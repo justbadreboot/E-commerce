@@ -10,7 +10,6 @@ const Navbar = () =>{
                             <a class="text-2xl font-bold font-heading" href="#">
                             Logo Here.
                             </a>
-                           
                             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                                 <li><a class="hover:text-gray-300" href="#">Home</a></li>
                                 <li><a class="hover:text-gray-200" href="#">Catagory</a></li>
