@@ -4,7 +4,6 @@ const HomePage = () => {
     return(
         <>
             <MainLayout>
-                contenido tienda principal
             </MainLayout>
         </>
     )
