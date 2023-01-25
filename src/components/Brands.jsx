@@ -1,6 +1,6 @@
 const Brands =() =>{
     return(
-        <div className="pt-16 pb-4">
+        <div className="pt-16 pb-2">
             <div className="container m-auto px-6 space-y-12 md:px-12 lg:px-56">
                 <div className="m-auto text-center lg:w-7/12">
                     <h2 className="text-2xl text-gray-700 font-bold md:text-3xl">Trabajamos con  las mejores marcas</h2>

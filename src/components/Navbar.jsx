@@ -43,7 +43,7 @@ const Navbar = () =>{
                     <NavLink to='/' className="md:w-2/12 cursor-pointer">
                         <img src={logo} className="w-48" alt='Kruger Med' />
                     </NavLink>
-                    <ul className="hidden w-8/12 md:flex items-center justify-center font-semibold font-heading space-x-8">
+                    <ul className="hidden w-8/12 md:flex items-center justify-center font-semibold font-heading space-x-8 text-lg">
                         <li><NavLink to='/' className="text-white hover:text-secondary-100">Productos</NavLink></li>
                         <li><NavLink to='/' className="text-white hover:text-secondary-100">Servicios</NavLink></li>
                         <li><NavLink to='/' className="text-white hover:text-secondary-100">Sobre Nosotros</NavLink></li>

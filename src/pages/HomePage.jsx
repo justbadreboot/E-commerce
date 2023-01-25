@@ -1,6 +1,9 @@
 import Brands from "../components/Brands";
 import Cta from "../components/Cta";
-import MainServices from "../components/mainServices";
+import MainServices from "../components/MainServices";
+import MainCategories from "../components/MainCategories";
+import MainMedServices from "../components/MainMedServices";
+import MainProducts from "../components/MainProducts";
 import Slider from "../components/Slider";
 import MainLayout from "../Layout/MainLayout";
 
@@ -10,7 +13,10 @@ const HomePage = () => {
             <MainLayout>
                 <Slider />
                 <MainServices />
+                <MainProducts />
+                <MainCategories />
                 <Cta />
+                <MainMedServices />
                 <Brands />
             </MainLayout>
         </>
