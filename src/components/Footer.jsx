@@ -58,30 +58,30 @@ const Footer = () =>{
                                     </ul>
                                 </div>
                                 <div>
-                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Catálogo</h6>
+                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Catálogo de Productos</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Productos</NavLink>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Medicamentos</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Servicios</NavLink>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Accesorios</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Doctores</NavLink>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Kits</NavLink>
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Resources</h6>
+                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Servicos Médicos</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Exámenes</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Especialidades</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Doctores</NavLink>
                                         </li>
                                     </ul>
                                 </div>

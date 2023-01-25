@@ -1,12 +1,12 @@
 import Brands from "../components/Brands";
-import Offers from "../components/Offers";
+import MainServices from "../components/mainServices";
 import MainLayout from "../Layout/MainLayout";
 
 const HomePage = () => {
     return(
         <>
             <MainLayout>
-                <Offers />
+                <MainServices />
                 <Brands />
             </MainLayout>
         </>
