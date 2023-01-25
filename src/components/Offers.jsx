@@ -1,9 +1,9 @@
 const Offers = () =>{
     return(   
-        <div className="py-16">
+        <div className="py-12 bg-gray-100">
             <div className="xl:container m-auto space-y-12 px-6 text-gray-500 md:px-12">
                 <div>
-                    <h2 className="mt-2 text-2xl font-semibold text-gray-800 md:text-center dark:text-white md:text-3xl">
+                    <h2 className="mt-2 text-2xl font-bold text-gray-800 md:text-center dark:text-white md:text-3xl">
                     Servicios que ofrecemos
                     </h2>
                 </div>

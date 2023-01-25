@@ -1,4 +1,5 @@
 import cara from '../assets/img/caraKm.png'
+import { NavLink} from 'react-router-dom';
 
 const Footer = () =>{
     return( 
@@ -20,19 +21,19 @@ const Footer = () =>{
                                 <img src={cara} alt="KrugerMed" className="w-40 dark:brightness-200 dark:grayscale" />
                                 <div className="flex">
                                     <form action="">
-                                        <label for="newsletter" className="text-lg font-semibold capitalize text-gray-900 dark:text-gray-200">Subscribete a nuestro boletin</label>
+                                        <label for="newsletter" className="text-lg font-semibold capitalize text-gray-900 dark:text-gray-200">Subscríbete a nuestro Newsletter</label>
                                         <div className="relative mt-4 input-group">
                                             <input
                                                 type="email"
                                                 name="newsletter"
                                                 id="newsletter"
                                                 placeholder="Tu correo"
-                                                className=" input input-bordered invalid:outline-none placeholder-gray-600 dark:placeholder-white rounded-3xl w-full bg-gray-100 dark:bg-gray-900 px-12 py-3 ring-1 ring-gray-200 dark:ring-gray-700 invalid:ring-red-400"
+                                                className=" input input-bordered invalid:outline-none placeholder-gray-600 dark:placeholder-white rounded-3xl w-full bg-gray-100 dark:bg-gray-900 px-12 py-3  invalid:ring-red-400"
                                              />
                                             <button
                                                 type="submit"
                                                 title="Submit"
-                                                className="btn absolute right-0 w-max rounded-r-3xl bg-primary py-3 px-3 text-center transition">
+                                                className="btn absolute right-0 w-max rounded-r-3xl bg-primary-100 py-3 px-3 text-center transition">
                                                 Enviar
                                             </button>
                                         </div>
@@ -41,55 +42,46 @@ const Footer = () =>{
                             </div>
                         </div>
                         <div className="col-span-8 md:col-span-6 lg:col-span-5">
-                            <div className="grid grid-cols-2 gap-6 pb-24 sm:grid-cols-3 md:pl-16">
+                            <div className="grid grid-cols-2 gap-6 pb-16 sm:grid-cols-3 md:pl-16">
                                 <div>
-                                    <h6 className="text-lg font-medium text-gray-800 dark:text-gray-200">Company</h6>
+                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Sobre Nosotros</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">About</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
                                         </li>
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Customers</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Nuestro equipo</NavLink>
                                         </li>
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Enterprise</a>
-                                        </li>
-                                        <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Partners</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Contáctanos</NavLink>
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h6 className="text-lg font-medium text-gray-800 dark:text-gray-200">Products</h6>
+                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Catálogo</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">About</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Productos</NavLink>
                                         </li>
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Customers</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Servicios</NavLink>
                                         </li>
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Enterprise</a>
-                                        </li>
-                                        <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Partners</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">Doctores</NavLink>
                                         </li>
                                     </ul>
                                 </div>
                                 <div>
-                                    <h6 className="text-lg font-medium text-gray-800 dark:text-gray-200">Resources</h6>
+                                    <h6 className="text-lg font-bold text-primary-100 dark:text-gray-200">Resources</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">About</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
                                         </li>
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Customers</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
                                         </li>
                                         <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Enterprise</a>
-                                        </li>
-                                        <li>
-                                            <a href="/" className="transition hover:text-cyan-600">Partners</a>
+                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
                                         </li>
                                     </ul>
                                 </div>
