@@ -46,8 +46,8 @@ const Navbar = () =>{
                     <ul className="hidden w-8/12 md:flex items-center justify-center font-semibold font-heading space-x-8 text-lg">
                         <li><NavLink to='/' className="text-white hover:text-secondary-100">Productos</NavLink></li>
                         <li><NavLink to='/' className="text-white hover:text-secondary-100">Servicios</NavLink></li>
-                        <li><NavLink to='/' className="text-white hover:text-secondary-100">Sobre Nosotros</NavLink></li>
-                        <li><NavLink to='/' className="text-white hover:text-secondary-100">Contacto</NavLink></li>
+                        <li><NavLink to='/nosotros' className="text-white hover:text-secondary-100">Sobre Nosotros</NavLink></li>
+                        <li><NavLink to='/contacto' className="text-white hover:text-secondary-100">Contacto</NavLink></li>
                     </ul>
                     <div className="md:w-2/12 justify-end flex items-center space-x-4 xl:space-x-8 text-white">
                         <div className="hidden lg:flex items-center">

@@ -43,7 +43,7 @@ const MainCategories = () =>{
                             <span className="text-primary-100"> Categorías</span>
                             </h1>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 md:gap-x-8 w-full px-6">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 md:gap-x-8 w-full px-8">
                             {categorias.map(categoria =>(
                                 <div key={categoria.id} className="flex flex-col space-y-4 md:space-y-8 mt-4">
                                     <div className="relative group flex justify-center items-center h-full w-full">
