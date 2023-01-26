@@ -16,7 +16,6 @@ const HomePage = () => {
                 <MainCategories />
                 <MainProducts />
                 <Cta />
-                <MainMedServices />
                 <Brands />
             </MainLayout>
         </>

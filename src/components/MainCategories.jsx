@@ -14,7 +14,7 @@ const MainCategories = () =>{
         {
             id:3,
             nombre:'Cuidado Personal',
-            img:'https://www.america-retail.com/static//2020/12/productos-de-higiene.jpg',
+            img:'https://st.depositphotos.com/1155723/1347/i/450/depositphotos_13471300-stock-photo-personal-hygiene-items-accessories-for.jpg',
         },
         {
             id:4,
@@ -39,9 +39,11 @@ const MainCategories = () =>{
                 <div className="2xl:mx-auto 2xl:container py-12 px-4 sm:px-6 xl:px-20 2xl:px-0 w-full">
                     <div className="flex flex-col jusitfy-center items-center space-y-10">
                         <div className="flex flex-col justify-center items-center space-y-2">
-                            <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800">Explora Nuestras Categorías</h1>
+                            <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800">Explora Nuestras 
+                            <span className="text-primary-100"> Categorías</span>
+                            </h1>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 md:gap-x-8 w-full">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 md:gap-x-8 w-full px-6">
                             {categorias.map(categoria =>(
                                 <div key={categoria.id} className="flex flex-col space-y-4 md:space-y-8 mt-4">
                                     <div className="relative group flex justify-center items-center h-full w-full">

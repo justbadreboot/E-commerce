@@ -38,7 +38,7 @@ const Navbar = () =>{
             </div>
 
              {/* For lg screen size */}
-            <div className="dark:bg-gray-900 bg-primary-100 px-12 py-3">
+            <div className="dark:bg-gray-900 bg-primary-100 px-12 py-2">
                 <div className="container mx-auto flex items-center justify-between">
                     <NavLink to='/' className="md:w-2/12 cursor-pointer">
                         <img src={logo} className="w-48" alt='Kruger Med' />
