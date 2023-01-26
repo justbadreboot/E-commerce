@@ -11,22 +11,50 @@ const MainProducts = () =>{
         },
         {
             id:2,
-            nombre:"Curitas redondas",
+            nombre:"Curitas translúcidas",
             img:"https://d2o812a6k13pkp.cloudfront.net/Productos/40392165_02.jpg",
             rate:4.5,
             precio:20,
         },
         {
             id:3,
-            nombre:"Enterogermina",
+            nombre:"Bago Vital Digestivo",
             img:"https://img.offers-cdn.net/assets/uploads/offers/ec/7771294/bagovital-digest-sobre-20-g-caja-con-large.jpeg",
             rate:4.5,
             precio:20,
         },
         {
             id:4,
+            nombre:"Bloqueador Solar 120g",
+            img:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
+            rate:4.5,
+            precio:20,
+        },
+        {
+            id:5,
             nombre:"Enterogermina",
             img:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
+            rate:4.5,
+            precio:20,
+        },
+        {
+            id:6,
+            nombre:"Bago Vital Digestivo",
+            img:"https://img.offers-cdn.net/assets/uploads/offers/ec/7771294/bagovital-digest-sobre-20-g-caja-con-large.jpeg",
+            rate:4.5,
+            precio:20,
+        },
+        {
+            id:7,
+            nombre:"Bloqueador Solar 120g",
+            img:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
+            rate:4.5,
+            precio:20,
+        },
+        {
+            id:8,
+            nombre:"Enterogermina",
+            img:"https://drfernandojuca.com/wp-content/uploads/2021/05/ENTEROGERMINA-2000-MILLONES-X-10-FRASCOS-BEBIBLES-600x600.jpg",
             rate:4.5,
             precio:20,
         },
@@ -39,7 +67,7 @@ const MainProducts = () =>{
             </h1>
             <div className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 lg:grid-cols-4">
                 {products.map( product =>(
-                    <article key={product.id} className="rounded-xl bg-gray-100 p-4 shadow-lg hover:shadow-xl">
+                    <article key={product.id} className="rounded-lg bg-gray-100 p-4 shadow-lg hover:shadow-xl">
                         <NavLink to="/">
                             <div className="relative flex items-end overflow-hidden rounded-xl">
                                 <img src={product.img} alt={product.nombre}/>

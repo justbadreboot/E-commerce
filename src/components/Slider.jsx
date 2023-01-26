@@ -6,6 +6,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 const mainSlider = () =>{
     
+    const imagenes =[
+        {
+            id:1,
+            img:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw91a1c598/images/homepage/hero-carousel/FY_HERO_CARROUSEL_desktop_dias_bebe_miercoles_ene.jpg",
+        },
+        {
+            id:2,
+            img:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw2e5c1deb/images/homepage/hero-carousel/FY_Hero_carrousel_desktop_proyecto_dermo_ene.jpg",
+        },
+    ]
     return(
         <div>
            <Swiper
@@ -24,12 +34,11 @@ const mainSlider = () =>{
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide>
-                    <img src='https://farmaenlace.vtexassets.com/assets/vtex.file-manager-graphql/images/fdb00c6d-88f5-4b87-81f0-4d249d609c8b___3374c306a0b1141fd6b36333df6c66d3.jpg' alt=''/>
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="https://farmaenlace.vtexassets.com/assets/vtex.file-manager-graphql/images/aac4e9e8-e2d4-4b1a-b2db-929bb01d3de9___c110088998d113272840f9606f896471.jpg" alt=''/>
-                </SwiperSlide>
+                {imagenes.map(imagen =>(
+                    <SwiperSlide key={imagen.id}>
+                        <img src={imagen.img} alt=''/>
+                    </SwiperSlide>
+                ))}
             </Swiper>
         </div>
     )

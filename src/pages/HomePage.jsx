@@ -13,8 +13,8 @@ const HomePage = () => {
             <MainLayout>
                 <Slider />
                 <MainServices />
-                <MainProducts />
                 <MainCategories />
+                <MainProducts />
                 <Cta />
                 <MainMedServices />
                 <Brands />
