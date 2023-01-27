@@ -26,11 +26,11 @@ const mainServices = () =>{
                 <div className="md:mx-2 lg:mx-32 grid gap-8 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3 text-center">
                     {services.map( service =>{
                         return(
-                            <div key={service.id} className="group relative px-8 py-6 rounded-3xl  dark:border-gray-700 dark:bg-gray-800 dark:lg:bg-transparent border border-gray-100 lg:border-transparent hover:border-gray-100 dark:shadow-none dark:hover:border-gray-700 dark:hover:bg-gray-800 shadow-2xl shadow-gray-600/10 lg:shadow-transparent lg:hover:shadow-gray-600/10 sm:gap-8 sm:flex transition duration-300">
+                            <div key={service.id} className="group relative px-8 py-6 rounded-3xl border-gray-100 lg:border-transparent hover:border-gray-100 shadow-2xl shadow-gray-600/10 lg:shadow-transparent lg:hover:shadow-gray-600/10 sm:gap-8 sm:flex transition duration-300">
                             <div className="relative">
                                 <img src={service.img} className="w-16 inline-block" alt={service.nombre} />
-                                <h3 className="m-4 text-xl font-semibold text-gray-800 transition dark:text-white">{service.nombre}</h3>
-                                <p className="text-gray-600 dark:text-gray-300">{service.descripcion}</p>
+                                <h3 className="m-4 text-xl font-semibold text-gray-800 transition">{service.nombre}</h3>
+                                <p className="text-gray-600">{service.descripcion}</p>
                             </div>
                         </div> 
                         )
