@@ -1,4 +1,6 @@
 import { NavLink} from 'react-router-dom';
+import ViewMore from './ViewMore'
+
 const MainProducts = () =>{
 
     const products=[
@@ -65,6 +67,9 @@ const MainProducts = () =>{
             <h1 className="mb-8 text-center font-sans text-4xl font-bold text-gray-900">
                 <span className="text-primary-100">Nuevos </span>Productos
             </h1>
+            <div className='mb-2 md:mb-0 md:mr-20'>
+                <ViewMore />    
+            </div>
             <div
                 data-aos="fade-up"
                 data-aos-duration="1200" 

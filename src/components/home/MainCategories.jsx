@@ -1,3 +1,5 @@
+import ViewMore from './ViewMore'
+
 const MainCategories = () =>{
 
     const categorias=[
@@ -38,16 +40,17 @@ const MainCategories = () =>{
             <div className="flex justify-center items-center">
                 <div className="2xl:mx-auto 2xl:container py-12 px-4 sm:px-6 xl:px-20 2xl:px-0 w-full">
                     <div className="flex flex-col jusitfy-center items-center space-y-10">
-                        <div className="flex flex-col justify-center items-center space-y-2">
+                        <div className="flex flex-col justify-center items-center">
                             <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800">Explora Nuestras 
                             <span className="text-primary-100"> Categorías</span>
                             </h1>
                         </div>
+                        <ViewMore />
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 md:gap-x-8 w-full px-8">
                             {categorias.map(categoria =>(
                                 <div 
                                     key={categoria.id}
-                                    className="flex flex-col space-y-4 md:space-y-8 mt-4">
+                                    className="flex flex-col space-y-2 md:space-y-8 mt-2">
                                     <div className="relative group flex justify-center items-center h-full w-full">
                                         <img className="object-center object-cover w-full h-full" src={categoria.img} alt={categoria.nombre} />
                                         <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">{categoria.nombre}</button>
