@@ -49,7 +49,10 @@ const Brands =() =>{
                 <div className="m-auto text-center lg:w-7/12">
                     <h2 className="text-2xl text-gray-700 font-bold md:text-3xl">Trabajamos con  las <span className="text-primary-100">mejores</span> marcas</h2>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 ">
+                <div 
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 ">
                 {marcas.map( marca =>{
                     return(
                         <div key={marca.id} className="p-4">

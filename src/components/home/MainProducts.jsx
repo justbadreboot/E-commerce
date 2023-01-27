@@ -65,7 +65,10 @@ const MainProducts = () =>{
             <h1 className="mb-8 text-center font-sans text-4xl font-bold text-gray-900">
                 <span className="text-primary-100">Nuevos </span>Productos
             </h1>
-            <div className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 lg:grid-cols-4">
+            <div
+                data-aos="fade-up"
+                data-aos-duration="1200" 
+                className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 lg:grid-cols-4">
                 {products.map( product =>(
                     <article key={product.id} className="rounded-lg bg-gray-100 p-4 shadow-lg hover:shadow-xl">
                         <NavLink to="/">
