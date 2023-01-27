@@ -2,7 +2,6 @@ import Brands from "../components/home/Brands";
 import Cta from "../components/home/Cta";
 import MainServices from "../components/home/MainServices";
 import MainCategories from "../components/home/MainCategories";
-import MainMedServices from "../components/home/MainMedServices";
 import MainProducts from "../components/home/MainProducts";
 import Slider from "../components/Slider";
 import MainLayout from "../Layout/MainLayout";
