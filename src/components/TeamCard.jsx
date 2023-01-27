@@ -14,7 +14,8 @@ const TeamCard =()=>{
             descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
             fb:"",
             git:"https://github.com/BryanArmando",
-            in:""
+            in:"",
+            delay:''
         },
         {
             id:2,
@@ -24,7 +25,8 @@ const TeamCard =()=>{
             descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
             fb:"",
             git:"https://github.com/Adrian-Bastidas",
-            in:""
+            in:"",
+            delay:'200'
         },
         {
             id:3,
@@ -34,7 +36,8 @@ const TeamCard =()=>{
             descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
             fb:"",
             git:"https://github.com/jonato96",
-            in:""
+            in:"",
+            delay:'400'
         },
         {
             id:4,
@@ -44,7 +47,8 @@ const TeamCard =()=>{
             descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
             fb:"",
             git:"https://github.com/DaniCis",
-            in:""
+            in:"",
+            delay:'600'
         },
     ]
 
@@ -62,7 +66,10 @@ const TeamCard =()=>{
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center">
                     {members.map(member =>(
-                        <div class="p-4 ">
+                        <div class="p-4"
+                            data-aos="fade-right"
+                            data-aos-duration="1200" 
+                            data-aos-delay={member.delay}>
                             <div class="mb-4 text-center opacity-90">
                                 <div class="relative block">
                                     <img alt={member.nombre} src={member.img} class="mx-auto object-cover rounded-full h-40 w-40 "/>
