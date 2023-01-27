@@ -10,11 +10,11 @@ const Footer = () =>{
                 id="wave"
                 data-name="wave"
                 d="M0,0S166.91-56.211,405.877-49.5,715.838,14.48,955.869,26.854,1366,0,1366,0V115H0Z"
-                transform="translate(5 115)"
+                transform="translate(0 130)"
                 ></path>
             </svg>
             <div className="bg-gradient-to-b from-gray-100 to-transparent dark:from-gray-800 dark:to-transparent -pt-32">
-                <div className="container m-auto space-y-8 px-6 text-gray-600 dark:text-gray-400 md:px-12 lg:px-20">
+                <div className="container m-auto space-y-8 px-6 text-gray-600 dark:text-gray-400 md:px-2 lg:px-20">
                     <div className="grid grid-cols-8 gap-6 md:gap-0">
                         <div className="col-span-8 border-r border-gray-100 dark:border-gray-800 md:col-span-2 lg:col-span-3">
                             <div className="flex items-center justify-between gap-6 border-b border-white dark:border-gray-800 py-6 md:block md:space-y-6 md:border-none md:py-0" >
@@ -27,7 +27,7 @@ const Footer = () =>{
                                                 type="email"
                                                 name="newsletter"
                                                 id="newsletter"
-                                                placeholder="Tu correo"
+                                                placeholder="Correo"
                                                 className=" input input-bordered invalid:outline-none placeholder-gray-600 dark:placeholder-white rounded-3xl w-full bg-gray-100 dark:bg-gray-900 px-12 py-3  invalid:ring-red-400"
                                              />
                                             <button
