@@ -1,4 +1,4 @@
-import ViewMore from './ViewMore'
+import ViewMore from '../ViewMore'
 
 const MainCategories = () =>{
 
@@ -55,9 +55,7 @@ const MainCategories = () =>{
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 w-full px-8">
                             {categorias.map(categoria =>(
                                 <div 
-                                    data-aos="fade-right"
-                                    data-aos-duration="1200" 
-                                    data-aos-delay={categoria.delay}
+                                    data-aos="fade-right" data-aos-duration="1200" data-aos-delay={categoria.delay}
                                     key={categoria.id}
                                     className="flex flex-col space-y-2 md:space-y-8 mt-2">
                                     <div className="relative group flex justify-center items-center h-full w-full">

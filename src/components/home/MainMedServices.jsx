@@ -1,36 +1,48 @@
+import ServiceCard from "../ServiceCard";
+
 const MainMedServices = () =>{
+
+    const services=[
+        {
+            id:1,
+            nombre:"Consulta Médica",
+            img:"https://images.unsplash.com/photo-1666214276389-393fb7dbc75c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8Mjl8fGhlYWx0aGNhcmV8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+            especialidad:"Oncología",
+        },
+        {
+            id:2,
+            nombre:"Consulta Médica",
+            img:"https://medicinaysaludpublica.blob.core.windows.net.optimalcdn.com/images/2022/10/15/consulta-medica-1f0d2819.jpg",
+            especialidad:"Oncología",
+        },
+        {
+            id:3,
+            nombre:"Consulta Médica",
+            img:"https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/BUOGLU5M4VCSJPSIM2PUHWIIZM.jpg",
+            especialidad:"Oncología",
+        },
+        {
+            id:4,   
+            nombre:"Consulta Médica",
+            img:"https://eresmama.com/wp-content/uploads/2019/04/bebe-revision-pediatra-que-es-la-pediatria.jpg",
+            especialidad:"Oncología",
+        },
+    ]
+
     return(
-        <div>
-            <div class="justify-center py-8 flex">
-                <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-                    <div class="w-full md:w-1/3 bg-white grid place-items-center">
-                        <img src="https://images.pexels.com/photos/4381392/pexels-photo-4381392.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="tailwind logo" class="rounded-xl" />
-                    </div>
-                    <div class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
-                        <div class="flex justify-between item-center">
-                            <p class="text-gray-500 font-medium hidden md:block">Vacations</p>
-                            <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                                <p class="text-gray-600 font-bold text-sm ml-1">
-                                    4.96
-                                    <span class="text-gray-500 font-normal">(76 reviews)</span>
-                                </p>
-                            </div>
-                           
-                            <div class="bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 hidden md:block">
-                                Superhost</div>
-                        </div>
-                        <h3 class="font-semibold text-gray-800 text-xl">The Majestic and Wonderful Bahamas</h3>
-                        <p class="md:text-lg text-gray-500 text-base">The best kept secret of The Bahamas is the country’s sheer
-                            size and diversity. With 16 major islands, The Bahamas is an unmatched destination</p>
-                        <p class="text-xl font-black text-gray-800">
-                            $110<span class="font-normal text-gray-600 text-base">/night</span>
-                        </p>
-                    </div>
+        <div class="bg-white py-6 sm:py-8 lg:py-12">
+            <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+                <div class="mb-10 md:mb-16">
+                    <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Servicios Médicos</h2>
+                    <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+                </div>
+                <div 
+                    data-aos="fade-up"
+                    data-aos-duration="1500" 
+                    class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+                    {services.map( service =>(
+                        <ServiceCard service={service} />
+                    ))}
                 </div>
             </div>
         </div>

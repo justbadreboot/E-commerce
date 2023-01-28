@@ -1,5 +1,5 @@
 import ProductCard from '../ProductCard';
-import ViewMore from './ViewMore'
+import ViewMore from '../ViewMore'
 
 const MainProducts = () =>{
 
