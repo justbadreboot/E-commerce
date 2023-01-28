@@ -7,6 +7,7 @@ const ProductDetail=()=>{
         descripcion:'This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.',
         precio:15.00,
         rate:4.2,
+        img:"https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600"
     }
     return(
         <div class="bg-white py-6 sm:py-8 lg:py-12">
@@ -14,7 +15,7 @@ const ProductDetail=()=>{
                 <div class="grid md:grid-cols-2 gap-8">
                     <div class="space-y-4">
                         <div class="bg-gray-100 rounded-lg overflow-hidden relative">
-                            <img src="https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="Photo by Himanshu Dewangan" class="w-full h-96 object-cover object-center" />
+                            <img src={detalles.img} loading="lazy" alt={detalles.nombre} class="w-full h-96 object-cover object-center" />
                             <span class="bg-red-500 text-white text-sm tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">sale</span>
                         </div>
                     </div>
