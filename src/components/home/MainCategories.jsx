@@ -52,7 +52,7 @@ const MainCategories = () =>{
                             </h1>
                         </div>
                         <ViewMore />
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 md:gap-x-8 w-full px-8">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 w-full px-8">
                             {categorias.map(categoria =>(
                                 <div 
                                     data-aos="fade-right"

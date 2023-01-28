@@ -10,6 +10,7 @@
     "aos": "^2.3.4",
     "axios": "^1.2.3",
     "daisyui": "^2.47.0",
+    "formik": "^2.2.9",
     "node-fetch": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -18,8 +19,10 @@
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.7.1",
     "swiper": "^8.4.6",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",

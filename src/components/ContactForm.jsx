@@ -1,6 +1,9 @@
 import { BsFillTelephoneFill} from 'react-icons/bs';
-import { GrMail} from 'react-icons/gr';
-import {ImLocation} from "react-icons/im"
+import { GrMail } from 'react-icons/gr';
+import { ImLocation } from "react-icons/im"
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Swal from "sweetalert2";
 
 const ContactForm = ()=>{
 
@@ -9,6 +12,30 @@ const ContactForm = ()=>{
         mail:"krugermed@gmail.com",
         direccion:"Quito,Ecuador"
     }
+    const contactSchema = Yup.object().shape({
+		email: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
+		nombre: Yup.string().required('Este campo es requerido'),
+        mensaje: Yup.string().required('Este campo es requerido'),
+	});
+    const formik = useFormik({
+		initialValues: {
+			email: "",
+			nombre:"",
+            mensaje:"",
+		},
+		validationSchema: contactSchema,
+		onSubmit: (data) => {
+			Swal.fire({
+                title:'Excelente!',
+                icon:'success',
+                text:'Mensaje enviado correctamente'
+            }).then((result) => {
+                if (result.isConfirmed){
+			        formik.resetForm();
+                }
+            })
+		},
+	});
 
     return (
         <div className='pt-8 px-4'>
@@ -44,20 +71,35 @@ const ContactForm = ()=>{
                         <div className='absolute z-0 w-40 h-40 bg-ternary-40 rounded-full -right-28 -top-28'></div>
                         <div className='absolute z-0 w-40 h-40 bg-ternary-40 rounded-full -left-24 -bottom-20'></div>
                         <div className=' relative z-10 bg-white rounded-xl shadow-lg p-8 md:w-96'>
-                            <form action='' className='flex flex-col space-y-4'>
+                            <form action='' className='flex flex-col space-y-4' onSubmit={formik.handleSubmit}>
                                 <div>
                                     <label for="" className='label-text text-sm'>Nombre</label>
-                                    <input type="text" placeholder='Tu nombre' className='input input-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300 text-gray-600' />
+                                    <input type="text" name="nombre" placeholder='Tu nombre' className='input input-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300 text-gray-600'  onChange={formik.handleChange}  value={formik.values.nombre} />
+                                    {formik.touched.nombre && formik.errors.nombre && (
+                                        <span className="text-red-400 flex text-xs">
+                                            {formik.errors.nombre}
+                                        </span>
+                                    )}
                                 </div>
                                 <div>
                                     <label for="" className='label-text text-sm'>Correo</label>
-                                    <input type="text" placeholder='Tu correo' className='input input-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300  text-gray-600' />
+                                    <input type="email" name="email" placeholder='Tu correo' className='input input-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300  text-gray-600'  onChange={formik.handleChange}  value={formik.values.email} />
+                                    {formik.touched.email && formik.errors.email && (
+                                        <span className="text-red-400 flex text-xs">
+                                            {formik.errors.email}
+                                        </span>
+                                    )}
                                 </div>
                                 <div>
                                     <label for="" className='label-text text-sm'>Mensaje</label>
-                                    <textarea type="text" placeholder='Tu mensaje' className='textarea textarea-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300  text-gray-600' />
+                                    <textarea type="text" name='mensaje' placeholder='Tu mensaje' className='textarea textarea-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300  text-gray-600'  onChange={formik.handleChange}  value={formik.values.mensaje} />
+                                    {formik.touched.mensaje && formik.errors.mensaje && (
+                                        <span className="text-red-400 flex text-xs">
+                                            {formik.errors.mensaje}
+                                        </span>
+                                    )}
                                 </div>
-                                <button className='btn inline-block self-end bg-secondary-80 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm'>Enviar</button>
+                                <button className='btn inline-block self-end bg-secondary-80 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm' type="submit" onClick={formik.handleSubmit}>Enviar</button>
                             </form>
                         </div>
                     </div>
