@@ -1,7 +1,15 @@
 import { BsFillTelephoneFill} from 'react-icons/bs';
 import { GrMail} from 'react-icons/gr';
 import {ImLocation} from "react-icons/im"
+
 const ContactForm = ()=>{
+
+    const contactInfo={
+        celular: "099298736",
+        mail:"krugermed@gmail.com",
+        direccion:"Quito,Ecuador"
+    }
+
     return (
         <div className='pt-8 px-4'>
             <div className="flex flex-col justify-center items-center">
@@ -17,15 +25,15 @@ const ContactForm = ()=>{
                         <div className='flex flex-col space-y-6'>
                             <div className='inline-flex space-x-2 items-center'>
                                 <BsFillTelephoneFill className='text-teal-600 text-xl' />
-                                <span className='text-gray-800'>0992987634</span>
+                                <span className='text-gray-800'>{contactInfo.celular}</span>
                             </div>
                             <div className='inline-flex space-x-2 items-center'>
                                 <GrMail className='text-teal-600 text-xl' />
-                                <span className='text-gray-800'>kruger-med@gmail.com</span>
+                                <span className='text-gray-800'>{contactInfo.mail}</span>
                             </div>
                             <div className='inline-flex space-x-2 items-center'>
                                 <ImLocation className='text-teal-600 text-xl' />
-                                <span className='text-gray-800'>Quito, Ecuador</span>
+                                <span className='text-gray-800'>{contactInfo.direccion}</span>
                             </div>
                         </div>
                         <div className='flex space-x-4 text-lg'>
