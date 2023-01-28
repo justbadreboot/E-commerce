@@ -1,4 +1,4 @@
-import { NavLink} from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import ViewMore from './ViewMore'
 
 const MainProducts = () =>{
@@ -76,7 +76,7 @@ const MainProducts = () =>{
                 className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 lg:grid-cols-4">
                 {products.map( product =>(
                     <article key={product.id} className="rounded-lg bg-gray-100 p-4 shadow-lg hover:shadow-xl">
-                        <NavLink to="/">
+                        <Link to={`/producto/${product.id}`}>
                             <div className="relative flex items-end overflow-hidden rounded-xl">
                                 <img src={product.img} alt={product.nombre}/>
                                 <div className="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
@@ -99,7 +99,7 @@ const MainProducts = () =>{
                                     </div>
                                 </div>
                             </div>
-                        </NavLink>
+                        </Link>
                     </article>
                 ))}
             </div>
