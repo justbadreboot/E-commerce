@@ -4,6 +4,7 @@ import { ImLocation } from "react-icons/im"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
+import emailjs from "@emailjs/browser";
 
 const ContactForm = ()=>{
 
@@ -25,15 +26,22 @@ const ContactForm = ()=>{
 		},
 		validationSchema: contactSchema,
 		onSubmit: (data) => {
-			Swal.fire({
-                title:'Excelente!',
-                icon:'success',
-                text:'Mensaje enviado correctamente'
-            }).then((result) => {
-                if (result.isConfirmed){
-			        formik.resetForm();
-                }
+            emailjs.send('service_0lwds3j', 'template_5waegri', data, 'KodhYw3i-kovKW2uQ')
+            .then(() => {
+                Swal.fire({
+                    title:'Excelente!',
+                    icon:'success',
+                    text:'Mensaje enviado correctamente'
+                });
+                formik.resetForm();
             })
+            .catch((error) => {
+                Swal.fire({
+                    title:'Error!',
+                    icon:'error',
+                    text: "Porfavor, intenta de nuevo en unos momentos"
+                });
+            });
 		},
 	});
 
@@ -92,7 +100,7 @@ const ContactForm = ()=>{
                                 </div>
                                 <div>
                                     <label for="" className='label-text text-sm'>Mensaje</label>
-                                    <textarea type="text" name='mensaje' placeholder='Tu mensaje' className='textarea textarea-bordered mt-2 w-full rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300  text-gray-600'  onChange={formik.handleChange}  value={formik.values.mensaje} />
+                                    <textarea type="text" name='mensaje' placeholder='Tu mensaje' className='textarea textarea-bordered mt-2 w-full resize-none rounded-md px-4 py-2 outline-none focus:ring-2 focus:ring-teal-300  text-gray-600'  onChange={formik.handleChange} rows="3" value={formik.values.mensaje} />
                                     {formik.touched.mensaje && formik.errors.mensaje && (
                                         <span className="text-red-400 flex text-xs">
                                             {formik.errors.mensaje}
