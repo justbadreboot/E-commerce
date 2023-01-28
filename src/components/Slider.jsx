@@ -4,6 +4,7 @@ import 'swiper/css/pagination';
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
+
 const mainSlider = () =>{
     
     const imagenes =[
@@ -18,7 +19,7 @@ const mainSlider = () =>{
     ]
     return(
         <div>
-           <Swiper
+            <Swiper
                 spaceBetween={30}
                 centeredSlides={true}
                 effect={"fade"}
@@ -35,8 +36,14 @@ const mainSlider = () =>{
                 className="mySwiper"
             >
                 {imagenes.map(imagen =>(
-                    <SwiperSlide key={imagen.id}>
-                        <img src={imagen.img} alt=''/>
+                    <SwiperSlide key={imagen.id} className='w-full relative'>
+                        <div className='w-full'>
+                            <img className='object-cover w-full h-full' src={imagen.img} alt=''/>
+                        </div>
+                        {/** 
+                        <div className='absolute inset-y-3/4'>
+                            <button className='text-black'>Compra ya</button>
+                        </div>*/}
                     </SwiperSlide>
                 ))}
             </Swiper>
