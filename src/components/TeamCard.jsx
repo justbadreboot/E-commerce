@@ -9,7 +9,7 @@ const TeamCard =()=>{
         {
             id:1,
             nombre:"Bryan Quisaguano",
-            img:"",
+            img:"https://avatars.githubusercontent.com/u/66704761?v=4",
             titulo:"Team Leader",
             descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
             fb:"",
@@ -31,7 +31,7 @@ const TeamCard =()=>{
         {
             id:3,
             nombre:"Jonathan Sanchez",
-            img:"",
+            img:"https://avatars.githubusercontent.com/u/80604082?v=4",
             titulo:"Team Leader",
             descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
             fb:"",
