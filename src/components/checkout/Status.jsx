@@ -38,8 +38,7 @@ const Status =(props)=>{
                     </li>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                    
+                    </svg>   
                     <li class="flex items-center space-x-3 text-left sm:space-x-4">
                         {props.act===3 ? (
                             <Link class="flex h-6 w-6 items-center justify-center rounded-full bg-primary-40 text-xs font-semibold text-white ring ring-primary-40 ring-offset-2" to="/">3</Link>
@@ -52,6 +51,5 @@ const Status =(props)=>{
             </div>
         </div>
     )
-
 }
 export default Status;
