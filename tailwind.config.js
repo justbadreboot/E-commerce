@@ -66,6 +66,9 @@ module.exports = {
           20:'#D4E7F4',
         },
       },
+      fontFamily: {
+        'poppins': ['Poppins', 'sans-serif']
+      },
     },
   },
 }

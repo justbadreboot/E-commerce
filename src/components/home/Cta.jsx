@@ -3,7 +3,7 @@ import doctor from '../../assets/img/doc.png';
 
 const Cta = () =>{
     return(
-        <div className="bg-primary-20 py-8">
+        <div className="bg-primary-20 py-8 font-poppins">
             <div className="container m-auto space-y-8 px-6 md:px-12 lg:px-20">
                 <div className="items-center justify-center gap-16 text-center md:flex md:text-left">
                     <div className="order-last mb-6 space-y-6 md:mb-0 md:w-7/12 lg:w-6/12">

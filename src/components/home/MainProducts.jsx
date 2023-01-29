@@ -63,8 +63,8 @@ const MainProducts = () =>{
     ]
 
     return(
-        <section className="py-10">
-            <h1 className="mb-8 text-center font-sans text-4xl font-bold text-gray-900">
+        <section className="py-10 font-poppins">
+            <h1 className="mb-8 text-center text-4xl font-bold text-gray-900">
                 <span className="text-primary-100">Nuevos </span>Productos
             </h1>
             <div className='mb-2 md:mb-0 md:mr-20'>

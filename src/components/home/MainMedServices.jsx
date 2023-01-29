@@ -1,5 +1,4 @@
 import ServiceCard from "../ServiceCard";
-
 const MainMedServices = () =>{
 
     const services=[
@@ -30,16 +29,16 @@ const MainMedServices = () =>{
     ]
 
     return(
-        <div class="bg-white py-6 sm:py-8 lg:py-12">
-            <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-                <div class="mb-10 md:mb-16">
-                    <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Servicios <span className="text-primary-100">Médicos</span></h2>
-                    <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+        <div className="bg-white py-6 sm:py-8 lg:py-12 font-poppins mt-8 md:mt-4">
+            <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
+                <div className="mb-10 md:mb-16">
+                    <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Servicios <span className="text-primary-100">Médicos</span></h2>
+                    <p className="mt-2 max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
                 </div>
                 <div 
                     data-aos="fade-up"
                     data-aos-duration="1500" 
-                    class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
+                    className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
                     {services.map( service =>(
                         <ServiceCard service={service} />
                     ))}

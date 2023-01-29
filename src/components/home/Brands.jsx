@@ -44,10 +44,10 @@ const Brands =() =>{
         
     ]
     return(
-        <div className="pt-12">
+        <div className="pt-12 font-poppins">
             <div className="container m-auto px-6 space-y-12 md:px-12 lg:px-56">
                 <div className="m-auto text-center lg:w-7/12">
-                    <h2 className="text-2xl text-gray-700 font-bold md:text-3xl">Trabajamos con  las <span className="text-primary-100">mejores</span> marcas</h2>
+                    <h2 className="text-2xl text-gray-700 font-bold md:text-3xl">Trabajamos con  las <span className="text-primary-100">Mejores</span> Marcas</h2>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 ">
                 {marcas.map( marca =>{
