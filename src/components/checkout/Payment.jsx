@@ -17,9 +17,7 @@ const Payment = ()=>{
                         </svg>
                     </div>
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-3'>    
-                    <div className='form-control max-w-xs mt-1'>
-                        <label className="mt-4 mb-2 block text-sm font-medium">Número de la tarjeta</label>
+                <label className="mt-4 mb-2 block text-sm font-medium">Número de la tarjeta</label>
                         <div className="relative flex-shrink-0">
                             <input type="text" className="w-full rounded-md border border-gray-200 px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="xxxx-xxxx-xxxx-xxxx" />
                             <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
@@ -29,10 +27,14 @@ const Payment = ()=>{
                                 </svg>
                             </div>
                         </div>
+                <div className='grid grid-cols-1 md:grid-cols-3'>    
+                    <div className='form-control max-w-xs mt-1'>
+                        <label className="mt-4 mb-2 block text-sm font-medium">Fecha Venc.</label>
+                        <input type="text" name="credit-expiry" className="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="MM" />
                     </div>
                     <div className='form-control ml-2 max-w-xs mt-1'>
-                        <label className="mt-4 mb-2 block text-sm font-medium">Fecha Venc.</label>
-                        <input type="text" name="credit-expiry" className="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="MM/YY" />
+                    <label className="mt-4 mb-2 block text-sm font-medium">Year</label>
+                        <input type="text" name="credit-expiry" className="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="YY" />
                     </div>
                     <div className='form-control max-w-xs mt-1 ml-2'>
                         <label className="mt-4 mb-2 block text-sm font-medium">CVV</label>
