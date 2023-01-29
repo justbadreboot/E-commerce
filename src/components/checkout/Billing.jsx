@@ -33,26 +33,6 @@ const Billing =( )=>{
                     </label>
                     <input type="text" placeholder="Type here" class="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 w-full" />
                 </div>
-                <div class='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-                    <div class="form-control w-full md:w-10/12 max-w-sm mt-1">
-                        <label class="label">
-                            <span class="label-text">Sector</span>
-                        </label>
-                        <input type="text" placeholder="Type here" class="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 w-full" />
-                    </div>
-                    <div class="form-controlw-full md:w-10/12 max-w-xs mt-1">
-                        <label class="label">
-                            <span class="label-text">Zip</span>
-                        </label>
-                        <input type="text" placeholder="Type here" class="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 w-full max-w-xs" />
-                    </div>
-                    <div class="form-control w-full md:w-8/12 max-w-xs mt-1">
-                        <label class="label">
-                            <span class="label-text"># Casa</span>
-                        </label>
-                        <input type="text" placeholder="Type here" class="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 w-full max-w-xs" />
-                    </div>
-                </div>
                 
             </div>                
             <div class="mt-8 border-t border-b py-4">

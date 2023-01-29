@@ -12,7 +12,7 @@ const Cart =()=>{
                                     <h1 class="text-xl font-medium ">Shopping Cart</h1>
                                     <div class="flex justify-between items-center mt-6 pt-6">
                                         <div class="flex  items-center">
-                                            <img src="https://i.imgur.com/EEguU02.jpg" width="60" class="rounded-full "/>
+                                            <img src="https://i.imgur.com/EEguU02.jpg" width="60" class="rounded-full" alt=""/>
                                             <div class="flex flex-col ml-3">
                                                 <span class="md:text-md font-medium">Chicken momo</span>
                                                 <span class="text-xs font-light text-gray-400">#41551</span>
@@ -34,7 +34,7 @@ const Cart =()=>{
                                     </div>
                                     <div class="flex justify-between items-center pt-6 mt-6 border-t">
                                         <div class="flex  items-center">
-                                            <img src="https://i.imgur.com/Uv2Yqzo.jpg" width="60" class="rounded-full "/>
+                                            <img src="https://i.imgur.com/Uv2Yqzo.jpg" width="60" class="rounded-full" alt=""/>
                                             <div class="flex flex-col ml-3 ">
                                                 <span class="text-md font-medium w-auto">Spicy Mexican potatoes</span>
                                                 <span class="text-xs font-light text-gray-400">#66999</span>
