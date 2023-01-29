@@ -1,6 +1,4 @@
-import Payment from "../components/checkout/Payment";
 import Status from "../components/checkout/Status";
-import Methods from "../components/checkout/Methods"
 import Summary from "../components/checkout/Summary";
 import MainLayout from "../Layout/MainLayout";
 import Shipping from "../components/checkout/Shipping";
@@ -16,7 +14,6 @@ const ShippingPage =() =>{
                 <Shipping />
                 <div class="px-4 pt-8">
                     <Summary />
-                    <Methods />
                 </div>
             </div>
         </MainLayout>
