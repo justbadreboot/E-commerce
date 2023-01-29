@@ -52,10 +52,10 @@ const TeamCard =()=>{
     ]
 
     return( 
-        <div className="pt-4">
+        <div className="pt-4 font-poppins">
             <div className="xl:container mx-auto px-6 md:px-12">
                 <div className="mb-16 md:w-2/3 lg:w-1/2">
-                    <h2 className="mb-4 text-2xl font-semibold text-gray-800 md:text-4xl">
+                    <h2 className="mb-4 text-2xl font-semibold text-gray-800 md:text-3xl">
                     Nuestro Equipo
                     </h2>
                     <p className="text-gray-600">
@@ -75,13 +75,13 @@ const TeamCard =()=>{
                                 </div>
                             </div>
                             <div className="text-center">
-                                <p className="text-2xl text-gray-800 dark:text-white">
+                                <p className="text-xl text-gray-800 dark:text-white">
                                     {member.nombre}
                                 </p>
-                                <p className="text-xl font-light text-gray-500 dark:text-gray-200">
+                                <p className="text-md font-light text-gray-500 dark:text-gray-200">
                                     {member.titulo}
                                 </p>
-                                <p className="md:max-w-xs py-4 font-light text-gray-500 text-md dark:text-gray-400">
+                                <p className="md:max-w-xs py-4 font-light text-gray-500 text-sm dark:text-gray-400">
                                     {member.descripcion}
                                 </p>
                             </div>

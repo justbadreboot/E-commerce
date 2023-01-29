@@ -14,13 +14,13 @@ const About =()=>{
         },
     ]
     return (
-        <div className="2xl:container 2xl:mx-auto lg:pt-16 lg:px-20 md:py-12 md:px-6 pt-8 px-4">
+        <div className="2xl:container 2xl:mx-auto lg:pt-16 lg:px-20 md:py-12 md:px-6 pt-8 px-4 font-poppins">
             <div className="flex flex-col lg:flex-row justify-between gap-8">
                 <div className="w-full lg:w-4/12 ">
                     <img className="w-full h-full" src="https://i.ibb.co/FhgPJt8/Rectangle-116.png" alt="A group of People" />
                 </div>
                 <div className="w-full lg:w-8/12 flex flex-col justify-center">
-                    <h1 className="text-3xl lg:text-4xl font-semibold leading-9 text-gray-800 pb-4">Sobre Nosotros</h1>
+                    <h1 className="text-2xl lg:text-3xl font-semibold leading-9 text-gray-800 pb-4">Sobre Nosotros</h1>
                     <p className="font-normal text-base leading-6 text-gray-600 ">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God.</p>
                     <div className="focus:outline-none mt-10 flex flex-wrap justify-center gap-10">
                         {info.map(card=>(
@@ -32,8 +32,8 @@ const About =()=>{
                                     </div>
                                 </div>
                                 <div className="w-10/12">   
-                                    <h2 className="focus:outline-none text-lg font-semibold leading-tight text-gray-800">{card.nombre}</h2>
-                                    <p className="focus:outline-none text-base text-gray-600 leading-normal pt-2">{card.descripcion}</p>
+                                    <h2 className="focus:outline-none text-md font-semibold leading-tight text-gray-800">{card.nombre}</h2>
+                                    <p className="focus:outline-none text-sm text-gray-600 leading-normal pt-2">{card.descripcion}</p>
                                 </div>
                             </div>
                         ))}

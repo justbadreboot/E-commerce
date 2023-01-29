@@ -10,10 +10,10 @@ const Footer = () =>{
                 id="wave"
                 data-name="wave"
                 d="M0,0S166.91-56.211,405.877-49.5,715.838,14.48,955.869,26.854,1366,0,1366,0V115H0Z"
-                transform="translate(0 130)"
+                transform="translate(0 125)"
                 ></path>
             </svg>
-            <div className="bg-gradient-to-b from-gray-100 to-transparent  -pt-32">
+            <div className="bg-gradient-to-b from-gray-100 to-transparent font-poppins -pt-32">
                 <div className="container m-auto space-y-8 px-6 text-gray-600  md:px-2 lg:px-20">
                     <div className="grid grid-cols-8 gap-6 md:gap-0">
                         <div className="col-span-8 border-r border-gray-100 md:col-span-2 lg:col-span-3">

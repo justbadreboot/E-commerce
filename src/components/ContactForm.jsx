@@ -46,7 +46,7 @@ const ContactForm = ()=>{
 	});
 
     return (
-        <div className='pt-8 px-4'>
+        <div className='pt-8 px-4 font-poppins'>
             <div className="flex flex-col justify-center items-center">
                 <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800">Contáctanos</h1>
             </div>
