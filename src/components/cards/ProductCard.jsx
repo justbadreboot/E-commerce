@@ -14,7 +14,7 @@ const ProductCard = ({product}) =>{
                     </div>
                 </div>
                 <div className="mt-1 p-2">
-                    <h2 className="text-ternary-60 text-lg capitalize font-semibold">{product.nombre}</h2>  
+                    <h2 className="text-ternary-60 text-md capitalize font-semibold">{product.nombre}</h2>  
                     <div className="mt-1 flex items-end justify-between">
                         <p><span className="text-lg font-bold text-info-80">${product.precio}</span> </p>
                         <div class="tooltip" data-tip="Añadir al carrito">

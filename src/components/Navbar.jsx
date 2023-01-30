@@ -12,13 +12,15 @@ const Navbar = () =>{
                 <div className="mx-auto container px-6 xl:py-2">
                     <div className="flex items-center justify-between">
                         <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
-                            <img className='w-48 ml-6' src={logo} alt="KrugerMed" />
+                            <Link to="/">
+                                <img className='w-48 ml-6' src={logo} alt="KrugerMed" />
+                            </Link>
                         </div>
                         <div className="flex">
                             <div className="hidden xl:flex md:mr-6 xl:mr-16 ">
-                                <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Productos</NavLink>
+                                <NavLink to='/productos' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Productos</NavLink>
                                 <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Servicios</NavLink>
-                                <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
+                                <div className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
                                     <div class="dropdown dropdown-hover">
                                         <label tabindex="0" class="py-6">Nosotros</label>
                                         <ul tabindex="0" class="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-52 mt-4">
@@ -26,7 +28,7 @@ const Navbar = () =>{
                                             <li><Link className='text-sm'>FAQs</Link></li>
                                         </ul>
                                     </div>
-                                </NavLink>
+                                </div>
                                 <NavLink to='/contacto' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Contacto</NavLink>
                             </div>
                             <div className="hidden xl:flex items-center px-10">
@@ -83,6 +85,7 @@ const Navbar = () =>{
                             ) : (
                                 <>
                                     <div className="flex items-center px-10">
+                                        <Link to="/carrito">
                                         <button className=" hidden md:flex items-center text-white" >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -93,6 +96,7 @@ const Navbar = () =>{
                                                 </span>
                                             </span>
                                         </button>
+                                        </Link>
                                         <button className=" hidden md:flex items-center ml-5 text-white">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -170,6 +174,7 @@ const Navbar = () =>{
                                 </div>
                                 <div className="w-full pb-4">
                                     <div className="border-t border-gray-300">
+                                        <Link to="/carrito">
                                         <div className="w-full flex items-center justify-between pt-6">
                                             <div className="flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -177,7 +182,7 @@ const Navbar = () =>{
                                                 </svg>
                                                 <p className=" text-gray-800 text-base leading-4 ml-2 hover:text-secondary-100 ">Carrito de Compras</p>
                                             </div>
-                                        </div>
+                                        </div></Link>
                                         <div className="w-full flex items-center justify-between pt-8">
                                             <div className="flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
