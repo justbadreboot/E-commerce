@@ -4,27 +4,27 @@ const MainMedServices = () =>{
     const services=[
         {
             id:1,
-            nombre:"Consulta Médica",
+            nombre:"Tomografías",
             img:"https://images.unsplash.com/photo-1666214276389-393fb7dbc75c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxzZWFyY2h8Mjl8fGhlYWx0aGNhcmV8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
-            especialidad:"Oncología",
+            especialidad:"General",
         },
         {
             id:2,
-            nombre:"Consulta Médica",
+            nombre:"Consultas Médicas",
             img:"https://medicinaysaludpublica.blob.core.windows.net.optimalcdn.com/images/2022/10/15/consulta-medica-1f0d2819.jpg",
-            especialidad:"Oncología",
+            especialidad:"General",
         },
         {
             id:3,
-            nombre:"Consulta Médica",
+            nombre:"Exámenes de Laboratorio",
             img:"https://cloudfront-us-east-1.images.arcpublishing.com/eluniverso/BUOGLU5M4VCSJPSIM2PUHWIIZM.jpg",
-            especialidad:"Oncología",
+            especialidad:"General",
         },
         {
             id:4,   
-            nombre:"Consulta Médica",
+            nombre:"Consultas Generales",
             img:"https://eresmama.com/wp-content/uploads/2019/04/bebe-revision-pediatra-que-es-la-pediatria.jpg",
-            especialidad:"Oncología",
+            especialidad:"Pediatría",
         },
     ]
 
