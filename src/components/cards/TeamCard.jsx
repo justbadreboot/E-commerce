@@ -55,7 +55,7 @@ const TeamCard =()=>{
         <div className="pt-4 font-poppins">
             <div className="xl:container mx-auto px-6 md:px-12">
                 <div className="mb-12 md:w-2/3 lg:w-1/2">
-                    <h2 className="mb-4 text-2xl font-semibold text-gray-800 md:text-3xl">
+                    <h2 className="mb-4 text-2xl font-semibold text-ternary-60 md:text-3xl">
                     Nuestro Equipo
                     </h2>
                     <p className="text-gray-600">

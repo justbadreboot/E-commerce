@@ -48,13 +48,13 @@ const ContactForm = ()=>{
     return (
         <div className='pt-8 px-4 font-poppins'>
             <div className="flex flex-col justify-center items-center">
-                <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800">Contáctanos</h1>
+                <h1 className="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-ternary-60">Contáctanos</h1>
             </div>
             <div className="flex w-full md:mt-8 justify-center items-center">
                 <div className="mt-6 md:mt-0 flex flex-col md:flex-row md:space-x-2 md:space-y-0 space-y-6 bg-primary-20 w-full max-w-4xl p-10 sm:p-12 text-white overflow-hidden rounded-lg shadow-md ">
                     <div className="flex flex-col mr-16 space-y-4 justify-between">
                         <div>
-                            <h1 className="font-bold text-3xl tracking-wide text-gray-500">Datos de Contacto</h1>
+                            <h1 className="font-bold text-xl md:text-2xl tracking-wide text-gray-700">Datos de Contacto</h1>
                             <p className="pt-2 text-cyan-800 text-sm">Lorem lorem lorem lorem lorem lorem lroe loremrrrrrrrm</p>
                         </div>
                         <div className='flex flex-col space-y-6'>
