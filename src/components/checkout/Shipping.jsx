@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Shipping = ()=>{
     return(
-        <div className="mt-4 bg-gray-50 px-4 pt-8 lg:mt-0">
+        <div className="mt-4 bg-gray-50 px-4 pt-8 lg:mt-0 font-poppins">
             <p className="text-xl font-medium">Datos para el Envío</p>
             <p className="text-gray-400 mt-2">Completa tu orden llenando los datos para el envío de tus productos.</p>
             <div>
@@ -66,7 +66,7 @@ const Shipping = ()=>{
                     </div>
                 </div>
                 <div className="mt-6 flex items-center justify-between">
-                    <p className="text-sm font-medium text-gray-900">Total</p>
+                    <p className="text-sm font-semibold text-gray-900">Total</p>
                     <p className="text-2xl font-semibold text-gray-900">$408.00</p>
                 </div>
             </div>

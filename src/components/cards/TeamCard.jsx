@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import fotoA from '../assets/img/FotoA.jpg'
-import fotoD from '../assets/img/FotoD.png'
+import fotoA from '../../assets/img/FotoA.jpg'
+import fotoD from '../../assets/img/FotoD.png'
 
 const TeamCard =()=>{
 

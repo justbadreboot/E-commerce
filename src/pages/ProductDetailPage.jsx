@@ -1,6 +1,6 @@
-import ProductDetail from "../components/ProductDetail";
+import ProductDetail from "../components/cards/ProductDetail";
 import MainLayout from "../Layout/MainLayout";
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../components/cards/ProductCard';
 
 const ProductDetailPage = ()=>{
 

@@ -25,24 +25,24 @@ const Summary =()=>{
     ]
 
     return(
-        <>
-            <p class="text-xl font-medium">Resumen de Compra</p>
-            <p class="text-gray-400">Verifica tus articulos.</p>
-            <div class="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
+        <div className='font-poppins'>
+            <p className="text-xl font-medium">Resumen de Compra</p>
+            <p className="text-gray-400">Verifica tus articulos.</p>
+            <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
                 {productos.map(product=>(
-                    <div class="flex flex-col rounded-lg bg-white sm:flex-row">
+                    <div className="flex flex-col rounded-lg bg-white sm:flex-row">
                         <>
-                            <img class="m-2 h-24 w-28 rounded-md border object-cover object-center" src={product.img} alt={product.nombre} />
-                            <div class="flex w-full flex-col px-4 py-4">
-                                <span class="font-semibold">{product.nombre}</span>
-                                <span class="float-right text-gray-400">{product.marca}</span>
-                                <p class="text-lg font-bold">${product.precio}</p>
+                            <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={product.img} alt={product.nombre} />
+                            <div className="flex w-full flex-col px-4 py-4">
+                                <span className="font-semibold">{product.nombre}</span>
+                                <span className="float-right text-gray-400">{product.marca}</span>
+                                <p className="text-lg font-bold">${product.precio}</p>
                             </div>
                         </>
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     )
 
 }

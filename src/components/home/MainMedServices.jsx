@@ -1,4 +1,4 @@
-import ServiceCard from "../ServiceCard";
+import ServiceCard from "../cards/ServiceCard";
 const MainMedServices = () =>{
 
     const services=[
