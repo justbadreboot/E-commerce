@@ -54,18 +54,17 @@ const TeamCard =()=>{
     return( 
         <div className="pt-4 font-poppins">
             <div className="xl:container mx-auto px-6 md:px-12">
-                <div className="mb-16 md:w-2/3 lg:w-1/2">
+                <div className="mb-12 md:w-2/3 lg:w-1/2">
                     <h2 className="mb-4 text-2xl font-semibold text-gray-800 md:text-3xl">
                     Nuestro Equipo
                     </h2>
                     <p className="text-gray-600">
-                    Tailus prides itself not only on award-winning technology, but also on the talent of its
-                    people of some of the brightest minds and most experienced executives in business.
+                        Conoce a las talentosas personas que forman parte de <span className="text-primary-100 font-bold">KrugerMed</span>
                     </p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center">
                     {members.map(member =>(
-                        <div className="p-4"
+                        <div className="p-4 mb-8 m-2 md:mb-0 bg-gray-100"
                             data-aos="fade-right"
                             data-aos-duration="1200" 
                             data-aos-delay={member.delay}>

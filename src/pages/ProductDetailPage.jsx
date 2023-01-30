@@ -1,4 +1,4 @@
-import ProductDetail from "../components/cards/ProductDetail";
+import ProductDetail from "../components/cards/ProductDetailCard";
 import MainLayout from "../Layout/MainLayout";
 import ProductCard from '../components/cards/ProductCard';
 

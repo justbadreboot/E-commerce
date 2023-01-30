@@ -35,7 +35,7 @@ const ProductDetail=()=>{
                             <span className="text-gray-500 text-sm ml-2">{detalles.rate}</span>
                         </div>
                         <div className="mt-8 mb-6 md:mb-8 lg:mt-4">
-                            <div className="text-gray-800 text-lg font-semibold mb-3">Description</div>
+                            <div className="text-gray-800 text-lg font-semibold mb-3">Descripción</div>
                             <p className="text-gray-500">{detalles.descripcion}</p>
                         </div>
                         <div className="mb-4">
@@ -49,7 +49,7 @@ const ProductDetail=()=>{
                                 <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" />
                             </svg>
-                            <span className="text-sm">2-4 day shipping</span>
+                            <span className="text-sm">2-4 días de envío</span>
                         </div>
                         <div className="flex gap-2.5">
                             <button className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>

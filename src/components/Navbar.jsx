@@ -12,13 +12,15 @@ const Navbar = () =>{
                 <div className="mx-auto container px-6 xl:py-2">
                     <div className="flex items-center justify-between">
                         <div className="flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
-                            <img className='w-48 ml-6' src={logo} alt="KrugerMed" />
+                            <Link to="/">
+                                <img className='w-48 ml-6' src={logo} alt="KrugerMed" />
+                            </Link>
                         </div>
                         <div className="flex">
                             <div className="hidden xl:flex md:mr-6 xl:mr-16 ">
-                                <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Productos</NavLink>
+                                <NavLink to='/productos' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Productos</NavLink>
                                 <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Servicios</NavLink>
-                                <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
+                                <div className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
                                     <div class="dropdown dropdown-hover">
                                         <label tabindex="0" class="py-6">Nosotros</label>
                                         <ul tabindex="0" class="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-52 mt-4">
@@ -26,7 +28,7 @@ const Navbar = () =>{
                                             <li><Link className='text-sm'>FAQs</Link></li>
                                         </ul>
                                     </div>
-                                </NavLink>
+                                </div>
                                 <NavLink to='/contacto' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Contacto</NavLink>
                             </div>
                             <div className="hidden xl:flex items-center px-10">
