@@ -69,6 +69,9 @@ module.exports = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
       },
+      maxHeight: {
+        '560': '35rem',
+      },
     },
   },
 }
