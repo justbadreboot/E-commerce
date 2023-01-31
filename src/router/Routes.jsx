@@ -8,6 +8,7 @@ import Checkout from '../pages/CheckoutPage';
 import ShippingPage from '../pages/ShippingPage';
 import PaymentPage from '../pages/PaymentPage';
 import FilterProductsPage from '../pages/FilterProductsPage';
+import LoginPage from '../pages/LoginPage';
 
 const routes = () =>{
     return(
@@ -22,6 +23,7 @@ const routes = () =>{
                 <Route path='/checkout' element={<Checkout />}> </Route>
                 <Route path='/envio' element={<ShippingPage />}> </Route>
                 <Route path='/pago' element={<PaymentPage />}> </Route>
+                <Route path='/login' element={<LoginPage />} ></Route>
             </Routes>
         </>
     )
