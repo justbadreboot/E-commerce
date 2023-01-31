@@ -1,24 +1,70 @@
 import { useState } from 'react'
 import login from '../assets/img/Login.png';
 import kruger from '../assets/img/kruger.png';
+import { useNavigate} from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Swal from "sweetalert2";
 
 const Login = () =>{
+    const navigate = useNavigate()
     const [isForm, setIsForm] = useState({
         login : true,
         register : false,
     })
-    const handleSubmitLogIn = (e) => {
-        e.preventDefault()
-    }
-    const handleSubmitSignUp = (e) => {
-        e.preventDefault()
-    }
     const getPosition = () => {
         return isForm.login ? "top-full"
         : isForm.register ? "top-0"
         : null
     }
     
+    const loginSchema = Yup.object().shape({
+		email_login: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
+        password_login: Yup.string().required("Este campo es requerido")
+	});
+
+    const signSchema = Yup.object().shape({
+		email_sign: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
+        password_sign: Yup.string().required("Este campo es requerido"),
+        nombre: Yup.string().required("Este campo es requerido"),
+        apellido: Yup.string().required("Este campo es requerido"),
+	});
+
+    const formik = useFormik({
+		initialValues: {
+			email_login:"",
+            password_login:","  
+		},
+		validationSchema: loginSchema,
+		onSubmit: (data) => {
+            formik.resetForm();
+            navigate("/")
+		},
+	});
+
+    const formik2 = useFormik({
+		initialValues: {
+			email_sign:"",
+            password_sign:"",
+            nombre:"",
+            apellido:"" 
+		},
+		validationSchema: signSchema,
+		onSubmit: (data) => {
+            Swal.fire({
+                title:'Excelente!',
+                icon:'success',
+                text:'Usuario registrado con éxito'
+            }).then((result) => {
+                if (result.isConfirmed){
+			        formik2.resetForm();
+                    navigate("/")
+                }
+            })
+		},
+	});
+
+
     return(
         <div className="relative w-full py-8 px-5 flex flex-col items-center font-poppins">
             <div className="relative z-10 max-w-6xl w-full md:w-3/4 grid grid-cols-7 bg-primary-40 overflow-hidden rounded-lg shadow-xl">
@@ -41,62 +87,92 @@ const Login = () =>{
                 </div>
                 <div className={`col-span-7 sm:col-span-5 md:col-span-4 relative max-h-560 transition-all duration-500 ease-in-out transform -translate-y-full ${getPosition()}`}>
                     {/* Login Form */}
-                    <div onSubmit={handleSubmitLogIn} className={`px-8 lg:px-20 w-full h-full flex flex-col items-center justify-center bg-white bg-opacity-80 transition-all duration-150 ease-in transform ${!isForm.login && "opacity-0"}`}>
+                    <div className={`px-8 lg:px-20 w-full h-full flex flex-col items-center justify-center bg-white bg-opacity-80 transition-all duration-150 ease-in transform ${!isForm.login && "opacity-0"}`}>
                         <img src={kruger} alt='kruger' className="h-20" />
                         <h2 className="py-3 text-center text-3xl font-bold text-gray-600">Bienvenido de nuevo!</h2>
-                        <form action="" className="py-6 w-full px-4 lg:px-0 xl:px-10">
+                        <form onSubmit={formik.handleSubmit} action="" className="py-6 w-full px-4 lg:px-0 xl:px-10">
                             <p className='mb-4 text-sm'>Ingresa tus credenciales de acceso para continuar</p>
                             <div className="form-control w-full mb-2">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input name="email-login" type="email" placeholder="Email" className="input input-bordered w-full max-w-sm" />
+                                <input name="email_login" type="email" placeholder="Email" className="input input-bordered w-full max-w-sm" onChange={formik.handleChange}  value={formik.values.email_login} />
+                                {formik.touched.email_login && formik.errors.email_login && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.email_login}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-control w-full mb-2">
                                 <label className="label">
                                     <span className="label-text">Contraseña</span>
                                 </label>
-                                <input  name="password-login" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" />
+                                <input  name="password_login" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" onChange={formik.handleChange}  value={formik.values.password_login} />
+                                {formik.touched.password_login && formik.errors.password_login && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.password_login}
+                                    </span>
+                                )}
                             </div>
                             <div className="mt-10 w-full">
-                                <button type="submit" className="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">Ingresar</button>
+                                <button type="submit" onClick={formik.handleSubmit} className="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">Ingresar</button>
                             </div>
                         </form>
                     </div>
 
                     {/* Register Form */}
-                    <div onSubmit={handleSubmitSignUp} className={`px-8 lg:px-20 w-full h-full flex flex-col items-center justify-center bg-white bg-opacity-80 transition-all duration-150 ease-in transform ${!isForm.register && "opacity-0"}`}>
+                    <div  className={`px-8 lg:px-20 w-full h-full flex flex-col items-center justify-center bg-white bg-opacity-80 transition-all duration-150 ease-in transform ${!isForm.register && "opacity-0"}`}>
                         <img src={kruger} alt='kruger' className="h-20" />
                         <h2 className="py-0 md:py-2 text-center text-2xl md:text-3xl font-bold text-gray-600">Crea una nueva cuenta</h2>
-                        <form action="" className="py-2 w-full px-4 lg:px-0 xl:px-10">
+                        <form onSubmit={formik2.handleSubmit} action="" className="py-2 w-full px-4 lg:px-0 xl:px-10">
                             <div className='grid grid-cols-1 md:grid-cols-2'>
                                 <div className="form-control w-full mb-2">
                                     <label className="label">
                                         <span className="label-text">Nombre</span>
                                     </label>
-                                    <input name="nombre" type="text" placeholder="Nombre" className="input input-bordered w-full max-w-sm" />
+                                    <input name="nombre" type="text" placeholder="Nombre" className="input input-bordered w-full max-w-sm"  onChange={formik2.handleChange}  value={formik2.values.nombre} />
+                                    {formik2.touched.nombre && formik.errors.nombre && (
+                                        <span className="text-red-400 flex text-xs">
+                                            {formik2.errors.nombre}
+                                        </span>
+                                    )}
                                 </div>
                                 <div className="form-control w-full mb-2 md:ml-1">
                                     <label className="label">
                                         <span className="label-text">Apellido</span>
                                     </label>
-                                    <input name="apellido" type="text" placeholder="Apellido" className="input input-bordered w-full max-w-sm" />
+                                    <input name="apellido" type="text" placeholder="Apellido" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.apellido} />
+                                    {formik2.touched.apellido && formik.errors.apellido && (
+                                        <span className="text-red-400 flex text-xs">
+                                            {formik2.errors.apellido}
+                                        </span>
+                                    )}
                                 </div>
                             </div>
                             <div className="form-control w-full mb-2">
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input name="email-sign" type="email" placeholder="Email" className="input input-bordered w-full max-w-sm" />
+                                <input name="email-sign" type="email" placeholder="Email" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.password_login} />
+                                {formik2.touched.email_sign && formik.errors.email_sign && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik2.errors.email_sign}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-control w-full mb-2">
                                 <label className="label">
                                     <span className="label-text">Contraseña</span>
                                 </label>
-                                <input  name="password-sign" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" />
+                                <input  name="password-sign" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.password_sign} />
+                                {formik2.touched.password_sign && formik2.errors.password_sign && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik2.errors.password_sign}
+                                    </span>
+                                )}
                             </div>
                             <div className="mt-6 md:mt-10 w-full">
-                                <button type="submit" className="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">Crear</button>
+                                <button type="submit" onClick={formik2.handleSubmit} className="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">Crear</button>
                             </div>
                         </form>
                     </div>
