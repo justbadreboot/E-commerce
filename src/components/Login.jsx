@@ -33,7 +33,7 @@ const Login = () =>{
     const formik = useFormik({
 		initialValues: {
 			email_login:"",
-            password_login:","  
+            password_login:"",  
 		},
 		validationSchema: loginSchema,
 		onSubmit: (data) => {
@@ -107,7 +107,7 @@ const Login = () =>{
                                 <label className="label">
                                     <span className="label-text">Contraseña</span>
                                 </label>
-                                <input  name="password_login" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" onChange={formik.handleChange}  value={formik.values.password_login} />
+                                <input  name="password_login" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" onChange={formik.handleChange} value={formik.values.password_login} />
                                 {formik.touched.password_login && formik.errors.password_login && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik.errors.password_login}
@@ -131,7 +131,7 @@ const Login = () =>{
                                         <span className="label-text">Nombre</span>
                                     </label>
                                     <input name="nombre" type="text" placeholder="Nombre" className="input input-bordered w-full max-w-sm"  onChange={formik2.handleChange}  value={formik2.values.nombre} />
-                                    {formik2.touched.nombre && formik.errors.nombre && (
+                                    {formik2.touched.nombre && formik2.errors.nombre && (
                                         <span className="text-red-400 flex text-xs">
                                             {formik2.errors.nombre}
                                         </span>
@@ -142,7 +142,7 @@ const Login = () =>{
                                         <span className="label-text">Apellido</span>
                                     </label>
                                     <input name="apellido" type="text" placeholder="Apellido" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.apellido} />
-                                    {formik2.touched.apellido && formik.errors.apellido && (
+                                    {formik2.touched.apellido && formik2.errors.apellido && (
                                         <span className="text-red-400 flex text-xs">
                                             {formik2.errors.apellido}
                                         </span>
@@ -153,8 +153,8 @@ const Login = () =>{
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input name="email-sign" type="email" placeholder="Email" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.password_login} />
-                                {formik2.touched.email_sign && formik.errors.email_sign && (
+                                <input name="email_sign" type="email" placeholder="Email" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.email_sign} />
+                                {formik2.touched.email_sign && formik2.errors.email_sign && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik2.errors.email_sign}
                                     </span>
@@ -164,7 +164,7 @@ const Login = () =>{
                                 <label className="label">
                                     <span className="label-text">Contraseña</span>
                                 </label>
-                                <input  name="password-sign" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.password_sign} />
+                                <input name="password_sign" type="password" placeholder="Contraseña" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.password_sign} />
                                 {formik2.touched.password_sign && formik2.errors.password_sign && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik2.errors.password_sign}
