@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useGetCategoriesQuery } from "../../store/serverApi";
+
 const MainCategories = () =>{
 
-    //const [categorias, setCategorias] = useState([]);
+    const {data: categorias, isLoading, isFetching, isSuccess} = useGetCategoriesQuery();
 
-    const temcategorias=[
+    /*const temcategorias=[
         {
             id:1,
             nombre:'Vitaminas',
@@ -40,7 +41,7 @@ const MainCategories = () =>{
             img:'https://www.rr-industrial.com/wp-content/uploads/2020/12/Bio-image.jpg',
             delay:"500"
         },
-    ]
+    ]*/
 
     return(
         <div className="pb-1 font-poppins">
@@ -53,18 +54,21 @@ const MainCategories = () =>{
                             </h1>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 w-full px-8">
-                            {temcategorias.map(categoria =>(
-                                <div 
-                                    data-aos="fade-up" data-aos-duration="1200"
-                                    key={categoria.id}
-                                    className="flex flex-col space-y-2 md:space-y-8 mt-2">
-                                    <div className="relative group flex justify-center items-center h-full w-full">
-                                        <img className="object-center object-cover w-full h-full" src={categoria.img} alt={categoria.name} />
-                                        <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-sm font-medium leading-none text-gray-800 py-3 w-36 bg-white">{categoria.nombre}</button>
-                                        <div className="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50" />
+                            {((isLoading || isFetching)) && <>cargando</>}
+                            {isSuccess && (
+                                categorias.map(categoria =>(
+                                    <div 
+                                        data-aos="fade-up" data-aos-duration="1200"
+                                        key={categoria.id}
+                                        className="flex flex-col space-y-2 md:space-y-8 mt-2">
+                                        <div className="relative group flex justify-center items-center h-full w-full">
+                                            <img className="object-center object-cover w-full h-full" src={categoria.img} alt={categoria.name} />
+                                            <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-sm font-medium leading-none text-gray-800 py-3 w-36 bg-white">{categoria.name}</button>
+                                            <div className="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50" />
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
                 </div>
