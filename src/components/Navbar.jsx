@@ -78,7 +78,9 @@ const Navbar = () =>{
             <nav>
                 <div className="py-2 px-6 w-full flex xl:hidden justify-between items-center  bg-primary-100 z-40">
                     <div className="w-48">
-                        <img src={logo} alt='KrugerMed' />
+                        <Link to="/">
+                            <img src={logo} alt='KrugerMed' />
+                        </Link>
                     </div>
                     <div className="flex items-center">
                         <div id="menu" className="text-gray-800" >
@@ -124,9 +126,11 @@ const Navbar = () =>{
                                 <div>
                                     <div className="mt-4 flex w-full items-center justify-between">
                                         <div className="flex items-center justify-between w-full">
-                                            <div className="flex items-center">
-                                                <img src={logo2} alt='Kruger' className='w-40' />
-                                            </div>
+                                            <Link to="/">
+                                                <div className="flex items-center">
+                                                    <img src={logo2} alt='Kruger' className='w-40' />
+                                                </div>
+                                            </Link>
                                             <div id="cross" className="text-gray-800" onClick={() => setShow(!show)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" />

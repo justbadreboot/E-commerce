@@ -6,6 +6,7 @@ import {BsFillGridFill} from 'react-icons/bs'
 import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
 import ProductCard from '../components/cards/ProductCard';
+import Pagination from './Pagination'
 
 const Filter =()=>{
   const [openFilter, setOpenFilter] = useState(true)
@@ -201,6 +202,7 @@ const Filter =()=>{
                 <ProductCard product={product}/>
               ))}
             </div>
+            <Pagination />
           </div>
         </div>
       </div>
