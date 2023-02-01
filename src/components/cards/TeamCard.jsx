@@ -64,7 +64,7 @@ const TeamCard =()=>{
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center">
                     {members.map(member =>(
-                        <div className="p-4 mb-8 m-2 md:mb-0 bg-gray-100"
+                        <div key={member.id} className="p-4 mb-8 m-2 md:mb-0 bg-gray-100"
                             data-aos="fade-right"
                             data-aos-duration="1200" 
                             data-aos-delay={member.delay}>

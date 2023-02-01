@@ -179,7 +179,7 @@ const Filter =()=>{
                     {section.id !== "color" &&
                       <Disclosure.Panel className="mt-5 flex flex-col">
                         {section.options.map(option => (
-                          <div className="m-1 flex items-center space-x-3">
+                          <div key={option.label} className="m-1 flex items-center space-x-3">
                             <div>
                               <label htmlFor={option.label} className="sr-only">{`Color ${option.label}`}</label>
                               <input type="checkbox" name={option.label} id={option.label} defaultValue={option.value} defaultChecked={option.checked} className="form-checkbox h-5 w-5 border-gray-300 rounded text-blue-400 focus:ring-blue-400" />
@@ -199,7 +199,7 @@ const Filter =()=>{
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
             <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
               {products.map( product =>(
-                <ProductCard product={product}/>
+                <ProductCard product={product} key={product.id}/>
               ))}
             </div>
             <Pagination />

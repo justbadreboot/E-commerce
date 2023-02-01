@@ -43,7 +43,7 @@ const Cart =()=>{
                                     <h2 className="mr-8 text-md">Total Items: <span>8</span></h2>
                                 </div>
                                 {productos.map(producto =>(
-                                    <CartItem producto={producto} />
+                                    <CartItem producto={producto} key={producto.id} />
                                 ))}
                                 <div className="flex justify-between items-center mt-12 pt-6 border-t"> 
                                     <Link to="/productos" className="flex items-center">

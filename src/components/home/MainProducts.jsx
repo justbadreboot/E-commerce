@@ -80,7 +80,7 @@ const MainProducts = () =>{
                 {((isLoading || isFetching)) && <>cargando</>}
                 {isSuccess && (
                     products.map( product =>(
-                        <ProductCard product={product} />
+                        <ProductCard product={product} key={product.id} />
                     ))
                 )}
                 {isError && <>Error</>}
