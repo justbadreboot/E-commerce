@@ -1,9 +1,12 @@
 import ProductCard from '../cards/ProductCard';
 import ViewMore from '../ViewMore'
+import { useGetProductsQuery } from '../../store/serverApi';
 
 const MainProducts = () =>{
 
-    const products=[
+    const {data: products, isLoading, isFetching, isSuccess, isError} = useGetProductsQuery();
+
+    const productos=[
         {
             id:1,
             nombre:"Enterogermina",
@@ -74,9 +77,13 @@ const MainProducts = () =>{
                 data-aos="fade-up"
                 data-aos-duration="1200" 
                 className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 lg:grid-cols-4">
-                {products.map( product =>(
-                    <ProductCard product={product}/>
-                ))}
+                {((isLoading || isFetching)) && <>cargando</>}
+                {isSuccess && (
+                    products.map( product =>(
+                        <ProductCard product={product} />
+                    ))
+                )}
+                {isError && <>Error</>}
             </div>
         </section>
     )

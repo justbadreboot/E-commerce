@@ -1,4 +1,5 @@
 import ServiceCard from "../cards/ServiceCard";
+
 const MainMedServices = () =>{
 
     const services=[
@@ -40,7 +41,7 @@ const MainMedServices = () =>{
                     data-aos-duration="1500" 
                     className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8">
                     {services.map( service =>(
-                        <ServiceCard service={service} />
+                        <ServiceCard service={service} key={service.id} />
                     ))}
                 </div>
             </div>

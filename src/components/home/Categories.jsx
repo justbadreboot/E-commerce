@@ -2,7 +2,7 @@ import { useGetCategoriesQuery } from "../../store/serverApi";
 
 const MainCategories = () =>{
 
-    const {data: categorias, isLoading, isFetching, isSuccess} = useGetCategoriesQuery();
+    const {data: categorias, isLoading, isFetching, isSuccess, isError} = useGetCategoriesQuery();
 
     /*const temcategorias=[
         {
@@ -69,6 +69,7 @@ const MainCategories = () =>{
                                     </div>
                                 ))
                             )}
+                            {isError && <>Error</>}
                         </div>
                     </div>
                 </div>

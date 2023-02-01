@@ -21,7 +21,7 @@ const Footer = () =>{
                                 <img src={cara} alt="KrugerMed" className="w-40" />
                                 <div className="flex">
                                     <form action="">
-                                        <label for="newsletter" className="text-lg font-semibold capitalize text-gray-900">Subscríbete a nuestro Newsletter</label>
+                                        <label htmlFor="newsletter" className="text-lg font-semibold capitalize text-gray-900">Subscríbete a nuestro Newsletter</label>
                                         <div className="relative mt-4 input-group">
                                             <input
                                                 type="email"
