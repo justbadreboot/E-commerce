@@ -19,5 +19,3 @@ export const serverApi = createApi({
     useGetCategoriesQuery, 
     useGetProductsQuery 
   } = serverApi;
-
-  // query: (page = 1) => `albums?_page=${page}&_limit=10`,

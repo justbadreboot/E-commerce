@@ -65,6 +65,9 @@ module.exports = {
           40:'#A8CEEA',
           20:'#D4E7F4',
         },
+        'load0':'rgba(0,0,0,1)',
+        'load5':'rgba(0,0,0,0.5)',
+        'load4':'rgba(0, 0,0,0.4)',
       },
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif']
@@ -72,6 +75,49 @@ module.exports = {
       maxHeight: {
         '560': '35rem',
       },
+      margin:{
+        'l-35':'2.188rem auto 0'
+      },
+      borderRadius:{
+        'l-50':'0 0 3.125rem 3.125rem',
+        'l-50%':'50%'
+      },
+      backgroundSize:{
+        'l-2280':'1.375rem 5rem'
+      },
+      backgroundPosition: {
+        'l-080':'0 5rem',
+        'l-00': '0 0'
+      },
+      boxShadow:{
+        'l-00':'0 0 rgb(48,195,228) inset',
+      },
+      backgroundImage:{
+        'l-lg':'linear-gradient(rgb(48,195,228) 6.25rem, transparent 0)',
+      },
+      keyframes:{
+        loading:{
+          '0%':{backgroundPosition: '0 5rem'},
+          '100%':{backgroundPosition: '0 0'}
+        },
+        loadingBubble:{
+          '0%': { transform: 'rotate(90deg)' },
+          '50%': { transform: 'rotate(215deg)' },
+          '100%': { transform: 'rotate(330deg)' },
+        },
+        loading2:{
+          '0%': { boxShadow: '0.25rem -0.625rem load0, 0.375rem 0 load0, 0.5rem -0.938rem load0,0.75rem 0 load0'},
+          '20%':{ boxShadow: '0.25rem -1.25rem load0, 0.5rem -0.625rem load0, 0.625rem -1.875rem load5, 0.938rem -0.313rem load0'},
+          '40%':{ boxShadow: '0.125rem -2.5rem load5, 0.5rem -0.625rem load4, 0.5rem -3.75rem load5, 0.75rem -0.938rem load5'},
+          '60%':{ boxShadow: '0.25rem -3.75rem load5, 0.375rem -3.125rem load4, 0.625rem -5.625rem load5, 0.938rem -1.563rem load5'},
+          '80%':{ boxShadow: '0.125rem -5rem load5, 0.25rem -4.375rem load4, 0.5rem -7.5rem load0, 0.75rem -2.188rem load5'},
+          '100%':{ boxShadow: '0.25rem -6.25rem load0, 0.5rem -5.625rem load0, 0.625rem -7.5rem load0, 0.938rem -2.813rem load0'},
+        }
+      },
+      animation:{
+        loading:'loading 6s linear infinite',
+        loading2: 'loading2 6s linear infinite'
+      }
     },
   },
 }
