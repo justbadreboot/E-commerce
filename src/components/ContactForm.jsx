@@ -2,17 +2,15 @@ import { BsFillTelephoneFill} from 'react-icons/bs';
 import { GrMail } from 'react-icons/gr';
 import { ImLocation } from "react-icons/im"
 import { useFormik } from "formik";
+import { useGetLandingQuery } from '../store/serverApi';
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
 
 const ContactForm = ()=>{
 
-    const contactInfo={
-        celular: "099298736",
-        mail:"krugermed@gmail.com",
-        direccion:"Quito,Ecuador"
-    }
+    const {data: contactInfo, isSuccess} = useGetLandingQuery();
+
     const contactSchema = Yup.object().shape({
 		email: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
 		nombre: Yup.string().required('Este campo es requerido'),
@@ -57,20 +55,26 @@ const ContactForm = ()=>{
                             <h1 className="font-bold text-xl md:text-2xl tracking-wide text-gray-700">Datos de Contacto</h1>
                             <p className="pt-2 text-cyan-800 text-sm">Lorem lorem lorem lorem lorem lorem lroe loremrrrrrrrm</p>
                         </div>
-                        <div className='flex flex-col space-y-6'>
-                            <div className='inline-flex space-x-2 items-center'>
-                                <BsFillTelephoneFill className='text-teal-600 text-xl' />
-                                <span className='text-gray-800'>{contactInfo.celular}</span>
+                        {isSuccess && (
+                            <div className='flex flex-col space-y-6'>
+                                {contactInfo.map(info=>(
+                                    <>
+                                     <div className='inline-flex space-x-2 items-center'>
+                                            <BsFillTelephoneFill className='text-teal-600 text-xl' />
+                                            <span className='text-gray-800'>{info.phone}</span>
+                                        </div>
+                                        <div className='inline-flex space-x-2 items-center'>
+                                            <GrMail className='text-teal-600 text-xl' />
+                                            <span className='text-gray-800'>{info.mail}</span>
+                                        </div>
+                                        <div className='inline-flex space-x-2 items-center'>
+                                            <ImLocation className='text-teal-600 text-xl' />
+                                            <span className='text-gray-800'>{info.address}</span>
+                                        </div>
+                                    </>
+                                ))}
                             </div>
-                            <div className='inline-flex space-x-2 items-center'>
-                                <GrMail className='text-teal-600 text-xl' />
-                                <span className='text-gray-800'>{contactInfo.mail}</span>
-                            </div>
-                            <div className='inline-flex space-x-2 items-center'>
-                                <ImLocation className='text-teal-600 text-xl' />
-                                <span className='text-gray-800'>{contactInfo.direccion}</span>
-                            </div>
-                        </div>
+                        )}
                         <div className='flex space-x-4 text-lg'>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7975223736703!2d-78.47892907847347!3d-0.18499999943328999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59080303a2eb1%3A0x523b5f69ac3065dd!2sKruger%20Corp!5e0!3m2!1ses-419!2sec!4v1674866639827!5m2!1ses-419!2sec" className='w-82 md:w-72 h-48' title='mapa' loading="lazy"></iframe>
                         </div>

@@ -3,19 +3,24 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const serverApi = createApi({
     reducerPath: 'serverApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://product-production-cf12.up.railway.app/api' 
+      baseUrl: 'https://' 
     }),
     endpoints: (builder) => ({
       getCategories: builder.query({
-        query: () => "/category/all",
+        query: () => "product-production-cf12.up.railway.app/api/category/all",
       }),
       getProducts: builder.query({
-        query: () => "/product/all",
+        query: () => "product-production-cf12.up.railway.app/api/product/all",
       }),
+      getLanding: builder.query({
+        query: () => "landing-production-11fd.up.railway.app/api/landing",
+      }),
+      
     }),
   });
   
   export const { 
     useGetCategoriesQuery, 
-    useGetProductsQuery 
+    useGetProductsQuery,
+    useGetLandingQuery
   } = serverApi;
