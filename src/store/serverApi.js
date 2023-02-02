@@ -15,7 +15,6 @@ export const serverApi = createApi({
       getLanding: builder.query({
         query: () => "landing-production-11fd.up.railway.app/api/landing",
       }),
-
     }),
   });
 
