@@ -8,7 +8,10 @@ import emailjs from "@emailjs/browser";
 
 const ContactForm = ()=>{
 
-    
+    const contactInfo=[
+        {address:'2',
+        phone:'22'}
+    ]    
     const contactSchema = Yup.object().shape({
 		email: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
 		nombre: Yup.string().required('Este campo es requerido'),

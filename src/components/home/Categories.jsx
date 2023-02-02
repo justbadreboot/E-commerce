@@ -1,7 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import { getCategories } from '../../store/categorySlice'
+import Loader from "../../components/Loader"
+
 const MainCategories = () =>{
 
+    const dispatch = useDispatch()
 
-    const categorias=[
+    useEffect(() => {
+        dispatch(getCategories())
+    }, [dispatch])
+
+    const categories = useSelector((state) => state.categories.categories)
+    console.log(categories)
+
+    /*const categorias=[
         {
             id:1,
             name:'Vitaminas',
@@ -38,7 +51,7 @@ const MainCategories = () =>{
             img:'https://www.rr-industrial.com/wp-content/uploads/2020/12/Bio-image.jpg',
             delay:"500"
         },
-    ]
+    ]*/
 
     return(
         <div className="pb-1 font-poppins">
@@ -51,7 +64,7 @@ const MainCategories = () =>{
                             </h1>
                         </div>
                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 md:gap-x-4 w-full px-8">
-                            {categorias.map(categoria =>(
+                            {categories.map(categoria =>(
                                 <div 
                                     data-aos="fade-up" data-aos-duration="1200"
                                     key={categoria.id}

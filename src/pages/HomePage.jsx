@@ -6,13 +6,11 @@ import MainProducts from "../components/home/MainProducts";
 import MainMedServices from '../components/home/MainMedServices'
 import Slider from "../components/Slider";
 import MainLayout from "../Layout/MainLayout";
-import Loader from "../components/Loader";
 
 const HomePage = () => {
     return(
         <>
             <MainLayout>
-                <Loader />
                 <Slider />
                 <MainServices />
                 <Categories />
