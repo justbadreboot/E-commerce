@@ -5,9 +5,9 @@ import Loader from "../../components/Loader"
 const ProductDetail=()=>{
 
     const params = useParams();
-    const {data: details, isLoading, isFetching, isSuccess} = useGetProductByIdQuery(params.id);
+    const {data: detalles, isLoading, isFetching, isSuccess, isError} = useGetProductByIdQuery(params.id);
     
-    const detalles ={
+    const detas ={
         brand:'Fancy Brand',
         name:'Pullover with pattern',
         description:'This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.',
@@ -70,7 +70,7 @@ const ProductDetail=()=>{
                         </div>
                     </div>
                 )}
-                
+                {isError && <>error</>}
             </div>
         </div>
     )

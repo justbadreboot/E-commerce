@@ -1,8 +1,10 @@
 import Loader from "../../components/Loader"
 import { useGetCategoriesQuery } from "../../store/serverApi";
+import {addToCart} from '../../store/cart/cartSlice'
+import { useDispatch } from 'react-redux';
 
 const MainCategories = () =>{
-
+    const dispatch = useDispatch()
     const {data: categorias, isLoading, isFetching, isSuccess} = useGetCategoriesQuery();
 
     /*const categorias=[
@@ -64,7 +66,7 @@ const MainCategories = () =>{
                                         className="flex flex-col space-y-2 md:space-y-8 mt-2">
                                         <div className="relative group flex justify-center items-center h-full w-full">
                                             <img className="object-center object-cover w-full h-full" src={categoria.img} alt={categoria.name} />
-                                            <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-sm font-medium leading-none text-gray-800 py-3 w-36 bg-white">{categoria.name}</button>
+                                            <button onClick={ ()=> dispatch(addToCart(categoria))} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-sm font-medium leading-none text-gray-800 py-3 w-36 bg-white">{categoria.name}</button>
                                             <div className="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50" />
                                         </div>
                                     </div>
