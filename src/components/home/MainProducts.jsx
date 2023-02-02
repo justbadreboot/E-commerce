@@ -1,9 +1,13 @@
+import { useGetProductsQuery } from '../../store/serverApi';
 import ProductCard from '../cards/ProductCard';
 import ViewMore from '../ViewMore'
+import Loader from "../../components/Loader"
+
 const MainProducts = () =>{
 
+    const {data: products, isLoading, isFetching, isSuccess} = useGetProductsQuery();
 
-    const products=[
+    /*const products=[
         {
             id:1,
             name:"Enterogermina",
@@ -60,7 +64,7 @@ const MainProducts = () =>{
             rate:4.5,
             pvp:20,
         },
-    ]
+    ]*/
 
     return(
         <section className="py-10 font-poppins">
@@ -70,14 +74,17 @@ const MainProducts = () =>{
             <div className='mb-2 md:mb-0 md:mr-20'>
                 <ViewMore />    
             </div>
-            <div
+            {((isLoading || isFetching)) && <Loader /> }
+            {isSuccess && (
+                <div
                 data-aos="fade-up"
                 data-aos-duration="1200" 
                 className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 lg:grid-cols-4">
                     {products.map( product =>(
                         <ProductCard product={product} key={product.id} />
                     ))}
-            </div>
+                </div>
+            )}
         </section>
     )
 }
