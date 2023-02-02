@@ -1,47 +1,46 @@
-import { useGetCategoriesQuery } from "../../store/serverApi";
+
 
 const MainCategories = () =>{
 
-    const {data: categorias, isLoading, isFetching, isSuccess, isError} = useGetCategoriesQuery();
 
-    /*const temcategorias=[
+    const categorias=[
         {
             id:1,
-            nombre:'Vitaminas',
+            name:'Vitaminas',
             img:'https://cdn.shopify.com/s/files/1/0312/1355/1754/collections/e4-multi-1_1200x1200.jpg?v=1663038570',
             delay:""
         },
         {
             id:2,
-            nombre:'Cuidado Facial',
+            name:'Cuidado Facial',
             img:'https://www.neutrogena.es/sites/neutrogena_es/files/taco-images/hydroboost_0_0.jpg',
             delay:"100"
         },
         {
             id:3,
-            nombre:'Cuidado Personal',
+            name:'Cuidado Personal',
             img:'https://st.depositphotos.com/1155723/1347/i/450/depositphotos_13471300-stock-photo-personal-hygiene-items-accessories-for.jpg',
             delay:"200"
         },
         {
             id:4,
-            nombre:'Bebés y niños',
+            name:'Bebés y niños',
             img:'https://http2.mlstatic.com/D_NQ_NP_719837-MCO49474711019_032022-V.jpg',
             delay:"300"
         },
         {
             id:5,
-            nombre:'Jarabes',
+            name:'Jarabes',
             img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTwFKe5FuIyyk1bD6te2RXIOTxpGrAWV_3clKA_R4RQ-ST_rbHCnvcIhFPn4jyuyms_VA&usqp=CAU',
             delay:"400"
         },
         {
             id:6,
-            nombre:'Bioseguridad',
+            name:'Bioseguridad',
             img:'https://www.rr-industrial.com/wp-content/uploads/2020/12/Bio-image.jpg',
             delay:"500"
         },
-    ]*/
+    ]
 
     return(
         <div className="pb-1 font-poppins">

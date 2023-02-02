@@ -2,14 +2,12 @@ import { BsFillTelephoneFill} from 'react-icons/bs';
 import { GrMail } from 'react-icons/gr';
 import { ImLocation } from "react-icons/im"
 import { useFormik } from "formik";
-import { useGetLandingQuery } from '../store/serverApi';
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
 
 const ContactForm = ()=>{
 
-    const {data: contactInfo, isSuccess} = useGetLandingQuery();
 
     const contactSchema = Yup.object().shape({
 		email: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
