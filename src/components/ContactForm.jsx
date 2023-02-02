@@ -60,20 +60,20 @@ const ContactForm = ()=>{
                         {isSuccess && (
                             <div className='flex flex-col space-y-6'>
                             {contactInfo.map(info=>(
-                                <>
+                                <div key={info.id}>
                                     <div className='inline-flex space-x-2 items-center'>
                                         <BsFillTelephoneFill className='text-teal-600 text-xl' />
                                         <span className='text-gray-800'>{info.phone}</span>
                                     </div>
                                     <div className='inline-flex space-x-2 items-center'>
                                         <GrMail className='text-teal-600 text-xl' />
-                                        <span className='text-gray-800'>{info.mail}</span>
+                                        <span className='text-gray-800'>{info.email}</span>
                                     </div>
                                     <div className='inline-flex space-x-2 items-center'>
                                         <ImLocation className='text-teal-600 text-xl' />
                                         <span className='text-gray-800'>{info.address}</span>
                                     </div>
-                                </>
+                                </div>
                             ))}
                         </div>
                         )}
