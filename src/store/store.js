@@ -4,8 +4,8 @@ import { serverApi } from './serverApi';
 
 export const store = configureStore({
   reducer: {
-    cart: cartSlice,
     [serverApi.reducerPath] : serverApi.reducer,
+    cart: cartSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(serverApi.middleware),

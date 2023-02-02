@@ -6,7 +6,7 @@ const ProductCard = ({product}) =>{
     
     const dispatch = useDispatch()
     const addCart =()=>{
-        //dispatch(addToCart({product }))
+        dispatch(addToCart({product }))
     }
 
     return(
