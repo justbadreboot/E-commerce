@@ -1,21 +1,15 @@
 import {MdDelete} from "react-icons/md"
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { listCartItems } from "../../store/cart/cartActions";
+import { getCartItems } from "../../store/cart/cartActions";
 
 const CartItem =({producto}) =>{
-    const dispatch = useDispatch()
-
-    const cardItemsList = useSelector(state => state.cartItemsList)
-    const {loading, error, cartItems} = cardItemsList
-
-    useEffect(()=>{
-        dispatch(listCartItems)
-        console.log("si")
-    },[dispatch])
-
+   
     const [count, setCount] = useState(0);
     
+    useEffect(()=>{
+        getCartItems()
+    },[])
+
     useEffect(()=>{
         setCount(producto.cantidad)
     },[producto.cantidad])
