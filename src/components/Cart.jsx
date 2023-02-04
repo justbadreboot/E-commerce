@@ -9,8 +9,8 @@ const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
 
     useEffect ( ()=>{
-        getCartItems('i9zBuJ8SZpcSk7ZsuFvY')
-        addToCart("eddy",98,45)
+        getCartItems('dani')
+        //addToCart('jane', 101,2)
     },[])
 
     const productos=[

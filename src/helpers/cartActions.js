@@ -1,60 +1,91 @@
-import {doc, setDoc, getDoc, deleteDoc, updateDoc, addDoc, arrayUnion, arrayRemove} from 'firebase/firestore'
+import {doc, setDoc, getDoc,getDocs, deleteDoc, updateDoc, addDoc,collection} from 'firebase/firestore'
 import firestore from "./firebaseConfig"
 
-const collectionName = "carts";
+const collectionName = "cart "
+const docId = "Id Producto "
 
-export const addToCart = async(email, item_id,cantidad) =>{
+export const addToCart = async(email, id_producto, cantidad) =>{
   try{
-    const item = {
-      cantidad: cantidad,
-      id_producto: item_id
-    }
-    const cartRef = doc(firestore, collectionName, email)
-    
-      try {
-        await setDoc(doc(firestore,collectionName, email), item);
-        console.log("Nuevo carrito agregado");
-      } catch (e) {
-        console.error("Error al agregar un carrito: ", e);
-      }
-   
-    const cartSnap = await getDoc(cartRef) 
-    if(cartSnap.exists){
-      console.log("Carrito existe y tiene items")
+    const cartRef = doc(firestore, collectionName + email, docId + id_producto)
+    const docSnap = await getDoc(cartRef);
+    if (docSnap.exists()) {
+      //ya existe el producto se debe aumentar la cantidad
+      const cantAnt = docSnap.data().cantidad
       await updateDoc(cartRef, {
-        items: arrayUnion(item)
+        cantidad: cantAnt + cantidad
       });
-    }else{
-      console.log("Carrito existe pero vacio")
-      await setDoc(cartRef, {
-        items: arrayUnion(item)
+    } else {
+      //agregar nuevo producto
+      await setDoc( cartRef, {
+        cantidad: cantidad
       });
     }
   }catch(error){
     console.log(error)
   }
+  /*try{
+    const item = {
+      cantidad: cantidad,
+      id_producto: item_id
+    }
+    const cartRef = doc(firestore, collectionName, email)
+    const cartSnap = await getDoc(cartRef) 
+    if(cartSnap.exists){
+      console.log("Carrito existe")
+      const cartItems = cartSnap.data()
+      if(cartItems){
+        console.log("Ya tiene items")
+        //verificar si ya existe el item en el carrito
+        cartItems.items.forEach(async i => {
+          if(i.id_producto == item.id_producto){
+            console.log("aumenta cantidad")
+            console.log(i.cantidad)
+            i.cantidad+=1;
+            console.log(i.cantidad)
+          }else{
+            await updateDoc(cartRef, {
+              items: arrayUnion(item)
+            });
+          }
+        });
+      }else{
+        console.log("No tiene items")
+        await setDoc(cartRef, {
+          items: arrayUnion(item)
+        });
+      }
+    }else{
+      console.log("carrito no existe")
+      try {
+        await setDoc(doc(firestore,collectionName, email), item);
+      } catch (e) {
+        console.error("Error al agregar un nuevo carrito: ", e);
+      }
+    }
+  }catch(error){
+    console.log(error)
+  }*/
 }
 
 export const getCartItems = async(email) => {
-  try {
-    const cartRef = doc(firestore, collectionName, email)
-    const cartSnap = await getDoc(cartRef)
-    if(cartSnap.exists){
-      const cartItems = cartSnap.data().items;
-      return cartItems
-    }else{
-      console.log("Documento no existe")
-    }
+  try { 
+    const cartItems = []
+    const items = await getDocs(collection(firestore, collectionName + email));
+    items.forEach((doc) => {
+      const item={
+        id: parseInt(doc.id.substring(12)),
+        cantidad: doc.data().cantidad
+      }
+      cartItems.push(item)
+    });
+    return cartItems
   } catch(error) {
       console.log(error)
   }
 } 
 
 export const updateCartQuantity = async (email) => {
-  const cartRef = doc(firestore, collectionName, email)
-  await updateDoc(cartRef, {
-    item:{cantidad:1, id_producto:2}
-  });
+ 
 }
 
 
