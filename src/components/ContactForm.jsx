@@ -113,7 +113,7 @@ const ContactForm = ()=>{
                                         </span>
                                     )}
                                 </div>
-                                <button className='btn inline-block self-end bg-secondary-80 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm' type="submit" onClick={formik.handleSubmit}>Enviar</button>
+                                <button className='btn inline-block self-end bg-green-500 text-white font-bold rounded-lg px-6 py-2 uppercase text-sm' type="submit" onClick={formik.handleSubmit}>Enviar</button>
                             </form>
                         </div>
                     </div>

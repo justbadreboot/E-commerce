@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import CartItem from "./checkout/CartItem";
 import {BsArrowLeft} from "react-icons/bs"
+import { addToCart, getCartItems } from "../helpers/cartActions";
+import { useEffect, useState } from "react";
+
 
 const Cart =()=>{
-    
+    const [cartItems, setCartItems] = useState([])
+
+    useEffect ( ()=>{
+        getCartItems('i9zBuJ8SZpcSk7ZsuFvY')
+        addToCart("eddy",98,45)
+    },[])
+
     const productos=[
         {
             id:1,

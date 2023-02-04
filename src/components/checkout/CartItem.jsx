@@ -1,15 +1,9 @@
-import {MdDelete} from "react-icons/md"
+import { MdDelete } from "react-icons/md"
 import { useState, useEffect } from "react";
-import { getCartItems } from "../../store/cart/cartActions";
 
 const CartItem =({producto}) =>{
    
     const [count, setCount] = useState(0);
-    
-    useEffect(()=>{
-        getCartItems()
-    },[])
-
     useEffect(()=>{
         setCount(producto.cantidad)
     },[producto.cantidad])
