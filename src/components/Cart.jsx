@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import CartItem from "./checkout/CartItem";
 import {BsArrowLeft} from "react-icons/bs"
-import { addToCart, getCartItems } from "../helpers/cartActions";
+import { addToCart, getCartItems , deleteCartItem, getTotalItems} from "../helpers/cartActions";
 import { useEffect, useState } from "react";
 
 
@@ -9,8 +9,10 @@ const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
 
     useEffect ( ()=>{
-        getCartItems('dani')
+        //getCartItems('dani')
         //addToCart('jane', 101,2)
+        //deleteCartItem('dani',100)
+        getTotalItems('dani')
     },[])
 
     const productos=[
@@ -75,7 +77,7 @@ const Cart =()=>{
                                         </div>
                                         <div className="flex items-center justify-between pt-5">
                                             <p className="text-base leading-none text-gray-800">Envío</p>
-                                            <p className="text-base leading-none text-gray-800">$30</p>
+                                            <p className="text-base leading-none text-gray-800">A calcular</p>
                                         </div>
                                     </div>
                                     <div>
