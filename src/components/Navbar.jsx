@@ -1,10 +1,18 @@
 import { Link, NavLink} from 'react-router-dom';
 import logo from '../assets/img/logo.png';
 import logo2 from '../assets/img/logo2.png';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getItemsCount } from '../helpers/cartActions';
 
 const Navbar = () =>{
     const [show, setShow] = useState(false);
+    const [count, setCount] = useState(0)
+    
+    useEffect(() => {
+        const res = getItemsCount('dani')
+        console.log(res)
+    }, [])
+    
 
     return(
         <div className="bg-gray-200 h-full w-full font-poppins">
@@ -39,7 +47,7 @@ const Navbar = () =>{
                                         </svg>
                                         <span className="flex absolute -mt-5 ml-4">
                                             <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
-                                            <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">8</span>
+                                            <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
                                         </span>
                                     </label>
                                     <div tabIndex="0" className="mt-3 card card-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
@@ -95,9 +103,8 @@ const Navbar = () =>{
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                             </svg>
                                             <span className="flex absolute -mt-5 ml-4">
-                                                <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-secondary-40 opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-secondary-100">
-                                                </span>
+                                                <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
+                                                <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
                                             </span>
                                         </button>
                                         </Link>

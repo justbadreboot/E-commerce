@@ -6,11 +6,13 @@ import MainProducts from "../components/home/MainProducts";
 import MainMedServices from '../components/home/MainMedServices'
 import Slider from "../components/Slider";
 import MainLayout from "../Layout/MainLayout";
+import { ToastContainer } from "react-toastify";
 
 const HomePage = () => {
     return(
         <>
             <MainLayout>
+                <ToastContainer position='top-right' theme='colored' autoClose={3000} />
                 <Slider />
                 <MainServices />
                 <Categories />

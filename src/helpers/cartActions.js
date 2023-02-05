@@ -1,6 +1,6 @@
-import { async } from '@firebase/util'
 import {doc, setDoc, getDoc, getDocs, deleteDoc, updateDoc, collection} from 'firebase/firestore'
 import firestore from "./firebaseConfig"
+import {  toast } from 'react-toastify'
 
 const collectionName = "cart "
 const docId = "Id Producto "
@@ -36,8 +36,10 @@ export const addToCart = async(email, id_producto, cantidad) => {
         cantidad: cantidad
       });
     }
+    //toast.success('Producto añadido al carrito')
   }catch(error){
     console.log(error)
+    toast.error('Ocurrió un error al agregar. Intente de nuevo')
   }
 }
 
@@ -62,14 +64,13 @@ export const deleteCartItem = async(email, id_producto) => {
   }
 }
 
-export const getTotalItems = async (email) =>{
+export const getItemsCount = async (email) =>{
   try { 
     const cartItems = []
     const items = await getDocs(collection(firestore, collectionName + email));
     items.forEach((doc) => {
       cartItems.push(doc)
     });
-    console.log(cartItems.length)
     return cartItems.length
   } catch(error) {
       console.log(error)
