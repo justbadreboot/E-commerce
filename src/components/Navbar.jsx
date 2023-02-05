@@ -9,10 +9,13 @@ const Navbar = () =>{
     const [count, setCount] = useState(0)
     
     useEffect(() => {
-        const res = getItemsCount('dani')
-        console.log(res)
+        cantidadCarrito("dani")
     }, [])
     
+    const cantidadCarrito = async (email) =>{
+        const res = await getItemsCount(email)
+        setCount(res)
+    }
 
     return(
         <div className="bg-gray-200 h-full w-full font-poppins">

@@ -1,48 +1,24 @@
 import { Link } from "react-router-dom";
 import CartItem from "./checkout/CartItem";
 import {BsArrowLeft} from "react-icons/bs"
-import { addToCart, getCartItems , deleteCartItem} from "../helpers/cartActions";
+import { getCartItems } from "../helpers/cartActions";
 import { useEffect, useState } from "react";
-
 
 const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
+    const [total,setTotal] = useState(0)
+    const [subtotal, setSubtotal] = useState(0)
+    const [totalItems, setTotalItems] = useState(0)
 
     useEffect ( ()=>{
-        const res= getCartItems('dani')
-        setCartItems(res)
-        console.log(cartItems)
-        //addToCart('jane', 101,2)
-        //deleteCartItem('dani',100)
+        getItems('dani')
     },[])
 
-    const productos=[
-        {
-            id:1,
-            nombre:"Chicken momo",
-            marca:'food',
-            precio:10.5,
-            cantidad:4,
-            img:"https://i.imgur.com/EEguU02.jpg",
-        },
-        {
-            id:2,
-            nombre:"Chicken momo",
-            marca:'food',
-            precio:10.5,
-            cantidad:2,
-            img:"https://i.imgur.com/EEguU02.jpg",
-        },
-        {
-            id:3,
-            nombre:"Chicken momo",
-            marca:'food',
-            precio:10.5,
-            cantidad:2,
-            img:"https://i.imgur.com/EEguU02.jpg",
-        },
-    ]
-    
+    const getItems = async (email) =>{
+        const res = await getCartItems(email)
+        setCartItems(res)
+    }
+
     return(
         <div className="pt-12 font-poppins">
             <div className="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg md:max-w-7xl">
@@ -52,11 +28,16 @@ const Cart =()=>{
                             <div className="col-span-2 p-5">
                                 <div className="flex justify-between">
                                     <h1 className="text-xl font-medium ">Carrito de Compras</h1>
-                                    <h2 className="mr-8 text-md">Total Items: <span>8</span></h2>
+                                    <h2 className="mr-8 text-md">Total Items: <span>{totalItems}</span></h2>
                                 </div>
-                                {productos.map(producto =>(
-                                    <CartItem producto={producto} key={producto.id} />
-                                ))}
+                                {cartItems.length!==0 ? (
+                                    cartItems.map(item =>(
+                                        <CartItem item={item} key={item.id} />
+                                    ))
+                                ) : (
+                                    <>no hay elementos</>
+                                )}
+                                
                                 <div className="flex justify-between items-center mt-12 pt-6 border-t"> 
                                     <Link to="/productos" className="flex items-center">
                                         <BsArrowLeft className="text-blue-500" />
@@ -64,7 +45,7 @@ const Cart =()=>{
                                     </Link>
                                     <div className="flex justify-center items-end">
                                         <span className="text-sm font-medium text-gray-400 mr-1">Subtotal:</span>
-                                        <span className="text-md font-bold text-gray-800 "> $24.90</span>
+                                        <span className="text-md font-bold text-gray-800 "> ${subtotal}</span>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +55,7 @@ const Cart =()=>{
                                         <p className="text-2xl font-semibold leading-9 text-gray-800">Resumen de Compra</p>
                                         <div className="flex items-center justify-between pt-12">
                                             <p className="text-base leading-none text-gray-800">Subtotal</p>
-                                            <p className="text-base leading-none text-gray-800">$9,000</p>
+                                            <p className="text-base leading-none text-gray-800">${subtotal}</p>
                                         </div>
                                         <div className="flex items-center justify-between pt-5">
                                             <p className="text-base leading-none text-gray-800">Envío</p>
@@ -84,7 +65,7 @@ const Cart =()=>{
                                     <div>
                                         <div className="flex items-center pb-6 justify-between lg:pt-5 pt-20">
                                             <p className="text-lg font-bold text-gray-800">Total</p>
-                                            <p className="text-lg font-bold leading-normal text-right text-gray-800">$10,240</p>
+                                            <p className="text-lg font-bold leading-normal text-right text-gray-800">${total}</p>
                                         </div>
                                         <Link to='/checkout'>
                                             <button  className="rounded-md text-base leading-none w-full py-5 bg-primary-60 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">

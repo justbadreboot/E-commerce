@@ -16,6 +16,7 @@ export const getCartItems = async(email) => {
       }
       cartItems.push(item)
     });
+    console.log(cartItems)
     return cartItems
   } catch(error) {
       console.log(error)
@@ -36,7 +37,7 @@ export const addToCart = async(email, id_producto, cantidad) => {
         cantidad: cantidad
       });
     }
-    //toast.success('Producto añadido al carrito')
+    toast.success('Producto añadido al carrito')
   }catch(error){
     console.log(error)
     toast.error('Ocurrió un error al agregar. Intente de nuevo')
@@ -59,8 +60,10 @@ export const updateCartQuantity = async (email,id_producto,cantidad) => {
 export const deleteCartItem = async(email, id_producto) => {
   try{
     await deleteDoc(doc(firestore, collectionName + email, docId + id_producto ))
+    toast.success("Producto eliminado con éxito")
   }catch(error){
     console.log(error)
+    toast.error('Ocurrió un error al agregar. Intente de nuevo')
   }
 }
 
