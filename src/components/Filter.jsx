@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Disclosure, Menu } from '@headlessui/react'
 import {BsChevronDown} from "react-icons/bs"
 import {BiSearch} from 'react-icons/bi'
-import {BsFillGridFill} from 'react-icons/bs'
 import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
 import ProductCard from '../components/cards/ProductCard';
@@ -13,13 +12,6 @@ const Filter =()=>{
   const {data: categorias, isSuccess} = useGetCategoriesQuery();
 
   const [openFilter, setOpenFilter] = useState(true)
-  const [sortOptions, setSortOptions] = useState([
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Newest', href: '#', current: false },
-    { name: 'Best Rating', href: '#', current: false },
-    { name: 'Price: Low to High', href: '#', current: false },
-    { name: 'Price: High to Low', href: '#', current: false },
-  ])
   
   const filters = [
     {
@@ -34,17 +26,12 @@ const Filter =()=>{
       ],
     },
   ]
-  const sortBy = (value) => {
-      let newState = [...sortOptions]
-      newState.map(option => option.current = false)
-      newState.find(option => option.name === value).current = true
-      setSortOptions(newState)
-  } 
+
   useEffect(() => {
     window.addEventListener('resize', () => {
-    const viewport = window.innerWidth
-    if(viewport >= 1024) return setOpenFilter(true)
-    })
+      const viewport = window.innerWidth
+      if(viewport >= 1024) return setOpenFilter(true)
+      })
   })
 
   const products=[
@@ -101,33 +88,12 @@ const Filter =()=>{
             <div className="hidden lg:inline-block relative">
               <input type="search" id="search" name="search"
                 placeholder="Buscar"
-                className="form-input pl-11 pr-5 w-60 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-primary-100 focus:ring-1 focus:ring-blue-300"
+                className="form-input pl-11 pr-5 w-72 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-primary-100 focus:ring-1 focus:ring-blue-300"
               />
               <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
                 <BiSearch className="w-4 h-4" />
               </span>
             </div>
-            <Menu as="div" className="flex-shrink-0 relative">
-              <Menu.Button className="inline-flex items-center text-base text-gray-400 font-semibold hover:text-gray-700">
-                Ordenar por
-                <BsChevronDown className="ml-2 w-5 h-5" />
-              </Menu.Button>
-              <Menu.Items className=" z-20 absolute right-0 mt-4 p-2 w-40 flex flex-col rounded-md shadow-2xl bg-white origin-top-right">
-                {sortOptions.map(option => (
-                  <Menu.Item key={option.name}>
-                    {({ active }) => (
-                      <a href={option.href} 
-                        className={`p-1 block rounded ${active ? "bg-gray-50" : option.current ? "bg-blue-50 text-blue-500" : "bg-transparent text-gray-400"} text-base font-medium whitespace-nowrap`}
-                        onClick={() => sortBy(option.name)}
-                      >
-                        {option.name}
-                      </a>
-                    )}
-                  </Menu.Item>
-                ))
-                }
-              </Menu.Items>
-            </Menu>
             <button className="lg:hidden text-gray-400 hover:text-blue-400" onClick={() => setOpenFilter(!openFilter)}>
               <FaFilter className="w-6 h-6" />
             </button>

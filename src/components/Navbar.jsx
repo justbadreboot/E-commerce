@@ -29,14 +29,30 @@ const Navbar = () =>{
                         </div>
                         <div className="flex">
                             <div className="hidden xl:flex md:mr-6 xl:mr-16 ">
-                                <NavLink to='/productos' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Productos</NavLink>
-                                <NavLink to='/' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Servicios</NavLink>
+                                <div className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
+                                    <div className="dropdown dropdown-hover">
+                                        <label tabIndex="0" className="py-6">Productos</label>
+                                        <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-44 mt-4">
+                                            <li><Link className='text-sm active:bg-green-400' to='/productos'>Ver todos</Link></li> 
+                                            <li><Link className='text-sm active:bg-green-400' to='/search'>Buscar</Link></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
+                                    <div className="dropdown dropdown-hover">
+                                        <label tabIndex="0" className="py-6">Servicios</label>
+                                        <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-44 mt-4">
+                                            <li><Link className='text-sm active:bg-green-400' to='/productos'>Ver todos</Link></li> 
+                                            <li><Link className='text-sm active:bg-green-400' to='/search'>Buscar</Link></li>
+                                        </ul>
+                                    </div>
+                                </div>
                                 <div className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">
                                     <div className="dropdown dropdown-hover">
                                         <label tabIndex="0" className="py-6">Nosotros</label>
-                                        <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-52 mt-4">
-                                            <li><Link className='text-sm' to='/nosotros'>Equipo</Link></li> 
-                                            <li><Link className='text-sm'>FAQs</Link></li>
+                                        <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-44 mt-4">
+                                            <li><Link className='text-sm active:bg-green-400' to='/nosotros'>Equipo</Link></li> 
+                                            <li><Link className='text-sm active:bg-green-400'>FAQs</Link></li>
                                         </ul>
                                     </div>
                                 </div>

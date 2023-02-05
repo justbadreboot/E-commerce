@@ -29,7 +29,7 @@ const CartItem =({item}) =>{
 
     return(
         <div className="grid grid-cols-1 lg:grid-cols-2 justify-between items-center mt-6 pt-6 border-t font-poppins">
-            {(isLoading || isFetching) && <Loader />}
+            
             {isSuccess && (
                 <>
                     <div className="flex items-center ">
