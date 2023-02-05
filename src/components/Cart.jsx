@@ -8,7 +8,6 @@ const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
     const [total,setTotal] = useState(0)
     const [subtotal, setSubtotal] = useState(0)
-    const [totalItems, setTotalItems] = useState(0)
 
     useEffect ( ()=>{
         getItems('dani')
@@ -28,7 +27,7 @@ const Cart =()=>{
                             <div className="col-span-2 p-5">
                                 <div className="flex justify-between">
                                     <h1 className="text-xl font-medium ">Carrito de Compras</h1>
-                                    <h2 className="mr-8 text-md">Total Items: <span>{totalItems}</span></h2>
+                                    <h2 className="mr-8 text-md">Total Items: <span>{cartItems.length}</span></h2>
                                 </div>
                                 {cartItems.length!==0 ? (
                                     cartItems.map(item =>(

@@ -7,7 +7,8 @@ import { deleteCartItem } from "../../helpers/cartActions";
 const CartItem =({item}) =>{
     const {data: producto, isLoading, isFetching, isSuccess} = useGetProductByIdQuery(item.id);
 
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(0)
+
     useEffect(()=>{
         setCount(item.cantidad)
     },[item.cantidad])
@@ -17,11 +18,13 @@ const CartItem =({item}) =>{
     }
 
     const decrementClick=()=>{
-        setCount(parseInt(count) - 1)
+        if(count > 1)
+            setCount(parseInt(count) - 1)
     }
 
     const incrementClick=()=>{
-        setCount(parseInt(count) + 1)
+        if(count < producto.stock)
+            setCount(parseInt(count) + 1)
     }
 
     return(
@@ -39,11 +42,11 @@ const CartItem =({item}) =>{
                     <div className="flex mt-6 md:mt-0 justify-center items-center">
                         <div className="flex px-6 ">
                             <div className="flex flex-row h-8 w-36 rounded-lg relative bg-transparent mt-1">
-                                <button onClick={decrementClick} className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                                <button onClick={decrementClick} className=" bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
                                     <span className="m-auto text-xl font-thin">−</span>
                                 </button>
-                                <input type="number" min={1} className="focus:outline-none text-center w-full bg-gray-300 font-semibold text-sm hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700 outline-none" value={count} onChange={handleOnChange}  />
-                                <button onClick={incrementClick} className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                                <input type="number" min={1} max={producto.stock} className="focus:outline-none text-center w-full bg-gray-200 font-semibold text-sm hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700 outline-none" value={count} onChange={handleOnChange}  />
+                                <button onClick={incrementClick} className="bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
                                     <span className="m-auto text-xl font-thin">+</span>
                                 </button>
                             </div>

@@ -5,8 +5,7 @@ const RelatedProductCard =({product})=>{
                 <div className="relative z-10 flex flex-col items-start space-y-1">
                     <span className="text-xs font-bold uppercase tracking-wide text-success-80">{product.brand}</span>
                     <h3 className="text-base lg:text-md text-gray-700 font-semibold">{product.name}</h3>
-                    <p className="lg:block w-2/3 text-sm font-bold text-info-100">${product.pvp}</p>
-                    
+                    <p className="lg:block w-2/3 text-sm font-bold text-info-100">${product.pvp}</p>    
                 </div>
                 <div>
                     <img src={product.image} alt="" className="flex items-center opacity-80 lg:opacity-100" />

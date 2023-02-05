@@ -7,8 +7,11 @@ import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
 import ProductCard from '../components/cards/ProductCard';
 import Pagination from './Pagination'
+import { useGetCategoriesQuery } from '../store/serverApi'
 
 const Filter =()=>{
+  const {data: categorias, isSuccess} = useGetCategoriesQuery();
+
   const [openFilter, setOpenFilter] = useState(true)
   const [sortOptions, setSortOptions] = useState([
     { name: 'Most Popular', href: '#', current: true },
@@ -18,13 +21,6 @@ const Filter =()=>{
     { name: 'Price: High to Low', href: '#', current: false },
   ])
   
-  const subCategories = [
-    { name: 'Belleza', href: '#' },
-    { name: 'Cuidado Facial', href: '#' },
-    { name: 'Bioseguiridad', href: '#' },
-    { name: 'Aseo Personal', href: '#' },
-    { name: 'Vitaminas', href: '#' },
-  ]
   const filters = [
     {
       id: 'marcas',
@@ -54,45 +50,45 @@ const Filter =()=>{
   const products=[
     {
       id:1,
-      nombre:"Enterogermina",
-      img:"https://drfernandojuca.com/wp-content/uploads/2021/05/ENTEROGERMINA-2000-MILLONES-X-10-FRASCOS-BEBIBLES-600x600.jpg",
+      name:"Enterogermina",
+      image:"https://drfernandojuca.com/wp-content/uploads/2021/05/ENTEROGERMINA-2000-MILLONES-X-10-FRASCOS-BEBIBLES-600x600.jpg",
       rate:4.5,
-      precio:20,
+      pvp:20,
     },
     {
       id:2,
-      nombre:"Curitas translúcidas",
-      img:"https://d2o812a6k13pkp.cloudfront.net/Productos/40392165_02.jpg",
+      name:"Curitas translúcidas",
+      image:"https://d2o812a6k13pkp.cloudfront.net/Productos/40392165_02.jpg",
       rate:4.5,
-      precio:20,
+      pvp:20,
     },
     {
       id:3,
-      nombre:"Bago Vital Digestivo",
-      img:"https://img.offers-cdn.net/assets/uploads/offers/ec/7771294/bagovital-digest-sobre-20-g-caja-con-large.jpeg",
+      name:"Bago Vital Digestivo",
+      image:"https://img.offers-cdn.net/assets/uploads/offers/ec/7771294/bagovital-digest-sobre-20-g-caja-con-large.jpeg",
       rate:4.5,
-      precio:20,
+      pvp:20,
     },
     {
       id:4,
-      nombre:"Bloqueador Solar 120g",
-      img:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
+      name:"Bloqueador Solar 120g",
+      image:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
       rate:4.5,
-      precio:20,
+      pvp:20,
     },
     {
       id:5,
-      nombre:"Enterogermina",
-      img:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
+      name:"Enterogermina",
+      image:"https://dermasoft.com.ec/wp-content/uploads/sites/2/2022/09/UMBRELLA-PLUS-600x600-1.gif",
       rate:4.5,
-      precio:20,
+      pvp:20,
     },
     {
       id:6,
-      nombre:"Bago Vital Digestivo",
-      img:"https://img.offers-cdn.net/assets/uploads/offers/ec/7771294/bagovital-digest-sobre-20-g-caja-con-large.jpeg",
+      name:"Bago Vital Digestivo",
+      image:"https://img.offers-cdn.net/assets/uploads/offers/ec/7771294/bagovital-digest-sobre-20-g-caja-con-large.jpeg",
       rate:4.5,
-      precio:20,
+      pvp:20,
     },
   ]
 
@@ -132,9 +128,6 @@ const Filter =()=>{
                 }
               </Menu.Items>
             </Menu>
-            <button className="text-gray-400 hover:text-primary-100">
-              <BsFillGridFill className="w-6 h-6" />
-            </button>
             <button className="lg:hidden text-gray-400 hover:text-blue-400" onClick={() => setOpenFilter(!openFilter)}>
               <FaFilter className="w-6 h-6" />
             </button>
@@ -160,11 +153,16 @@ const Filter =()=>{
           <div className="mt-5 pb-5 pl-5 border-b border-gray-200">
             <p className='text-gray-700 font-bold mb-3'>Categorías Disponibles</p>
             <ul className="flex flex-col items-start space-y-2">
-              {subCategories.map(subcategory => (
-                <li key={subcategory.name}>
-                  <a href={subcategory.href} className="text-base text-gray-700 font-medium hover:text-green-400">{subcategory.name}</a>
-                </li>
-              ))}
+              {isSuccess && (
+                categorias.map(category => (
+                  <div key={category.id} className="m-1 flex items-center space-x-3">
+                    <div>
+                      <input type="radio" name="categorias" id={category.namel} className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
+                    </div>
+                    <span className="text-base text-gray-700 font-medium hover:text-green-400">{category.name}</span>
+                  </div>
+                ))
+              )}  
             </ul>
           </div>
           <div>
@@ -181,7 +179,6 @@ const Filter =()=>{
                         {section.options.map(option => (
                           <div key={option.label} className="m-1 flex items-center space-x-3">
                             <div>
-                              <label htmlFor={option.label} className="sr-only">{`Color ${option.label}`}</label>
                               <input type="checkbox" name={option.label} id={option.label} defaultValue={option.value} defaultChecked={option.checked} className="form-checkbox h-5 w-5 border-gray-300 rounded text-blue-400 focus:ring-blue-400" />
                             </div>
                             <span className="text-base text-gray-700">{option.label}</span>
