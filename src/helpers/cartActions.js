@@ -1,9 +1,20 @@
 import {doc, setDoc, getDoc, deleteDoc, updateDoc} from 'firebase/firestore'
 import firestore from "./firebaseConfig"
-import { toast } from 'react-toastify'
+import Swal from 'sweetalert2'
 
 const collectionName = "cart "
 const docId = "Id Producto "
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 export const addToCart = async(email, id_producto, cantidad) => {
   try{
@@ -19,13 +30,12 @@ export const addToCart = async(email, id_producto, cantidad) => {
         cantidad: cantidad
       });
     }
-    toast.success('Producto añadido al carrito')
+    Toast.fire({ icon: 'success', title: 'Producto añadido al carrito',background:'#D3FDDD'})
   }catch(error){
     console.log(error)
-    toast.error('Ocurrió un error al agregar. Intente de nuevo')
+    Toast.fire({ icon: 'error', title: 'Error. Intente de nuevo',background:'#FFDADA'})
   }
 }
-
 export const updateCartQuantity = async (email,id_producto,cantidad) => {
   try{
     const cartRef = doc(firestore, collectionName + email, docId + id_producto)
@@ -40,9 +50,9 @@ export const updateCartQuantity = async (email,id_producto,cantidad) => {
 export const deleteCartItem = (email, id_producto) => {
   try{
     deleteDoc(doc(firestore, collectionName + email, docId + id_producto ))
-    toast.success("Producto eliminado con éxito")
+    Swal.fire('Eliminado!', 'Tu producto ha sido eliminado con éxito', 'success')
   }catch(error){
     console.log(error)
-    toast.error('Ocurrió un error al agregar. Intente de nuevo')
+    Toast.fire({ icon: 'error', title: 'Ocurrió un error. Intente de nuevo', background:'#FFDADA' })
   }
 }

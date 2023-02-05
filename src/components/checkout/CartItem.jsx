@@ -2,6 +2,7 @@ import { MdDelete } from "react-icons/md"
 import { useState, useEffect } from "react";
 import { useGetProductByIdQuery } from '../../store/serverApi'
 import { deleteCartItem, updateCartQuantity } from "../../helpers/cartActions";
+import Swal from "sweetalert2";
 
 const CartItem =({item}) =>{
     const {data: producto, isSuccess} = useGetProductByIdQuery(item.id);
@@ -11,6 +12,23 @@ const CartItem =({item}) =>{
     useEffect(()=>{
         setCount(item.cantidad)
     },[item.cantidad])
+
+    const handleDelete = (email,id) =>{
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "No podrás revertir esta acción",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Continuar',
+            cancelButtonText:'Cancelar',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed)
+                deleteCartItem(email,id)
+          })
+    }
 
     const handleOnChange = (e) =>{
         setCount(e.target.value)
@@ -61,7 +79,7 @@ const CartItem =({item}) =>{
                         <div className="pr-4">
                             <span className="text-md font-base">${(producto.pvp * count).toFixed(2)}</span>
                         </div>
-                        <button onClick={()=> deleteCartItem("dani", item.id)} className="px-4">
+                        <button onClick={()=>handleDelete('dani',producto.id)} className="px-4">
                             <MdDelete className="h-5 w-5 text-red-500" />
                         </button>
                     </div>

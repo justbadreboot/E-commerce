@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Disclosure} from '@headlessui/react'
 import {BsChevronDown} from "react-icons/bs"
 import {BiSearch} from 'react-icons/bi'

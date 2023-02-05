@@ -3,7 +3,7 @@ import { useGetProductByIdQuery } from "../../store/serverApi";
 import Loader from "../../components/Loader"
 import { useState } from "react";
 import { addToCart } from "../../helpers/cartActions";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ProductDetail=()=>{
 
@@ -11,6 +11,18 @@ const ProductDetail=()=>{
     const {data: detalles, isLoading, isFetching, isSuccess, isError} = useGetProductByIdQuery(params.id);
     
     const [count, setCount] = useState(1)
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
 
     const handleOnChange = (e) =>{
         setCount(e.target.value);
@@ -30,7 +42,7 @@ const ProductDetail=()=>{
         if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0)
             addToCart(email,id,cant)
         else
-            toast.error("Cantidad seleccionada fuera de stock")
+            Toast.fire({ icon: 'error', title: 'Cantidad fuera de stock',background:'#FFDADA'})
     }
 
     return(

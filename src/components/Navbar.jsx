@@ -68,26 +68,17 @@ const Navbar = () =>{
                                 <NavLink to='/contacto' className="flex px-5 items-center py-6 text-lg leading-5 text-white hover:text-gray-600 hover:bg-primary-40 focus:outline-none transition duration-150 ease-in-out">Contacto</NavLink>
                             </div>
                             <div className="hidden xl:flex items-center px-10">
-                                <div className="dropdown dropdown-end ">
-                                    <label tabIndex="0" className="flex items-center text-white cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <Link to="/carrito">
+                                    <button className=" hidden md:flex items-center text-white" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                         <span className="flex absolute -mt-5 ml-4">
                                             <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
                                             <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
                                         </span>
-                                    </label>
-                                    <div tabIndex="0" className="mt-3 card card-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
-                                        <div className="card-body">
-                                            <span className="font-bold text-md">8 Items</span>
-                                            <span className="text-info">Subtotal: $999</span>
-                                            <div className="card-actions">
-                                                <Link to="/carrito" className="btn bg-primary-20 border-primary-100 text-primary-100 btn-block hover:bg-primary-100 hover:text-white hover:border-none">Ver carrito</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </button>
+                                </Link>
                                 {/*<div className="dropdown dropdown-end">
                                     <label tabIndex="0" className="flex items-center text-white cursor-pointer ml-6">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -126,15 +117,15 @@ const Navbar = () =>{
                                 <>
                                     <div className="flex items-center px-10">
                                         <Link to="/carrito">
-                                        <button className=" hidden md:flex items-center text-white" >
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                            </svg>
-                                            <span className="flex absolute -mt-5 ml-4">
-                                                <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
-                                                <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
-                                            </span>
-                                        </button>
+                                            <button className=" hidden md:flex items-center text-white" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                                </svg>
+                                                <span className="flex absolute -mt-5 ml-4">
+                                                    <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
+                                                    <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
+                                                </span>
+                                            </button>
                                         </Link>
                                         <button className=" hidden md:flex items-center ml-5 text-white">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
