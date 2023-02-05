@@ -7,14 +7,6 @@ const ProductDetail=()=>{
     const params = useParams();
     const {data: detalles, isLoading, isFetching, isSuccess, isError} = useGetProductByIdQuery(params.id);
     
-    const detas ={
-        brand:'Fancy Brand',
-        name:'Pullover with pattern',
-        description:'This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.',
-        pvp:15.00,
-        rate:4.2,
-        image:"https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600"
-    }
     return(
         <div className="bg-white py-6 sm:py-8 lg:py-12">
             <div className="max-w-screen-lg px-4 md:px-8 mx-auto">
@@ -37,7 +29,7 @@ const ProductDetail=()=>{
                                     <input type="radio" name="rating-2" className="mask mask-star-2 bg-yellow-400" />
                                     <input type="radio" name="rating-2" className="mask mask-star-2 bg-yellow-400" />
                                     <input type="radio" name="rating-2" className="mask mask-star-2 bg-yellow-400" />
-                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-yellow-400" checked />
+                                    <input type="radio" name="rating-2" className="mask mask-star-2 bg-yellow-400"  />
                                     <input type="radio" name="rating-2" className="mask mask-star-2 bg-yellow-400" />
                                 </div>
                                 <span className="text-gray-500 text-sm ml-2">{detalles.rate}</span>
