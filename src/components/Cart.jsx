@@ -1,22 +1,40 @@
 import { Link } from "react-router-dom";
 import CartItem from "./checkout/CartItem";
 import {BsArrowLeft} from "react-icons/bs"
-import { getCartItems, getItemsCount } from "../helpers/cartActions";
+import { getItemsCount } from "../helpers/cartActions";
 import { useEffect, useState } from "react";
+import firestore from "../helpers/firebaseConfig";
+import { collection, onSnapshot } from "firebase/firestore";
 
 const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
     const [total,setTotal] = useState(0)
     const [subtotal, setSubtotal] = useState(0)
+    const [count, setCount] = useState(0)
+
+    const email= "dani"
+    const collectionName =  'cart '+ email
 
     useEffect ( ()=>{
-        getItems('dani')
-    },[])
-
-    const getItems = async (email) =>{
-        const res = await getCartItems(email)
-        setCartItems(res)
-    }
+        const getItems = onSnapshot(collection(firestore,collectionName), snapshot =>{
+            setCartItems(snapshot.docs.map(doc => 
+                ({id: parseInt(doc.id.substring(12)), cantidad: doc.data().cantidad})
+            ))
+            let items = 0
+            snapshot.docs.map(doc => 
+                items += doc.data().cantidad
+            )
+            setCount(items)
+        },(error) => {
+            console.log(error)
+        })
+        
+        return () =>{
+            getItems()
+        }
+        
+    },[collectionName])
+    
 
     return(
         <div className="pt-12 font-poppins">
@@ -27,10 +45,10 @@ const Cart =()=>{
                             <div className="col-span-2 p-5">
                                 <div className="flex justify-between">
                                     <h1 className="text-xl font-medium ">Carrito de Compras</h1>
-                                    <h2 className="mr-8 text-md">Total Items: <span>{cartItems.length}</span></h2>
+                                    <h2 className="mr-8 text-md">Total Items: <span>{count}</span></h2>
                                 </div>
                                 {cartItems.length!==0 ? (
-                                    <div className="overflow-auto h-80">
+                                    <div className="md:overflow-y-auto overflow-x-hidden md:h-80">
                                         {cartItems.map(item =>(
                                             <CartItem item={item} key={item.id} />
                                         ))}

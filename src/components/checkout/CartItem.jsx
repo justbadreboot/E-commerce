@@ -14,7 +14,6 @@ const CartItem =({item}) =>{
 
     const handleOnChange = (e) =>{
         setCount(e.target.value)
-        //updateCartQuantity('dani', producto.id, parseInt(count))
     }
 
     const decrementClick=()=>{
@@ -57,7 +56,7 @@ const CartItem =({item}) =>{
                             </div>
                         </div>
                         <div className="pr-4">
-                            <span className="text-md font-base">${producto.pvp}</span>
+                            <span className="text-md font-base">${(producto.pvp).toFixed(2)}</span>
                         </div>
                         <div className="pr-4">
                             <span className="text-md font-base">${(producto.pvp * count).toFixed(2)}</span>

@@ -1,22 +1,31 @@
 import { Link, NavLink} from 'react-router-dom';
 import logo from '../assets/img/logo.png';
 import logo2 from '../assets/img/logo2.png';
-import React, { useEffect, useState } from "react";
-import { getItemsCount } from '../helpers/cartActions';
+import { useEffect, useState } from "react";
+import firestore from '../helpers/firebaseConfig';
+import { collection, onSnapshot } from 'firebase/firestore';
 
 const Navbar = () =>{
     const [show, setShow] = useState(false);
     const [count, setCount] = useState(0)
     
-    useEffect(() => {
-        cantidadCarrito("dani")
-    }, [])
-    
-    const cantidadCarrito = async (email) =>{
-        const res = await getItemsCount(email)
-        setCount(res)
-    }
+    const email= "dani"
+    const collectionName =  'cart '+ email
 
+    useEffect ( ()=>{
+        const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
+            let items = 0
+            snapshot.docs.map(doc =>  items += doc.data().cantidad)
+            setCount(items)
+        },(error) => {
+            console.log(error)
+        })
+        
+        return () =>{
+            getItemsCount()
+        }
+    },[collectionName])
+    
     return(
         <div className="bg-gray-200 h-full w-full font-poppins">
             <nav className="bg-primary-100 shadow xl:block hidden">
