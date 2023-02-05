@@ -34,7 +34,7 @@ const Navbar = () =>{
                                         <label tabIndex="0" className="py-6">Productos</label>
                                         <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-44 mt-4">
                                             <li><Link className='text-sm active:bg-green-400' to='/productos'>Ver todos</Link></li> 
-                                            <li><Link className='text-sm active:bg-green-400' to='/search'>Buscar</Link></li>
+                                            <li><Link className='text-sm active:bg-green-400' to='/buscarProductos'>Buscar</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -42,8 +42,8 @@ const Navbar = () =>{
                                     <div className="dropdown dropdown-hover">
                                         <label tabIndex="0" className="py-6">Servicios</label>
                                         <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-44 mt-4">
-                                            <li><Link className='text-sm active:bg-green-400' to='/productos'>Ver todos</Link></li> 
-                                            <li><Link className='text-sm active:bg-green-400' to='/search'>Buscar</Link></li>
+                                            <li><Link className='text-sm active:bg-green-400' to='/servicios'>Ver todos</Link></li> 
+                                            <li><Link className='text-sm active:bg-green-400' to='/buscarServicios'>Buscar</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@ const Navbar = () =>{
                                             </NavLink>
                                         </li>
                                         <li className='pt-8 cursor-pointer'>
-                                            <NavLink to="/">
+                                            <NavLink to="/servicios">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Servicios</p>
                                                 </div>
@@ -220,8 +220,8 @@ const Navbar = () =>{
                                             <div className="w-full flex items-center justify-between pt-8">
                                                 <div className="flex items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
                                                     <p className=" text-gray-800 text-base leading-4 ml-2 hover:text-secondary-100">Login</p>
                                                 </div>
                                             </div>

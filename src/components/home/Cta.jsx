@@ -8,8 +8,8 @@ const Cta = () =>{
                 <div className="items-center justify-center gap-16 text-center md:flex md:text-left">
                     <div className="order-last mb-6 space-y-6 md:mb-0 md:w-7/12 lg:w-6/12">
                         <h1 className="text-4xl font-bold text-primary-100 lg:text-5xl">Conoce a Nuestros Doctores</h1>
-                        <p className="text-lg text-gray-600">
-                            Contamos con los mejores especialistas para cuidar de ti.
+                        <p className="text-md md:text-lg text-gray-600">
+                        Kruger Med cuenta con el mejor equipo de profesionales, altamente capacitados y comprometidos para para cuidar de tu salud.
                         </p>
                         <div className="flex flex-wrap gap-6">
                             <NavLink to="/"

@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import ServiceCard from "../cards/ServiceCard";
+import ViewMore from "../ViewMore";
 
 const MainMedServices = () =>{
 
@@ -34,7 +36,12 @@ const MainMedServices = () =>{
             <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
                 <div className="mb-10 md:mb-16">
                     <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Servicios <span className="text-primary-100">Médicos</span></h2>
-                    <p className="mt-2 max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
+                    <p className="mt-2 max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">Nuestros servicios están diseñados para satisfacer sus necesidades de atención médica y ayudarlo a mantener un estilo de vida saludable.</p>
+                </div>
+                <div className='mb-2 md:mb-4 md:mr-20'>
+                    <Link to='/servicios'>
+                        <ViewMore />
+                    </Link>    
                 </div>
                 <div 
                     data-aos="fade-up"

@@ -1,11 +1,10 @@
 import { MdDelete } from "react-icons/md"
 import { useState, useEffect } from "react";
-import {useGetProductByIdQuery } from '../../store/serverApi'
-import Loader from '../../components/Loader'
+import { useGetProductByIdQuery } from '../../store/serverApi'
 import { deleteCartItem } from "../../helpers/cartActions";
 
 const CartItem =({item}) =>{
-    const {data: producto, isLoading, isFetching, isSuccess} = useGetProductByIdQuery(item.id);
+    const {data: producto, isSuccess} = useGetProductByIdQuery(item.id);
 
     const [count, setCount] = useState(0)
 

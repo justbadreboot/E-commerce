@@ -9,6 +9,9 @@ import ShippingPage from '../pages/ShippingPage';
 import PaymentPage from '../pages/PaymentPage';
 import FilterProductsPage from '../pages/FilterProductsPage';
 import LoginPage from '../pages/LoginPage';
+import ProductsPage from '../pages/ProductsPage';
+import ServicesPage from '../pages/ServicesPage';
+import SearchServicesPage from '../pages/SearchServicesPage';
 
 const routes = () =>{
     return(
@@ -17,9 +20,11 @@ const routes = () =>{
                 <Route path='/' element={<HomePage />}> </Route>
                 <Route path='/nosotros' element={<AboutPage />}> </Route>
                 <Route path='/contacto' element={<ContactPage />}> </Route>
-                <Route path='/search' element={<FilterProductsPage />} ></Route>
-                <Route path='/productos' element={<FilterProductsPage />} ></Route>
-                <Route path='/producto/:id' element={<ProductDetailPage />}> </Route>
+                <Route path='/buscarProductos' element={<FilterProductsPage />}></Route>
+                <Route path='/productos' element={<ProductsPage />} ></Route>
+                <Route path='/producto/:id' element={<ProductDetailPage />}></Route>
+                <Route path='/buscarServicios' element={<SearchServicesPage />}></Route>
+                <Route path='/servicios' element={<ServicesPage />} ></Route>
                 <Route path='/carrito' element={<ShoppingCart />}> </Route>
                 <Route path='/checkout' element={<Checkout />}> </Route>
                 <Route path='/envio' element={<ShippingPage />}> </Route>
