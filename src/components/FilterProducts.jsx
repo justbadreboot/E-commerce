@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Disclosure, Menu } from '@headlessui/react'
+import { Disclosure} from '@headlessui/react'
 import {BsChevronDown} from "react-icons/bs"
 import {BiSearch} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
-import ProductCard from '../components/cards/ProductCard';
+import ProductCard from './cards/ProductCard';
 import Pagination from './Pagination'
 import { useGetCategoriesQuery } from '../store/serverApi'
 
