@@ -16,18 +16,20 @@ const Toast = Swal.mixin({
   }
 })
 
-export const addToCart = async(email, id_producto, cantidad) => {
+export const addToCart = async(email, id_producto, cantidad, precio) => {
   try{
     const cartRef = doc(firestore, collectionName + email, docId + id_producto)
     const docSnap = await getDoc(cartRef);
     if (docSnap.exists()) {
       const cantAnt = docSnap.data().cantidad
       await updateDoc(cartRef, {
-        cantidad: cantAnt + cantidad
+        cantidad: cantAnt + cantidad,
+        precio: precio
       });
     } else {
       await setDoc( cartRef, {
-        cantidad: cantidad
+        cantidad: cantidad,
+        precio: precio
       });
     }
     Toast.fire({ icon: 'success', title: 'Producto añadido al carrito',background:'#D3FDDD'})
@@ -36,11 +38,12 @@ export const addToCart = async(email, id_producto, cantidad) => {
     Toast.fire({ icon: 'error', title: 'Error. Intente de nuevo',background:'#FFDADA'})
   }
 }
-export const updateCartQuantity = async (email,id_producto,cantidad) => {
+export const updateCartQuantity = async (email,id_producto,cantidad,precio) => {
   try{
     const cartRef = doc(firestore, collectionName + email, docId + id_producto)
       await updateDoc(cartRef, {
-        cantidad: cantidad
+        cantidad: cantidad,
+        precio:precio
       });
   }catch(error){
     console.log(error)

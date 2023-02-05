@@ -4,7 +4,7 @@ import {BsArrowLeft} from "react-icons/bs"
 import { getItemsCount } from "../helpers/cartActions";
 import { useEffect, useState } from "react";
 import firestore from "../helpers/firebaseConfig";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, doc, onSnapshot } from "firebase/firestore";
 
 const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
@@ -18,13 +18,19 @@ const Cart =()=>{
     useEffect ( ()=>{
         const getItems = onSnapshot(collection(firestore,collectionName), snapshot =>{
             setCartItems(snapshot.docs.map(doc => 
-                ({id: parseInt(doc.id.substring(12)), cantidad: doc.data().cantidad})
+                ({id: parseInt(doc.id.substring(12)), cantidad: doc.data().cantidad, precio: doc.data().precio})
             ))
             let items = 0
+            let subtotal = 0
             snapshot.docs.map(doc => 
-                items += doc.data().cantidad
+                items += doc.data().cantidad,
             )
             setCount(items)
+            snapshot.docs.map(doc => 
+                subtotal += (doc.data().cantidad * doc.data().precio)
+            )
+            setSubtotal(subtotal.toFixed(2))
+            setTotal(subtotal.toFixed(2))
         },(error) => {
             console.log(error)
         })
@@ -50,7 +56,9 @@ const Cart =()=>{
                                 {cartItems.length!==0 ? (
                                     <div className="md:overflow-y-auto overflow-x-hidden md:h-80">
                                         {cartItems.map(item =>(
-                                            <CartItem item={item} key={item.id} />
+                                            <>
+                                            <CartItem item={item} key={item.id}  />
+                                            </>
                                         ))}
                                     </div>
                                 ) : (

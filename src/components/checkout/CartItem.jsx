@@ -8,10 +8,12 @@ const CartItem =({item}) =>{
     const {data: producto, isSuccess} = useGetProductByIdQuery(item.id);
 
     const [count, setCount] = useState(0)
+    const [price,setPrice] = useState(item.precio*item.cantidad)
 
     useEffect(()=>{
         setCount(item.cantidad)
-    },[item.cantidad])
+        setPrice((item.precio * count).toFixed(2))
+    },[item.cantidad, item.precio,count])
 
     const handleDelete = (email,id) =>{
         Swal.fire({
@@ -31,14 +33,16 @@ const CartItem =({item}) =>{
     }
 
     const handleOnChange = (e) =>{
-        setCount(e.target.value)
+        let val = parseInt(e.target.value)
+        setCount(val)
+        updateCartQuantity('dani', producto.id, val , item.precio)
     }
 
     const decrementClick=()=>{
         let cant = parseInt(count) 
         if(cant > 1){
             setCount(cant - 1)
-            updateCartQuantity('dani', producto.id, cant -1)
+            updateCartQuantity('dani', producto.id, cant -1, item.precio)
         }
     }
 
@@ -46,7 +50,7 @@ const CartItem =({item}) =>{
         let cant = parseInt(count) 
         if(cant < producto.stock){
             setCount(cant + 1)
-            updateCartQuantity('dani', producto.id, cant +1 )
+            updateCartQuantity('dani', producto.id, cant +1 , item.precio)
         }
     }
 
@@ -77,7 +81,7 @@ const CartItem =({item}) =>{
                             <span className="text-md font-base">${(producto.pvp).toFixed(2)}</span>
                         </div>
                         <div className="pr-4">
-                            <span className="text-md font-base">${(producto.pvp * count).toFixed(2)}</span>
+                            <span className="text-md font-base">${price}</span>
                         </div>
                         <button onClick={()=>handleDelete('dani',producto.id)} className="px-4">
                             <MdDelete className="h-5 w-5 text-red-500" />
