@@ -16,7 +16,6 @@ export const getCartItems = async(email) => {
       }
       cartItems.push(item)
     });
-    console.log(cartItems)
     return cartItems
   } catch(error) {
       console.log(error)
@@ -47,10 +46,8 @@ export const addToCart = async(email, id_producto, cantidad) => {
 export const updateCartQuantity = async (email,id_producto,cantidad) => {
   try{
     const cartRef = doc(firestore, collectionName + email, docId + id_producto)
-    const docSnap = await getDoc(cartRef);
-    const cantAnt = docSnap.data().cantidad
       await updateDoc(cartRef, {
-        cantidad: cantAnt + cantidad
+        cantidad: cantidad
       });
   }catch(error){
     console.log(error)
@@ -69,12 +66,12 @@ export const deleteCartItem = async(email, id_producto) => {
 
 export const getItemsCount = async (email) =>{
   try { 
-    const cartItems = []
+    let cartCount = 0
     const items = await getDocs(collection(firestore, collectionName + email));
     items.forEach((doc) => {
-      cartItems.push(doc)
+      cartCount += doc.data().cantidad
     });
-    return cartItems.length
+    return cartCount
   } catch(error) {
       console.log(error)
   }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import CartItem from "./checkout/CartItem";
 import {BsArrowLeft} from "react-icons/bs"
-import { getCartItems } from "../helpers/cartActions";
+import { getCartItems, getItemsCount } from "../helpers/cartActions";
 import { useEffect, useState } from "react";
 
 const Cart =()=>{
@@ -30,9 +30,11 @@ const Cart =()=>{
                                     <h2 className="mr-8 text-md">Total Items: <span>{cartItems.length}</span></h2>
                                 </div>
                                 {cartItems.length!==0 ? (
-                                    cartItems.map(item =>(
-                                        <CartItem item={item} key={item.id} />
-                                    ))
+                                    <div className="overflow-auto h-80">
+                                        {cartItems.map(item =>(
+                                            <CartItem item={item} key={item.id} />
+                                        ))}
+                                    </div>
                                 ) : (
                                     <>no hay elementos</>
                                 )}

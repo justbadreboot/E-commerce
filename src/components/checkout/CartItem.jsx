@@ -1,7 +1,7 @@
 import { MdDelete } from "react-icons/md"
 import { useState, useEffect } from "react";
 import { useGetProductByIdQuery } from '../../store/serverApi'
-import { deleteCartItem } from "../../helpers/cartActions";
+import { deleteCartItem, updateCartQuantity } from "../../helpers/cartActions";
 
 const CartItem =({item}) =>{
     const {data: producto, isSuccess} = useGetProductByIdQuery(item.id);
@@ -13,22 +13,28 @@ const CartItem =({item}) =>{
     },[item.cantidad])
 
     const handleOnChange = (e) =>{
-        setCount(e.target.value);
+        setCount(e.target.value)
+        //updateCartQuantity('dani', producto.id, parseInt(count))
     }
 
     const decrementClick=()=>{
-        if(count > 1)
-            setCount(parseInt(count) - 1)
+        let cant = parseInt(count) 
+        if(cant > 1){
+            setCount(cant - 1)
+            updateCartQuantity('dani', producto.id, cant -1)
+        }
     }
 
     const incrementClick=()=>{
-        if(count < producto.stock)
-            setCount(parseInt(count) + 1)
+        let cant = parseInt(count) 
+        if(cant < producto.stock){
+            setCount(cant + 1)
+            updateCartQuantity('dani', producto.id, cant +1 )
+        }
     }
 
     return(
-        <div className="grid grid-cols-1 lg:grid-cols-2 justify-between items-center mt-6 pt-6 border-t font-poppins">
-            
+        <div className="grid grid-cols-1 lg:grid-cols-2 justify-between items-center mt-5 pt-5 border-t font-poppins">
             {isSuccess && (
                 <>
                     <div className="flex items-center ">

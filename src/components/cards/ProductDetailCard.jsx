@@ -1,12 +1,38 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../store/serverApi";
 import Loader from "../../components/Loader"
+import { useState } from "react";
+import { addToCart } from "../../helpers/cartActions";
+import { toast } from "react-toastify";
 
 const ProductDetail=()=>{
 
     const params = useParams();
     const {data: detalles, isLoading, isFetching, isSuccess, isError} = useGetProductByIdQuery(params.id);
     
+    const [count, setCount] = useState(1)
+
+    const handleOnChange = (e) =>{
+        setCount(e.target.value);
+    }
+
+    const decrementClick=()=>{
+        if(count > 1)
+            setCount(parseInt(count) - 1)
+    }
+
+    const incrementClick=()=>{
+        if(count < detalles.stock)
+            setCount(parseInt(count) + 1)
+    }
+    
+    const handleOnClick =(email,id,cant)=>{
+        if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0)
+            addToCart(email,id,cant)
+        else
+            toast.error("Cantidad seleccionada fuera de stock")
+    }
+
     return(
         <div className="bg-white py-6 sm:py-8 lg:py-12">
             <div className="max-w-screen-lg px-4 md:px-8 mx-auto">
@@ -44,6 +70,17 @@ const ProductDetail=()=>{
                                     <span className="text-red-500 line-through mb-0.5">$30.00</span>
                                 </div>
                             </div>
+                            <div className="flex mb-4">
+                                <div className="flex flex-row h-8 w-36 rounded-lg relative bg-transparent mt-1">
+                                    <button onClick={decrementClick} className=" bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
+                                        <span className="m-auto text-xl font-thin">−</span>
+                                    </button>
+                                    <input type="number" min={1} max={detalles.stock} className="focus:outline-none text-center w-full bg-gray-200 font-semibold text-sm hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700 outline-none" value={count} onChange={handleOnChange}  />
+                                    <button onClick={incrementClick} className="bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer">
+                                        <span className="m-auto text-xl font-thin">+</span>
+                                    </button>
+                                </div>
+                            </div>
                             <div className="flex items-center text-gray-500 gap-2 mb-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -52,7 +89,7 @@ const ProductDetail=()=>{
                                 <span className="text-sm">2-4 días de envío</span>
                             </div>
                             <div className="flex gap-2.5">
-                                <button className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>
+                                <button onClick={()=> handleOnClick("dani",detalles.id,count)} className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>
 
                                 <Link to="/checkout" className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3">
                                     Comprar ahora
