@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { FormContext } from "../../pages/CheckoutPage"
 import Billing from "./Billing";
 import Payment from "./Payment";

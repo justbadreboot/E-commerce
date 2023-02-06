@@ -9,11 +9,12 @@ export const FormContext = createContext();
 const Checkout =()=>{
 
     const [activeStep, setActiveStep] = useState(0);
+    const [formData, setFormData] = useState({});
 
     return(
-        <FormContext.Provider value={{activeStep}}>
+        <FormContext.Provider value={{activeStep, setActiveStep, formData, setFormData}}>
             <MainLayout>
-                <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+                <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32 font-poppins">
                     <p className="text-2xl font-semibold text-gray-800">Checkout</p>
                     <Status />
                 </div>
