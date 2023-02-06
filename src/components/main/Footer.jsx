@@ -1,4 +1,4 @@
-import cara from '../assets/img/caraKm.png'
+import cara from '../../assets/img/caraKm.png'
 import { NavLink} from 'react-router-dom';
 
 const Footer = () =>{

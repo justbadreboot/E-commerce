@@ -1,7 +1,7 @@
 import { useGetProductsQuery } from '../store/serverApi';
 import ProductCard from '../components/cards/ProductCard';  
-import Loader from "../components/Loader"
-import Pagination from './Pagination';
+import Loader from "../components/main/Loader"
+import Pagination from './main/Pagination';
 
 const Products = () =>{
     const {data: products, isLoading, isFetching, isSuccess} = useGetProductsQuery();

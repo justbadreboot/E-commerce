@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import CartItem from "./checkout/CartItem";
 import {BsArrowLeft} from "react-icons/bs"
-import { getItemsCount } from "../helpers/cartActions";
 import { useEffect, useState } from "react";
 import firestore from "../helpers/firebaseConfig";
-import { collection, doc, onSnapshot } from "firebase/firestore";
+import { collection,onSnapshot } from "firebase/firestore";
 
 const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
@@ -62,7 +61,9 @@ const Cart =()=>{
                                         ))}
                                     </div>
                                 ) : (
-                                    <>no hay elementos</>
+                                    <>
+                                    <h4>Carrito vacio</h4>
+                                    </>
                                 )}
                                 
                                 <div className="flex justify-between items-center mt-12 pt-6 border-t"> 
@@ -77,16 +78,16 @@ const Cart =()=>{
                                 </div>
                             </div>
                             <div className=" p-5 bg-gray-200 rounded overflow-visible">
-                                <div className="flex flex-col md:h-full px-14 py-6 justify-between overflow-y-auto">
+                                <div className="flex flex-col md:h-full px-14 py-6 sm:px-4 md:py-14 justify-between overflow-y-auto">
                                     <div>
                                         <p className="text-2xl font-semibold leading-9 text-gray-800">Resumen de Compra</p>
                                         <div className="flex items-center justify-between pt-12">
-                                            <p className="text-base leading-none text-gray-800">Subtotal</p>
-                                            <p className="text-base leading-none text-gray-800">${subtotal}</p>
+                                            <p className="text-base leading-none text-gray-900">Subtotal</p>
+                                            <p className="text-base leading-none text-gray-500">${subtotal}</p>
                                         </div>
                                         <div className="flex items-center justify-between pt-5">
-                                            <p className="text-base leading-none text-gray-800">Envío</p>
-                                            <p className="text-base leading-none text-gray-800">A calcular</p>
+                                            <p className="text-base leading-none text-gray-900">Envío</p>
+                                            <p className="text-base leading-none text-gray-500">A calcular</p>
                                         </div>
                                     </div>
                                     <div>
@@ -94,11 +95,13 @@ const Cart =()=>{
                                             <p className="text-lg font-bold text-gray-800">Total</p>
                                             <p className="text-lg font-bold leading-normal text-right text-gray-800">${total}</p>
                                         </div>
-                                        <Link to='/checkout'>
-                                            <button  className="rounded-md text-base leading-none w-full py-5 bg-primary-60 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
-                                                Checkout
-                                            </button>
-                                        </Link>
+                                        {cartItems.length !== 0 && (
+                                            <Link to='/checkout'>
+                                                <button  className="rounded-md text-base leading-none w-full py-5 bg-primary-60 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                                    Checkout
+                                                </button>
+                                            </Link>
+                                        )}
                                     </div>
                                 </div>
                             </div>

@@ -1,8 +1,8 @@
 import { Link, NavLink} from 'react-router-dom';
-import logo from '../assets/img/logo.png';
-import logo2 from '../assets/img/logo2.png';
+import logo from '../../assets/img/logo.png';
+import logo2 from '../../assets/img/logo2.png';
 import { useEffect, useState } from "react";
-import firestore from '../helpers/firebaseConfig';
+import firestore from '../../helpers/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
 
 const Navbar = () =>{

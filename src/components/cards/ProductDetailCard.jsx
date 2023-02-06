@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../store/serverApi";
-import Loader from "../../components/Loader"
+import Loader from "../../components/main/Loader"
 import { useState } from "react";
 import { addToCart} from "../../helpers/cartActions";
 import Swal from "sweetalert2";

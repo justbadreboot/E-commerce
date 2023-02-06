@@ -1,7 +1,7 @@
 import { useGetProductsQuery } from '../../store/serverApi';
 import ProductCard from '../cards/ProductCard';
-import ViewMore from '../ViewMore'
-import Loader from "../../components/Loader"
+import ViewMore from '../main/ViewMore'
+import Loader from "../../components/main/Loader"
 import { Link } from 'react-router-dom';
 
 const MainProducts = () =>{

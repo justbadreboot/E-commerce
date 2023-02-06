@@ -6,7 +6,7 @@ import { useGetLandingQuery } from '../store/serverApi';
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
-import Loader from './Loader';
+import Loader from './main/Loader';
 
 const ContactForm = ()=>{
  

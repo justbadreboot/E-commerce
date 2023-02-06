@@ -4,7 +4,7 @@ import MainServices from "../components/home/MainServices";
 import Categories from "../components/home/Categories";
 import MainProducts from "../components/home/MainProducts";
 import MainMedServices from '../components/home/MainMedServices'
-import Slider from "../components/Slider";
+import Slider from "../components/home/Slider";
 import MainLayout from "../Layout/MainLayout";
 
 const HomePage = () => {

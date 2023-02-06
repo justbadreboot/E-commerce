@@ -5,7 +5,7 @@ import {BiSearch} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
 import ProductCard from './cards/ProductCard';
-import Pagination from './Pagination'
+import Pagination from './main/Pagination'
 import { useGetCategoriesQuery } from '../store/serverApi'
 
 const Filter =()=>{

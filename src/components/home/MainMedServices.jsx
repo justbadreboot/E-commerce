@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import ServiceCard from "../cards/ServiceCard";
-import ViewMore from "../ViewMore";
+import ViewMore from "../main/ViewMore";
 
 const MainMedServices = () =>{
 
