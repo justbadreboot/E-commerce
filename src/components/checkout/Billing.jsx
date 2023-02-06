@@ -16,14 +16,13 @@ const Billing = ( )=>{
 
     const formik = useFormik({
 		initialValues: {
-			nombre:'',
-            apellido:'',
-            ident:'',
-            telf:''
+			nombre:formData.name,
+            apellido:formData.apellido,
+            ident:formData.ident,
+            telf:formData.telf
 		},
 		validationSchema: billingSchema,
 		onSubmit: (values) => {
-            formik.resetForm();
             const data = { ...formData, ...values };
             setFormData(data);
             setActiveStep(activeStep + 1);

@@ -55,9 +55,7 @@ const Cart =()=>{
                                 {cartItems.length!==0 ? (
                                     <div className="md:overflow-y-auto overflow-x-hidden md:h-80">
                                         {cartItems.map(item =>(
-                                            <>
                                             <CartItem item={item} key={item.id}  />
-                                            </>
                                         ))}
                                     </div>
                                 ) : (

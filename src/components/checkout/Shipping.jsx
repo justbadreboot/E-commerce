@@ -14,20 +14,21 @@ const Shipping = ()=>{
         calle2: Yup.string().required("Este campo es requerido"),
         zip: Yup.string().required("Este campo es requerido"),
         casa: Yup.string().required("Este campo es requerido"),
+        sector:Yup.string().required("Este campo es requerido")
 	});
 
     const formik = useFormik({
 		initialValues: {
-			ciudad: "",
-            provincia: "",
-            calle1: "",
-            calle2: "",
-            zip: "",
-            casa: "",
+			ciudad: formData.ciudad,
+            provincia: formData.provincia,
+            calle1: formData.calle1,
+            calle2: formData.calle2,
+            zip: formData.zip,
+            casa: formData.casa,
+            sector: formData.sector
 		},
 		validationSchema: shippingSchema,
 		onSubmit: (values) => {
-            formik.resetForm();
             const data = { ...formData, ...values };
             setFormData(data);
             setActiveStep(activeStep + 1);
@@ -123,7 +124,10 @@ const Shipping = ()=>{
                     </div>
                 </div>                
                 <PriceSummary />
-                <button onClick={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Continuar con el pago</button> 
+                <div className='grid sm:grid-cols-2 gap-4'>
+                    <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
+                    <button onSubmit={formik.handleSubmit} type="submit" className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Continuar con el pago</button>
+                </div>
             </form>
         </div>
     )

@@ -4,16 +4,22 @@ import PriceSummary from './PriceSummary'
 import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Payment = ()=>{
 
+    const navigate = useNavigate()
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
+
+    const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
     const paymentSchema = Yup.object().shape({
         nombreTarjeta: Yup.string().required("Este campo es requerido"),
-        numTarjeta:Yup.number().typeError('Solo dígitos').min(12, 'Min 12 dígitos').required("Este campo es requerido"),
-        yearTarjeta:Yup.number().typeError('Solo dígitos').min(4, '4 dígitos').max(12, '4 dígitos').required("Este campo es requerido"),
-        cvv:Yup.number().typeError('Solo dígitos').min(3, 'Solo 3 dígitos').max(3, 'Solo 3 dígitos').required("Este campo es requerido"),
+        numTarjeta:Yup.number().typeError('Solo dígitos').min(12).required("Este campo es requerido"),
+        yearTarjeta:Yup.number().typeError('Solo dígitos').integer("Debe ser entero").min(4, '4 dígitos').required("Este campo es requerido"),
+        cvv:Yup.number().typeError('Solo dígitos').integer("Debe ser entero").min(3,"3 dígitos").required("Este campo es requerido"),
+        mesTarjeta: Yup.number().required("Seleccione un mes")
 	});
 
     const formik = useFormik({
@@ -22,14 +28,33 @@ const Payment = ()=>{
             numTarjeta:"",
             yearTarjeta:"",
             cvv:"",
+            mesTarjeta:""
 		},
 		validationSchema: paymentSchema,
 		onSubmit: (values) => {
-            formik.resetForm();
             const data = { ...formData, ...values };
             console.log(data)
-            setFormData(data);
-            setActiveStep(activeStep + 1);
+            setFormData(data)
+            Swal.fire({
+                title: '¿Desea continuar?',
+                text: "Se le debitará de su tarjeta el valor total de la compra",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#28a745',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, continuar',
+                cancelButtonText:"Cancelar",
+                reverseButtons:true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Orden Completada!',
+                    'Su pago se ha realizado con éxito',
+                    'success'
+                    )  
+                    //navigate("/")
+                }
+            })
 		},
 	});
 
@@ -41,7 +66,7 @@ const Payment = ()=>{
             <form onSubmit={formik.handleSubmit}>
                 <label className="mt-4 mb-2 block text-sm font-medium">Titular de la tarjeta</label>
                     <div className="relative">
-                        <input type="text" id="card-holder" name="nombreTarjeta" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="Nombre Completo" onChange={formik.handleChange} value={formik.values.nombreTarjeta} />
+                        <input type="text" name="nombreTarjeta" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="Nombre Completo" onChange={formik.handleChange} value={formik.values.nombreTarjeta} />
                         {formik.touched.nombreTarjeta && formik.errors.nombreTarjeta && (
                             <span className="text-red-400 flex text-xs">
                                 {formik.errors.nombreTarjeta}
@@ -71,10 +96,17 @@ const Payment = ()=>{
                 <div className='grid grid-cols-1 md:grid-cols-3'>    
                     <div className='form-control max-w-xs mt-1'>
                         <label className="mt-4 mb-2 block text-sm font-medium">Mes Venc.</label>
-                        <select name="mesTarjeta" className='w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' >
-                            <option>1</option>
+                        <select name="mesTarjeta" value={formik.values.mesTarjeta} onChange={formik.handleChange} className='w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' >
+                            <option value={""}>Seleccione</option>
+                            {meses.map( (mes,i) =>(
+                                <option key={i} value={i}>{mes}</option>
+                            ))}
                         </select>
-                        <input type="text" name="mesTarjeta" className="" placeholder="MM" />
+                        {formik.touched.mesTarjeta && formik.errors.mesTarjeta && (
+                            <span className="text-red-400 flex text-xs">
+                                {formik.errors.mesTarjeta}
+                            </span>
+                        )}
                     </div>
                     <div className='form-control ml-2 max-w-xs mt-1'>
                     <label className="mt-4 mb-2 block text-sm font-medium">Año Venc.</label>
@@ -96,7 +128,10 @@ const Payment = ()=>{
                     </div>
                 </div>
                 <PriceSummary />
-                <button onSubmit={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Confirmar Pago</button>
+                <div className='grid sm:grid-cols-2 gap-4'>
+                    <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
+                    <button onSubmit={formik.handleSubmit} type="submit" className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Confirmar Pago</button>
+                </div>
             </form>
         </div>
     )

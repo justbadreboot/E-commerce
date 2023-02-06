@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { useGetProductByIdQuery } from '../../store/serverApi'
 import { deleteCartItem, updateCartQuantity } from "../../helpers/cartActions";
 import Swal from "sweetalert2";
+import Loader from "../main/Loader";
 
 const CartItem =({item}) =>{
-    const {data: producto, isSuccess} = useGetProductByIdQuery(item.id);
+    const {data: producto, isSuccess, isLoading} = useGetProductByIdQuery(item.id);
 
     const [count, setCount] = useState(0)
     const [price,setPrice] = useState(item.precio*item.cantidad)
@@ -23,7 +24,7 @@ const CartItem =({item}) =>{
             showCancelButton: true,
             confirmButtonColor: '#28a745',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Continuar',
+            confirmButtonText: 'Si, continuar',
             cancelButtonText:'Cancelar',
             reverseButtons: true
           }).then((result) => {
@@ -56,6 +57,7 @@ const CartItem =({item}) =>{
 
     return(
         <div className="grid grid-cols-1 lg:grid-cols-2 justify-between items-center mt-5 pt-5 border-t font-poppins">
+            {isLoading && <Loader />}
             {isSuccess && (
                 <>
                     <div className="flex items-center ">
