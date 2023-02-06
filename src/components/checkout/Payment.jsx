@@ -1,4 +1,5 @@
 import Methods from '../checkout/Methods';
+import PriceSummary from './PriceSummary'
 
 const Payment = ()=>{
 
@@ -41,21 +42,7 @@ const Payment = ()=>{
                         <input type="text" name="credit-cvc" className="w-full flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="CVC" />
                     </div>
                 </div>
-            
-                <div className="mt-8 border-t border-b py-2">
-                    <div className="flex items-center justify-between">
-                    <p className="text-sm font-medium text-gray-500">Subtotal</p>
-                    <p className="font-semibold text-gray-900">$399.00</p>
-                    </div>
-                    <div className="mt-2 flex items-center justify-between">
-                    <p className="text-sm font-medium text-gray-500">Envío</p>
-                    <p className="font-semibold text-gray-900">$8.00</p>
-                    </div>
-                </div>
-                <div className="mt-6 flex items-center justify-between">
-                    <p className="text-sm font-semibold text-gray-900">Total</p>
-                    <p className="text-2xl font-semibold text-gray-900">$408.00</p>
-                </div>
+                <PriceSummary />
             </div>
             <button className="mt-6 mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Confirmar Pago</button>
         </div>

@@ -5,8 +5,6 @@ import ContactPage from '../pages/ContactPage';
 import ProductDetailPage from '../pages/ProductDetailPage';
 import ShoppingCart from '../pages/ShoppingCart';
 import Checkout from '../pages/CheckoutPage';
-import ShippingPage from '../pages/ShippingPage';
-import PaymentPage from '../pages/PaymentPage';
 import FilterProductsPage from '../pages/FilterProductsPage';
 import LoginPage from '../pages/LoginPage';
 import ProductsPage from '../pages/ProductsPage';
@@ -27,8 +25,6 @@ const routes = () =>{
                 <Route path='/servicios' element={<ServicesPage />} ></Route>
                 <Route path='/carrito' element={<ShoppingCart />}> </Route>
                 <Route path='/checkout' element={<Checkout />}> </Route>
-                <Route path='/envio' element={<ShippingPage />}> </Route>
-                <Route path='/pago' element={<PaymentPage />}> </Route>
                 <Route path='/login' element={<LoginPage />} ></Route>
             </Routes>
         </>

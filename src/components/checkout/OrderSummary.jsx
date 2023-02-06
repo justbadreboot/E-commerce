@@ -1,4 +1,4 @@
-const Summary =()=>{
+const OrderSummary =()=>{
 
     const productos=[
         {
@@ -46,4 +46,4 @@ const Summary =()=>{
     )
 
 }
-export default Summary;
+export default OrderSummary;
