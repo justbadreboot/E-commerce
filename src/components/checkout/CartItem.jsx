@@ -10,7 +10,7 @@ const CartItem =({item}) =>{
 
     const [count, setCount] = useState(0)
     const [price,setPrice] = useState(item.precio*item.cantidad)
-
+      
     useEffect(()=>{
         setCount(item.cantidad)
         setPrice((item.precio * count).toFixed(2))
@@ -36,14 +36,16 @@ const CartItem =({item}) =>{
     const handleOnChange = (e) =>{
         let val = parseInt(e.target.value)
         setCount(val)
-        updateCartQuantity('dani', producto.id, val , item.precio)
+        if(val < producto.stock)
+            updateCartQuantity('dani', producto.id, val , item.precio, producto.name)
+        
     }
 
     const decrementClick=()=>{
         let cant = parseInt(count) 
         if(cant > 1){
             setCount(cant - 1)
-            updateCartQuantity('dani', producto.id, cant -1, item.precio)
+            updateCartQuantity('dani', producto.id, cant -1, item.precio, producto.name)
         }
     }
 
@@ -51,7 +53,7 @@ const CartItem =({item}) =>{
         let cant = parseInt(count) 
         if(cant < producto.stock){
             setCount(cant + 1)
-            updateCartQuantity('dani', producto.id, cant +1 , item.precio)
+            updateCartQuantity('dani', producto.id, cant +1 , item.precio, producto.name)
         }
     }
 

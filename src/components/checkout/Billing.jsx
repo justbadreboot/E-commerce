@@ -4,7 +4,7 @@ import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const Billing = ( )=>{
+const Billing = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
 
     const billingSchema = Yup.object().shape({
@@ -16,7 +16,7 @@ const Billing = ( )=>{
 
     const formik = useFormik({
 		initialValues: {
-			nombre:formData.name,
+			nombre:formData.nombre,
             apellido:formData.apellido,
             ident:formData.ident,
             telf:formData.telf
@@ -40,7 +40,7 @@ const Billing = ( )=>{
                             <label className="label">
                                 <span className="label-text">Nombre</span>
                             </label>
-                            <input type="text" name="nombre" placeholder="Nombre" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 " onChange={formik.handleChange} value={formik.values.nombre} />
+                            <input type="text" name="nombre" placeholder="Nombre" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.nombre} />
                             {formik.touched.nombre && formik.errors.nombre && (
                                 <span className="text-red-400 flex text-xs">
                                     {formik.errors.nombre}
@@ -84,7 +84,7 @@ const Billing = ( )=>{
                         </div>
                     </div>
                 </div>                
-                <PriceSummary />
+                <PriceSummary subtotal={subtotal} envio={envio} total={total} />
                 <button onClick={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">
                     Continuar con el envío
                 </button>

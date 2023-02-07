@@ -4,7 +4,7 @@ import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const Shipping = ()=>{
+const Shipping = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
 
     const shippingSchema = Yup.object().shape({
@@ -114,7 +114,7 @@ const Shipping = ()=>{
                             <label className="label">
                                 <span className="label-text"># Casa</span>
                             </label>
-                            <input type="text" name="casa" placeholder="Type here" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full max-w-xs" onChange={formik.handleChange} value={formik.values.casa} />
+                            <input type="text" name="casa" placeholder="Num" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full max-w-xs" onChange={formik.handleChange} value={formik.values.casa} />
                             {formik.touched.casa && formik.errors.casa && (
                                 <span className="text-red-400 flex text-xs">
                                     {formik.errors.casa}
@@ -123,7 +123,7 @@ const Shipping = ()=>{
                         </div>
                     </div>
                 </div>                
-                <PriceSummary />
+                <PriceSummary subtotal={subtotal} envio={envio} total={total} />
                 <div className='grid sm:grid-cols-2 gap-4'>
                     <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
                     <button onSubmit={formik.handleSubmit} type="submit" className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Continuar con el pago</button>

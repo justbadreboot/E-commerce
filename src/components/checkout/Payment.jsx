@@ -1,17 +1,22 @@
-import Methods from '../checkout/Methods';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import PriceSummary from './PriceSummary'
 import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useAddNewAddressMutation, useAddNewClientMutation, useAddNewOrderMutation, useGetClientByDocumentQuery } from "../../store/serverApi";
+import * as Yup from "yup";
 
-const Payment = ()=>{
+const Payment = ({envio,total,subtotal})=>{
 
-    const navigate = useNavigate()
-    const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
+    //const navigate = useNavigate()
+    const { activeStep, setActiveStep, formData, setFormData, cartItems } = useContext(FormContext);
+    const {data: cliente, isError} = useGetClientByDocumentQuery(formData.ident)
+    const [addNewPost] = useAddNewClientMutation()
+    const [addNewAddress] = useAddNewAddressMutation()
+    const [addNewOrder] = useAddNewOrderMutation()
 
+    const [selectedOption, setSelectedOption] = useState("tarjeta")
+    
     const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
     const paymentSchema = Yup.object().shape({
@@ -33,8 +38,8 @@ const Payment = ()=>{
 		validationSchema: paymentSchema,
 		onSubmit: (values) => {
             const data = { ...formData, ...values };
-            console.log(data)
             setFormData(data)
+            console.log(cartItems)
             Swal.fire({
                 title: '¿Desea continuar?',
                 text: "Se le debitará de su tarjeta el valor total de la compra",
@@ -47,24 +52,140 @@ const Payment = ()=>{
                 reverseButtons:true
             }).then((result) => {
                 if (result.isConfirmed) {
+                    generarPago()
                     Swal.fire(
-                    'Orden Completada!',
-                    'Su pago se ha realizado con éxito',
+                    'Orden Generada!',
+                    'Su pago se ha realizado con éxito.',
                     'success'
-                    )  
-                    //navigate("/")
+                    )
                 }
             })
 		},
 	});
 
+    const pagoEfectivo = ()=>{
+        Swal.fire({
+            title: '¿Desea continuar?',
+            text: "El pago deberá ser cancelado al momento de la entrega de su orden.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#28a745',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, continuar',
+            cancelButtonText:"Cancelar",
+            reverseButtons:true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                generarPago()
+                Swal.fire(
+                    'Orden Generada!',
+                    'Su pedido se encuentra en camino',
+                    'success'
+                )
+            }
+        })
+    }
+
+    const generarPago = ()=>{
+        let pagoID = 0
+        let pagoState =""
+        const hoy = Date.now()
+        const fecha = new Date(hoy)
+        let detalles = []
+        cartItems.map( item =>{
+            const detalle ={
+                id: item.id,
+                amount: item.cantidad,
+                price: item.precio,
+                name: item.nombre
+            }
+            detalles.push(detalle)
+            return detalles
+        })
+        if(selectedOption === "tarjeta"){
+            pagoID = 1
+            pagoState ="Pago efectuado"
+        }   
+        else{
+            pagoID = 2
+            pagoState ="Pago pendiente"
+        }
+        if(isError)
+            crearCliente()
+        crearDireccion()
+        addNewOrder({
+            date: fecha.toISOString(),
+            deliveryState: {
+                id:1,
+                state:"Por entregar"
+            },
+            idClient: cliente.id,
+            orderDetails: detalles,
+            orderState: {
+                id:1,
+                state:'En curso'
+            },
+            paymentState: {
+                id:pagoID,
+                state:pagoState
+            },
+            subtotal:parseFloat(subtotal),
+            total:parseFloat(total),
+        })
+    }
+
+    const crearCliente = () =>{
+        addNewPost({ 
+            document: formData.ident,
+            firstName: formData.nombre,
+            lastName: formData.apellido,
+            phone: formData.telf
+        })
+    }
+
+    const crearDireccion = ()=>{
+        addNewAddress({
+            id: cliente.id,
+            city: formData.ciudad,
+            state: formData.provincia,
+            mainStreet: formData.calle1,
+            secondStreet: formData.calle2,
+            postalCode: formData.zip,
+            sector: formData.sector,
+            houseNumber: formData.casa,
+        })        
+    }
+
     return(
         <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0 font-poppins">
             <p className="text-xl font-medium">Datos de Pago</p>
             <p className="text-gray-400 mt-2">Llene los datos para completar su orden</p>
-            <Methods />
             <form onSubmit={formik.handleSubmit}>
-                <label className="mt-4 mb-2 block text-sm font-medium">Titular de la tarjeta</label>
+                <p className="mt-8 text-md font-medium font-poppins">Métodos de pago</p>
+                <div className="mt-5 grid gap-6 grid-cols-1 sm:grid-cols-2">
+                    <div className="relative w-full">
+                        <input className="peer hidden" id="radio_1" type="radio" name="radio" value="tarjeta" onChange={(e)=> setSelectedOption(e.target.value)} checked={selectedOption==="tarjeta"} />
+                        <span className="peer-checked:border-green-500 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        <label className="peer-checked:border-2 peer-checked:border-green-500 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_1">
+                            <div className="ml-5">
+                                <span className="mt-2 font-semibold">Tarjeta de Crédito</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div className="relative w-full">
+                        <input className="peer hidden" id="radio_2" type="radio" name="radio" value="efectivo" onChange={(e)=> setSelectedOption(e.target.value)} checked={selectedOption==="efectivo"} />
+                        <span className="peer-checked:border-green-500 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                        <label className="peer-checked:border-2 peer-checked:border-green-500 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_2">
+                            <div className="ml-5">
+                                <span className="mt-2 font-semibold">Efectivo</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </form>
+            {(selectedOption === "tarjeta") ? (
+                <>
+                    <label className="mt-4 mb-2 block text-sm font-medium">Titular de la tarjeta</label>
                     <div className="relative">
                         <input type="text" name="nombreTarjeta" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="Nombre Completo" onChange={formik.handleChange} value={formik.values.nombreTarjeta} />
                         {formik.touched.nombreTarjeta && formik.errors.nombreTarjeta && (
@@ -78,7 +199,7 @@ const Payment = ()=>{
                             </svg>
                         </div>
                     </div>
-                <label className="mt-4 mb-2 block text-sm font-medium">Número de la tarjeta</label>
+                    <label className="mt-4 mb-2 block text-sm font-medium">Número de la tarjeta</label>
                     <div className="relative flex-shrink-0">
                         <input type="text" name="numTarjeta" className="w-full rounded-md border border-gray-200 px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="xxxx-xxxx-xxxx-xxxx" onChange={formik.handleChange} value={formik.values.numTarjeta} />
                         {formik.touched.numTarjeta && formik.errors.numTarjeta && (
@@ -93,46 +214,55 @@ const Payment = ()=>{
                             </svg>
                         </div>
                     </div>
-                <div className='grid grid-cols-1 md:grid-cols-3'>    
-                    <div className='form-control max-w-xs mt-1'>
-                        <label className="mt-4 mb-2 block text-sm font-medium">Mes Venc.</label>
-                        <select name="mesTarjeta" value={formik.values.mesTarjeta} onChange={formik.handleChange} className='w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' >
-                            <option value={""}>Seleccione</option>
-                            {meses.map( (mes,i) =>(
-                                <option key={i} value={i}>{mes}</option>
-                            ))}
-                        </select>
-                        {formik.touched.mesTarjeta && formik.errors.mesTarjeta && (
-                            <span className="text-red-400 flex text-xs">
-                                {formik.errors.mesTarjeta}
-                            </span>
-                        )}
+                    <div className='grid grid-cols-1 md:grid-cols-3'>    
+                        <div className='form-control max-w-xs mt-1'>
+                            <label className="mt-4 mb-2 block text-sm font-medium">Mes Venc.</label>
+                            <select name="mesTarjeta" value={formik.values.mesTarjeta} onChange={formik.handleChange} className='w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' >
+                                <option value={""}>Seleccione</option>
+                                {meses.map( (mes,i) =>(
+                                    <option key={i} value={i}>{mes}</option>
+                                ))}
+                            </select>
+                            {formik.touched.mesTarjeta && formik.errors.mesTarjeta && (
+                                <span className="text-red-400 flex text-xs">
+                                    {formik.errors.mesTarjeta}
+                                </span>
+                            )}
+                        </div>
+                        <div className='form-control ml-2 max-w-xs mt-1'>
+                        <label className="mt-4 mb-2 block text-sm font-medium">Año Venc.</label>
+                            <input type="text" name="yearTarjeta" className="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="YYYY" onChange={formik.handleChange} value={formik.values.yearTarjeta} />
+                            {formik.touched.yearTarjeta && formik.errors.yearTarjeta && (
+                                <span className="text-red-400 flex text-xs">
+                                    {formik.errors.yearTarjeta}
+                                </span>
+                            )}
+                        </div>
+                        <div className='form-control max-w-xs mt-1 ml-2'>
+                            <label className="mt-4 mb-2 block text-sm font-medium">CVV</label>
+                            <input type="text" name="cvv" className="w-full flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="CVV" onChange={formik.handleChange} value={formik.values.cvv}/>
+                            {formik.touched.cvv && formik.errors.cvv && (
+                                <span className="text-red-400 flex text-xs">
+                                    {formik.errors.cvv}
+                                </span>
+                            )}
+                        </div>
                     </div>
-                    <div className='form-control ml-2 max-w-xs mt-1'>
-                    <label className="mt-4 mb-2 block text-sm font-medium">Año Venc.</label>
-                        <input type="text" name="yearTarjeta" className="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="YYYY" onChange={formik.handleChange} value={formik.values.yearTarjeta} />
-                        {formik.touched.yearTarjeta && formik.errors.yearTarjeta && (
-                            <span className="text-red-400 flex text-xs">
-                                {formik.errors.yearTarjeta}
-                            </span>
-                        )}
-                    </div>
-                    <div className='form-control max-w-xs mt-1 ml-2'>
-                        <label className="mt-4 mb-2 block text-sm font-medium">CVV</label>
-                        <input type="text" name="cvv" className="w-full flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" placeholder="CVV" onChange={formik.handleChange} value={formik.values.cvv}/>
-                        {formik.touched.cvv && formik.errors.cvv && (
-                            <span className="text-red-400 flex text-xs">
-                                {formik.errors.cvv}
-                            </span>
-                        )}
-                    </div>
+                </>
+            ): (
+                <div className='mt-4'>
+                    <p className='text-sm text-gray-500'>Valor a cancelar cuando el pedido sea entregado</p>
                 </div>
-                <PriceSummary />
-                <div className='grid sm:grid-cols-2 gap-4'>
-                    <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
+            )}
+            <PriceSummary subtotal={subtotal} envio={envio} total={total} />
+            <div className='grid sm:grid-cols-2 gap-4'>
+                <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
+                {(selectedOption === 'tarjeta')? (
                     <button onSubmit={formik.handleSubmit} type="submit" className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Confirmar Pago</button>
-                </div>
-            </form>
+                ): (
+                    <button onClick={pagoEfectivo}  className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Confirmar Orden</button>
+                )}
+            </div>
         </div>
     )
 }

@@ -4,19 +4,19 @@ import Billing from "./Billing";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 
-const CheckoutSteps = () =>{
+const CheckoutSteps = ({envio,total,subtotal}) =>{
 
     const {activeStep} =useContext(FormContext)
     let stepContent;
     switch(activeStep){
         case 0:
-            stepContent = <Billing />
+            stepContent = <Billing subtotal={subtotal} envio={envio} total={total} />
             break;
         case 1:
-            stepContent = <Shipping />
+            stepContent = <Shipping subtotal={subtotal} envio={envio} total={total} />
             break;
         case 2:
-            stepContent = <Payment />
+            stepContent = <Payment subtotal={subtotal} envio={envio} total={total} />
             break;
         default:
             break;

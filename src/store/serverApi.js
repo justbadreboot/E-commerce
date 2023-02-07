@@ -26,7 +26,32 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       }),
       getPromotions: builder.query({
         query: () => `product-production-cf12.up.railway.app/api/product/all`
-      })
+      }),
+      getClientByDocument: builder.query({
+        query:(doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
+      }),
+      addNewClient: builder.mutation({
+        query: ({document,lastName, firstName, phone}) => ({
+          url: `client-production-d410.up.railway.app/api/client`,
+          method: 'POST',
+          body:{ document, lastName, firstName, phone },
+        })
+      }),
+      addNewAddress : builder.mutation({
+        query : ({id, city, houseNumber, mainStreet, postalCode, secondStreet, sector, state}) =>({
+          url: `client-production-d410.up.railway.app/api/client/${id}/direction`,
+          method: 'POST',
+          body:{city, houseNumber, mainStreet, postalCode, secondStreet, sector, state},
+        })
+      }),
+      addNewOrder: builder.mutation({
+        query: ({date, deliveryState, idClient, orderDetails, orderState, paymentState, subtotal, total})=>({
+          url: `order-production-bfbc.up.railway.app/api/order`,
+          method: 'POST',
+          body:{date, deliveryState, idClient, orderDetails, orderState, paymentState, subtotal, total},
+        })
+      }),
+
     }),
   });
 
@@ -35,4 +60,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetProductsQuery,
     useGetLandingQuery,
     useGetProductByIdQuery,
+    useGetClientByDocumentQuery,
+    useAddNewClientMutation,
+    useAddNewAddressMutation,
+    useAddNewOrderMutation,
   } = serverApi;

@@ -39,9 +39,9 @@ const ProductDetail=()=>{
             setCount(parseInt(count) + 1)
     }
     
-    const handleOnClick =(email,id,cant,precio)=>{
+    const handleOnClick =(email,id,cant,precio,nombre)=>{
         if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0)
-            addToCart(email,id,cant,precio)
+            addToCart(email,id,cant,precio,nombre)
         else
             Toast.fire({ icon: 'error', title: 'Cantidad fuera de stock',background:'#FFDADA'})
     }
@@ -102,7 +102,7 @@ const ProductDetail=()=>{
                                 <span className="text-sm">2-4 días de envío</span>
                             </div>
                             <div className="flex gap-2.5">
-                                <button onClick={()=> handleOnClick("dani",detalles.id,count,detalles.pvp)} className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>
+                                <button onClick={()=> handleOnClick("dani",detalles.id,count,detalles.pvp, detalles.name)} className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>
 
                                 <Link to="/checkout" className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3">
                                     Comprar ahora
