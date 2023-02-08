@@ -7,8 +7,8 @@ const Products = () =>{
     const {data: products, isLoading, isFetching, isSuccess} = useGetProductsQuery();
 
     return(
-        <section className="py-10 px-4 font-poppins">
-        <h1 className="mb-6 text-center text-3xl font-bold text-gray-900">
+        <section className="pt-10 px-4 font-poppins">
+        <h1 className="mb-6 text-center text-3xl font-bold text-gray-700">
             Todos <span className="text-primary-100">Nuestros </span>  Productos
         </h1>
         {((isLoading || isFetching)) && <Loader /> }

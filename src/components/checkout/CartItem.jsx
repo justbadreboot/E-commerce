@@ -14,7 +14,7 @@ const CartItem =({item}) =>{
     useEffect(()=>{
         setCount(item.cantidad)
         setPrice((item.precio * count).toFixed(2))
-    },[item.cantidad, item.precio,count])
+    },[item.cantidad, item.precio, count])
 
     const handleDelete = (email,id) =>{
         Swal.fire({
@@ -35,10 +35,10 @@ const CartItem =({item}) =>{
 
     const handleOnChange = (e) =>{
         let val = parseInt(e.target.value)
-        setCount(val)
-        if(val < producto.stock)
+        if(val < producto.stock && val > 0){
             updateCartQuantity('dani', producto.id, val , item.precio, producto.name)
-        
+            setCount(val)
+        }
     }
 
     const decrementClick=()=>{

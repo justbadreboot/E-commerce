@@ -7,13 +7,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     }),
     endpoints: (builder) => ({
       getLanding: builder.query({
-        query: () => "landing-production-11fd.up.railway.app/api/landing",
+        query: () => "landing-production-11fd.up.railway.app/api/landing"
       }),
       getCategories: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/category/all",
+        query: () => "product-production-cf12.up.railway.app/api/category/all"
       }),
       getProducts: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/product/all",
+        query: () => "product-production-cf12.up.railway.app/api/product/all"
       }),
       getProductById: builder.query({
         query:(id) => `product-production-cf12.up.railway.app/api/product/${id}`
@@ -24,11 +24,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       searchProductsByName: builder.query({
         query: (name) => `product-production-cf12.up.railway.app/api/product/filter/${name}}`
       }),
-      getPromotions: builder.query({
-        query: () => `product-production-cf12.up.railway.app/api/product/all`
-      }),
       getClientByDocument: builder.query({
         query:(doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
+      }),
+      getServices: builder.query({
+        query: () => "api-gateway-production-d841.up.railway.app/api/service"
+      }),
+      getServicesMain: builder.query({
+        query: () => "api-gateway-production-d841.up.railway.app/api/service/main"
       }),
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone}) => ({
@@ -61,6 +64,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetLandingQuery,
     useGetProductByIdQuery,
     useGetClientByDocumentQuery,
+    useGetServicesQuery,
+    useGetServicesMainQuery,
     useAddNewClientMutation,
     useAddNewAddressMutation,
     useAddNewOrderMutation,
