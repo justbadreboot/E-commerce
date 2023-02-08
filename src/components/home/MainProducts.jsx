@@ -10,9 +10,10 @@ const MainProducts = () =>{
 
     return(
         <section className="py-10 font-poppins">
-            <h1 className="mb-6 text-center text-4xl font-bold text-gray-900">
+            <h1 className="mb-6 text-center text-2xl xl:text-3xl font-bold text-gray-900">
                 <span className="text-primary-100">Nuevos </span>Productos
             </h1>
+            <p className="mb-6 mt-2 max-w-screen-md text-gray-500 md:text-lg text-center mx-4 sm:mx-auto">Nuestros servicios están diseñados para satisfacer sus necesidades de atención médica y ayudarlo a mantener un estilo de vida saludable.</p>
             <div className='mb-2 md:mb-0 md:mr-20'>
                 <Link to='/productos'>
                     <ViewMore />    

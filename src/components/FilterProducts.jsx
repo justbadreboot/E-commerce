@@ -1,32 +1,17 @@
 import { useEffect, useState } from 'react'
-import { Disclosure} from '@headlessui/react'
-import {BsChevronDown} from "react-icons/bs"
 import {BiSearch} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
 import ProductCard from './cards/ProductCard';
 import Pagination from './main/Pagination'
 import { useGetCategoriesQuery } from '../store/serverApi'
+import Loader from './main/Loader'
 
 const Filter =()=>{
-  const {data: categorias, isSuccess} = useGetCategoriesQuery();
+  const {data: categorias, isSuccess, isLoading} = useGetCategoriesQuery();
 
   const [openFilter, setOpenFilter] = useState(true)
   
-  const filters = [
-    {
-      id: 'marcas',
-      name: 'Por Marca',
-      options: [
-          { value: 'Buliclo', label: 'Buliclo', checked: false },
-          { value: 'Carlotin', label: 'Carlotin', checked: false },
-          { value: 'Merguinez', label: 'Merguinez', checked: false },
-          { value: 'Swifty', label: 'Swifty', checked: true },
-          { value: 'TamTam', label: 'TamTam', checked: false },
-      ],
-    },
-  ]
-
   useEffect(() => {
     window.addEventListener('resize', () => {
       const viewport = window.innerWidth
@@ -119,43 +104,18 @@ const Filter =()=>{
           <div className="mt-5 pb-5 pl-5 border-b border-gray-200">
             <p className='text-gray-700 font-bold mb-3'>Categorías Disponibles</p>
             <ul className="flex flex-col items-start space-y-2">
+            {isLoading && <Loader />}
               {isSuccess && (
                 categorias.map(category => (
                   <div key={category.id} className="m-1 flex items-center space-x-3">
                     <div>
-                      <input type="radio" name="categorias" id={category.namel} className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
+                      <input type="radio" name="categorias" id={category.name} className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
                     </div>
                     <span className="text-base text-gray-700 font-medium hover:text-green-400">{category.name}</span>
                   </div>
                 ))
               )}  
             </ul>
-          </div>
-          <div>
-            {filters.map(section => (
-              <Disclosure as="div" key={section.id} className="border-b border-gray-200">
-                {({ open }) => (
-                  <div className={`py-5 pl-5 pr-3 flex flex-col ${open && "bg-blue-50"}`}> 
-                    <Disclosure.Button className="group flex items-center justify-between">
-                      <span className="text-base text-gray-700 font-semibold">{section.name}</span>
-                      <BsChevronDown className={`w-6 h-6 ${open ? "transform rotate-90" : "text-gray-400 group-hover:text-gray-700 "}`} />
-                    </Disclosure.Button>
-                    {section.id !== "color" &&
-                      <Disclosure.Panel className="mt-5 flex flex-col">
-                        {section.options.map(option => (
-                          <div key={option.label} className="m-1 flex items-center space-x-3">
-                            <div>
-                              <input type="checkbox" name={option.label} id={option.label} defaultValue={option.value} defaultChecked={option.checked} className="form-checkbox h-5 w-5 border-gray-300 rounded text-blue-400 focus:ring-blue-400" />
-                            </div>
-                            <span className="text-base text-gray-700">{option.label}</span>
-                          </div>
-                        ))}
-                      </Disclosure.Panel>
-                    }
-                  </div>
-                )}
-              </Disclosure>
-            ))}
           </div>
         </div>
         <div className="col-span-full lg:col-span-3">
@@ -171,7 +131,6 @@ const Filter =()=>{
       </div>
     </div>
   )
-
 }
 
 export default Filter;

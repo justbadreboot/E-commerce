@@ -5,7 +5,7 @@ import ContactPage from '../pages/ContactPage';
 import ProductDetailPage from '../pages/ProductDetailPage';
 import ShoppingCart from '../pages/ShoppingCart';
 import Checkout from '../pages/CheckoutPage';
-import FilterProductsPage from '../pages/FilterProductsPage';
+import SearchProductsPage from '../pages/SearchProductsPage';
 import LoginPage from '../pages/LoginPage';
 import ProductsPage from '../pages/ProductsPage';
 import ServicesPage from '../pages/ServicesPage';
@@ -18,7 +18,7 @@ const routes = () =>{
                 <Route path='/' element={<HomePage />}> </Route>
                 <Route path='/nosotros' element={<AboutPage />}> </Route>
                 <Route path='/contacto' element={<ContactPage />}> </Route>
-                <Route path='/buscarProductos' element={<FilterProductsPage />}></Route>
+                <Route path='/buscarProductos' element={<SearchProductsPage />}></Route>
                 <Route path='/productos' element={<ProductsPage />} ></Route>
                 <Route path='/producto/:id' element={<ProductDetailPage />}></Route>
                 <Route path='/buscarServicios' element={<SearchServicesPage />}></Route>

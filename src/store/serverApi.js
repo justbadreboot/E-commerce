@@ -33,6 +33,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getServicesMain: builder.query({
         query: () => "api-gateway-production-d841.up.railway.app/api/service/main"
       }),
+      getSpecialty: builder.query({
+        query: () => "api-gateway-production-d841.up.railway.app/api/specialty"
+      }),
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone}) => ({
           url: `client-production-d410.up.railway.app/api/client`,
@@ -66,6 +69,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetClientByDocumentQuery,
     useGetServicesQuery,
     useGetServicesMainQuery,
+    useGetSpecialtyQuery,
     useAddNewClientMutation,
     useAddNewAddressMutation,
     useAddNewOrderMutation,
