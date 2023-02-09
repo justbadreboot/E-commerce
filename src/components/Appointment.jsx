@@ -9,7 +9,7 @@ const Appointment = ({serviceID}) =>{
     
     const [openClient, setOpenClient] = useState(false)
     const [doc, setDoc] = useState("")
-    const [isSkip,setIsSkip] = useState(false)
+    const [isSkip,setIsSkip] = useState(true)
 
     const {data: cliente} = useGetClientByDocumentQuery(doc, {skip: isSkip} )
     const [addNewApp] = useAddNewAppointmentMutation()
@@ -41,6 +41,8 @@ const Appointment = ({serviceID}) =>{
             hora: Yup.string().required("Este campo es requerido"),
         }),
 		onSubmit: (values) => {
+            setIsSkip(false)
+            console.log(doc)
             console.log(serviceID, cliente)
             Swal.fire({
                 title: '¿Desea continuar?',
@@ -54,20 +56,22 @@ const Appointment = ({serviceID}) =>{
                 reverseButtons:true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    addNewApp({
+                    /*addNewApp({
                         id:serviceID,
                         clientId: cliente.id,
                         date:values.fecha,
                         duration:values.hora
-                    })
+                    })*/
                     Swal.fire(
                         'Cita generada!',
                         'Su cita ha sido agendada con éxito',
                         'success'
                     )
-                    setIsSkip(false)
+                    //setIsSkip(true)     
                     setDoc("")
                     setOpenClient(false)
+                    formik2.resetForm()
+                    formik.resetForm()
                 }
             })
             

@@ -1,9 +1,26 @@
 import { useAddNewClientMutation, useGetClientByDocumentQuery } from "../store/serverApi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 const SearchClient =({doc, id})=>{
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+
+    useEffect(()=>{
+        id(doc)
+    })
     const {data: cliente, isError, isSuccess} = useGetClientByDocumentQuery(doc)
     const [addNewPost] = useAddNewClientMutation()
 
@@ -23,13 +40,15 @@ const SearchClient =({doc, id})=>{
 		},
 		validationSchema: appSchema,
 		onSubmit: (values) => {
-            addNewPost({ 
+            /*addNewPost({ 
                 document: values.ident,
                 firstName: values.nombre,
                 lastName: values.apellido,
                 phone: values.telf
-            })
+            })*/
             id(values.ident)
+            //formik.resetForm()
+            Toast.fire({ icon: 'success', title: 'Paciente registrado',background:'#D3FDDD'})
 		},
 	});
 
