@@ -41,7 +41,7 @@ const Appointment = ({serviceID}) =>{
             hora: Yup.string().required("Este campo es requerido"),
         }),
 		onSubmit: (values) => {
-            setIsSkip(true)
+            console.log(serviceID, cliente)
             Swal.fire({
                 title: '¿Desea continuar?',
                 text: "Su cita será agendada en la fecha y hora seleccionada previamente.",
@@ -54,12 +54,12 @@ const Appointment = ({serviceID}) =>{
                 reverseButtons:true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    /*addNewApp({
+                    addNewApp({
                         id:serviceID,
                         clientId: cliente.id,
                         date:values.fecha,
                         duration:values.hora
-                    })*/
+                    })
                     Swal.fire(
                         'Cita generada!',
                         'Su cita ha sido agendada con éxito',

@@ -1,4 +1,4 @@
-import { useGetProductsMainQuery, useGetProductsQuery } from '../../store/serverApi';
+import { useGetProductsMainQuery} from '../../store/serverApi';
 import ProductCard from '../cards/ProductCard';
 import ViewMore from '../main/ViewMore'
 import Loader from "../../components/main/Loader"

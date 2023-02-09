@@ -65,7 +65,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       }),
       addNewAppointment: builder.mutation({
         query: ({id,clientId,date,duration})=>({
-          url: `https://api-gateway-production-d841.up.railway.app/api/service/${id}/appointment`,
+          url: `service-production-bb52.up.railway.app/api/service/${id}/appointment`,
           method: 'POST',
           body:{id,clientId,date,duration},
         })
