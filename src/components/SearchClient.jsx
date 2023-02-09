@@ -1,8 +1,8 @@
 import { useAddNewClientMutation, useGetClientByDocumentQuery } from "../store/serverApi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useEffect } from "react";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const SearchClient =({doc, id})=>{
 
@@ -16,13 +16,15 @@ const SearchClient =({doc, id})=>{
           toast.addEventListener('mouseenter', Swal.stopTimer)
           toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
-      })
-
-    useEffect(()=>{
-        id(doc)
     })
+
     const {data: cliente, isError, isSuccess} = useGetClientByDocumentQuery(doc)
     const [addNewPost] = useAddNewClientMutation()
+
+    useEffect(()=>{
+        if(isSuccess)
+            id(cliente.id)
+    })
 
     const appSchema = Yup.object().shape({
 		nombre: Yup.string().required("Este campo es requerido"),
@@ -39,15 +41,14 @@ const SearchClient =({doc, id})=>{
             telf:""
 		},
 		validationSchema: appSchema,
-		onSubmit: (values) => {
-            /*addNewPost({ 
+		onSubmit: async (values) => {
+            const res =  await addNewPost({ 
                 document: values.ident,
                 firstName: values.nombre,
                 lastName: values.apellido,
                 phone: values.telf
-            })*/
-            id(values.ident)
-            //formik.resetForm()
+            }).unwrap()
+            id(res.id)
             Toast.fire({ icon: 'success', title: 'Paciente registrado',background:'#D3FDDD'})
 		},
 	});

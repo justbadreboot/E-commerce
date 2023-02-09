@@ -56,7 +56,6 @@ export const updateCartQuantity = async (email,id_producto,cantidad,precio, nomb
 export const deleteCartItem = (email, id_producto) => {
   try{
     deleteDoc(doc(firestore, collectionName + email, docId + id_producto ))
-    Swal.fire('Eliminado!', 'Tu producto ha sido eliminado con éxito', 'success')
   }catch(error){
     console.log(error)
     Toast.fire({ icon: 'error', title: 'Ocurrió un error. Intente de nuevo', background:'#FFDADA' })

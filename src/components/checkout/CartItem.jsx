@@ -30,6 +30,7 @@ const CartItem =({item}) =>{
           }).then((result) => {
             if (result.isConfirmed)
                 deleteCartItem(email,id)
+                Swal.fire('Eliminado!', 'Tu producto ha sido eliminado con éxito', 'success')
           })
     }
 

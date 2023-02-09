@@ -17,7 +17,7 @@ const Payment = ({envio,total,subtotal})=>{
     const [addNewOrder] = useAddNewOrderMutation()
 
     const [selectedOption, setSelectedOption] = useState("tarjeta")
-    
+
     const meses=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
 
     const paymentSchema = Yup.object().shape({
@@ -86,12 +86,10 @@ const Payment = ({envio,total,subtotal})=>{
         })
     }
 
-    const generarPago = ()=>{
-        let pagoID = 0
-        let pagoState =""
+    const generarPago = async ()=>{
+        let pagoID = 0, pagoState ="" ,clientID = 0,detalles = []
         const hoy = Date.now()
         const fecha = new Date(hoy)
-        let detalles = []
         cartItems.map( item =>{
             const detalle ={
                 id: item.id,
@@ -111,15 +109,19 @@ const Payment = ({envio,total,subtotal})=>{
             pagoState ="Pago pendiente"
         }
         if(isError)
-            crearCliente()
-        crearDireccion()
+            clientID = await crearCliente()
+        else
+            clientID = cliente.id
+
+        const addressID =  await crearDireccion(clientID)
         addNewOrder({
             date: fecha.toISOString(),
             deliveryState: {
                 id:1,
                 state:"Por entregar"
             },
-            idClient: cliente.id,
+            idAddress: addressID,
+            idClient: clientID,
             orderDetails: detalles,
             orderState: {
                 id:1,
@@ -136,24 +138,19 @@ const Payment = ({envio,total,subtotal})=>{
         setFormData({})
     }
 
-    const vaciarCarrito =()=>{
-        cartItems.map(item =>(
-            deleteCartItem("dani",item.id)
-        ))
-    }
-
-    const crearCliente = () =>{
-        addNewPost({ 
+    const crearCliente = async () =>{
+        const res = await addNewPost({ 
             document: formData.ident,
             firstName: formData.nombre,
             lastName: formData.apellido,
             phone: formData.telf
-        })
+        }).unwrap()
+        return res.id
     }
 
-    const crearDireccion = ()=>{
-        addNewAddress({
-            id: cliente.id,
+    const crearDireccion = async (clientID)=>{
+        const res = await addNewAddress({
+            id: clientID,
             city: formData.ciudad,
             state: formData.provincia,
             mainStreet: formData.calle1,
@@ -161,7 +158,14 @@ const Payment = ({envio,total,subtotal})=>{
             postalCode: formData.zip,
             sector: formData.sector,
             houseNumber: formData.casa,
-        })        
+        }).unwrap()
+        return res.id       
+    }
+
+    const vaciarCarrito =()=>{
+        cartItems.map(item =>(
+            deleteCartItem("dani",item.id)
+        ))
     }
 
     return(

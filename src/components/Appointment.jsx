@@ -2,16 +2,14 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
-import { useAddNewAppointmentMutation, useGetClientByDocumentQuery } from "../store/serverApi";
+import { useAddNewAppointmentMutation} from "../store/serverApi";
 import SearchClient from "./SearchClient";
 
 const Appointment = ({serviceID}) =>{
     
     const [openClient, setOpenClient] = useState(false)
-    const [doc, setDoc] = useState("")
-    const [isSkip,setIsSkip] = useState(true)
-
-    const {data: cliente} = useGetClientByDocumentQuery(doc, {skip: isSkip} )
+    const [id, setId] = useState(0)
+    const [doc,setDoc] = useState("")
     const [addNewApp] = useAddNewAppointmentMutation()
 
     const formik = useFormik({
@@ -28,7 +26,7 @@ const Appointment = ({serviceID}) =>{
 	})
 
     const getID = (id)=>{
-        setDoc(id)
+        setId(id)
     }
 
     const formik2 = useFormik({
@@ -41,9 +39,6 @@ const Appointment = ({serviceID}) =>{
             hora: Yup.string().required("Este campo es requerido"),
         }),
 		onSubmit: (values) => {
-            setIsSkip(false)
-            console.log(doc)
-            console.log(serviceID, cliente)
             Swal.fire({
                 title: '¿Desea continuar?',
                 text: "Su cita será agendada en la fecha y hora seleccionada previamente.",
@@ -56,19 +51,17 @@ const Appointment = ({serviceID}) =>{
                 reverseButtons:true
             }).then((result) => {
                 if (result.isConfirmed) {
-                    /*addNewApp({
+                    addNewApp({
                         id:serviceID,
-                        clientId: cliente.id,
+                        clientId: id,
                         date:values.fecha,
                         duration:values.hora
-                    })*/
+                    })
                     Swal.fire(
                         'Cita generada!',
                         'Su cita ha sido agendada con éxito',
                         'success'
                     )
-                    //setIsSkip(true)     
-                    setDoc("")
                     setOpenClient(false)
                     formik2.resetForm()
                     formik.resetForm()
