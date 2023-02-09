@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from '../../store/serverApi';
+import { useGetProductsMainQuery, useGetProductsQuery } from '../../store/serverApi';
 import ProductCard from '../cards/ProductCard';
 import ViewMore from '../main/ViewMore'
 import Loader from "../../components/main/Loader"
@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const MainProducts = () =>{
 
-    const {data: products, isLoading, isFetching, isSuccess} = useGetProductsQuery();
+    const {data: products, isLoading, isFetching, isSuccess} = useGetProductsMainQuery()
 
     return(
         <section className="py-10 font-poppins">

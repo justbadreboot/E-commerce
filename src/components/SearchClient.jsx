@@ -2,7 +2,7 @@ import { useAddNewClientMutation, useGetClientByDocumentQuery } from "../store/s
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const SearchClient =({doc})=>{
+const SearchClient =({doc, id})=>{
 
     const {data: cliente, isError, isSuccess} = useGetClientByDocumentQuery(doc)
     const [addNewPost] = useAddNewClientMutation()
@@ -18,7 +18,7 @@ const SearchClient =({doc})=>{
 		initialValues: {
 			nombre:"",
             apellido:"",
-            ident:doc,
+            ident:"",
             telf:""
 		},
 		validationSchema: appSchema,
@@ -29,9 +29,9 @@ const SearchClient =({doc})=>{
                 lastName: values.apellido,
                 phone: values.telf
             })
+            id(values.ident)
 		},
 	});
-
 
     return(
         <>
@@ -94,19 +94,14 @@ const SearchClient =({doc})=>{
                                 )}
                             </div>
                         </div>
-                        {cliente!= null && (
-                            <button onClick={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full sm:w-11/12 rounded-md bg-primary-80 px-6 py-3 font-medium text-white">
-                            Registrar
-                            </button>
-                        )}
+                        <button onClick={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full sm:w-11/12 rounded-md bg-primary-80 px-6 py-3 font-medium text-white">
+                        Registrar
+                        </button>
                     </form>
-                </>
-               
+                </> 
             )}
         </>
-        
     )
-
 }
 
 export default SearchClient;

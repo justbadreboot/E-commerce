@@ -112,7 +112,7 @@ const Payment = ({envio,total,subtotal})=>{
         }
         if(isError)
             crearCliente()
-        //crearDireccion()
+        crearDireccion()
         addNewOrder({
             date: fecha.toISOString(),
             deliveryState: {
@@ -133,6 +133,7 @@ const Payment = ({envio,total,subtotal})=>{
             total:parseFloat(total),
         })
         vaciarCarrito()
+        setFormData({})
     }
 
     const vaciarCarrito =()=>{

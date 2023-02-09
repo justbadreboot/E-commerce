@@ -16,7 +16,7 @@ const ServiceCard = ({service}) =>{
                                 <path d="M12 5l7 7-7 7"></path>
                             </svg>
                         </label>
-                        <Appointment /> 
+                        <Appointment serviceID={service.id} /> 
                         <span className="text-gray-800 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none pr-2 py-1">
                             ${service.price}
                         </span>

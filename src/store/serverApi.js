@@ -15,6 +15,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getProducts: builder.query({
         query: () => "product-production-cf12.up.railway.app/api/product/all"
       }),
+      getProductsMain: builder.query({
+        query: () => "product-production-cf12.up.railway.app/api/product/main"
+      }),
       getProductById: builder.query({
         query:(id) => `product-production-cf12.up.railway.app/api/product/${id}`
       }),
@@ -36,6 +39,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getSpecialty: builder.query({
         query: () => "api-gateway-production-d841.up.railway.app/api/specialty"
       }),
+      getDoctors: builder.query({
+        query: () => `api-gateway-production-d841.up.railway.app/api/doctor`
+      }),
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone}) => ({
           url: `client-production-d410.up.railway.app/api/client`,
@@ -43,7 +49,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
           body:{ document, lastName, firstName, phone },
         })
       }),
-      addNewAddress : builder.mutation({
+      addNewAddress: builder.mutation({
         query : ({id, city, houseNumber, mainStreet, postalCode, secondStreet, sector, state}) =>({
           url: `client-production-d410.up.railway.app/api/client/${id}/direction`,
           method: 'POST',
@@ -57,20 +63,29 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
           body:{date, deliveryState, idClient, orderDetails, orderState, paymentState, subtotal, total},
         })
       }),
-
+      addNewAppointment: builder.mutation({
+        query: ({id,clientId,date,duration})=>({
+          url: `https://api-gateway-production-d841.up.railway.app/api/service/${id}/appointment`,
+          method: 'POST',
+          body:{id,clientId,date,duration},
+        })
+      }),
     }),
   });
 
   export const { 
     useGetCategoriesQuery, 
     useGetProductsQuery,
+    useGetProductsMainQuery,
     useGetLandingQuery,
     useGetProductByIdQuery,
     useGetClientByDocumentQuery,
     useGetServicesQuery,
     useGetServicesMainQuery,
     useGetSpecialtyQuery,
+    useGetDoctorsQuery,
     useAddNewClientMutation,
     useAddNewAddressMutation,
     useAddNewOrderMutation,
+    useAddNewAppointmentMutation,
   } = serverApi;

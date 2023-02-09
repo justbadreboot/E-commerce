@@ -10,6 +10,7 @@ import LoginPage from '../pages/LoginPage';
 import ProductsPage from '../pages/ProductsPage';
 import ServicesPage from '../pages/ServicesPage';
 import SearchServicesPage from '../pages/SearchServicesPage';
+import DoctorsPage from "../pages/DoctorsPage"
 
 const routes = () =>{
     return(
@@ -23,6 +24,7 @@ const routes = () =>{
                 <Route path='/producto/:id' element={<ProductDetailPage />}></Route>
                 <Route path='/buscarServicios' element={<SearchServicesPage />}></Route>
                 <Route path='/servicios' element={<ServicesPage />} ></Route>
+                <Route path='/doctores' element={<DoctorsPage />} ></Route>
                 <Route path='/carrito' element={<ShoppingCart />}> </Route>
                 <Route path='/checkout' element={<Checkout />}> </Route>
                 <Route path='/login' element={<LoginPage />} ></Route>
