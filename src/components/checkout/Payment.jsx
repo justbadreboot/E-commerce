@@ -112,7 +112,6 @@ const Payment = ({envio,total,subtotal})=>{
             clientID = await crearCliente()
         else
             clientID = cliente.id
-
         const addressID =  await crearDireccion(clientID)
         addNewOrder({
             date: fecha.toISOString(),
