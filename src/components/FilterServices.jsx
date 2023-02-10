@@ -8,7 +8,7 @@ import Loader from "./main/Loader"
 
 const FilterServices =()=>{
 
-    const {data: services,} = useGetServicesQuery();
+    const {data: services} = useGetServicesQuery();
     const {data: specialties, isSuccess, isLoading} = useGetSpecialtyQuery()
 
     const [openFilter, setOpenFilter] = useState(true)

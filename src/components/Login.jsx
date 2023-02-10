@@ -38,7 +38,8 @@ const Login = () =>{
                 password: data.password_login,
             })
             localStorage.setItem('token',  JSON.stringify(res.data.token))
-            formik.resetForm();
+            localStorage.setItem('currentUser', JSON.stringify(data.email_login))
+            formik.resetForm()
             navigate("/")
 		},
 	});
@@ -66,7 +67,6 @@ const Login = () =>{
                         email: data.email_sign,
                         password: data.password_sign
                     })
-                    localStorage.setItem('currentUser', JSON.stringify(data.usuario))
 			        formik2.resetForm()
                     setIsForm({
                         login:true,

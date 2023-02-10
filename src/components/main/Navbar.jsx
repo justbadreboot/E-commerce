@@ -9,8 +9,8 @@ const Navbar = () =>{
     const [show, setShow] = useState(false);
     const [count, setCount] = useState(0)
     
-    const email= "dani"
-    const collectionName =  'cart '+ email
+    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const collectionName =  'cart '+ user
 
     useEffect ( ()=>{
         const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
