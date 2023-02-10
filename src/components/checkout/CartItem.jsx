@@ -10,13 +10,15 @@ const CartItem =({item}) =>{
 
     const [count, setCount] = useState(0)
     const [price,setPrice] = useState(item.precio*item.cantidad)
-      
+    
+    const user = JSON.parse(localStorage.getItem('currentUser'))
+
     useEffect(()=>{
         setCount(item.cantidad)
         setPrice((item.precio * count).toFixed(2))
     },[item.cantidad, item.precio, count])
 
-    const handleDelete = (email,id) =>{
+    const handleDelete = (user,id) =>{
         Swal.fire({
             title: '¿Estás seguro?',
             text: "No podrás revertir esta acción",
@@ -29,7 +31,7 @@ const CartItem =({item}) =>{
             reverseButtons: true
           }).then((result) => {
             if (result.isConfirmed)
-                deleteCartItem(email,id)
+                deleteCartItem(user,id)
                 Swal.fire('Eliminado!', 'Tu producto ha sido eliminado con éxito', 'success')
           })
     }
@@ -37,7 +39,7 @@ const CartItem =({item}) =>{
     const handleOnChange = (e) =>{
         let val = parseInt(e.target.value)
         if(val < producto.stock && val > 0){
-            updateCartQuantity('dani', producto.id, val , item.precio, producto.name)
+            updateCartQuantity(user, producto.id, val , item.precio, producto.name)
             setCount(val)
         }
     }
@@ -46,7 +48,7 @@ const CartItem =({item}) =>{
         let cant = parseInt(count) 
         if(cant > 1){
             setCount(cant - 1)
-            updateCartQuantity('dani', producto.id, cant -1, item.precio, producto.name)
+            updateCartQuantity(user, producto.id, cant -1, item.precio, producto.name)
         }
     }
 
@@ -54,7 +56,7 @@ const CartItem =({item}) =>{
         let cant = parseInt(count) 
         if(cant < producto.stock){
             setCount(cant + 1)
-            updateCartQuantity('dani', producto.id, cant +1 , item.precio, producto.name)
+            updateCartQuantity(user, producto.id, cant +1 , item.precio, producto.name)
         }
     }
 
@@ -88,7 +90,7 @@ const CartItem =({item}) =>{
                         <div className="pr-4">
                             <span className="text-md font-base">${price}</span>
                         </div>
-                        <button onClick={()=>handleDelete('dani',producto.id)} className="px-4">
+                        <button onClick={()=>handleDelete(user,producto.id)} className="px-4">
                             <MdDelete className="h-5 w-5 text-red-500" />
                         </button>
                     </div>

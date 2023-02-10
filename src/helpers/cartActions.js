@@ -16,9 +16,9 @@ const Toast = Swal.mixin({
   }
 })
 
-export const addToCart = async(email, id_producto, cantidad, precio, nombre) => {
+export const addToCart = async(user, id_producto, cantidad, precio, nombre) => {
   try{
-    const cartRef = doc(firestore, collectionName + email, docId + id_producto)
+    const cartRef = doc(firestore, collectionName + user, docId + id_producto)
     const docSnap = await getDoc(cartRef);
     if (docSnap.exists()) {
       const cantAnt = docSnap.data().cantidad
@@ -41,9 +41,9 @@ export const addToCart = async(email, id_producto, cantidad, precio, nombre) => 
   }
 }
 
-export const updateCartQuantity = async (email,id_producto,cantidad,precio, nombre) => {
+export const updateCartQuantity = async (user ,id_producto,cantidad,precio, nombre) => {
   try{
-    const cartRef = doc(firestore, collectionName + email, docId + id_producto)
+    const cartRef = doc(firestore, collectionName + user , docId + id_producto)
       await updateDoc(cartRef, {
         nombre: nombre,
         cantidad: cantidad,
@@ -54,9 +54,9 @@ export const updateCartQuantity = async (email,id_producto,cantidad,precio, nomb
   }
 }
 
-export const deleteCartItem = (email, id_producto) => {
+export const deleteCartItem = (user, id_producto) => {
   try{
-    deleteDoc(doc(firestore, collectionName + email, docId + id_producto ))
+    deleteDoc(doc(firestore, collectionName + user, docId + id_producto ))
   }catch(error){
     console.log(error)
     Toast.fire({ icon: 'error', title: 'Ocurrió un error. Intente de nuevo', background:'#FFDADA' })

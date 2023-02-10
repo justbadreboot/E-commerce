@@ -25,9 +25,12 @@ const routes = () =>{
                 <Route path='/buscarServicios' element={<SearchServicesPage />}></Route>
                 <Route path='/servicios' element={<ServicesPage />} ></Route>
                 <Route path='/doctores' element={<DoctorsPage />} ></Route>
+                <Route path='/login' element={<LoginPage />} ></Route>
+
+                
                 <Route path='/carrito' element={<ShoppingCart />}> </Route>
                 <Route path='/checkout' element={<Checkout />}> </Route>
-                <Route path='/login' element={<LoginPage />} ></Route>
+                
             </Routes>
         </>
     )

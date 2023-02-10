@@ -11,8 +11,8 @@ const Cart =()=>{
     const [subtotal, setSubtotal] = useState(0)
     const [count, setCount] = useState(0)
 
-    const email= "dani"
-    const collectionName =  'cart '+ email
+    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const collectionName =  'cart '+ user
 
     useEffect ( ()=>{
         const getItems = onSnapshot(collection(firestore,collectionName), snapshot =>{
@@ -33,7 +33,6 @@ const Cart =()=>{
         },(error) => {
             console.log(error)
         })
-        
         return () =>{
             getItems()
         }

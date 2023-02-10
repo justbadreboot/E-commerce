@@ -37,7 +37,7 @@ const Login = () =>{
                 email: data.email_login,
                 password: data.password_login,
             })
-            localStorage.setItem('token', res.data.token)
+            localStorage.setItem('token',  JSON.stringify(res.data.token))
             formik.resetForm();
             navigate("/")
 		},
@@ -61,12 +61,12 @@ const Login = () =>{
                 text:'Usuario registrado con éxito'
             }).then(async (result) => {
                 if (result.isConfirmed){
-                    /*createM({
+                    createM({
                         username: data.usuario,
                         email: data.email_sign,
                         password: data.password_sign
-                    })*/
-                    localStorage.setItem('currentUser', data.usuario)
+                    })
+                    localStorage.setItem('currentUser', JSON.stringify(data.usuario))
 			        formik2.resetForm()
                     setIsForm({
                         login:true,
