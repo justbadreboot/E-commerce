@@ -2,7 +2,7 @@ import { useGetLandingQuery } from "../store/serverApi";
 
 const About =()=>{
 
-    const {data: info, isError, isSuccess} = useGetLandingQuery();
+    const {data: info, isSuccess} = useGetLandingQuery();
     return (
         <div className="2xl:container 2xl:mx-auto lg:pt-16 lg:px-20 md:py-12 md:px-6 pt-8 px-4 font-poppins">
             <div className="flex flex-col lg:flex-row justify-between gap-8">
@@ -44,7 +44,6 @@ const About =()=>{
                             </div>
                         ))
                     )}
-                    {isError && console.log("error")}
                 </div>
             </div>
         </div>

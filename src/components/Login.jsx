@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import login from '../assets/img/Login.png';
+import imagenLogin from '../assets/img/Login.png';
 import kruger from '../assets/img/kruger.png';
 import { useNavigate} from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
+import { useCreateMutation, useLoginMutation } from '../store/serverApi'
 
 const Login = () =>{
     const navigate = useNavigate()
@@ -12,31 +13,31 @@ const Login = () =>{
         login : true,
         register : false,
     })
+
+    const [loginM] = useLoginMutation()
+    const [createM] = useCreateMutation()
+
     const getPosition = () => {
         return isForm.login ? "top-full"
         : isForm.register ? "top-0"
         : null
     }
-    
-    const loginSchema = Yup.object().shape({
-		email_login: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
-        password_login: Yup.string().required("Este campo es requerido")
-	});
-
-    const signSchema = Yup.object().shape({
-		email_sign: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
-        password_sign: Yup.string().required("Este campo es requerido"),
-        nombre: Yup.string().required("Este campo es requerido"),
-        apellido: Yup.string().required("Este campo es requerido"),
-	});
-
+ 
     const formik = useFormik({
 		initialValues: {
 			email_login:"",
             password_login:"",  
 		},
-		validationSchema: loginSchema,
-		onSubmit: (data) => {
+		validationSchema: Yup.object().shape({
+            email_login: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
+            password_login: Yup.string().required("Este campo es requerido")
+        }),
+		onSubmit: async (data) => {
+            const res = await loginM({
+                email: data.email_login,
+                password: data.password_login,
+            })
+            localStorage.setItem('token', res.data.token)
             formik.resetForm();
             navigate("/")
 		},
@@ -46,30 +47,41 @@ const Login = () =>{
 		initialValues: {
 			email_sign:"",
             password_sign:"",
-            nombre:"",
-            apellido:"" 
+            usuario:""
 		},
-		validationSchema: signSchema,
+		validationSchema: Yup.object().shape({
+            email_sign: Yup.string().email("Email incorrecto").required("Este campo es requerido"),
+            password_sign: Yup.string().required("Este campo es requerido"),
+            usuario: Yup.string().required("Este campo es requerido"),
+        }),
 		onSubmit: (data) => {
             Swal.fire({
                 title:'Excelente!',
                 icon:'success',
                 text:'Usuario registrado con éxito'
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed){
-			        formik2.resetForm();
-                    navigate("/")
+                    /*createM({
+                        username: data.usuario,
+                        email: data.email_sign,
+                        password: data.password_sign
+                    })*/
+                    localStorage.setItem('currentUser', data.usuario)
+			        formik2.resetForm()
+                    setIsForm({
+                        login:true,
+                        register:false,
+                    })
                 }
             })
 		},
 	});
 
-
     return(
         <div className="relative w-full py-8 px-5 flex flex-col items-center font-poppins">
             <div className="relative z-10 max-w-6xl w-full md:w-3/4 grid grid-cols-7 bg-primary-40 overflow-hidden rounded-lg shadow-xl">
                 <div className="hidden md:block md:col-span-2 relative border-t border-transparent">
-                    <img src={login} alt="" className="absolute h-full bg-center object-cover"/>
+                    <img src={imagenLogin} alt="logo" className="absolute h-full bg-center object-cover"/>
                 </div>
                 <div className="z-10 col-span-7 sm:col-span-2 md:col-span-1 h-full flex sm:flex-col border-transparent items-center text-sm text-gray-500">
                     <button onClick={() => setIsForm({ login : true, register : false})} className={`py-1.5 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.login ? "bg-white bg-opacity-80 text-gray-600" : "text-white"}`}>
@@ -125,29 +137,16 @@ const Login = () =>{
                         <img src={kruger} alt='kruger' className="h-20" />
                         <h2 className="py-0 md:py-2 text-center text-2xl md:text-3xl font-bold text-gray-600">Crea una nueva cuenta</h2>
                         <form onSubmit={formik2.handleSubmit} action="" className="py-2 w-full px-4 lg:px-0 xl:px-10">
-                            <div className='grid grid-cols-1 md:grid-cols-2'>
-                                <div className="form-control w-full mb-2">
-                                    <label className="label">
-                                        <span className="label-text">Nombre</span>
-                                    </label>
-                                    <input name="nombre" type="text" placeholder="Nombre" className="input input-bordered w-full max-w-sm"  onChange={formik2.handleChange}  value={formik2.values.nombre} />
-                                    {formik2.touched.nombre && formik2.errors.nombre && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik2.errors.nombre}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="form-control w-full mb-2 md:ml-1">
-                                    <label className="label">
-                                        <span className="label-text">Apellido</span>
-                                    </label>
-                                    <input name="apellido" type="text" placeholder="Apellido" className="input input-bordered w-full max-w-sm" onChange={formik2.handleChange}  value={formik2.values.apellido} />
-                                    {formik2.touched.apellido && formik2.errors.apellido && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik2.errors.apellido}
-                                        </span>
-                                    )}
-                                </div>
+                            <div className="form-control w-full mb-2">
+                                <label className="label">
+                                    <span className="label-text">Usuario</span>
+                                </label>
+                                <input name="usuario" type="text" placeholder="Usuario" className="input input-bordered w-full max-w-sm"  onChange={formik2.handleChange}  value={formik2.values.usuario} />
+                                {formik2.touched.usuario && formik2.errors.usuario && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik2.errors.usuario}
+                                    </span>
+                                )}
                             </div>
                             <div className="form-control w-full mb-2">
                                 <label className="label">

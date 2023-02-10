@@ -23,6 +23,5 @@ const Doctors =()=>{
             </div>
         </section>
     )
-
 }
 export default Doctors;

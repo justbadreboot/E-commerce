@@ -26,7 +26,7 @@ const Status =()=>{
                     {/** 1 */}
                     <li className=" flex items-center space-x-3 text-left sm:space-x-4">
                         <Link className="stepper-item flex h-7 w-7 items-center justify-center rounded-full bg-primary-40 text-sm font-semibold text-white ring ring-primary-40 ring-offset-2" >1</Link>
-                        <span className="font-semibold text-gray-700">Datos del Cliente</span>
+                        <span className="font-semibold text-gray-700">Factura</span>
                     </li>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

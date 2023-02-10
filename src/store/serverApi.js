@@ -27,17 +27,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getProductsByCategory: builder.query({
         query: (id) => `product-production-cf12.up.railway.app/api/product/category/${id}`
       }),
-      searchProductsByName: builder.query({
-        query: (name) => `product-production-cf12.up.railway.app/api/product/filter/${name}}`
-      }),
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
       }),
       getServices: builder.query({
-        query: () => "api-gateway-production-d841.up.railway.app/api/service"
+        query: () => "service-production-bb52.up.railway.app/api/service"
       }),
       getServicesMain: builder.query({
-        query: () => "api-gateway-production-d841.up.railway.app/api/service/main"
+        query: () => "service-production-bb52.up.railway.app/api/service/main"
       }),
       getSpecialty: builder.query({
         query: () => "api-gateway-production-d841.up.railway.app/api/specialty"
@@ -73,6 +70,20 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
           body:{id,clientId,date,duration},
         })
       }),
+      login: builder.mutation({
+        query:({email, password}) => ({
+          url: `authserve-production.up.railway.app/auth/login`,
+          method: 'POST',
+          body:{email, password},
+        })
+      }),
+      create: builder.mutation({
+        query:({email, password, username}) => ({
+          url: `authserve-production.up.railway.app/auth/create`,
+          method: 'POST',
+          body:{email, password, username},
+        })
+      })
     }),
   });
 
@@ -92,4 +103,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useAddNewAddressMutation,
     useAddNewOrderMutation,
     useAddNewAppointmentMutation,
+    useLoginMutation,
+    useCreateMutation,
   } = serverApi;
