@@ -92,7 +92,6 @@ const Payment = ({envio,total,subtotal})=>{
         const fecha = new Date(hoy)
         cartItems.map( item =>{
             const detalle ={
-                id: item.id,
                 amount: item.cantidad,
                 price: item.precio,
                 name: item.nombre

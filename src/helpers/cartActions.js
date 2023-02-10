@@ -40,6 +40,7 @@ export const addToCart = async(email, id_producto, cantidad, precio, nombre) => 
     Toast.fire({ icon: 'error', title: 'Error. Intente de nuevo',background:'#FFDADA'})
   }
 }
+
 export const updateCartQuantity = async (email,id_producto,cantidad,precio, nombre) => {
   try{
     const cartRef = doc(firestore, collectionName + email, docId + id_producto)
