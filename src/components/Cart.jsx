@@ -34,10 +34,11 @@ const Cart =()=>{
             console.log(error)
         })
         return () =>{
-            getItems()
+            if(user)
+                getItems()
         }
         
-    },[collectionName])
+    },[collectionName,user])
     
 
     return(

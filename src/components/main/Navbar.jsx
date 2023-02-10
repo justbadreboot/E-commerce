@@ -1,14 +1,16 @@
-import { Link, NavLink} from 'react-router-dom';
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 import logo from '../../assets/img/logo.png';
 import logo2 from '../../assets/img/logo2.png';
 import { useEffect, useState } from "react";
 import firestore from '../../helpers/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
+import  {FaUserAlt} from 'react-icons/fa'
 
 const Navbar = () =>{
     const [show, setShow] = useState(false);
     const [count, setCount] = useState(0)
     
+    const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('currentUser'))
     const collectionName =  'cart '+ user
 
@@ -22,9 +24,16 @@ const Navbar = () =>{
         })
         
         return () =>{
-            getItemsCount()
+            if(user)
+                getItemsCount()
         }
-    },[collectionName])
+    },[collectionName,user])
+
+    const  handleOnClick =()=>{
+        localStorage.removeItem("token")
+        localStorage.removeItem("currentUser")
+        navigate("/")
+    } 
     
     return(
         <div className="bg-gray-200 h-full w-full font-poppins">
@@ -80,24 +89,25 @@ const Navbar = () =>{
                                         </span>
                                     </button>
                                 </Link>
-                                {/*<div className="dropdown dropdown-end">
-                                    <label tabIndex="0" className="flex items-center text-white cursor-pointer ml-6">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </label>
-                                    <ul tabIndex="0" className="mt-2 p-2 menu menu-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
-                                        <li><Link>Perfil</Link></li>
-                                        <li><Link >Cerrar Sesión</Link></li> 
-                                    </ul>
-                                </div>*/}
-                                <Link to="/login">
-                                    <button className="flex items-center ml-5 text-white">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </button>
-                                </Link>
+                                {user ? ( 
+                                    <div className="dropdown dropdown-end">
+                                        <label tabIndex="0" className="flex items-center text-white cursor-pointer ml-6">
+                                            <FaUserAlt className='w-5 h-5 hover:text-secondary-80' />
+                                        </label>
+                                        <ul tabIndex="0" className="mt-2 p-2 menu menu-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
+                                            <li><Link to='/perfil'>Perfil</Link></li>
+                                            <li><div onClick={()=> handleOnClick()}>Cerrar Sesión</div></li> 
+                                        </ul>
+                                    </div>
+                                ): (
+                                    <Link to="/login">
+                                        <button className="flex items-center ml-5 text-white">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </button>
+                                    </Link>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -128,11 +138,25 @@ const Navbar = () =>{
                                                 </span>
                                             </button>
                                         </Link>
-                                        <button className=" hidden md:flex items-center ml-5 text-white">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                        </button>
+                                        {user ? ( 
+                                            <div className="dropdown dropdown-end">
+                                                <label tabIndex="0" className="flex items-center text-white cursor-pointer ml-6">
+                                                    <FaUserAlt className='w-5 h-5 hover:text-secondary-80' />
+                                                </label>
+                                                <ul tabIndex="0" className="mt-2 p-2 menu menu-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
+                                                    <li><Link to='/perfil'>Perfil</Link></li>
+                                                    <li><div onClick={()=> handleOnClick()}>Cerrar Sesión</div></li> 
+                                                </ul>
+                                            </div>
+                                        ): (
+                                            <Link to="/login">
+                                                <button className="flex items-center ml-5 text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    </svg>
+                                                </button>
+                                            </Link>
+                                        )}
                                         <button  className="flex items-center ml-5 text-white" onClick={() => setShow(!show)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -224,16 +248,36 @@ const Navbar = () =>{
                                                 </div>
                                             </div>
                                         </Link>
-                                        <Link to="/login">
-                                            <div className="w-full flex items-center justify-between pt-8">
+                                        {user ? (
+                                            <>
+                                            <Link to="/perfil">
+                                                <div className="w-full flex items-center justify-between pt-8">
+                                                    <div className="flex items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                        <p className=" text-gray-800 text-base leading-4 ml-2 hover:text-secondary-100">Mi perfil</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                            <div onClick={()=> handleOnClick()} className="w-full flex items-center justify-between pt-8">
                                                 <div className="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
-                                                    <p className=" text-gray-800 text-base leading-4 ml-2 hover:text-secondary-100">Login</p>
+                                                    <p className=" text-gray-800 text-sm leading-4 ml-2 hover:text-secondary-100">Cerrar Sesión</p>
                                                 </div>
                                             </div>
-                                        </Link>
+                                            </>
+                                        ) : (
+                                            <Link to="/login">
+                                                <div className="w-full flex items-center justify-between pt-8">
+                                                    <div className="flex items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                        <p className=" text-gray-800 text-base leading-4 ml-2 hover:text-secondary-100">Login</p>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        )}
                                     </div>
                                 </div>
                             </div>

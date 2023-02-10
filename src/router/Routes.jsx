@@ -12,7 +12,7 @@ import SearchServicesPage from '../pages/SearchServicesPage';
 import DoctorsPage from "../pages/DoctorsPage"
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoutes from './ProtectedRoutes';
-
+import ProfilePage from '../pages/ProfilePage';
 
 const MainRouter = () =>{
 
@@ -32,6 +32,7 @@ const MainRouter = () =>{
             <Route element={<ProtectedRoutes />}>
                 <Route path='/carrito' element={<ShoppingCart />}> </Route>
                 <Route path='/checkout' element={<Checkout />}> </Route>
+                <Route path='/perfil' element={<ProfilePage />}> </Route>
             </Route>
         </Routes>
     )

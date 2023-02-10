@@ -43,18 +43,26 @@ const ProductDetail=()=>{
     }
     
     const handleOnClick =(user,id,cant,precio,nombre)=>{
-        if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0)
-            addToCart(user,id,cant,precio,nombre)
-        else
-            Toast.fire({ icon: 'error', title: 'Cantidad fuera de stock',background:'#FFDADA'})
+        if(user){
+            if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0)
+                addToCart(user,id,cant,precio,nombre)
+            else
+                Toast.fire({ icon: 'error', title: 'Cantidad fuera de stock',background:'#FFDADA'})
+        }else
+            navigate("/login")
+        
     }
 
     const handleOnCheckout =(user,id,cant,precio,nombre) =>{
-        if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0){
-            addToCart(user,id,cant,precio,nombre)
-            navigate("/checkout")
+        if(user){
+            if(parseInt(cant) <= detalles.stock && parseInt(cant) > 0){
+                addToCart(user,id,cant,precio,nombre)
+                navigate("/checkout")
+            }else
+                Toast.fire({ icon: 'error', title: 'Cantidad fuera de stock',background:'#FFDADA'})
         }else
-            Toast.fire({ icon: 'error', title: 'Cantidad fuera de stock',background:'#FFDADA'})
+            navigate("/login")
+        
     }
 
     return(
@@ -95,7 +103,7 @@ const ProductDetail=()=>{
                                         <span className="text-red-500 line-through mb-0.5">$30.00</span>
                                     </div>
                                 </div>
-                                <div className="flex mb-4">
+                                <div className={`flex mb-4 ${!user ? "hidden" : 'block'}`}>
                                     <div className="flex flex-row h-8 w-36 rounded-lg relative bg-transparent mt-1">
                                         <button onClick={decrementClick} className=" bg-gray-200 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none">
                                             <span className="m-auto text-xl font-thin">−</span>

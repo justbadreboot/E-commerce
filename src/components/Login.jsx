@@ -37,10 +37,19 @@ const Login = () =>{
                 email: data.email_login,
                 password: data.password_login,
             })
-            localStorage.setItem('token',  JSON.stringify(res.data.token))
-            localStorage.setItem('currentUser', JSON.stringify(data.email_login))
-            formik.resetForm()
-            navigate("/")
+            if(res.data){
+                localStorage.setItem('token', JSON.stringify(res.data.token))
+                localStorage.setItem('currentUser', JSON.stringify(data.email_login))
+                formik.resetForm()
+                navigate("/")
+            }else{
+                Swal.fire({
+                    title:'Error',
+                    icon:'error',
+                    text:'Se produjo un problema. Intenta de nuevo'
+                })
+                formik.resetForm()
+            }
 		},
 	});
 
@@ -55,36 +64,38 @@ const Login = () =>{
             password_sign: Yup.string().required("Este campo es requerido"),
             usuario: Yup.string().required("Este campo es requerido"),
         }),
-		onSubmit: (data) => {
-            Swal.fire({
-                title:'Excelente!',
-                icon:'success',
-                text:'Usuario registrado con éxito'
-            }).then(async (result) => {
-                if (result.isConfirmed){
-                    createM({
-                        username: data.usuario,
-                        email: data.email_sign,
-                        password: data.password_sign
-                    })
-			        formik2.resetForm()
-                    setIsForm({
-                        login:true,
-                        register:false,
-                    })
-                }
+		onSubmit: async (data) => {
+            const res = await createM({
+                username: data.usuario,
+                email: data.email_sign,
+                password: data.password_sign
             })
+            if(res.data){
+                Swal.fire({
+                    title:'Excelente!',
+                    icon:'success',
+                    text:'Usuario registrado con éxito'
+                })
+                formik2.resetForm()
+                setIsForm({ login : true, register : false})
+            }else{
+                Swal.fire({
+                    title:'Error',
+                    icon:'error',
+                    text:'Se produjo un problema. Intenta de nuevo'
+                })
+            }
 		},
 	});
 
     return(
         <div className="relative w-full py-8 px-5 flex flex-col items-center font-poppins">
-            <div className="relative z-10 max-w-6xl w-full md:w-3/4 grid grid-cols-7 bg-primary-40 overflow-hidden rounded-lg shadow-xl">
+            <div className="relative z-10 max-w-6xl w-full lg:w-3/4 grid grid-cols-7 bg-primary-40 overflow-hidden rounded-lg shadow-xl">
                 <div className="hidden md:block md:col-span-2 relative border-t border-transparent">
                     <img src={imagenLogin} alt="logo" className="absolute h-full bg-center object-cover"/>
                 </div>
                 <div className="z-10 col-span-7 sm:col-span-2 md:col-span-1 h-full flex sm:flex-col border-transparent items-center text-sm text-gray-500">
-                    <button onClick={() => setIsForm({ login : true, register : false})} className={`py-1.5 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.login ? "bg-white bg-opacity-80 text-gray-600" : "text-white"}`}>
+                    <button onClick={() => setIsForm({ login : true, register : false})} className={`py-1.5 w-full h-full sm:h-1/2 inline-flex flex-col  justify-center items-center active:outline-none focus:outline-none  ${isForm.login ? "bg-white bg-opacity-80 text-gray-600" : "text-white"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
