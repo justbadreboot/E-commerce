@@ -77,10 +77,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         })
       }),
       addNewOrder: builder.mutation({
-        query: ({date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total})=>({
+        query: ({date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName, clientLastName,clientPhone})=>({
           url: `order-production-bfbc.up.railway.app/api/order`,
           method: 'POST',
-          body:{date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total},
+          body:{date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName,clientLastName,clientPhone},
         })
       }),
       addNewAppointment: builder.mutation({

@@ -3,16 +3,16 @@ import PriceSummary from './PriceSummary'
 import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import Swal from 'sweetalert2';
-import { useAddNewAddressMutation, useAddNewClientMutation, useAddNewOrderMutation, useGetClientByDocumentQuery } from "../../store/serverApi";
 import * as Yup from "yup";
 import { deleteCartItem } from "../../helpers/cartActions";
+import { useNavigate } from "react-router-dom";
+import { useAddNewAddressMutation, useAddNewOrderMutation} from "../../store/serverApi";
 
 const Payment = ({envio,total,subtotal})=>{
 
-    //const navigate = useNavigate()
-    const { activeStep, setActiveStep, formData, setFormData, cartItems } = useContext(FormContext);
-    const {data: cliente, isError} = useGetClientByDocumentQuery(formData.ident)
-    const [addNewPost] = useAddNewClientMutation()
+    const navigate = useNavigate()
+    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const { activeStep, setActiveStep, formData, setFormData, cartItems } = useContext(FormContext)
     const [addNewAddress] = useAddNewAddressMutation()
     const [addNewOrder] = useAddNewOrderMutation()
 
@@ -58,6 +58,7 @@ const Payment = ({envio,total,subtotal})=>{
                     'Su pago se ha realizado con éxito.',
                     'success'
                     )
+                    navigate("/perfil")
                 }
             })
 		},
@@ -76,18 +77,21 @@ const Payment = ({envio,total,subtotal})=>{
             reverseButtons:true
         }).then((result) => {
             if (result.isConfirmed) {
+                console.log(formData)
                 generarPago()
                 Swal.fire(
                     'Orden Generada!',
                     'Su pedido se encuentra en camino',
                     'success'
                 )
+                navigate("/perfil")
             }
         })
     }
 
     const generarPago = async ()=>{
-        let pagoID = 0, pagoState ="" ,clientID = 0,detalles = []
+        let pagoID = 0, pagoState ="" ,
+        detalles = [], addressID=0, ident="", nom="",ape="",telf=""
         const hoy = Date.now()
         const fecha = new Date(hoy)
         cartItems.map( item =>{
@@ -107,11 +111,21 @@ const Payment = ({envio,total,subtotal})=>{
             pagoID = 2
             pagoState ="Pago pendiente"
         }
-        if(isError)
-            clientID = await crearCliente()
+        if(formData.setNuevaDireccion)
+            addressID = await crearDireccion(id)
         else
-            clientID = cliente.id
-        const addressID =  await crearDireccion(clientID)
+            addressID = formData.idDireccion
+        if(formData.setNuevosDatos){
+            ident = formData.ident
+            ape = formData.apellido
+            nom = formData.nombre
+            telf = formData.telf
+        }else{
+            ident= ""
+            ape = ""
+            nom = ""
+            telf = ""
+        }
         addNewOrder({
             date: fecha.toISOString(),
             deliveryState: {
@@ -119,7 +133,7 @@ const Payment = ({envio,total,subtotal})=>{
                 state:"Por entregar"
             },
             idAddress: addressID,
-            idClient: clientID,
+            idClient: id,
             orderDetails: detalles,
             orderState: {
                 id:1,
@@ -131,24 +145,18 @@ const Payment = ({envio,total,subtotal})=>{
             },
             subtotal:parseFloat(subtotal),
             total:parseFloat(total),
+            clientDocument: ident,
+            clientName: nom,
+            clientLastName: ape,
+            clientPhone:telf
         })
-        vaciarCarrito()
+        vaciarCarrito(id)
         setFormData({})
     }
 
-    const crearCliente = async () =>{
-        const res = await addNewPost({ 
-            document: formData.ident,
-            firstName: formData.nombre,
-            lastName: formData.apellido,
-            phone: formData.telf
-        }).unwrap()
-        return res.id
-    }
-
-    const crearDireccion = async (clientID)=>{
+    const crearDireccion = async (id)=>{
         const res = await addNewAddress({
-            id: clientID,
+            id: id,
             city: formData.ciudad,
             state: formData.provincia,
             mainStreet: formData.calle1,
@@ -160,9 +168,9 @@ const Payment = ({envio,total,subtotal})=>{
         return res.id       
     }
 
-    const vaciarCarrito =()=>{
+    const vaciarCarrito = (id)=>{
         cartItems.map(item =>(
-            deleteCartItem("dani",item.id)
+            deleteCartItem(id,item.id)
         ))
     }
 

@@ -58,7 +58,6 @@ export const deleteCartItem = (user, id_producto) => {
   try{
     deleteDoc(doc(firestore, collectionName + user, docId + id_producto ))
   }catch(error){
-    console.log(error)
     Toast.fire({ icon: 'error', title: 'Ocurrió un error. Intente de nuevo', background:'#FFDADA' })
   }
 }

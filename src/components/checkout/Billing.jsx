@@ -28,14 +28,21 @@ const Billing = ({envio,total,subtotal})=>{
 		},
 		validationSchema: billingSchema,
 		onSubmit: (values) => {
-            const data = { ...formData, ...values };
+            const temp = {
+                setNuevosDatos: true,
+            }
+            const data = { ...formData, ...values,...temp} 
             setFormData(data);
             setActiveStep(activeStep + 1);
 		},
 	});
 
     const handleOnClick =()=>{
-        setFormData({...formData });
+        const temp = {
+            setNuevosDatos: false,
+        }
+        const data = {...formData, ...temp}
+        setFormData(data)
         setActiveStep(activeStep + 1);
     }
     

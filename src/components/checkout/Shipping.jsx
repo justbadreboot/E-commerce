@@ -4,14 +4,52 @@ import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useGetAddressClientQuery } from "../../store/serverApi";
+import axios from "axios";
 
 const Shipping = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
 
     const [isChecked, setIsChecked] = useState(false)
+    const [infoDireccion, setInfoDireccion] = useState({})
+    const [ciudad,setCiudad] = useState("")
+    const [zip,setZip] = useState("")
+    const [calle1,setCalle1] = useState("")
+    const [calle2,setCalle2] = useState("")
+    const [provincia,setProvincia] = useState("")
+    const [sector,setSector] = useState("")
+    const [casa,setCasa] = useState("")
+    const [addID,setAddID] = useState(0)
+    const [ver,setVer] = useState(false)
 
     const id = JSON.parse(localStorage.getItem('currentUser'))
     const {data: address, isSuccess} = useGetAddressClientQuery(id)
+
+    const getAddress = async(id) =>{
+        await axios.get(`https://client-production-d410.up.railway.app/api/direction/${id}`)
+        .then(response => {
+            setInfoDireccion(response.data)
+            setCiudad(response.data.city)
+            setZip(response.data.postalCode)
+            setCalle1(response.data.mainStreet)
+            setCalle2(response.data.secondStreet)
+            setProvincia(response.data.state)
+            setSector(response.data.sector)
+            setCasa(response.data.houseNumber)
+            setAddID(response.data.id)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    const handleOnChange =(e) =>{
+        if(e.target.value !==0){
+            setVer(true)
+            getAddress(e.target.value)
+        }
+        else
+            setVer(false)
+    }
 
     const shippingSchema = Yup.object().shape({
         ciudad: Yup.string().required("Este campo es requerido"),
@@ -35,14 +73,22 @@ const Shipping = ({envio,total,subtotal})=>{
 		},
 		validationSchema: shippingSchema,
 		onSubmit: (values) => {
-            const data = { ...formData, ...values };
+            const temp = {
+                setNuevaDireccion: true,
+            }
+            const data = { ...formData, ...values,...temp} 
             setFormData(data);
             setActiveStep(activeStep + 1);
 		},
 	});
 
     const handleOnClick =()=>{
-        setFormData({...formData});
+        const values ={
+            idDireccion: addID,
+            setNuevaDireccion: false,
+        }
+        const data = {...formData,...values}
+        setFormData(data)
         setActiveStep(activeStep + 1);
     }
 
@@ -53,6 +99,51 @@ const Shipping = ({envio,total,subtotal})=>{
             {!isChecked ? (
                 <>
                     <div className="py-2">
+                    {isSuccess && (
+                        address.length !== 0 ? (
+                            <>
+                                <select name="direcciones" className='w-full sm:w-9/12 md:w-11/12  mt-3 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' onChange={handleOnChange} >
+                                <option value={0}>Seleccione la dirección</option>
+                                    {address.map( ad =>(
+                                        <option key={ad.id} value={ad.id}>{ad.address}</option>
+                                    ))}
+                                </select>
+                                {(Object.entries(infoDireccion).length !== 0 && ver) && (
+                                    <div className="mt-3">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 mb-2">
+                                            <p className="font-semibold text-gray-600">Ciudad: 
+                                                <span className="font-medium text-gray-600"> {ciudad}</span>
+                                            </p>
+                                            <p className="font-semibold text-gray-600">Provincia: 
+                                                <span className="font-medium text-gray-600"> {provincia}</span>
+                                            </p>
+                                        </div>
+                                        <p className="font-semibold text-gray-600 mb-2">Calle Principal: 
+                                            <span className="font-medium text-gray-600"> {calle1}</span>
+                                        </p>
+                                        <p className="font-semibold text-gray-600 mb-2">Calle Secundaria: 
+                                            <span className="font-medium text-gray-600"> {calle2}</span>
+                                        </p>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-2">
+                                            <p className="font-semibold text-gray-600">Sector: 
+                                                <span className="font-medium text-gray-600"> {sector}</span>
+                                            </p>
+                                            <p className="font-semibold text-gray-600">Zip: 
+                                                <span className="font-medium text-gray-600"> {zip}</span>
+                                            </p>
+                                            <p className="font-semibold text-gray-600"># Casa: 
+                                                <span className="font-medium text-gray-600"> {casa}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        ): (
+                            <>
+                                <p className="text-sm mt-4 ml-8">No existen direcciones asociadas a este cliente. Agregue una nueva.</p>
+                            </>
+                        )
+                    )}
                     </div>
                     <div className="m-2 flex items-center space-x-3">
                         <input type="checkbox" onChange={()=> setIsChecked(!isChecked)} checked={isChecked} className="form-checkbox h-4 w-4 border-gray-300 rounded text-green-400 focus:ring-green-500" />
@@ -61,7 +152,7 @@ const Shipping = ({envio,total,subtotal})=>{
                     <PriceSummary subtotal={subtotal} envio={envio} total={total} />
                     <div className='grid sm:grid-cols-2 gap-4'>
                         <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
-                        <button onClick={()=> handleOnClick()} className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Continuar con el pago</button>
+                        <button onClick={()=> handleOnClick()} className={`order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white`} disabled={!ver}>Continuar con el pago</button>
                     </div>
                 </>
             ) : (
