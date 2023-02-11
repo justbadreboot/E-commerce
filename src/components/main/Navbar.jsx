@@ -9,10 +9,16 @@ import  {FaUserAlt} from 'react-icons/fa'
 const Navbar = () =>{
     const [show, setShow] = useState(false);
     const [count, setCount] = useState(0)
-    
+    const [user, setUser] = useState("")
+
     const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem('currentUser'))
     const collectionName =  'cart '+ user
+
+    useEffect(()=>{
+        const temp = JSON.parse(localStorage.getItem('currentUser'))
+        if (temp) 
+            setUser(temp)
+    },[])
 
     useEffect ( ()=>{
         const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
@@ -71,7 +77,6 @@ const Navbar = () =>{
                                         <label tabIndex="0" className="py-6">Nosotros</label>
                                         <ul tabIndex="0" className="menu dropdown-content rounded-lg p-2 shadow text-gray-800 bg-primary-20 w-44 mt-4">
                                             <li><Link className='text-sm active:bg-green-400' to='/nosotros'>Equipo</Link></li> 
-                                            <li><Link className='text-sm active:bg-green-400'>FAQs</Link></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -217,13 +222,6 @@ const Navbar = () =>{
                                             <NavLink to="/nosotros">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Nuestro Equipo</p>
-                                                </div>
-                                            </NavLink>
-                                        </li>
-                                        <li className='pt-8 cursor-pointer'>
-                                            <NavLink to="/">
-                                                <div className="flex items-center justify-between">
-                                                    <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">FAQs</p>
                                                 </div>
                                             </NavLink>
                                         </li>

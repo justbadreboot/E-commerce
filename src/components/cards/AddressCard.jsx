@@ -33,7 +33,7 @@ const AddessCard = () =>{
 	});
 
     return(
-        <div className="font-poppins w-full max-w-full px-4 py-3 bg-gray-100 rounded-2xl">
+        <div className="mt-6 lg:mt-0 font-poppins w-full max-w-full px-4 py-3 bg-gray-100 rounded-2xl">
             <div className="relative flex flex-col h-full min-w-0 break-words shadow-soft-xl rounded-2xl bg-clip-border">
                 <div className="px-6 pt-3 pb-0 mb-0 rounded-t-2xl">
                     <div className="flex ">
@@ -45,91 +45,89 @@ const AddessCard = () =>{
                         </div>
                     </div>
                 </div>
-                <div className="flex-auto px-6 mt-4">
+                <div className="flex-auto px-6 mt-3">
                     <form onSubmit={formik.handleSubmit}>
-                        <div className="py-2">
-                            <div className='grid grid-cols-1 md:grid-cols-2'>
-                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                    <label className="label">
-                                        <span className="label-text">Ciudad</span>
-                                    </label>
-                                    <input type="text" name="ciudad" placeholder="Ciudad" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.ciudad} />
-                                    {formik.touched.ciudad && formik.errors.ciudad && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.ciudad}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                    <label className="label">
-                                        <span className="label-text">Provincia</span>
-                                    </label>
-                                    <input type="text" name="provincia" placeholder="Provincia" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.provincia} />
-                                    {formik.touched.provincia && formik.errors.provincia && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.provincia}
-                                        </span>
-                                    )}
-                                </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2'>
+                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text">Ciudad</span>
+                                </label>
+                                <input type="text" name="ciudad" placeholder="Ciudad" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.ciudad} disabled={!isEditar} />
+                                {formik.touched.ciudad && formik.errors.ciudad && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.ciudad}
+                                    </span>
+                                )}
                             </div>
-                            <div className='grid grid-cols-1 md:grid-cols-2'>
-                                <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                    <label className="label">
-                                        <span className="label-text">Calle Principal</span>
-                                    </label>
-                                    <input type="text" name="calle1" placeholder="Calle principal" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.calle1} />
-                                    {formik.touched.calle1 && formik.errors.calle1 && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.calle1}
-                                        </span>
-                                    )}
-                                </div>
-                                <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                    <label className="label">
-                                        <span className="label-text">Calle Secundaria</span>
-                                    </label>
-                                    <input type="text" name="calle2" placeholder="Calle secundaria" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.calle2} />
-                                    {formik.touched.calle2 && formik.errors.calle2 && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.calle2}
-                                        </span>
-                                    )}
-                                </div>
+                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text">Provincia</span>
+                                </label>
+                                <input type="text" name="provincia" placeholder="Provincia" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.provincia} disabled={!isEditar} />
+                                {formik.touched.provincia && formik.errors.provincia && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.provincia}
+                                    </span>
+                                )}
                             </div>
-                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                    <label className="label">
-                                        <span className="label-text">Sector</span>
-                                    </label>
-                                    <input type="text" name="sector" placeholder="Sector" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.sector} />
-                                    {formik.touched.sector && formik.errors.sector && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.sector}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="form-control w-full md:w-10/12 max-w-xs mt-1">
-                                    <label className="label">
-                                        <span className="label-text">Zip</span>
-                                    </label>
-                                    <input type="text" name="zip" placeholder="Zip" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full max-w-xs" onChange={formik.handleChange} value={formik.values.zip} />
-                                    {formik.touched.zip && formik.errors.zip && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.zip}
-                                        </span>
-                                    )}
-                                </div>
-                                <div className="form-control w-full md:w-8/12 max-w-xs mt-1">
-                                    <label className="label">
-                                        <span className="label-text"># Casa</span>
-                                    </label>
-                                    <input type="text" name="casa" placeholder="Num" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full max-w-xs" onChange={formik.handleChange} value={formik.values.casa} />
-                                    {formik.touched.casa && formik.errors.casa && (
-                                        <span className="text-red-400 flex text-xs">
-                                            {formik.errors.casa}
-                                        </span>
-                                    )}
-                                </div>
+                        </div>
+                        <div className='grid grid-cols-1 md:grid-cols-2'>
+                            <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text">Calle Principal</span>
+                                </label>
+                                <input type="text" name="calle1" placeholder="Calle principal" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.calle1} disabled={!isEditar} />
+                                {formik.touched.calle1 && formik.errors.calle1 && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.calle1}
+                                    </span>
+                                )}
+                            </div>
+                            <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text">Calle Secundaria</span>
+                                </label>
+                                <input type="text" name="calle2" placeholder="Calle secundaria" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.calle2} disabled={!isEditar} />
+                                {formik.touched.calle2 && formik.errors.calle2 && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.calle2}
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
+                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text">Sector</span>
+                                </label>
+                                <input type="text" name="sector" placeholder="Sector" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.sector} disabled={!isEditar} />
+                                {formik.touched.sector && formik.errors.sector && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.sector}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text">Zip</span>
+                                </label>
+                                <input type="text" name="zip" placeholder="Zip" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.zip} disabled={!isEditar} />
+                                {formik.touched.zip && formik.errors.zip && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.zip}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="form-control w-full md:w-8/12 max-w-sm mt-1">
+                                <label className="label">
+                                    <span className="label-text"># Casa</span>
+                                </label>
+                                <input type="text" name="casa" placeholder="Num" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full" onChange={formik.handleChange} value={formik.values.casa} disabled={!isEditar} />
+                                {formik.touched.casa && formik.errors.casa && (
+                                    <span className="text-red-400 flex text-xs">
+                                        {formik.errors.casa}
+                                    </span>
+                                )}
                             </div>
                         </div>
                         {isEditar && (

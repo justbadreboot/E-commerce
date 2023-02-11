@@ -30,8 +30,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
       }),
-      getClientByUser: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/client/user/${doc}`
+      getClientByID: builder.query({
+        query: (doc) => `client-production-d410.up.railway.app/api/client/${doc}`
       }),
       getServices: builder.query({
         query: () => "service-production-bb52.up.railway.app/api/service"
@@ -52,11 +52,25 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
           body:{ document, lastName, firstName, phone, userId },
         })
       }),
+      updateClient: builder.mutation({
+        query: ({document,lastName, firstName, phone,userId,id}) => ({
+          url: `client-production-d410.up.railway.app/api/client`,
+          method: 'PUT',
+          body:{ document, lastName, firstName, phone, userId,id },
+        })
+      }),
       addNewAddress: builder.mutation({
         query : ({id, city, houseNumber, mainStreet, postalCode, secondStreet, sector, state}) =>({
           url: `client-production-d410.up.railway.app/api/client/${id}/direction`,
           method: 'POST',
           body:{city, houseNumber, mainStreet, postalCode, secondStreet, sector, state},
+        })
+      }),
+      updateAddress: builder.mutation({
+        query : ({idCliente,id, city, houseNumber, mainStreet, postalCode, secondStreet, sector, state}) =>({
+          url: `client-production-d410.up.railway.app/api/client/${idCliente}/direction`,
+          method: 'PUT',
+          body:{city, houseNumber, mainStreet, postalCode, secondStreet, sector, state,id},
         })
       }),
       addNewOrder: builder.mutation({
@@ -86,7 +100,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
           method: 'POST',
           body:{email, password, username},
         })
-      })
+      }),
     }),
   });
 
@@ -98,12 +112,13 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetLandingQuery,
     useGetProductByIdQuery,
     useGetClientByDocumentQuery,
-    useGetClientByUserQuery,
+    useGetClientByIDQuery,
     useGetServicesQuery,
     useGetServicesMainQuery,
     useGetSpecialtyQuery,
     useGetDoctorsQuery,
     useAddNewClientMutation,
+    useUpdateClientMutation,
     useAddNewAddressMutation,
     useAddNewOrderMutation,
     useAddNewAppointmentMutation,

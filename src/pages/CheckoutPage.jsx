@@ -19,8 +19,8 @@ const Checkout =()=>{
     const [subtotal, setSubtotal] = useState(0)
     const [envio, setEnvio] = useState(0)
 
-    const email= "dani"
-    const collectionName =  'cart '+ email
+    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const collectionName =  'cart '+ user
 
     useEffect ( ()=>{
         const getItems = onSnapshot(collection(firestore,collectionName), snapshot =>{
@@ -73,7 +73,7 @@ const Checkout =()=>{
                         </div>
                     </div>
                 </div>
-        </MainLayout>
+            </MainLayout>
         </FormContext.Provider>
     )
 

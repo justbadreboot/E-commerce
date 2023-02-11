@@ -7,7 +7,8 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import jwt from 'jwt-decode'
 import { useCreateMutation, useLoginMutation, 
-    useAddNewClientMutation, useGetClientByUserQuery } from '../store/serverApi'
+    useAddNewClientMutation } from '../store/serverApi'
+import axios from 'axios';
 
 const Login = () =>{
     
@@ -16,20 +17,27 @@ const Login = () =>{
         login : true,
         register : false,
     })
-    const [skip,setSkip] = useState(true)
-    const [id,setId] = useState(0) 
 
     const [loginM] = useLoginMutation()
     const [createM] = useCreateMutation()
     const [addNewClient] = useAddNewClientMutation()
     
-    const {data: usuario,isSuccess} = useGetClientByUserQuery(id,{skip})
     const getPosition = () => {
         return isForm.login ? "top-full"
         : isForm.register ? "top-0"
         : null
     }
  
+    const getClient = async(id) =>{
+        await axios.get(`https://client-production-d410.up.railway.app/api/client/user/${id}`)
+        .then(response => {
+            localStorage.setItem('currentUser', JSON.stringify(response.data.id))
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
     const formik = useFormik({
 		initialValues: {
 			email_login:"",
@@ -46,8 +54,7 @@ const Login = () =>{
             })
             if(res.data){
                 const token_decoded = jwt(res.data.token)
-                setId(token_decoded.id)
-                setSkip(false)
+                getClient(token_decoded.id)
                 formik.resetForm()
                 navigate("/")
             }else{
@@ -121,7 +128,6 @@ const Login = () =>{
                 <div className="hidden md:block md:col-span-2 relative border-t border-transparent">
                     <img src={imagenLogin} alt="logo" className="absolute h-full bg-center object-cover"/>
                 </div>
-                {isSuccess && localStorage.setItem('currentUser', JSON.stringify(usuario.id))}
                 <div className="z-10 col-span-7 sm:col-span-2 md:col-span-1 h-full flex sm:flex-col border-transparent items-center text-sm text-gray-500">
                     <button onClick={() => setIsForm({ login : true, register : false})} className={`py-1.5 w-full h-full sm:h-1/2 inline-flex flex-col  justify-center items-center active:outline-none focus:outline-none  ${isForm.login ? "bg-white bg-opacity-80 text-gray-600" : "text-white"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">

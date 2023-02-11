@@ -83,6 +83,12 @@ const Billing = ({envio,total,subtotal})=>{
                             )}
                         </div>
                     </div>
+                </div>
+                <div className="m-1 flex items-center space-x-3">
+                    <div>
+                        <input type="checkbox" name="" defaultChecked={false} className="form-checkbox h-4 w-4 border-gray-300 rounded text-green-400 focus:ring-green-500" />
+                    </div>
+                    <span className="text-sm text-gray-400">Deseo facturar con otros datos</span>
                 </div>                
                 <PriceSummary subtotal={subtotal} envio={envio} total={total} />
                 <button onClick={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">

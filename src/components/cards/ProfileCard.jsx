@@ -2,9 +2,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import { FaEdit} from "react-icons/fa"
-import { useState } from "react";
+import { useState } from "react"
+import { useGetClientByIDQuery, useUpdateClientMutation } from "../../store/serverApi";
 
 const ProfileCard = () =>{
+    
+    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const {data: usuario} = useGetClientByIDQuery(id)
+    const [editClient] = useUpdateClientMutation()
     
     const [isEditar, setIsEditar] = useState(false)
 
@@ -28,21 +33,23 @@ const ProfileCard = () =>{
     
     const formik = useFormik({
         initialValues: {
-            nombre:"",
-            apellido:"",
-            ident:"",
-            telf:""
+            nombre:'',
+            apellido:'',
+            ident:'',
+            telf:'',
         },
         validationSchema: appSchema,
         onSubmit: async (values) => {
-            /*const res =  await addNewPost({ 
+            const res = await editClient({ 
                 document: values.ident,
                 firstName: values.nombre,
                 lastName: values.apellido,
-                phone: values.telf
-            }).unwrap()
-            id(res.id)*/
-            Toast.fire({ icon: 'success', title: 'Paciente registrado',background:'#D3FDDD'})
+                phone: values.telf,
+                userId: usuario.userId,
+                id: id,
+            })
+            console.log(res)
+            Toast.fire({ icon: 'success', title: 'Datos actualizados',background:'#D3FDDD'})
         },
     });
     
@@ -55,18 +62,18 @@ const ProfileCard = () =>{
                             <h6 className="mb-0 text-lg font-semibold">Datos Personales</h6>
                         </div>
                         <div className="w-full max-w-full px-3 shrink-0 md:w-2/12 md:flex-none">
-                            <FaEdit onClick={()=> {setIsEditar(true)}} className={`w-5 h-5 cursor-pointer ${isEditar ? "hidden" : "block"}`}     />
+                            <FaEdit onClick={()=> {setIsEditar(true)}} className={`w-5 h-5 cursor-pointer ${isEditar ? "hidden" : "block"}`} />
                         </div>
                     </div>
                 </div>
-                <div className="flex-auto px-6 mt-4">
+                <div className="flex-auto px-6 mt-3">
                     <form onSubmit={formik.handleSubmit}>
                         <div className='grid grid-cols-1 md:grid-cols-2'>
                             <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
                                 <label className="label">
                                     <span className="label-text">Nombre</span>
                                 </label>
-                                <input type="text" name="nombre" placeholder="Nombre" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.nombre} />
+                                <input type="text" name="nombre" placeholder="Nombre" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.nombre} disabled={!isEditar} />
                                 {formik.touched.nombre && formik.errors.nombre && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik.errors.nombre}
@@ -77,7 +84,7 @@ const ProfileCard = () =>{
                                 <label className="label">
                                     <span className="label-text">Apellido</span>
                                 </label>
-                                <input type="text" name="apellido" placeholder="Apellido" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.apellido} />
+                                <input type="text" name="apellido" placeholder="Apellido" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik.handleChange} value={formik.values.apellido} disabled={!isEditar} />
                                 {formik.touched.apellido && formik.errors.apellido && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik.errors.apellido}
@@ -90,7 +97,7 @@ const ProfileCard = () =>{
                                 <label className="label">
                                     <span className="label-text">Identificación</span>
                                 </label>
-                                <input type="text" name="ident" placeholder="Identificación" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 " onChange={formik.handleChange} value={formik.values.ident} />
+                                <input type="text" name="ident" placeholder="Identificación" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 " onChange={formik.handleChange} value={formik.values.ident} disabled={!isEditar} />
                                 {formik.touched.ident && formik.errors.ident && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik.errors.ident}
@@ -101,7 +108,7 @@ const ProfileCard = () =>{
                                 <label className="label">
                                     <span className="label-text">Teléfono</span>
                                 </label>
-                                <input type="text" name="telf" placeholder="Teléfono" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 " onChange={formik.handleChange} value={formik.values.telf} />
+                                <input type="text" name="telf" placeholder="Teléfono" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 " onChange={formik.handleChange} value={formik.values.telf} disabled={!isEditar} />
                                 {formik.touched.telf && formik.errors.telf && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik.errors.telf}
@@ -112,7 +119,7 @@ const ProfileCard = () =>{
                         {isEditar && (
                             <div className='grid sm:grid-cols-2 gap-4'>
                                 <button onClick={formik.handleSubmit} type="submit" className="mt-6 mb-8 w-full sm:w-11/12 rounded-md bg-primary-80 px-6 py-3 font-medium text-white">
-                                Guardar
+                                    Actualizar
                                 </button>
                             </div>
                         )}
