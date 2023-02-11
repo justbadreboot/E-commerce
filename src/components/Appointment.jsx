@@ -1,33 +1,12 @@
 import { useFormik } from "formik";
-import { useState } from "react";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { useAddNewAppointmentMutation} from "../store/serverApi";
-import SearchClient from "./SearchClient";
 
 const Appointment = ({serviceID}) =>{
     
-    const [openClient, setOpenClient] = useState(false)
-    const [id, setId] = useState(0)
-    const [doc,setDoc] = useState("")
+    const id = JSON.parse(localStorage.getItem('currentUser'))
     const [addNewApp] = useAddNewAppointmentMutation()
-
-    const formik = useFormik({
-		initialValues: {
-            consultar:"",
-		},
-		validationSchema: Yup.object().shape({
-            consultar: Yup.number().typeError('Solo dígitos').min(10, 'Min 10 dígitos').required("Este campo es requerido"),
-        }),
-		onSubmit: (values) => {
-            setDoc(values.consultar)
-            setOpenClient(true)
-		},
-	})
-
-    const getID = (id)=>{
-        setId(id)
-    }
 
     const formik2 = useFormik({
 		initialValues: {
@@ -62,9 +41,7 @@ const Appointment = ({serviceID}) =>{
                         'Su cita ha sido agendada con éxito',
                         'success'
                     )
-                    setOpenClient(false)
                     formik2.resetForm()
-                    formik.resetForm()
                 }
             })
             
@@ -75,34 +52,14 @@ const Appointment = ({serviceID}) =>{
         <>
             <input type="checkbox" id="cita" className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box w-11/12 sm:w-10/12 max-w-5xl">
+                <div className="modal-box w-10/12 sm:w-7/12 lg:w-5/12 max-w-5xl">
                     <div className="text-center text-2xl font-semibold capitalize text-gray-600">
                         <h2>Agendar nueva cita</h2>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2">
-                        <div className="mt-4">
-                            <p className="text-lg">Datos del Paciente</p>
-                            <form className="form-control mt-1" onSubmit={formik.handleSubmit}>
-                                <label className="label">
-                                    <span className="label-text text-gray-400">Buscar por Identificación</span>
-                                </label>
-                                <div className="input-group">
-                                    <input type="text" name="consultar" placeholder="Identificación" className="w-8/12 md:w-6/12 lg:w-8/12 px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 " onChange={formik.handleChange} value={formik.values.consultar} />
-                                    <button  onClick={formik.handleSubmit} type="submit" className="btn bg-primary-100">Consultar</button>
-                                </div>
-                                {formik.touched.consultar && formik.errors.consultar && (
-                                    <span className="text-red-400 flex text-xs">
-                                        {formik.errors.consultar}
-                                    </span>
-                                )}
-                            </form>
-                            {openClient &&(
-                                <SearchClient doc={doc} id={getID} />
-                            )}
-                        </div>
+                    <div className="grid grid-cols-1">
                         <form onSubmit={formik2.handleSubmit} className="mt-4">
                             <p className="text-lg font-medium text-gray-400">Seleccione fecha y hora para la cita</p>
-                            <div className="form-control w-full lg:w-6/12 mt-1">
+                            <div className="form-control w-full md:w-8/12  mt-1">
                                 <label className="label">
                                     <span className="label-text">Fecha</span>
                                 </label>
@@ -113,7 +70,7 @@ const Appointment = ({serviceID}) =>{
                                     </span>
                                 )}
                             </div>
-                            <div className="form-control w-full lg:w-6/12 mt-1">
+                            <div className="form-control w-full md:w-8/12  mt-1">
                                 <label className="label">
                                     <span className="label-text">Hora</span>
                                 </label>

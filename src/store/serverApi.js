@@ -45,6 +45,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getDoctors: builder.query({
         query: () => `api-gateway-production-d841.up.railway.app/api/doctor`
       }),
+      getAddressClient: builder.query({
+        query: (doc) => `client-production-d410.up.railway.app/api/client/${doc}/direction/custom`
+      }),
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId}) => ({
           url: `client-production-d410.up.railway.app/api/client`,
@@ -110,6 +113,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetProductsMainQuery,
     useGetRelatedProductsQuery,
     useGetLandingQuery,
+    useGetAddressClientQuery,
     useGetProductByIdQuery,
     useGetClientByDocumentQuery,
     useGetClientByIDQuery,
@@ -119,6 +123,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetDoctorsQuery,
     useAddNewClientMutation,
     useUpdateClientMutation,
+    useUpdateAddressMutation,
     useAddNewAddressMutation,
     useAddNewOrderMutation,
     useAddNewAppointmentMutation,

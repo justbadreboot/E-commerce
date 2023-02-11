@@ -76,7 +76,6 @@ const Checkout =()=>{
             </MainLayout>
         </FormContext.Provider>
     )
-
 }
 
 export default Checkout;

@@ -2,6 +2,7 @@ import AddessCard from "./cards/AddressCard"
 import ProfileCard from "./cards/ProfileCard"
 
 const Profile =() =>{
+
     return(
         <div className="font-poppins w-full p-8 mx-auto">
             <h1 className="mb-5 text-2xl font-bold text-gray-700">
