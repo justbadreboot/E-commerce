@@ -30,6 +30,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
       }),
+      getClientByUser: builder.query({
+        query: (doc) => `client-production-d410.up.railway.app/api/client/user/${doc}`
+      }),
       getServices: builder.query({
         query: () => "service-production-bb52.up.railway.app/api/service"
       }),
@@ -43,10 +46,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: () => `api-gateway-production-d841.up.railway.app/api/doctor`
       }),
       addNewClient: builder.mutation({
-        query: ({document,lastName, firstName, phone}) => ({
+        query: ({document,lastName, firstName, phone,userId}) => ({
           url: `client-production-d410.up.railway.app/api/client`,
           method: 'POST',
-          body:{ document, lastName, firstName, phone },
+          body:{ document, lastName, firstName, phone, userId },
         })
       }),
       addNewAddress: builder.mutation({
@@ -95,6 +98,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetLandingQuery,
     useGetProductByIdQuery,
     useGetClientByDocumentQuery,
+    useGetClientByUserQuery,
     useGetServicesQuery,
     useGetServicesMainQuery,
     useGetSpecialtyQuery,

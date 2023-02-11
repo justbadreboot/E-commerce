@@ -95,8 +95,8 @@ const Navbar = () =>{
                                             <FaUserAlt className='w-5 h-5 hover:text-secondary-80' />
                                         </label>
                                         <ul tabIndex="0" className="mt-2 p-2 menu menu-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
-                                            <li><Link to='/perfil'>Perfil</Link></li>
-                                            <li><div onClick={()=> handleOnClick()}>Cerrar Sesión</div></li> 
+                                            <li><Link  className='active:bg-green-400' to='/perfil'>Perfil</Link></li>
+                                            <li><div className='active:bg-green-400' onClick={()=> handleOnClick()}>Cerrar Sesión</div></li> 
                                         </ul>
                                     </div>
                                 ): (
