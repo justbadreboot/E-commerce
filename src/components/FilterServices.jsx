@@ -38,8 +38,15 @@ const FilterServices =()=>{
         getServicesByName(temp)
     }
     
-    const getServicesByName =(name)=>{
-
+    const getServicesByName = async (name)=>{
+        await axios.get(`https://service-production-bb52.up.railway.app/api/service/search/${name}`)
+        .then(response => {
+            setServicios(response.data)
+        })
+        .catch(error => {
+            setSelectedOption([])
+            console.log(error)
+        })
     }
 
     const getServices = async ()=>{

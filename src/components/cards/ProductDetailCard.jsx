@@ -100,7 +100,7 @@ const ProductDetail=()=>{
                                 <div className="bg-gray-100 rounded-lg overflow-hidden relative">
                                     <img src={detalles.image} loading="lazy" alt={detalles.name} className="w-full h-96 object-cover object-center" />
                                     {detalles.porcentajeDescuento !== null && (
-                                        <span className="bg-red-500 text-white text-sm tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">Oferta</span>
+                                        <span className="bg-red-500 text-white text-sm tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">{detalles.porcentajeDescuento}% off</span>
                                     )}
                                 </div>
                             </div>
@@ -130,7 +130,7 @@ const ProductDetail=()=>{
                                                 <span className="text-gray-800 text-xl md:text-2xl font-bold">
                                                     ${precio}
                                                 </span>
-                                                <span className="text-red-500 text-lg line-through mb-0.5">${detalles.pvp}</span>
+                                                <span className="text-red-500 text-lg line-through mb-0.5">${(detalles.pvp).toFixed(2)}</span>
                                             </>
                                         ) : (
                                             <span className="text-gray-800 text-xl md:text-2xl font-bold">${precio}</span>
