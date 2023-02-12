@@ -43,9 +43,10 @@ const Shipping = ({envio,total,subtotal})=>{
     }
 
     const handleOnChange =(e) =>{
-        if(e.target.value !==0){
+        let temp = parseInt(e.target.value)
+        if(temp !==0){
             setVer(true)
-            getAddress(e.target.value)
+            getAddress(temp)
         }
         else
             setVer(false)

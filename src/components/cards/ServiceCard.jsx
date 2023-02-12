@@ -1,4 +1,4 @@
-import Appointment from "../Appointment";
+import Appointment from "../../components/modals/Appointment"
 
 const ServiceCard = ({service}) =>{
     return(

@@ -48,6 +48,12 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getAddressClient: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/client/${doc}/direction/custom`
       }),
+      getOrdersByClient:builder.query({
+        query: (doc) => `order-production-bfbc.up.railway.app/api/order/client/${doc}`
+      }),
+      getAppointmentsByClient:builder.query({
+        query: (doc) => `service-production-bb52.up.railway.app/api/appointment/client/${doc}`
+      }),
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId}) => ({
           url: `client-production-d410.up.railway.app/api/client`,
@@ -118,8 +124,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetClientByDocumentQuery,
     useGetClientByIDQuery,
     useGetServicesQuery,
+    useGetAppointmentsByClientQuery,
     useGetServicesMainQuery,
     useGetSpecialtyQuery,
+    useGetOrdersByClientQuery,
     useGetDoctorsQuery,
     useAddNewClientMutation,
     useUpdateClientMutation,

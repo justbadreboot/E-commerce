@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
-import { useAddNewAppointmentMutation} from "../store/serverApi";
+import { useAddNewAppointmentMutation} from "../../store/serverApi";
 
 const Appointment = ({serviceID}) =>{
     

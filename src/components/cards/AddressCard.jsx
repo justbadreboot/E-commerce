@@ -22,6 +22,7 @@ const AddessCard = () =>{
     const [sector,setSector] = useState("")
     const [casa,setCasa] = useState("")
     const [addID,setAddID] = useState(0)
+    const [ver,setVer] = useState(false)
 
     const Toast = Swal.mixin({
         toast: true,
@@ -54,7 +55,13 @@ const AddessCard = () =>{
     }
 
     const handleOnChange =(e) =>{
-        getAddress(e.target.value)
+        let temp = parseInt(e.target.value)
+        if( temp !== 0){
+            setVer(true)
+            getAddress(temp)
+        }
+        else
+            setVer(false)
     }
 
     const handleOnSubmit = async (e)=>{
@@ -83,81 +90,83 @@ const AddessCard = () =>{
             <div className="relative flex flex-col h-full min-w-0 break-words shadow-soft-xl rounded-2xl bg-clip-border">
                 <div className="px-6 pt-3 pb-0 mb-0 rounded-t-2xl">
                     <div className="flex ">
-                        <div className="flex items-center max-w-full px-3 shrink-0 w-11/12 md:flex-none">
+                        <div className="flex items-center max-w-full px-3 w-11/12 flex-none">
                             <h6 className="mb-0 text-lg font-semibold">Direcciones Asociadas</h6>
                         </div>
-                        <div className="w-full max-w-full px-3 shrink-0 md:w-2/12 md:flex-none">
+                        <div className="w-full max-w-full px-3 md:w-2/12 ">
                             <FaEdit onClick={()=> {setIsEditar(true)}} className={`w-5 h-5 cursor-pointer ${isEditar ? "hidden" : "block"}`} />
                             <MdClose onClick={()=> {setIsEditar(false)}} className={`w-5 h-5 cursor-pointer ${!isEditar ? "hidden" : "block"}`}/>
                         </div>
                     </div>
                 </div>
-                <div className="px-6 pt-3 pb-0 mb-0 rounded-t-2xl">
+                <div className="px-6 pt-3 pb-0 mb-3 rounded-t-2xl">
                     {isSuccess && (
                         address.length !== 0 ? (
                             <>
                                 <select name="direcciones" className='w-full sm:w-9/12 md:w-11/12  mt-3 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' onChange={handleOnChange} >
-                                <option value={""}>Seleccione</option>
+                                <option value={0}>Seleccione</option>
                                     {address.map( ad =>(
                                         <option key={ad.id} value={ad.id}>{ad.address}</option>
                                     ))}
                                 </select>
-                                {Object.entries(infoDireccion).length !== 0 && (
-                                    <form  className="mb-3" onSubmit={handleOnSubmit}>
-                                        <div className='grid grid-cols-1 md:grid-cols-2'>
-                                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text">Ciudad</span>
-                                                </label>
-                                                <input type="text" name="ciudad" placeholder="Ciudad" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 ${!isEditar && "bg-gray-200"}`} value={ciudad} onChange={(e) =>setCiudad(e.target.value)} disabled={!isEditar} />
+                                {ver && (
+                                    Object.entries(infoDireccion).length !== 0 && (
+                                        <form  className="mb-3" onSubmit={handleOnSubmit}>
+                                            <div className='grid grid-cols-1 md:grid-cols-2'>
+                                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text">Ciudad</span>
+                                                    </label>
+                                                    <input type="text" name="ciudad" placeholder="Ciudad" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 ${!isEditar && "bg-gray-200"}`} value={ciudad} onChange={(e) =>setCiudad(e.target.value)} disabled={!isEditar} />
+                                                </div>
+                                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text">Provincia</span>
+                                                    </label>
+                                                    <input type="text" name="provincia" placeholder="Provincia" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 ${!isEditar && "bg-gray-200"}`} value={provincia} onChange={(e) =>setProvincia(e.target.value)} disabled={!isEditar} />
+                                                </div>
                                             </div>
-                                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text">Provincia</span>
-                                                </label>
-                                                <input type="text" name="provincia" placeholder="Provincia" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 ${!isEditar && "bg-gray-200"}`} value={provincia} onChange={(e) =>setProvincia(e.target.value)} disabled={!isEditar} />
+                                            <div className='grid grid-cols-1 md:grid-cols-2'>
+                                                <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text">Calle Principal</span>
+                                                    </label>
+                                                    <input type="text" name="calle1" placeholder="Calle principal" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={calle1} onChange={(e) =>setCalle1(e.target.value)} disabled={!isEditar} />
+                                                </div>
+                                                <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text">Calle Secundaria</span>
+                                                    </label>
+                                                    <input type="text" name="calle2" placeholder="Calle secundaria" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={calle2} onChange={(e) =>setCalle2(e.target.value)} disabled={!isEditar} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className='grid grid-cols-1 md:grid-cols-2'>
-                                            <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text">Calle Principal</span>
-                                                </label>
-                                                <input type="text" name="calle1" placeholder="Calle principal" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={calle1} onChange={(e) =>setCalle1(e.target.value)} disabled={!isEditar} />
+                                            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
+                                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text">Sector</span>
+                                                    </label>
+                                                    <input type="text" name="sector" placeholder="Sector" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={sector} onChange={(e) =>setSector(e.target.value)} disabled={!isEditar} />
+                                                </div>
+                                                <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text">Zip</span>
+                                                    </label>
+                                                    <input type="text" name="zip" placeholder="Zip" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`}  value={zip} onChange={(e) =>setZip(e.target.value)} disabled={!isEditar}  />
+                                                </div>
+                                                <div className="form-control w-full md:w-8/12 max-w-sm mt-1">
+                                                    <label className="label">
+                                                        <span className="label-text"># Casa</span>
+                                                    </label>
+                                                    <input type="text" name="casa" placeholder="Num" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={casa} onChange={(e) =>setCasa(e.target.value)} disabled={!isEditar} />
+                                                </div>
                                             </div>
-                                            <div  className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text">Calle Secundaria</span>
-                                                </label>
-                                                <input type="text" name="calle2" placeholder="Calle secundaria" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={calle2} onChange={(e) =>setCalle2(e.target.value)} disabled={!isEditar} />
-                                            </div>
-                                        </div>
-                                        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3'>
-                                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text">Sector</span>
-                                                </label>
-                                                <input type="text" name="sector" placeholder="Sector" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={sector} onChange={(e) =>setSector(e.target.value)} disabled={!isEditar} />
-                                            </div>
-                                            <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text">Zip</span>
-                                                </label>
-                                                <input type="text" name="zip" placeholder="Zip" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`}  value={zip} onChange={(e) =>setZip(e.target.value)} disabled={!isEditar}  />
-                                            </div>
-                                            <div className="form-control w-full md:w-8/12 max-w-sm mt-1">
-                                                <label className="label">
-                                                    <span className="label-text"># Casa</span>
-                                                </label>
-                                                <input type="text" name="casa" placeholder="Num" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 w-full ${!isEditar && "bg-gray-200"}`} value={casa} onChange={(e) =>setCasa(e.target.value)} disabled={!isEditar} />
-                                            </div>
-                                        </div>
-                                        {isEditar && (
-                                            <div className='grid sm:grid-cols-2 gap-4'>
-                                                <button onSubmit={handleOnSubmit} className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Actualizar</button>
-                                            </div>
-                                        )}
-                                    </form>
+                                            {isEditar && (
+                                                <div className='grid sm:grid-cols-2 gap-4'>
+                                                    <button onSubmit={handleOnSubmit} className="order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white">Actualizar</button>
+                                                </div>
+                                            )}
+                                        </form>
+                                    )
                                 )}
                             </>
                         ): (

@@ -1,5 +1,7 @@
 import AddessCard from "./cards/AddressCard"
 import ProfileCard from "./cards/ProfileCard"
+import AppointmentsTables from "./tables/AppoitnmentsTables"
+import OrdersTables from "./tables/OrdersTables"
 
 const Profile =() =>{
 
@@ -10,6 +12,16 @@ const Profile =() =>{
             <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-8">
                 <ProfileCard />
                 <AddessCard />
+            </div>
+            <div className="mt-8">
+                <h1 className="mb-4 text-xl font-bold text-gray-700">Historial de
+                <span className="text-primary-100"> Órdenes</span> de Compras </h1> 
+                <OrdersTables />
+            </div>
+            <div className="mt-8">
+                <h1 className="mb-4 text-xl font-bold text-gray-700">Historial de
+                <span className="text-primary-100"> Citas</span> médicas</h1> 
+                <AppointmentsTables />
             </div>
         </div>
     )

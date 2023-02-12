@@ -69,10 +69,10 @@ const ProfileCard = () =>{
             <div className="relative flex flex-col h-full min-w-0 shadow-soft-xl rounded-2xl ">
                 <div className="px-6 pt-3 pb-0 mb-0 rounded-t-2xl">
                     <div className="flex ">
-                        <div className="flex items-center max-w-full px-3 shrink-0 w-11/12 md:flex-none">
+                        <div className="flex items-center max-w-full px-3 w-11/12 flex-none">
                             <h6 className="mb-0 text-lg font-semibold">Datos Personales</h6>
                         </div>
-                        <div className="w-full max-w-full px-3 shrink-0 md:w-2/12 md:flex-none">
+                        <div className="w-full max-w-full px-3 md:w-2/12 ">
                             <FaEdit onClick={()=> {setIsEditar(true)}} className={`w-5 h-5 cursor-pointer ${isEditar ? "hidden" : "block"}`} />
                             <MdClose onClick={()=> {setIsEditar(false)}} className={`w-5 h-5 cursor-pointer ${!isEditar ? "hidden" : "block"}`}/>
                         </div>
