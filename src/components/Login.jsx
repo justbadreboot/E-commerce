@@ -171,7 +171,7 @@ const Login = () =>{
                                     </span>
                                 )}
                             </div>
-                            <div className="mt-10 w-full">
+                            <div className="mt-10 w-full max-w-sm">
                                 <button type="submit" onClick={formik.handleSubmit} className="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">Ingresar</button>
                             </div>
                         </form>

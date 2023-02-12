@@ -20,24 +20,20 @@ const Footer = () =>{
                             <div className="flex items-center justify-between gap-6 border-b border-white  py-6 md:block md:space-y-6 md:border-none md:py-0" >
                                 <img src={cara} alt="KrugerMed" className="w-40" />
                                 <div className="flex">
-                                    <form action="">
-                                        <label htmlFor="newsletter" className="text-lg font-semibold capitalize text-gray-900">Subscríbete a nuestro Newsletter</label>
+                                    <div>
+                                        <label className="text-lg font-semibold capitalize text-gray-900">Subscríbete a nuestro Newsletter</label>
                                         <div className="relative mt-4 input-group">
                                             <input
                                                 type="email"
-                                                name="newsletter"
-                                                id="newsletter"
                                                 placeholder="Correo"
                                                 className=" input input-bordered invalid:outline-none placeholder-gray-600 rounded-3xl w-full bg-gray-100 px-12 py-3 invalid:ring-red-400"
                                              />
                                             <button
-                                                type="submit"
-                                                title="Submit"
                                                 className="btn absolute right-0 w-max rounded-r-3xl bg-primary-100 py-3 px-3 text-center transition">
                                                 Enviar
                                             </button>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -47,13 +43,13 @@ const Footer = () =>{
                                     <h6 className="text-lg font-bold text-primary-100">Sobre Nosotros</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
+                                            <NavLink to='/nosotros' className="transition hover:text-cyan-500">¿Quiénes somos?</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Nuestro equipo</NavLink>
+                                            <NavLink to='/nosotros' className="transition hover:text-cyan-500">Nuestro equipo</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Contáctanos</NavLink>
+                                            <NavLink to='/contacto' className="transition hover:text-cyan-500">Contáctanos</NavLink>
                                         </li>
                                     </ul>
                                 </div>
@@ -61,13 +57,13 @@ const Footer = () =>{
                                     <h6 className="text-lg font-bold text-primary-100 ">Catálogo de Productos</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Medicamentos</NavLink>
+                                            <NavLink to='/productos' className="transition hover:text-cyan-500">Medicamentos</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Accesorios</NavLink>
+                                            <NavLink to='/productos' className="transition hover:text-cyan-500">Accesorios</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Kits</NavLink>
+                                            <NavLink to='/productos' className="transition hover:text-cyan-500">Kits</NavLink>
                                         </li>
                                     </ul>
                                 </div>
@@ -75,13 +71,13 @@ const Footer = () =>{
                                     <h6 className="text-lg font-bold text-primary-100 ">Servicos Médicos</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Exámenes</NavLink>
+                                            <NavLink to='/servicos' className="transition hover:text-cyan-500">Exámenes</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Especialidades</NavLink>
+                                            <NavLink to='/servicios' className="transition hover:text-cyan-500">Especialidades</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/about'className="transition hover:text-cyan-500">Doctores</NavLink>
+                                            <NavLink to='/servicios' className="transition hover:text-cyan-500">Doctores</NavLink>
                                         </li>
                                     </ul>
                                 </div>

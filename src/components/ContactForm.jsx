@@ -54,7 +54,7 @@ const ContactForm = ()=>{
                     <div className="flex flex-col mr-16 space-y-4 justify-between">
                         <div>
                             <h1 className="font-bold text-xl md:text-2xl tracking-wide text-gray-700">Datos de Contacto</h1>
-                            <p className="pt-2 text-cyan-800 text-sm">Lorem lorem lorem lorem lorem lorem lroe loremrrrrrrrm</p>
+                            <p className="pt-2 text-cyan-800 text-sm">Encuéntranos a través de los siguientes medios</p>
                         </div>
                         {(isLoading || isFetching) && <Loader />}
                         {isSuccess && (

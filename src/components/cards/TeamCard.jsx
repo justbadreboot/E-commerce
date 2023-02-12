@@ -9,10 +9,9 @@ const TeamCard =()=>{
             id:1,
             nombre:"Bryan Quisaguano",
             img:"https://avatars.githubusercontent.com/u/66704761?v=4",
-            titulo:"Team Leader",
-            descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
+            titulo:"Full-Stack Developer",
             fb:"",
-            git:"https://github.com/BryanArmando",
+            git:"",
             in:"",
             delay:''
         },
@@ -20,10 +19,9 @@ const TeamCard =()=>{
             id:2,
             nombre:"Adrian Bastidas",
             img:fotoA,
-            titulo:"Team Leader",
-            descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
+            titulo:"Full-Stack Developer",
             fb:"",
-            git:"https://github.com/Adrian-Bastidas",
+            git:"",
             in:"",
             delay:'200'
         },
@@ -31,10 +29,9 @@ const TeamCard =()=>{
             id:3,
             nombre:"Jonathan Sanchez",
             img:"https://avatars.githubusercontent.com/u/80604082?v=4",
-            titulo:"Team Leader",
-            descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
+            titulo:"Full-Stack Developer",
             fb:"",
-            git:"https://github.com/jonato96",
+            git:"",
             in:"",
             delay:'400'
         },
@@ -42,10 +39,9 @@ const TeamCard =()=>{
             id:4,
             nombre:"Daniela Cisneros",
             img:fotoD,
-            titulo:"Team Leader",
-            descripcion:'Quae labore quia tempora dolor impedit. Possimus, sint ducimus ipsam?',
+            titulo:"Full-Stack Developer",
             fb:"",
-            git:"https://github.com/DaniCis",
+            git:"",
             in:"",
             delay:'600'
         },
@@ -77,11 +73,8 @@ const TeamCard =()=>{
                                 <p className="text-xl text-gray-800 dark:text-white">
                                     {member.nombre}
                                 </p>
-                                <p className="text-md font-light text-gray-500 dark:text-gray-200">
+                                <p className="text-md mb-2 font-light text-gray-500 dark:text-gray-200">
                                     {member.titulo}
-                                </p>
-                                <p className="md:max-w-xs py-4 font-light text-gray-500 text-sm dark:text-gray-400">
-                                    {member.descripcion}
                                 </p>
                             </div>
                             <div className="flex items-center justify-between pt-8 mx-auto text-gray-500 border-t border-gray-200 w-44">

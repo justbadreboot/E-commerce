@@ -1,4 +1,3 @@
-import Pagination from '../components/main/Pagination'
 import { useGetServicesQuery } from '../store/serverApi';
 import ServiceCard from './cards/ServiceCard';
 import Loader from './main/Loader';
@@ -21,9 +20,6 @@ const Services = () =>{
                         <ServiceCard service={service} key={service.id} />
                     ))
                 )}
-            </div>
-            <div className='mt-4'>
-                <Pagination />
             </div>
         </section>
     )

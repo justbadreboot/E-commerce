@@ -141,7 +141,7 @@ const Shipping = ({envio,total,subtotal})=>{
                             </>
                         ): (
                             <>
-                                <p className="text-sm mt-4 ml-8">No existen direcciones asociadas a este cliente. Agregue una nueva.</p>
+                                <p className="text-sm mt-4 ml-8">No existen direcciones asociadas a este cliente</p>
                             </>
                         )
                     )}

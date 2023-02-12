@@ -59,9 +59,12 @@ const Cart =()=>{
                                         ))}
                                     </div>
                                 ) : (
-                                    <>
-                                    <h4>Carrito vacio</h4>
-                                    </>
+                                    <div className="mt-6 flex justify-center">
+                                        <div>
+                                            <h4 className="text-gray-600 font-semibold">Carrito vacío</h4>
+                                            <img src="https://www.pngall.com/wp-content/uploads/5/Shopping-Cart-PNG-Download-Image.png" alt="carrito" className="w-32 h-32" />
+                                        </div>
+                                    </div>
                                 )}
                                 
                                 <div className="flex justify-between items-center mt-12 pt-6 border-t"> 

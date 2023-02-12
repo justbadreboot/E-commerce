@@ -7,11 +7,11 @@ const About =()=>{
         <div className="2xl:container 2xl:mx-auto lg:pt-16 lg:px-20 md:py-12 md:px-6 pt-8 px-4 font-poppins">
             <div className="flex flex-col lg:flex-row justify-between gap-8">
                 <div className="w-full lg:w-4/12 ">
-                    <img className="w-full h-full" src="https://i.ibb.co/FhgPJt8/Rectangle-116.png" alt="A group of People" />
+                    <img className="w-full h-full" src="https://www.liderempresarial.com/wp-content/uploads/2021/10/especialidades-12-clinica-medica.jpg" alt="A group of People" />
                 </div>
                 <div className="w-full lg:w-8/12 flex flex-col justify-center">
                     <h1 className="text-2xl lg:text-3xl font-semibold leading-9 text-ternary-60 pb-4">Sobre Nosotros</h1>
-                    <p className="font-normal text-base leading-6 text-gray-600 ">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.In the first place we have granted to God.</p>
+                    <p className="font-normal text-base leading-6 text-gray-600 ">Somos una empresa dedicada al comercio de productos farmacéuticos y prestación de servicios médicos.</p>
                     {isSuccess && (
                         info.map(card=>(
                             <div key={card.id}>
