@@ -10,6 +10,7 @@ const CartItem =({item}) =>{
 
     const [count, setCount] = useState(0)
     const [price,setPrice] = useState(item.precio*item.cantidad)
+    const [preUni, setPreUni] = useState(0)
     
     const user = JSON.parse(localStorage.getItem('currentUser'))
 
@@ -17,6 +18,22 @@ const CartItem =({item}) =>{
         setCount(item.cantidad)
         setPrice((item.precio * count).toFixed(2))
     },[item.cantidad, item.precio, count])
+
+    useEffect(()=>{
+        setPrecioUnitario()
+    })
+
+    const setPrecioUnitario = ()=>{
+        let temp = 0
+        if(isSuccess){
+            if(producto.porcentajeDescuento !== null){
+                temp = producto.pvp - (producto.pvp * (producto.porcentajeDescuento)/100)
+                temp = parseFloat(temp)
+                setPreUni(temp.toFixed(2))
+            }else
+                setPreUni(parseFloat(producto.pvp).toFixed(2))
+        }
+    }
 
     const handleDelete = (user,id) =>{
         Swal.fire({
@@ -85,7 +102,7 @@ const CartItem =({item}) =>{
                             </div>
                         </div>
                         <div className="pr-4">
-                            <span className="text-md font-base">${(producto.pvp).toFixed(2)}</span>
+                            <span className="text-md font-base">${preUni}</span>
                         </div>
                         <div className="pr-4">
                             <span className="text-md font-base">${price}</span>

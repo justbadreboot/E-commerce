@@ -1,10 +1,26 @@
 import { addToCart } from '../../helpers/cartActions';
-import { useNavigate, } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const RelatedProductCard =({product})=>{
     
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('currentUser'))
+    const [precio, setPrecio] = useState(0)
+    
+    useEffect(()=>{
+        //setDiscount()
+    })
+
+    const setDiscount =()=>{
+       let temp = 0 
+       if(product.porcentajeDescuento !== null){
+            temp = product.pvp - (product.pvp * (product.porcentajeDescuento)/100)
+            temp = parseFloat(temp)
+            setPrecio(temp.toFixed(2))
+        }else
+            setPrecio((product.pvp).toFixed(2))
+    }
     
     const handleOnClick =(user,id,cant,precio,nombre)=>{
         if(user)
@@ -22,7 +38,9 @@ const RelatedProductCard =({product})=>{
                     <p className="lg:block w-2/3 text-sm font-bold text-info-100">${product.pvp}</p>    
                 </div>
                 <div>
-                    <img src={product.image} alt="" className="flex items-center opacity-80 lg:opacity-100" />
+                    <Link to={`/producto/${product.id}`}>
+                        <img src={product.image} alt="producto" className="flex items-center opacity-80 lg:opacity-100" />
+                    </Link>
                 </div>
             </div>
             <button onClick={()=> handleOnClick(user,product.id,1, product.pvp, product.name)} className={`bg-green-500 py-2 px-4 rounded-lg border-2 border-gray-200 text-xs text-white font-semibold hover:text-white hover:border-transparent`}>

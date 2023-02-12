@@ -3,15 +3,18 @@ import Pagination from "./main/Pagination"
 import {BiSearch} from 'react-icons/bi'
 import {FaFilter} from 'react-icons/fa'
 import {RxCross2} from 'react-icons/rx'
-import { useGetServicesQuery, useGetSpecialtyQuery } from "../store/serverApi";
+import { useGetSpecialtyQuery } from "../store/serverApi";
+import ServiceCardSearch from "./cards/ServiceCardSearch"
 import Loader from "./main/Loader"
+import axios from "axios"
 
 const FilterServices =()=>{
 
-    const {data: services} = useGetServicesQuery();
     const {data: specialties, isSuccess, isLoading} = useGetSpecialtyQuery()
 
     const [openFilter, setOpenFilter] = useState(true)
+    const [servicios,setServicios] = useState([])
+    const [, setSelectedOption] = useState("")
 
     useEffect(() => {
         window.addEventListener('resize', () => {
@@ -19,6 +22,47 @@ const FilterServices =()=>{
             if(viewport >= 1024) return setOpenFilter(true)
         })
     })
+
+    useEffect(()=>{
+        getServices()
+    },[])
+
+    const handleOnChange = (e) =>{
+        let temp = e.target.value
+        setSelectedOption(temp)
+        getServiceBySpecialty(temp)
+      }
+    
+    const handleOnSearch = (e) =>{
+        let temp = e.target.value
+        getServicesByName(temp)
+    }
+    
+    const getServicesByName =(name)=>{
+
+    }
+
+    const getServices = async ()=>{
+        await axios.get(`https://service-production-bb52.up.railway.app/api/service`)
+        .then(response => {
+            setServicios(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+    
+    const getServiceBySpecialty = async (id) =>{
+        await axios.get(`https://service-production-bb52.up.railway.app/api/specialty/${id}/service`)
+          .then(response => {
+            setServicios(response.data)
+            console.log(response.data)
+          })
+          .catch(error => {
+            setServicios([])
+            console.log(error)
+          })
+    }
 
     return(
         <div className="relative mx-auto py-4 sm:py-12 px-4 md:px-12 w-full max-w-8xl bg-gray-50 font-poppins">
@@ -29,7 +73,7 @@ const FilterServices =()=>{
                         <div className="hidden lg:inline-block relative">
                             <input type="search" id="search" name="search"
                                 placeholder="Buscar"
-                                className="form-input pl-11 pr-5 w-72 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-primary-100 focus:ring-1 focus:ring-blue-300"
+                                className="form-input pl-11 pr-5 w-72 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-primary-100 focus:ring-1 focus:ring-blue-300" onChange={handleOnSearch}
                             />
                             <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
                                 <BiSearch className="w-4 h-4" />
@@ -50,7 +94,7 @@ const FilterServices =()=>{
                     </div>
                     <div className="lg:hidden relative m-5">
                         <input type="search" id="search" name="search"
-                        placeholder="Buscar"
+                        placeholder="Buscar" onChange={handleOnSearch}
                         className="form-input pl-11 pr-5 w-52 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-blue-300 focus:ring-1 focus:ring-blue-300"
                         />
                         <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
@@ -65,7 +109,10 @@ const FilterServices =()=>{
                             specialties.map(item => (
                                 <div key={item.id} className="m-1 flex items-center space-x-3">
                                     <div>
-                                        <input type="radio" name="categorias" id={item.name} className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
+                                        <input type="radio" name="especialidad" id={item.name} 
+                                        value={item.id} 
+                                        onChange={handleOnChange}
+                                        className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
                                     </div>
                                     <span className="text-base text-gray-700 font-medium hover:text-green-400">{item.name}</span>
                                 </div>
@@ -76,8 +123,14 @@ const FilterServices =()=>{
                 </div>
                 <div className="col-span-full lg:col-span-3">
                     <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-                        <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-                        
+                        <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3">
+                            {servicios.length !== 0 ? (
+                                servicios.map( service =>(
+                                    <ServiceCardSearch service={service} key={service.id} />
+                                ))
+                            ) : (
+                                <p className="">Resultados no encontrados</p>
+                            )}
                         </div>
                         <Pagination />
                     </div>

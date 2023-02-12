@@ -51,13 +51,15 @@ const Checkout =()=>{
             <MainLayout>
                 <div className=" font-poppins ml-10 mt-4">
                     <Link to="/carrito" className="sm:hidden text-sm inline-flex">
-                        <HiArrowUturnLeft className="w-4 h-4 mr-2" />Regresar
+                        <HiArrowUturnLeft className="w-4 h-4 mr-2" />Regresar al carrito
                     </Link>
                 </div>
                 <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32 font-poppins">
-                    <Link to="/carrito" className="hidden sm:block">
-                        <HiArrowUturnLeft className="w-5 h-5 mr-6" />
-                    </Link>
+                    <div className="tooltip" data-tip="Regresar al carrito">
+                        <Link to="/carrito" className="hidden sm:block">
+                            <HiArrowUturnLeft className="w-5 h-5 mr-6" />
+                        </Link>
+                    </div>
                     <p className="text-2xl font-semibold text-gray-800">Checkout</p>
                     <Status />
                 </div>

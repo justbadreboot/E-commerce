@@ -13,7 +13,7 @@ const Filter =()=>{
 
   const [products,setProductos] = useState([])
   const [openFilter, setOpenFilter] = useState(true)
-  
+  const [, setSelectedOption] = useState("")
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -26,17 +26,48 @@ const Filter =()=>{
     getProducts()
   },[])
 
-  const getProducts = async()=>{
+  const handleOnChange = (e) =>{
+    let temp = e.target.value
+    setSelectedOption(temp)
+    getProductsByCategory(temp)
+  }
+
+  const handleOnSearch = (e) =>{
+    let temp = e.target.value
+    getProductsByName(temp)
+  }
+
+  const getProducts = async ()=>{
     await axios.get(`https://product-production-cf12.up.railway.app/api/product/all`)
       .then(response => {
         setProductos(response.data)
-        console.log(response.data)
       })
       .catch(error => {
         console.log(error)
       })
   }
 
+  const getProductsByCategory = async (id) =>{
+    await axios.get(`https://product-production-cf12.up.railway.app/api/product/category/${id}`)
+      .then(response => {
+        setProductos(response.data)
+      })
+      .catch(error => {
+        setProductos([])
+        console.log(error)
+      })
+  }
+
+  const getProductsByName = async (name)=>{
+    await axios.get(`https://product-production-cf12.up.railway.app/api/product/filter/${name}`)
+    .then(response => {
+      setProductos(response.data)
+    })
+    .catch(error => {
+      setProductos([])
+      console.log(error)
+    })
+  }
 
   return(
     <div className="relative mx-auto py-4 sm:py-12 px-4 md:px-12 w-full max-w-8xl bg-gray-50 font-poppins">
@@ -48,6 +79,7 @@ const Filter =()=>{
               <input type="search" id="search" name="search"
                 placeholder="Buscar"
                 className="form-input pl-11 pr-5 w-72 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-primary-100 focus:ring-1 focus:ring-blue-300"
+                onChange={handleOnSearch}
               />
               <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
                 <BiSearch className="w-4 h-4" />
@@ -68,7 +100,7 @@ const Filter =()=>{
           </div>
           <div className="lg:hidden relative m-5">
             <input type="search" id="search" name="search"
-              placeholder="Buscar"
+              placeholder="Buscar" onChange={handleOnSearch}
               className="form-input pl-11 pr-5 w-52 block shadow-sm rounded-full border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-blue-300 focus:ring-1 focus:ring-blue-300"
             />
             <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
@@ -83,7 +115,9 @@ const Filter =()=>{
                 categorias.map(category => (
                   <div key={category.id} className="m-1 flex items-center space-x-3">
                     <div>
-                      <input type="radio" name="categorias" id={category.name} className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
+                      <input type="radio" name="categorias" id={category.name} value={category.id} 
+                        onChange={handleOnChange}
+                       className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
                     </div>
                     <span className="text-base text-gray-700 font-medium hover:text-green-400">{category.name}</span>
                   </div>
@@ -95,9 +129,13 @@ const Filter =()=>{
         <div className="col-span-full lg:col-span-3">
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
             <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-              {products.map( product =>(
+            {products.length !== 0 ? (
+              products.map( product =>(
                 <ProductCard product={product} key={product.id}/>
-              ))}
+              ))
+              ):(
+                <p>Resultados no encontrados</p>
+              )}
             </div>
             <Pagination />
           </div>

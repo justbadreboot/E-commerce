@@ -1,10 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetProductByIdQuery } from "../../store/serverApi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addToCart} from "../../helpers/cartActions";
 import Swal from "sweetalert2";
 import Loader from "../../components/main/Loader"
 import RelatedProducts from "../RelatedProducts";
+import {HiArrowUturnLeft} from "react-icons/hi2";
 
 const ProductDetail=()=>{
 
@@ -13,7 +14,25 @@ const ProductDetail=()=>{
     const {data: detalles, isLoading, isFetching, isSuccess} = useGetProductByIdQuery(params.id)
     
     const [count, setCount] = useState(1)
+    const [precio, setPrecio] = useState(0)
     const user = JSON.parse(localStorage.getItem('currentUser'))
+
+    useEffect(()=>{
+        setDiscount()
+    })
+
+    const setDiscount =()=>{
+       let temp = 0
+        if(isSuccess){
+            if(detalles.porcentajeDescuento !== null){
+                temp = detalles.pvp - (detalles.pvp * (detalles.porcentajeDescuento)/100)
+                temp = parseFloat(temp)
+                setPrecio(temp.toFixed(2))
+            }else
+                setPrecio((detalles.pvp).toFixed(2))
+        }
+        
+    }
 
     const Toast = Swal.mixin({
         toast: true,
@@ -68,6 +87,11 @@ const ProductDetail=()=>{
     return(
         <>
             <div className="bg-white py-6 sm:py-8 lg:py-12">
+                <div className=" font-poppins ml-10 md:ml-14 mb-6">
+                    <Link to="/productos" className="text-sm inline-flex">
+                        <HiArrowUturnLeft className="w-4 h-4 mr-2" />Regresar
+                    </Link>
+                </div>
                 <div className="max-w-screen-lg px-4 md:px-8 mx-auto">
                     {(isFetching || isLoading) && <Loader />}
                     {isSuccess && (
@@ -75,7 +99,9 @@ const ProductDetail=()=>{
                             <div className="space-y-4">
                                 <div className="bg-gray-100 rounded-lg overflow-hidden relative">
                                     <img src={detalles.image} loading="lazy" alt={detalles.name} className="w-full h-96 object-cover object-center" />
-                                    <span className="bg-red-500 text-white text-sm tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">sale</span>
+                                    {detalles.porcentajeDescuento !== null && (
+                                        <span className="bg-red-500 text-white text-sm tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">Oferta</span>
+                                    )}
                                 </div>
                             </div>
                             <div className="md:py-4">
@@ -99,8 +125,16 @@ const ProductDetail=()=>{
                                 </div>
                                 <div className="mb-4">
                                     <div className="flex items-end gap-2">
-                                        <span className="text-gray-800 text-xl md:text-2xl font-bold">${detalles.pvp}</span>
-                                        <span className="text-red-500 line-through mb-0.5">$30.00</span>
+                                        {detalles.porcentajeDescuento !== null ? (
+                                            <>
+                                                <span className="text-gray-800 text-xl md:text-2xl font-bold">
+                                                    ${precio}
+                                                </span>
+                                                <span className="text-red-500 text-lg line-through mb-0.5">${detalles.pvp}</span>
+                                            </>
+                                        ) : (
+                                            <span className="text-gray-800 text-xl md:text-2xl font-bold">${precio}</span>
+                                        )}
                                     </div>
                                 </div>
                                 <div className={`flex mb-4 ${!user ? "hidden" : 'block'}`}>
@@ -122,9 +156,9 @@ const ProductDetail=()=>{
                                     <span className="text-sm">2-4 días de envío</span>
                                 </div>
                                 <div className="flex gap-2.5">
-                                    <button onClick={()=> handleOnClick(user,detalles.id,count,detalles.pvp, detalles.name)} className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>
+                                    <button onClick={()=> handleOnClick(user,detalles.id,count,precio, detalles.name)} className="inline-block flex-1 sm:flex-none bg-warning-100 hover:bg-warning-60 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Añadir al carrito</button>
 
-                                    <button onClick={()=> handleOnCheckout(user,detalles.id,count,detalles.pvp, detalles.name)} className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3">
+                                    <button onClick={()=> handleOnCheckout(user,detalles.id,count,precio, detalles.name)} className="inline-block bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-indigo-300 text-gray-500 active:text-gray-700 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-4 py-3">
                                         Comprar ahora
                                     </button>
                                 </div>

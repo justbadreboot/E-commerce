@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, } from 'react-router-dom';
 import { addToCart } from '../../helpers/cartActions';
 
@@ -5,7 +6,22 @@ const ProductCard = ({product}) =>{
 
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem('currentUser'))
+    const [precio, setPrecio] = useState(0)
     
+    useEffect(()=>{
+        //setDiscount()
+    })
+
+    const setDiscount =()=>{
+       let temp = 0 
+       if(product.porcentajeDescuento !== null){
+            temp = product.pvp - (product.pvp * (product.porcentajeDescuento)/100)
+            temp = parseFloat(temp)
+            setPrecio(temp.toFixed(2))
+        }else
+            setPrecio((product.pvp).toFixed(2))
+    }
+
     const handleOnClick =(user,id,cant,precio,nombre)=>{
         if(user)
             addToCart(user,id,cant,precio,nombre)
