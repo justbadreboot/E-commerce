@@ -49,8 +49,9 @@ const CartItem =({item}) =>{
           }).then((result) => {
             if (result.isConfirmed)
                 deleteCartItem(user,id)
+                console.log('aqui')
                 Swal.fire('Eliminado!', 'Tu producto ha sido eliminado con éxito', 'success')
-          })
+            })
     }
 
     const handleOnChange = (e) =>{

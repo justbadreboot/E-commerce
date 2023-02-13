@@ -58,7 +58,7 @@ const Payment = ({envio,total,subtotal})=>{
                     'Su pago se ha realizado con éxito.',
                     'success'
                     )
-                    navigate("/perfil")
+                    navigate("/")
                 }
             })
 		},
@@ -84,7 +84,7 @@ const Payment = ({envio,total,subtotal})=>{
                     'Su pedido se encuentra en camino',
                     'success'
                 )
-                navigate("/perfil")
+                navigate("/")
             }
         })
     }

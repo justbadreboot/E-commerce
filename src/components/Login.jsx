@@ -12,6 +12,7 @@ import axios from 'axios';
 
 const Login = () =>{
     
+    const token = JSON.parse(localStorage.getItem('token'))
     const navigate = useNavigate()
     const [isForm, setIsForm] = useState({
         login : true,
@@ -29,7 +30,9 @@ const Login = () =>{
     }
  
     const getClient = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/client/user/${id}`)
+        await axios.get(`https://client-production-d410.up.railway.app/api/cliente/client/user/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+        })
         .then(response => {
             localStorage.setItem('currentUser', JSON.stringify(response.data.id))
         })
@@ -131,7 +134,7 @@ const Login = () =>{
                 </div>
                 <div className="z-10 col-span-7 sm:col-span-2 md:col-span-1 h-full flex sm:flex-col border-transparent items-center text-sm text-gray-500">
                     <button onClick={() => setIsForm({ login : true, register : false})} 
-                    className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col  justify-center items-center active:outline-none focus:outline-none  ${isForm.login ? "bg-white bg-opacity-80 text-gray-600 border-y-2 border-r-2 border-green-500" : "text-white"}`}>
+                    className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col  justify-center items-center active:outline-none focus:outline-none  ${isForm.login ? "bg-white bg-opacity-80 text-gray-600 border-t-2 border-r-2 border-green-500" : "text-white"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -139,7 +142,7 @@ const Login = () =>{
                         <hr className={` hidden sm:block  ${!isForm.register ? "h-1 bg-green-500 w-20 mt-4" : "hidden" }`} />
                     </button>
                     <button onClick={() => setIsForm({ login : false, register : true})}
-                     className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.register ? "bg-white bg-opacity-80 text-gray-600 border-y-2 border-r-2 border-green-500" : "text-white "}`}>
+                     className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.register ? "bg-white bg-opacity-80 text-gray-600 border-t-2 sm:border-t-0 sm:border-b-2 border-l-2 sm:border-r-2  sm:border-l-0 border-green-500" : "text-white "}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>
@@ -150,10 +153,10 @@ const Login = () =>{
                 <div className={`col-span-7 sm:col-span-5 md:col-span-4 relative h-[48rem] md:h-[48rem] lg:h-[35rem] transition-all duration-500 ease-in-out transform -translate-y-full  ${getPosition()}`}>
                     {/* Login Form */}
                     <div className={`px-8 lg:px-20 w-full h-full flex flex-col items-center justify-center bg-white bg-opacity-80 transition-all duration-150 ease-in transform ${!isForm.login && "opacity-0"}`}>
-                        <img src={kruger} alt='kruger' className="h-20" />
+                        <img src={kruger} alt='kruger' className="h-28 mb-4 md:mb-0 md:h-24" />
                         <h2 className="py-3 text-center text-3xl font-bold text-gray-600">Bienvenido de nuevo!</h2>
                         <form onSubmit={formik.handleSubmit} action="" className="py-6 w-full px-4 lg:px-0 xl:px-10">
-                            <p className='mb-4 text-sm'>Ingresa tus credenciales de acceso para continuar</p>
+                            <p className='mb-4 text-md md:text-sm'>Ingresa tus credenciales de acceso para continuar</p>
                             <div className="form-control w-full mb-2">
                                 <label className="label">
                                     <span className="label-text">Email</span>

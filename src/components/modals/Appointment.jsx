@@ -1,10 +1,12 @@
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { useAddNewAppointmentMutation} from "../../store/serverApi";
 
 const Appointment = ({serviceID}) =>{
     
+    const navigate = useNavigate()
     const id = JSON.parse(localStorage.getItem('currentUser'))
     const [addNewApp] = useAddNewAppointmentMutation()
 
@@ -42,6 +44,7 @@ const Appointment = ({serviceID}) =>{
                         'success'
                     )
                     formik2.resetForm()
+                    navigate('/')
                 }
             })
             

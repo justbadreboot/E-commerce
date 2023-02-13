@@ -15,7 +15,7 @@ const FilterServices =()=>{
     const [dataOriginal, setDataOriginal] = useState([])
     const [openFilter, setOpenFilter] = useState(true)
     const [servicios,setServicios] = useState([])
-    const [, setSelectedOption] = useState("")
+    const [selectedOption, setSelectedOption] = useState("")
 
     useEffect(() => {
         window.addEventListener('resize', () => {
@@ -30,18 +30,25 @@ const FilterServices =()=>{
 
     const handleOnChange = (e) =>{
         let temp = parseInt(e.target.value)
-        setSelectedOption(temp)
-        let res = dataOriginal.filter((x) => x.specialty.id === temp)
-        setServicios(res)
-      }
+        if(temp ===1){
+            setServicios(dataOriginal)
+        }else{
+            setSelectedOption(temp)
+            let res = dataOriginal.filter((x) => x.specialty.id === temp)
+            setServicios(res)
+        }
+    }
     
     const handleOnSearch = (e) =>{
         let temp = e.target.value
-        getServicesByName(temp)
+        if(temp === '')
+            setServicios(dataOriginal)
+        else
+            getServicesByName(temp)
     }
     
     const getServicesByName = async (name)=>{
-        await axios.get(`https://service-production-bb52.up.railway.app/api/service/search/${name}`)
+        await axios.get(`https://service-production-bb52.up.railway.app/api/public/service/search/${name}`)
         .then(response => {
             setServicios(response.data)
         })
@@ -52,7 +59,7 @@ const FilterServices =()=>{
     }
 
     const getServices = async ()=>{
-        await axios.get(`https://service-production-bb52.up.railway.app/api/service`)
+        await axios.get(`https://service-production-bb52.up.railway.app/api/public/service`)
         .then(response => {
             setServicios(response.data)
             setDataOriginal(response.data)
@@ -117,11 +124,21 @@ const FilterServices =()=>{
                             ))
                         )}
                         </ul>
+                        {selectedOption !== "" && (
+                            <div className="m-1 pt-4 flex items-center space-x-3">
+                            <div>
+                                <input type="radio" name="categorias" value={1} 
+                                onChange={handleOnChange} 
+                                className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
+                            </div>
+                            <span className="text-base text-gray-700 font-medium hover:text-green-400">Todas</span>
+                            </div>
+                        )}  
                     </div>
                 </div>
                 <div className="col-span-full lg:col-span-3">
                     <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-                        <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3">
+                        <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:grid-cols-3">
                             {servicios.length !== 0 ? (
                                 servicios.map( service =>(
                                     <ServiceCardSearch service={service} key={service.id} />

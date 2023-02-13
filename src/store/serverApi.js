@@ -3,12 +3,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
   export const serverApi = createApi({
     reducerPath: 'serverApi',
     baseQuery: fetchBaseQuery({
+      credentials: "same-origin",
       baseUrl: 'https://',
       prepareHeaders: (headers) => {
-        //const token = JSON.parse(localStorage.getItem('token'))
-        //headers.set('Authorization', `Bearer ${token}`)
+        const token = JSON.parse(localStorage.getItem('token'))
+        if (token) {
+          headers.set("authorization", `Bearer ${token}`);
+          headers.set("Content-Type", "application/json");
+        }
         return headers;
-      }
+      },
     }),
     endpoints: (builder) => ({
       getLanding: builder.query({
@@ -33,73 +37,73 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/category/${id}`
       }),
       getClientByDocument: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
+        query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/filter/${doc}`
       }),
       getClientByID: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/client/${doc}`
+        query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/${doc}`
       }),
       getServices: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/service"
+        query: () => "service-production-bb52.up.railway.app/api/public/service"
       }),
       getServicesMain: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/service/main"
+        query: () => "service-production-bb52.up.railway.app/api/public/service/main"
       }),
       getSpecialty: builder.query({
-        query: () => "api-gateway-production-d841.up.railway.app/api/specialty"
+        query: () => "service-production-bb52.up.railway.app/api/public/specialty"
       }),
       getDoctors: builder.query({
-        query: () => `api-gateway-production-d841.up.railway.app/api/doctor`
+        query: () => `api-gateway-production-d841.up.railway.app/api/public/doctor`
       }),
       getAddressClient: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/client/${doc}/direction/custom`
+        query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/${doc}/direction/custom`
       }),
       getOrdersByClient:builder.query({
-        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/client/${doc}`
+        query: (doc) => `client-production-d410.up.railway.app/api/cliente/order/client/${doc}`
       }),
       getOrderByID:builder.query({
-        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/${doc}`
+        query: (doc) => `client-production-d410.up.railway.app/api/cliente/order/${doc}`
       }),
       getAppointmentsByClient:builder.query({
-        query: (doc) => `service-production-bb52.up.railway.app/api/appointment/client/${doc}`
+        query: (doc) => `service-production-bb52.up.railway.app/api/cliente/appointment/client/${doc}`
       }),
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId}) => ({
-          url: `client-production-d410.up.railway.app/api/client`,
+          url: `client-production-d410.up.railway.app/api/public/client`,
           method: 'POST',
           body:{ document, lastName, firstName, phone, userId },
         })
       }),
       updateClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId,id}) => ({
-          url: `client-production-d410.up.railway.app/api/client`,
+          url: `client-production-d410.up.railway.app/api/cliente/client`,
           method: 'PUT',
           body:{ document, lastName, firstName, phone, userId,id },
         })
       }),
       addNewAddress: builder.mutation({
         query : ({id, city, houseNumber, mainStreet, postalCode, secondStreet, sector, state}) =>({
-          url: `client-production-d410.up.railway.app/api/client/${id}/direction`,
+          url: `client-production-d410.up.railway.app/api/cliente/client/${id}/direction`,
           method: 'POST',
           body:{city, houseNumber, mainStreet, postalCode, secondStreet, sector, state},
         })
       }),
       updateAddress: builder.mutation({
         query : ({idCliente,id, city, houseNumber, mainStreet, postalCode, secondStreet, sector, state}) =>({
-          url: `client-production-d410.up.railway.app/api/client/${idCliente}/direction`,
+          url: `client-production-d410.up.railway.app/api/cliente/client/${idCliente}/direction`,
           method: 'PUT',
           body:{city, houseNumber, mainStreet, postalCode, secondStreet, sector, state,id},
         })
       }),
       addNewOrder: builder.mutation({
         query: ({date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName, clientLastName,clientPhone})=>({
-          url: `order-production-bfbc.up.railway.app/api/cliente/order`,
+          url: `client-production-d410.up.railway.app/api/cliente/order`,
           method: 'POST',
           body:{date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName,clientLastName,clientPhone},
         })
       }),
       addNewAppointment: builder.mutation({
         query: ({id,clientId,date,duration})=>({
-          url: `service-production-bb52.up.railway.app/api/service/${id}/appointment`,
+          url: `service-production-bb52.up.railway.app/api/cliente/service/${id}/appointment`,
           method: 'POST',
           body:{id,clientId,date,duration},
         })

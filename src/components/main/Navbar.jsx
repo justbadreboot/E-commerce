@@ -39,6 +39,7 @@ const Navbar = () =>{
         localStorage.removeItem("currentUser")
         localStorage.removeItem("token")
         navigate("/")
+        //window.location.reload()
     } 
     
     return(
@@ -174,9 +175,9 @@ const Navbar = () =>{
                     </div>
                 </div>
                 {/*Mobile responsive sidebar*/}
-                <div className={show ? "w-full xl:hidden h-full absolute z-40 transform top-0 translate-x-0 " : " w-full xl:hidden h-full absolute z-40 transform -translate-x-full"}>
-                    <div className="bg-gray-700 opacity-50 w-full h-full" onClick={() => setShow(!show)} />
-                    <div className="w-72 fixed overflow-y-auto z-40 top-0 bg-gray-200 shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
+                <div className={show ? "w-full xl:hidden h-full max-h-full absolute z-40 transform top-0 right-0 translate-x-0 " : " w-full xl:hidden h-full absolute z-40 transform max-h-full -translate-x-full"}>
+                    <div className="bg-gray-700 opacity-50 w-full h-full " onClick={() => setShow(!show)} />
+                    <div className="w-72 fixed overflow-y-auto z-40 top-0 bg-gray-200 shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out" >
                         <div className="px-6 h-full">
                             <div className="flex flex-col justify-between h-full w-full">
                                 <div>
@@ -197,7 +198,7 @@ const Navbar = () =>{
                                         </div>
                                     </div>
                                     <ul className="f-m-m">
-                                        <ul className='pt-8 ml-4'>
+                                        <ul className='pt-5 ml-4'>
                                             <h2 className='font-semibold'>Productos</h2>
                                             <li className='pt-3 cursor-pointer '>
                                                 <NavLink to="/productos">
@@ -214,7 +215,7 @@ const Navbar = () =>{
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                        <ul className='pt-8 ml-4'>
+                                        <ul className='pt-6 ml-4'>
                                             <h2 className='font-semibold'>Servicios Médicos</h2>
                                             <li className='pt-2 cursor-pointer'>
                                                 <NavLink to="/servicios">
@@ -231,21 +232,21 @@ const Navbar = () =>{
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                        <li className='pt-6 cursor-pointer font-semibold'>
+                                        <li className='pt-5 cursor-pointer font-semibold'>
                                             <NavLink to="/doctores">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Doctores</p>
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li className='pt-6 cursor-pointer font-semibold'>
+                                        <li className='pt-5 cursor-pointer font-semibold'>
                                             <NavLink to="/nosotros">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Nuestro Equipo</p>
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li className='pt-6 cursor-pointer font-semibold'>
+                                        <li className='pt-5 cursor-pointer font-semibold'>
                                             <NavLink to="/contacto">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Contacto</p>
