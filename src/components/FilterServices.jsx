@@ -12,6 +12,7 @@ const FilterServices =()=>{
 
     const {data: specialties, isSuccess, isLoading} = useGetSpecialtyQuery()
 
+    const [dataOriginal, setDataOriginal] = useState([])
     const [openFilter, setOpenFilter] = useState(true)
     const [servicios,setServicios] = useState([])
     const [, setSelectedOption] = useState("")
@@ -28,9 +29,10 @@ const FilterServices =()=>{
     },[])
 
     const handleOnChange = (e) =>{
-        let temp = e.target.value
+        let temp = parseInt(e.target.value)
         setSelectedOption(temp)
-        getServiceBySpecialty(temp)
+        let res = dataOriginal.filter((x) => x.specialty.id === temp)
+        setServicios(res)
       }
     
     const handleOnSearch = (e) =>{
@@ -53,24 +55,13 @@ const FilterServices =()=>{
         await axios.get(`https://service-production-bb52.up.railway.app/api/service`)
         .then(response => {
             setServicios(response.data)
+            setDataOriginal(response.data)
         })
         .catch(error => {
             console.log(error)
         })
     }
     
-    const getServiceBySpecialty = async (id) =>{
-        await axios.get(`https://service-production-bb52.up.railway.app/api/specialty/${id}/service`)
-          .then(response => {
-            setServicios(response.data)
-            console.log(response.data)
-          })
-          .catch(error => {
-            setServicios([])
-            console.log(error)
-          })
-    }
-
     return(
         <div className="relative mx-auto py-4 sm:py-12 px-4 md:px-12 w-full max-w-8xl bg-gray-50 font-poppins">
             <div className="grid grid-cols-4 gap-y-8 gap-x-4">
@@ -92,7 +83,7 @@ const FilterServices =()=>{
                     </div>
                 </div>
                 <div className={`z-10 lg:hidden absolute inset-0 bg-gray-500 bg-opacity-75 ${openFilter ? "visible" : "invisible"}`} />
-                <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative w-full h-full max-h-full max-w-xs overflow-y-scroll lg:overflow-auto bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}>
+                <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative w-full h-full max-h-full max-w-xs overflow-y-scroll lg:overflow-auto bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 hidden"}`}>
                     <div className="lg:hidden py-5 px-5 flex items-center justify-between border-b border-gray-200">
                         <h3 className="text-xl text-gray-600 font-medium">Filtros de Búsqueda</h3>
                         <button className="text-gray-400 hover:text-gray-700" onClick={() => setOpenFilter(false)}>

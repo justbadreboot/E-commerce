@@ -131,9 +131,9 @@ const Navbar = () =>{
                                 ""
                             ) : (
                                 <>
-                                    <div className="flex items-center px-10">
+                                    <div className="flex items-center px-6">
                                         <Link to="/carrito">
-                                            <button className=" hidden md:flex items-center text-white" >
+                                            <button className="  items-center text-white" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                                 </svg>
@@ -144,17 +144,17 @@ const Navbar = () =>{
                                             </button>
                                         </Link>
                                         {user ? ( 
-                                            <div className="dropdown dropdown-end">
+                                            <div className=" hidden sm:flex dropdown dropdown-end">
                                                 <label tabIndex="0" className="flex items-center text-white cursor-pointer ml-6">
                                                     <FaUserAlt className='w-5 h-5 hover:text-secondary-80' />
                                                 </label>
                                                 <ul tabIndex="0" className="mt-2 p-2 menu menu-compact rounded-lg dropdown-content w-52 bg-primary-20 shadow">
-                                                    <li><Link to='/perfil'>Perfil</Link></li>
-                                                    <li><div onClick={()=> handleOnClick()}>Cerrar Sesión</div></li> 
+                                                    <li><Link className='text-sm active:bg-green-400' to='/perfil'>Perfil</Link></li>
+                                                    <li><div className='text-sm active:bg-green-400' onClick={()=> handleOnClick()}>Cerrar Sesión</div></li> 
                                                 </ul>
                                             </div>
                                         ): (
-                                            <Link to="/login">
+                                            <Link to="/login" className='hidden sm:flex'>
                                                 <button className="flex items-center ml-5 text-white">
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -197,35 +197,55 @@ const Navbar = () =>{
                                         </div>
                                     </div>
                                     <ul className="f-m-m">
-                                        <li className='pt-8 cursor-pointer '>
-                                            <NavLink to="/productos">
-                                                <div className="flex items-center justify-between">
-                                                    <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Productos</p>
-                                                </div>
-                                            </NavLink>
-                                        </li>
-                                        <li className='pt-8 cursor-pointer'>
-                                            <NavLink to="/servicios">
-                                                <div className="flex items-center justify-between">
-                                                    <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Servicios</p>
-                                                </div>
-                                            </NavLink>
-                                        </li>
-                                        <li className='pt-8 cursor-pointer'>
+                                        <ul className='pt-8 ml-4'>
+                                            <h2 className='font-semibold'>Productos</h2>
+                                            <li className='pt-3 cursor-pointer '>
+                                                <NavLink to="/productos">
+                                                    <div className="flex items-center justify-between">
+                                                        <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Ver todos</p>
+                                                    </div>
+                                                </NavLink>
+                                            </li>
+                                            <li className='pt-3 cursor-pointer '>
+                                                <NavLink to="/buscarProductos">
+                                                    <div className="flex items-center justify-between">
+                                                        <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Buscar</p>
+                                                    </div>
+                                                </NavLink>
+                                            </li>
+                                        </ul>
+                                        <ul className='pt-8 ml-4'>
+                                            <h2 className='font-semibold'>Servicios Médicos</h2>
+                                            <li className='pt-2 cursor-pointer'>
+                                                <NavLink to="/servicios">
+                                                    <div className="flex items-center justify-between">
+                                                        <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Ver todos</p>
+                                                    </div>
+                                                </NavLink>
+                                            </li>
+                                            <li className='pt-3 cursor-pointer'>
+                                                <NavLink to="/buscarServicios">
+                                                    <div className="flex items-center justify-between">
+                                                        <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Buscar</p>
+                                                    </div>
+                                                </NavLink>
+                                            </li>
+                                        </ul>
+                                        <li className='pt-6 cursor-pointer font-semibold'>
                                             <NavLink to="/doctores">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Doctores</p>
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li className='pt-8 cursor-pointer'>
+                                        <li className='pt-6 cursor-pointer font-semibold'>
                                             <NavLink to="/nosotros">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Nuestro Equipo</p>
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li className='pt-8 cursor-pointer'>
+                                        <li className='pt-6 cursor-pointer font-semibold'>
                                             <NavLink to="/contacto">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Contacto</p>
