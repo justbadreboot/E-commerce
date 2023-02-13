@@ -35,7 +35,7 @@ const ProductCard = ({product}) =>{
                 <Link to={`/producto/${product.id}`}>
                     <img src={product.image} alt={product.name}  />
                     {product.porcentajeDescuento !== null && (
-                        <span className="bg-red-500 text-white text-sm tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">{product.porcentajeDescuento}% off</span>
+                        <span className="bg-red-500 text-white text-xs tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">{product.porcentajeDescuento}% off</span>
                     )}
                     <div className="absolute bottom-3 left-3 inline-flex items-center rounded-lg bg-white p-2 shadow-md">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
@@ -47,7 +47,7 @@ const ProductCard = ({product}) =>{
           </div>
             <div className="mt-1 p-2">
                 <h2 className="text-ternary-60 text-md capitalize font-semibold">{product.name}</h2>  
-                <div className="mt-1 flex items-end justify-between">
+                <div className="mt-1 flex-wrap flex items-end justify-between">
                     {product.porcentajeDescuento !== null ? (
                             <>
                                 <div>

@@ -11,6 +11,7 @@ import axios from 'axios';
 const Filter =()=>{
   const {data: categorias, isSuccess, isLoading} = useGetCategoriesQuery();
 
+  const [dataOriginal, setDataOriginal] = useState([])
   const [products,setProductos] = useState([])
   const [openFilter, setOpenFilter] = useState(true)
   const [, setSelectedOption] = useState("")
@@ -27,9 +28,10 @@ const Filter =()=>{
   },[])
 
   const handleOnChange = (e) =>{
-    let temp = e.target.value
+    let temp = parseInt(e.target.value)
     setSelectedOption(temp)
-    getProductsByCategory(temp)
+    let res = dataOriginal.filter(product => product.category.id === temp)
+    setProductos(res)
   }
 
   const handleOnSearch = (e) =>{
@@ -41,19 +43,9 @@ const Filter =()=>{
     await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/all`)
       .then(response => {
         setProductos(response.data)
+        setDataOriginal(response.data)
       })
       .catch(error => {
-        console.log(error)
-      })
-  }
-
-  const getProductsByCategory = async (id) =>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/category/${id}`)
-      .then(response => {
-        setProductos(response.data)
-      })
-      .catch(error => {
-        setProductos([])
         console.log(error)
       })
   }
@@ -90,8 +82,10 @@ const Filter =()=>{
             </button>
           </div>
         </div>
+
         <div className={`z-10 lg:hidden absolute inset-0 bg-gray-500 bg-opacity-75 ${openFilter ? "visible" : "invisible"}`} />
-        <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative w-full h-full max-h-full max-w-xs overflow-y-scroll lg:overflow-auto bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"}`}>
+        
+        <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative  w-full h-full max-h-full max-w-xs overflow-y-scroll lg:overflow-auto bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-100 hidden"}`}>
           <div className="lg:hidden py-5 px-5 flex items-center justify-between border-b border-gray-200">
             <h3 className="text-xl text-gray-600 font-medium">Filtros de Búsqueda</h3>
             <button className="text-gray-400 hover:text-gray-700" onClick={() => setOpenFilter(false)}>
@@ -129,7 +123,7 @@ const Filter =()=>{
         <div className="col-span-full lg:col-span-3">
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
             <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-            {products.length !== 0 ? (
+            {products !== "No existen coincidencias" ? (
               products.map( product =>(
                 <ProductCard product={product} key={product.id}/>
               ))
