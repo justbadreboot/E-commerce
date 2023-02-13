@@ -5,28 +5,32 @@ import OrderDetailSummary from "../checkout/OrderDetailSummary";
 const OrderDetails = ({ordenID,nombre}) =>{
 
     const user = JSON.parse(localStorage.getItem('currentUser'))
+    //const token = JSON.parse(localStorage.getItem('token'))
     const [address,setAddress] = useState({})
     const [client, setClient] = useState({})
     const [orden, setOrden] = useState({})
     const [detalles,setDetalles] = useState([])
 
-    useEffect( () =>{
+    useEffect(()=>{
+        const getOrder = async (id) =>{
+            await axios.get(`https://order-production-bfbc.up.railway.app/api/cliente/order/${id}`)
+            .then(response => {
+                setOrden(response.data)
+                getAddress(response.data.idAddress)
+                setDetalles(response.data.orderDetails)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
         getOrder(ordenID)
+    },[ordenID])
+
+    useEffect( () =>{
         getClientnfo(user)
-    },[ordenID,user])
+    },[user])
 
-    const getOrder = async (id) =>{
-        await axios.get(`https://order-production-bfbc.up.railway.app/api/order/${id}`)
-        .then(response => {
-            setOrden(response.data)
-            getAddress(response.data.idAddress)
-            setDetalles(response.data.orderDetails)
-        })
-        .catch(error => {
-            console.log(error)
-        })
-    }
-
+  
     const getClientnfo = async(id) =>{
         await axios.get(`https://client-production-d410.up.railway.app/api/client/${id}`)
         .then(response => {
@@ -90,7 +94,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
                             <h2 className="text-base-80 font-semibold ">Detalles de Compra</h2>
                                 <div className="mt-3 rounded-lg border bg-white px-2 sm:px-6 md:overflow-y-auto md:max-h-72">
                                     {detalles.map( item =>
-                                        <OrderDetailSummary item={item} />
+                                        <OrderDetailSummary item={item} key={item.id} />
                                     )}
                             </div>
                         </div>

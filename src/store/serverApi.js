@@ -7,7 +7,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       prepareHeaders: (headers) => {
         //const token = JSON.parse(localStorage.getItem('token'))
         //headers.set('Authorization', `Bearer ${token}`)
-        console.log(headers)
         return headers;
       }
     }),
@@ -31,7 +30,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/${id}`
       }),
       getProductsByCategory: builder.query({
-        query: (id) => `api-gateway-production-d841.up.railway.app/api/product/category/${id}`
+        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/category/${id}`
       }),
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`
@@ -55,10 +54,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: (doc) => `client-production-d410.up.railway.app/api/client/${doc}/direction/custom`
       }),
       getOrdersByClient:builder.query({
-        query: (doc) => `order-production-bfbc.up.railway.app/api/order/client/${doc}`
+        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/client/${doc}`
       }),
       getOrderByID:builder.query({
-        query: (doc) => `order-production-bfbc.up.railway.app/api/order/${doc}`
+        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/${doc}`
       }),
       getAppointmentsByClient:builder.query({
         query: (doc) => `service-production-bb52.up.railway.app/api/appointment/client/${doc}`
@@ -93,7 +92,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       }),
       addNewOrder: builder.mutation({
         query: ({date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName, clientLastName,clientPhone})=>({
-          url: `order-production-bfbc.up.railway.app/api/order`,
+          url: `order-production-bfbc.up.railway.app/api/cliente/order`,
           method: 'POST',
           body:{date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName,clientLastName,clientPhone},
         })

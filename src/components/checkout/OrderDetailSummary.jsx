@@ -8,7 +8,7 @@ const OrderDetailSummary = ({item})=>{
 
     useEffect(()=>{
         getProductInfo(item.name)
-    },[])
+    },[item.name])
 
     const getProductInfo = async(name) =>{
         await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/filter/${name}`)

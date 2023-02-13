@@ -35,7 +35,7 @@ const OrderElement =({orden,num, onAction})=>{
             colorPago = 'bg-success-100'
             break
         case 'Pago pendiente':
-            colorPago = 'bg-warning-100'
+            colorPago = 'bg-error-100'
             break
         default:
             colorPago = ''
