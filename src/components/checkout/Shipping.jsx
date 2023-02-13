@@ -111,14 +111,12 @@ const Shipping = ({envio,total,subtotal})=>{
                                 </select>
                                 {(Object.entries(infoDireccion).length !== 0 && ver) && (
                                     <div className="mt-3">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 mb-2">
-                                            <p className="font-semibold text-gray-600">Ciudad: 
-                                                <span className="font-medium text-gray-600"> {ciudad}</span>
-                                            </p>
-                                            <p className="font-semibold text-gray-600">Provincia: 
-                                                <span className="font-medium text-gray-600"> {provincia}</span>
-                                            </p>
-                                        </div>
+                                        <p className="font-semibold text-gray-600 mb-2">Ciudad: 
+                                            <span className="font-medium text-gray-600"> {ciudad}</span>
+                                        </p>
+                                        <p className="font-semibold text-gray-600 mb-2">Provincia: 
+                                            <span className="font-medium text-gray-600"> {provincia}</span>
+                                        </p>
                                         <p className="font-semibold text-gray-600 mb-2">Calle Principal: 
                                             <span className="font-medium text-gray-600"> {calle1}</span>
                                         </p>

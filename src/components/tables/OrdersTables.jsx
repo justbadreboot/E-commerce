@@ -1,10 +1,15 @@
 import { useGetOrdersByClientQuery } from "../../store/serverApi";
 import OrderElement from "./OrderElement";
+import Loader from "../main/Loader"
 
-const OrdersTables =()=>{
+const OrdersTables =({setAction})=>{
 
     const id = JSON.parse(localStorage.getItem('currentUser'))
-    const {data: ordenes,isSuccess} = useGetOrdersByClientQuery(id)
+    const {data: ordenes,isSuccess,isLoading} = useGetOrdersByClientQuery(id)
+
+    const modal = (id) =>{
+       setAction(id)
+    }
 
     return(
         <div className='bg-gray-50 font-poppins'>
@@ -14,6 +19,7 @@ const OrdersTables =()=>{
                         <div className=" min-w-0 mb-6 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border ">
                             <div className="px-6 py-4 mb-0 bg-white border-b-0 border-b-solid rounded-2xl h-3gl">
                                 <div className="px-4 overflow-x-auto ">
+                                {isLoading && <Loader />}
                                 {isSuccess && (
                                    ordenes.length !== 0 ? (
                                         <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
@@ -30,7 +36,7 @@ const OrdersTables =()=>{
                                             </thead>
                                             <tbody>   
                                             {ordenes.map((orden,i) =>(
-                                               <OrderElement orden={orden} key={orden.id} num={i+1}/>
+                                               <OrderElement orden={orden} key={orden.id} num={i+1} onAction={modal} />
                                             ))}
                                             </tbody>
                                         </table>

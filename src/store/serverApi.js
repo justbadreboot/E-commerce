@@ -51,6 +51,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getOrdersByClient:builder.query({
         query: (doc) => `order-production-bfbc.up.railway.app/api/order/client/${doc}`
       }),
+      getOrderByID:builder.query({
+        query: (doc) => `order-production-bfbc.up.railway.app/api/order/${doc}`
+      }),
       getAppointmentsByClient:builder.query({
         query: (doc) => `service-production-bb52.up.railway.app/api/appointment/client/${doc}`
       }),
@@ -122,6 +125,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetAddressClientQuery,
     useGetProductByIdQuery,
     useGetClientByDocumentQuery,
+    useGetOrderByIDQuery,
     useGetClientByIDQuery,
     useGetServicesQuery,
     useGetAppointmentsByClientQuery,

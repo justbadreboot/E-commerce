@@ -4,6 +4,7 @@ import {BsArrowLeft} from "react-icons/bs"
 import { useEffect, useState } from "react";
 import firestore from "../helpers/firebaseConfig";
 import { collection,onSnapshot } from "firebase/firestore";
+import carrito from "../assets/img/carrito.png"
 
 const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
@@ -62,7 +63,7 @@ const Cart =()=>{
                                     <div className="mt-6 flex justify-center">
                                         <div>
                                             <h4 className="text-gray-600 font-semibold">Carrito vacío</h4>
-                                            <img src="https://www.pngall.com/wp-content/uploads/5/Shopping-Cart-PNG-Download-Image.png" alt="carrito" className="w-32 h-32" />
+                                            <img src={carrito} alt="carrito" className="w-32 h-32" />
                                         </div>
                                     </div>
                                 )}

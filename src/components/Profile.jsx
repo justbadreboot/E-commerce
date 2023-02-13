@@ -1,9 +1,16 @@
+import { useState } from "react"
 import AddessCard from "./cards/AddressCard"
 import ProfileCard from "./cards/ProfileCard"
+import OrderDetails from "./modals/OrderDetails"
 import AppointmentsTables from "./tables/AppoitnmentsTables"
 import OrdersTables from "./tables/OrdersTables"
 
 const Profile =() =>{
+
+    const [id,setId] = useState(0)
+    const leerID = (id)=>{
+        setId(id)
+    }
 
     return(
         <div className="font-poppins w-full p-8 mx-auto">
@@ -16,7 +23,8 @@ const Profile =() =>{
             <div className="mt-8">
                 <h1 className="mb-4 text-xl font-bold text-gray-700">Historial de
                 <span className="text-primary-100"> Órdenes</span> de Compras </h1> 
-                <OrdersTables />
+                <OrdersTables setAction={leerID} />
+                <OrderDetails ordenID={id} />
             </div>
             <div className="mt-8">
                 <h1 className="mb-4 text-xl font-bold text-gray-700">Historial de

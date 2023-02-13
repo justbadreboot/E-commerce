@@ -1,5 +1,4 @@
-
-const OrderElement =({orden,num})=>{
+const OrderElement =({orden,num, onAction})=>{
     
     let colorOrden = '', colorPago = '', colorEnvio = ''
     
@@ -69,7 +68,7 @@ const OrderElement =({orden,num})=>{
                 </span>
             </td>
             <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                <label htmlFor="orden" className="cursor-pointer font-medium leading-tight text-sm text-slate-500">
+                <label htmlFor="orden" onClick={ () => onAction(orden.id)} className="cursor-pointer font-medium leading-tight text-sm text-slate-500">
                     Ver detalles
                 </label>
             </td>
