@@ -13,7 +13,7 @@ const AppointmentsTables = ()=>{
                     <div className="flex-none w-full h-full max-w-full px-3 table-container">
                         <div className=" min-w-0 mb-6 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border ">
                             <div className="px-6 py-4 mb-0 bg-white border-b-0 border-b-solid rounded-2xl h-3gl">
-                                <div className="px-4 overflow-x-auto ">
+                                <div className="px-4 overflow-x-auto md:overflow-y-auto md:max-h-[22rem]">
                                 {isSuccess && (
                                     appointments.length !== 0 ? (
                                         <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">

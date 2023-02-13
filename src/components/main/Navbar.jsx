@@ -35,8 +35,9 @@ const Navbar = () =>{
         }
     },[collectionName,user])
 
-    const  handleOnClick =()=>{
+    const handleOnClick =()=>{
         localStorage.removeItem("currentUser")
+        localStorage.removeItem("token")
         navigate("/")
     } 
     

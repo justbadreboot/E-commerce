@@ -68,9 +68,16 @@ const OrderElement =({orden,num, onAction})=>{
                 </span>
             </td>
             <td className="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                <label htmlFor="orden" onClick={ () => onAction(orden.id)} className="cursor-pointer font-medium leading-tight text-sm text-slate-500">
-                    Ver detalles
-                </label>
+                {orden.orderState.state === 'Finalizada' ? (
+                    <label htmlFor="orden" onClick={ () => onAction(orden.id,"Factura")} className="cursor-pointer leading-tight text-sm text-slate-500 font-semibold">
+                        Ver Factura
+                    </label>
+                ) : (
+                    <label htmlFor="orden" onClick={ () => onAction(orden.id,"Orden")} className="cursor-pointer font-medium leading-tight text-sm text-slate-500">
+                        Ver Detalles
+                    </label>
+                )}
+                
             </td>
         </tr>
     )

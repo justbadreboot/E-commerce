@@ -8,8 +8,11 @@ import OrdersTables from "./tables/OrdersTables"
 const Profile =() =>{
 
     const [id,setId] = useState(0)
-    const leerID = (id)=>{
+    const [nombre,setNombre] = useState("")
+
+    const leerID = (id,nombre)=>{
         setId(id)
+        setNombre(nombre)
     }
 
     return(
@@ -24,7 +27,7 @@ const Profile =() =>{
                 <h1 className="mb-4 text-xl font-bold text-gray-700">Historial de
                 <span className="text-primary-100"> Órdenes</span> de Compras </h1> 
                 <OrdersTables setAction={leerID} />
-                <OrderDetails ordenID={id} />
+                <OrderDetails ordenID={id} nombre={nombre} />
             </div>
             <div className="mt-8">
                 <h1 className="mb-4 text-xl font-bold text-gray-700">Historial de

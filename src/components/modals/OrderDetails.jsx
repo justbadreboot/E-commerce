@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import OrderDetailSummary from "../checkout/OrderDetailSummary";
 
-const OrderDetails = ({ordenID}) =>{
+const OrderDetails = ({ordenID,nombre}) =>{
 
     const user = JSON.parse(localStorage.getItem('currentUser'))
     const [address,setAddress] = useState({})
@@ -53,7 +53,11 @@ const OrderDetails = ({ordenID}) =>{
             <div className="modal">
                 <div className="modal-box w-10/12 lg:w-6/12 max-w-5xl">
                     <div className="text-center text-lg font-semibold capitalize text-gray-600">
-                        <h2>Detalles de la Orden #{orden.id}</h2>
+                        {nombre === 'Orden' ? (
+                            <h2>Detalles de la Orden #{orden.id}</h2>
+                        ) : (
+                            <h2>Factura</h2>
+                        )}
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 mt-4">
                         <div>
@@ -84,11 +88,15 @@ const OrderDetails = ({ordenID}) =>{
                         </div>
                         <div className="mt-4 md:mt-0">
                             <h2 className="text-base-80 font-semibold ">Detalles de Compra</h2>
-                            <div className="mt-3 rounded-lg border bg-white px-2 sm:px-6 md:overflow-y-auto md:h-72">
-                                {detalles.map( item =>
-                                    <OrderDetailSummary item={item} />
-                                )}
+                                <div className="mt-3 rounded-lg border bg-white px-2 sm:px-6 md:overflow-y-auto md:max-h-72">
+                                    {detalles.map( item =>
+                                        <OrderDetailSummary item={item} />
+                                    )}
+                            </div>
                         </div>
+                        <div>
+                            <h2 className="text-base-80 font-semibold mt-3">Total: 
+                            <span className="text-gray-700"> ${orden.total}</span></h2>
                         </div>
                     </div>
                     <div className="modal-action">

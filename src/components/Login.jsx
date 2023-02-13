@@ -53,6 +53,7 @@ const Login = () =>{
                 password: data.password_login,
             })
             if(res.data){
+                localStorage.setItem('token', JSON.stringify(res.data.token))
                 const token_decoded = jwt(res.data.token)
                 getClient(token_decoded.id)
                 formik.resetForm()

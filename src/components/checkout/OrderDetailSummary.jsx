@@ -23,7 +23,7 @@ const OrderDetailSummary = ({item})=>{
 
     return(
         <div key={item.id} className="flex rounded-lg bg-white sm:flex-row">
-            <img className="m-1 mt-2 h-20 w-24 rounded-md border object-cover object-center" src={imagen} alt={item.name} />
+            <img className="m-1 my-1 h-20 w-24 rounded-md border object-cover object-center" src={imagen} alt={item.name} />
             <div className="flex w-full flex-col px-2 py-4">
                 <span className="text-sm font-semibold">{item.name}</span>
                 <span className="text-sm">Cant. {item.amount}</span>
