@@ -29,7 +29,7 @@ export default function ScrollToTop() {
         <div>
           <div
             onClick={scrollToTop}
-            className="scroll_up flex fixed bg-primary-100 text-white cursor-pointer"
+            className="scroll_up flex fixed justify-center items-center rounded-l-50% bg-primary-100 text-white cursor-pointer hover:--transform-translate-y: -0.25rem;"
             data-aos="fade-left"
             data-aos-duration="1200"
             data-aos-delay="200"

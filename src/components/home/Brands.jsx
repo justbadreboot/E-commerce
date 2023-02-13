@@ -43,6 +43,7 @@ const Brands =() =>{
         },
         
     ]
+    
     return(
         <div className="pt-12 font-poppins">
             <div className="container m-auto px-6 space-y-12 md:px-12 lg:px-56">

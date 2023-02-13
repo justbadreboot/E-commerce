@@ -5,7 +5,7 @@
   "dependencies": {
     "@emailjs/browser": "^3.10.0",
     "@headlessui/react": "^1.7.8",
-    "@reduxjs/toolkit": "^1.9.1",
+    "@reduxjs/toolkit": "^1.9.2",
     "@tailwindcss/forms": "^0.5.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -13,7 +13,9 @@
     "aos": "^2.3.4",
     "axios": "^1.2.3",
     "daisyui": "^2.47.0",
+    "firebase": "^9.16.0",
     "formik": "^2.2.9",
+    "jwt-decode": "^3.1.2",
     "node-fetch": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

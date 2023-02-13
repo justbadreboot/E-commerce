@@ -72,6 +72,44 @@ module.exports = {
       maxHeight: {
         '560': '35rem',
       },
+      margin:{
+        'l-35':'2.188rem auto 0'
+      },
+      borderRadius:{
+        'l-50':'0 0 3.125rem 3.125rem',
+        'l-50%':'50%'
+      },
+      backgroundSize:{
+        'l-2280':'1.375rem 5rem'
+      },
+      backgroundPosition: {
+        'l-080':'0 5rem',
+        'l-00': '0 0'
+      },
+      boxShadow:{
+        'l-00':'0 0 rgb(48,195,228) inset',
+      },
+      backgroundImage:{
+        'l-lg':'linear-gradient(rgb(48,195,228) 6.25rem, transparent 0)',
+      },
+      keyframes:{
+        loading:{
+          '0%':{backgroundPosition: '0 5rem'},
+          '100%':{backgroundPosition: '0 0'}
+        },
+        loading2:{
+          '0%': { boxShadow: '4px -10px rgba(0, 0, 0, 0), 6px 0px rgba(0, 0, 0, 0), 8px -15px rgba(0, 0, 0, 0), 12px 0px rgba(0, 0, 0, 0)'},
+          '20%':{ boxShadow: '4px -20px rgba(0, 0, 0, 0), 8px -10px rgba(0, 0, 0, 0), 10px -30px rgba(0, 0, 0, 0.5), 15px -5px rgba(0, 0, 0, 0)'},
+          '40%':{ boxShadow: '2px -40px rgba(0, 0, 0, 0.5), 8px -30px rgba(0, 0, 0, 0.4), 8px -60px rgba(0, 0, 0, 0.5), 12px -15px rgba(0, 0, 0, 0.5)'},
+          '60%':{ boxShadow: '4px -60px rgba(0, 0, 0, 0.5), 6px -50px rgba(0, 0, 0, 0.4), 10px -90px rgba(0, 0, 0, 0.5), 15px -25px rgba(0, 0, 0, 0.5)'},
+          '80%':{ boxShadow: '2px -80px rgba(0, 0, 0, 0.5), 4px -70px rgba(0, 0, 0, 0.4), 8px -120px rgba(0, 0, 0, 0), 12px -35px rgba(0, 0, 0, 0.5)'},
+          '100%':{ boxShadow: '4px -100px rgba(0, 0, 0, 0), 8px -90px rgba(0, 0, 0, 0), 10px -120px rgba(0, 0, 0, 0), 15px -45px rgba(0, 0, 0, 0)'},
+        }
+      },
+      animation:{
+        loading:'loading 6s linear infinite',
+        loading2: 'loading2 6s linear infinite'
+      }
     },
   },
 }
