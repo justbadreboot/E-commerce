@@ -86,7 +86,7 @@ const ProductDetail=()=>{
 
     return(
         <>
-            <div className="bg-white py-6 sm:py-8 lg:py-12">
+            <div className="bg-white py-6 sm:py-8">
                 <div className=" font-poppins ml-10 md:ml-14 mb-6">
                     <Link to="/productos" className="text-sm inline-flex">
                         <HiArrowUturnLeft className="w-4 h-4 mr-2" />Regresar

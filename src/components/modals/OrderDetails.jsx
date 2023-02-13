@@ -10,7 +10,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
     const [orden, setOrden] = useState({})
     const [detalles,setDetalles] = useState([])
 
-    useEffect(()=>{
+    useEffect( () =>{
         getOrder(ordenID)
         getClientnfo(user)
     },[ordenID,user])

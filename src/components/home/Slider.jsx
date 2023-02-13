@@ -4,7 +4,6 @@ import 'swiper/css/pagination';
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
 const mainSlider = () =>{
     
     const imagenes =[

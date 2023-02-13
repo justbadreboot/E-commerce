@@ -38,7 +38,7 @@ const Filter =()=>{
   }
 
   const getProducts = async ()=>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/product/all`)
+    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/all`)
       .then(response => {
         setProductos(response.data)
       })
@@ -48,7 +48,7 @@ const Filter =()=>{
   }
 
   const getProductsByCategory = async (id) =>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/product/category/${id}`)
+    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/category/${id}`)
       .then(response => {
         setProductos(response.data)
       })
@@ -59,7 +59,7 @@ const Filter =()=>{
   }
 
   const getProductsByName = async (name)=>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/product/filter/${name}`)
+    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/filter/${name}`)
     .then(response => {
       setProductos(response.data)
     })

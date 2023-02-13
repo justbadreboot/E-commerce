@@ -3,29 +3,35 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
   export const serverApi = createApi({
     reducerPath: 'serverApi',
     baseQuery: fetchBaseQuery({
-      baseUrl: 'https://' 
+      baseUrl: 'https://',
+      prepareHeaders: (headers) => {
+        //const token = JSON.parse(localStorage.getItem('token'))
+        //headers.set('Authorization', `Bearer ${token}`)
+        console.log(headers)
+        return headers;
+      }
     }),
     endpoints: (builder) => ({
       getLanding: builder.query({
         query: () => "landing-production-11fd.up.railway.app/api/landing"
       }),
       getCategories: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/category/all"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/category/all"
       }),
       getProducts: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/product/all"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/product/all"
       }),
       getProductsMain: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/product/main"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/product/main"
       }),
       getRelatedProducts: builder.query({
-        query: (id) => `product-production-cf12.up.railway.app/api/product/same/category/${id}`
+        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/same/category/${id}`
       }),
       getProductById: builder.query({
-        query: (id) => `product-production-cf12.up.railway.app/api/product/${id}`
+        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/${id}`
       }),
       getProductsByCategory: builder.query({
-        query: (id) => `product-production-cf12.up.railway.app/api/product/category/${id}`
+        query: (id) => `api-gateway-production-d841.up.railway.app/api/product/category/${id}`
       }),
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/client/filter/${doc}`

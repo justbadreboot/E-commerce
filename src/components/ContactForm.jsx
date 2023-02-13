@@ -17,6 +17,7 @@ const ContactForm = ()=>{
 		nombre: Yup.string().required('Este campo es requerido'),
         mensaje: Yup.string().required('Este campo es requerido'),
 	});
+    
     const formik = useFormik({
 		initialValues: {
 			email: "",
