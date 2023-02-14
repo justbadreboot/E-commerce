@@ -1,8 +1,10 @@
+import {useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Appointment from "../../components/modals/Appointment"
 
 const ServiceCard = ({service}) =>{
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    
+    const user = useSelector((state) => state.users.currentUser);
 
     return(
         <>
@@ -24,7 +26,7 @@ const ServiceCard = ({service}) =>{
                             <Appointment serviceID={service.id} /> 
                         </>
                         ):(
-                            <Link to="/carrito">
+                            <Link to="/login">
                                 <label className="cursor-pointer text-green-400 inline-flex font-semibold items-center md:mb-2 lg:mb-0">Agendar cita
                                     <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                         <path d="M5 12h14"></path>

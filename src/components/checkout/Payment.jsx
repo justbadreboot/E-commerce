@@ -7,11 +7,12 @@ import * as Yup from "yup";
 import { deleteCartItem } from "../../helpers/cartActions";
 import { useNavigate } from "react-router-dom";
 import { useAddNewAddressMutation, useAddNewOrderMutation} from "../../store/serverApi";
+import { useSelector } from "react-redux";
 
 const Payment = ({envio,total,subtotal})=>{
 
     const navigate = useNavigate()
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const { activeStep, setActiveStep, formData, setFormData, cartItems } = useContext(FormContext)
     const [addNewAddress] = useAddNewAddressMutation()
     const [addNewOrder] = useAddNewOrderMutation()
@@ -58,7 +59,7 @@ const Payment = ({envio,total,subtotal})=>{
                     'Su pago se ha realizado con éxito.',
                     'success'
                     )
-                    navigate("/perfil")
+                    navigate("/")
                 }
             })
 		},
@@ -84,7 +85,7 @@ const Payment = ({envio,total,subtotal})=>{
                     'Su pedido se encuentra en camino',
                     'success'
                 )
-                navigate("/perfil")
+                navigate("/")
             }
         })
     }

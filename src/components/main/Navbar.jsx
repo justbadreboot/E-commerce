@@ -5,20 +5,18 @@ import { useEffect, useState } from "react";
 import firestore from '../../helpers/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
 import  {FaUserAlt} from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser } from '../../store/userSlice';
 
 const Navbar = () =>{
+
+    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
-    const [count, setCount] = useState(0)
-    const [user, setUser] = useState("")
+    const [count, setCount] = useState("")
+    const user = useSelector((state) => state.users.currentUser);
 
     const navigate = useNavigate()
     const collectionName =  'cart '+ user
-
-    useEffect(()=>{
-        const temp = JSON.parse(localStorage.getItem('currentUser'))
-        if (temp) 
-            setUser(temp)
-    },[])
 
     useEffect ( ()=>{
         const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
@@ -36,8 +34,8 @@ const Navbar = () =>{
     },[collectionName,user])
 
     const handleOnClick =()=>{
-        localStorage.removeItem("currentUser")
         localStorage.removeItem("token")
+        dispatch(setCurrentUser(null));
         navigate("/")
     } 
     
@@ -88,10 +86,12 @@ const Navbar = () =>{
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
-                                        <span className="flex absolute -mt-5 ml-4">
-                                            <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
-                                            <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
-                                        </span>
+                                        {user && (
+                                            <span className="flex absolute -mt-5 ml-4">
+                                                <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
+                                                <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
+                                            </span>
+                                        )}
                                     </button>
                                 </Link>
                                 {user ? ( 
@@ -174,9 +174,9 @@ const Navbar = () =>{
                     </div>
                 </div>
                 {/*Mobile responsive sidebar*/}
-                <div className={show ? "w-full xl:hidden h-full absolute z-40 transform top-0 translate-x-0 " : " w-full xl:hidden h-full absolute z-40 transform -translate-x-full"}>
-                    <div className="bg-gray-700 opacity-50 w-full h-full" onClick={() => setShow(!show)} />
-                    <div className="w-72 fixed overflow-y-auto z-40 top-0 bg-gray-200 shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
+                <div className={show ? "w-full xl:hidden h-full max-h-full absolute z-40 transform top-0 right-0 translate-x-0 " : " w-full xl:hidden h-full absolute z-40 transform max-h-full -translate-x-full"}>
+                    <div className="bg-gray-700 opacity-50 w-full h-full " onClick={() => setShow(!show)} />
+                    <div className="w-72 fixed overflow-y-auto z-40 top-0 bg-gray-200 shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out" >
                         <div className="px-6 h-full">
                             <div className="flex flex-col justify-between h-full w-full">
                                 <div>
@@ -197,7 +197,7 @@ const Navbar = () =>{
                                         </div>
                                     </div>
                                     <ul className="f-m-m">
-                                        <ul className='pt-8 ml-4'>
+                                        <ul className='pt-5 ml-4'>
                                             <h2 className='font-semibold'>Productos</h2>
                                             <li className='pt-3 cursor-pointer '>
                                                 <NavLink to="/productos">
@@ -214,7 +214,7 @@ const Navbar = () =>{
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                        <ul className='pt-8 ml-4'>
+                                        <ul className='pt-6 ml-4'>
                                             <h2 className='font-semibold'>Servicios Médicos</h2>
                                             <li className='pt-2 cursor-pointer'>
                                                 <NavLink to="/servicios">
@@ -231,21 +231,21 @@ const Navbar = () =>{
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                        <li className='pt-6 cursor-pointer font-semibold'>
+                                        <li className='pt-5 cursor-pointer font-semibold'>
                                             <NavLink to="/doctores">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Doctores</p>
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li className='pt-6 cursor-pointer font-semibold'>
+                                        <li className='pt-5 cursor-pointer font-semibold'>
                                             <NavLink to="/nosotros">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Nuestro Equipo</p>
                                                 </div>
                                             </NavLink>
                                         </li>
-                                        <li className='pt-6 cursor-pointer font-semibold'>
+                                        <li className='pt-5 cursor-pointer font-semibold'>
                                             <NavLink to="/contacto">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Contacto</p>

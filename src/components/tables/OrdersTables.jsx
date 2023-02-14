@@ -1,10 +1,11 @@
 import { useGetOrdersByClientQuery } from "../../store/serverApi";
 import OrderElement from "./OrderElement";
 import Loader from "../main/Loader"
+import { useSelector } from "react-redux";
 
 const OrdersTables =({setAction})=>{
 
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const {data: ordenes,isSuccess,isLoading} = useGetOrdersByClientQuery(id)
 
     const modal = (id,nombre) =>{

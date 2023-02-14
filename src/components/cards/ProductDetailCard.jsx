@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import Loader from "../../components/main/Loader"
 import RelatedProducts from "../RelatedProducts";
 import {HiArrowUturnLeft} from "react-icons/hi2";
+import { useSelector } from "react-redux";
 
 const ProductDetail=()=>{
 
@@ -15,7 +16,7 @@ const ProductDetail=()=>{
     
     const [count, setCount] = useState(1)
     const [precio, setPrecio] = useState(0)
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
 
     useEffect(()=>{
         setDiscount()

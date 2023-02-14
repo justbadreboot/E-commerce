@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useGetAddressClientQuery } from "../../store/serverApi";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Shipping = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
@@ -21,11 +22,11 @@ const Shipping = ({envio,total,subtotal})=>{
     const [addID,setAddID] = useState(0)
     const [ver,setVer] = useState(false)
 
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const {data: address, isSuccess} = useGetAddressClientQuery(id)
 
     const getAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/direction/${id}`)
+        await axios.get(`https://client-production-d410.up.railway.app/api/private/direction/${id}`)
         .then(response => {
             setInfoDireccion(response.data)
             setCiudad(response.data.city)

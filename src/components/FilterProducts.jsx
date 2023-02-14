@@ -14,7 +14,15 @@ const Filter =()=>{
   const [dataOriginal, setDataOriginal] = useState([])
   const [products,setProductos] = useState([])
   const [openFilter, setOpenFilter] = useState(true)
-  const [, setSelectedOption] = useState("")
+  const [selectedOption, setSelectedOption] = useState("")
+
+  const [Loading, setLoading] = useState(false)
+  const [productosPerPage, ] = useState(12)
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalProducts = products.length
+  
+  const lastIndex = currentPage * productosPerPage
+  const firstIndex = lastIndex - productosPerPage
 
   useEffect(() => {
     window.addEventListener('resize', () => {
@@ -27,16 +35,32 @@ const Filter =()=>{
     getProducts()
   },[])
 
+  useEffect(() => {
+    if (products.length !== 0) {
+      setLoading(false)
+    }
+    else{
+      setLoading(true)
+    }
+  }, [products])
+
   const handleOnChange = (e) =>{
     let temp = parseInt(e.target.value)
-    setSelectedOption(temp)
-    let res = dataOriginal.filter(product => product.category.id === temp)
-    setProductos(res)
+    if(temp ===1){
+      setProductos(dataOriginal)
+    }else{
+      setSelectedOption(temp)
+      let res = dataOriginal.filter(product => product.category.id === temp)
+      setProductos(res)
+    }
   }
 
   const handleOnSearch = (e) =>{
     let temp = e.target.value
-    getProductsByName(temp)
+    if(temp === '')
+      setProductos(dataOriginal)
+    else
+      getProductsByName(temp)
   }
 
   const getProducts = async ()=>{
@@ -85,7 +109,7 @@ const Filter =()=>{
 
         <div className={`z-10 lg:hidden absolute inset-0 bg-gray-500 bg-opacity-75 ${openFilter ? "visible" : "invisible"}`} />
         
-        <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative  w-full h-full max-h-full max-w-xs overflow-y-scroll lg:overflow-auto bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-100 hidden"}`}>
+        <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative w-full h-full max-h-full max-w-xs  bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-100 hidden"}`}>
           <div className="lg:hidden py-5 px-5 flex items-center justify-between border-b border-gray-200">
             <h3 className="text-xl text-gray-600 font-medium">Filtros de Búsqueda</h3>
             <button className="text-gray-400 hover:text-gray-700" onClick={() => setOpenFilter(false)}>
@@ -116,22 +140,42 @@ const Filter =()=>{
                     <span className="text-base text-gray-700 font-medium hover:text-green-400">{category.name}</span>
                   </div>
                 ))
+              )}
+              {selectedOption !== "" && (
+                <div className="m-1 pt-4 flex items-center space-x-3">
+                  <div>
+                    <input type="radio" name="categorias" value={1} 
+                      onChange={handleOnChange} 
+                    className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
+                  </div>
+                  <span className="text-base text-gray-700 font-medium hover:text-green-400">Todas</span>
+                </div>
               )}  
             </ul>
           </div>
         </div>
         <div className="col-span-full lg:col-span-3">
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-            <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-            {products !== "No existen coincidencias" ? (
-              products.map( product =>(
-                <ProductCard product={product} key={product.id}/>
-              ))
-              ):(
-                <p>Resultados no encontrados</p>
-              )}
-            </div>
-            <Pagination />
+            {Loading ? <Loader/> : (
+              <>  
+                <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
+                {products !== "No existen coincidencias" ? (
+                  products.map( product =>(
+                    <ProductCard product={product} key={product.id}/>
+                  )).slice(firstIndex,lastIndex)
+                  ):(
+                    <p>Resultados no encontrados</p>
+                  )}
+                </div>
+                <div className='mt-4'>
+                  <Pagination 
+                  productosPerPage={productosPerPage} 
+                  currentPage={currentPage} 
+                  setCurrentPage={setCurrentPage}
+                  totalProducts={totalProducts} />
+              </div>
+              </>
+            )}
           </div>
         </div>
       </div>

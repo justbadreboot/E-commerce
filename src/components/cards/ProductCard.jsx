@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate, } from 'react-router-dom';
 import { addToCart } from '../../helpers/cartActions';
 
 const ProductCard = ({product}) =>{
 
     const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
     const [precio, setPrecio] = useState(0)
     
     useEffect(()=>{
@@ -31,9 +32,9 @@ const ProductCard = ({product}) =>{
 
     return(
         <article className="rounded-lg bg-gray-100 p-4 shadow-lg hover:shadow-xl">
-            <div className="relative flex items-end overflow-hidden rounded-xl">
+            <div className="relative flex items-end justify-center overflow-hidden rounded-xl">
                 <Link to={`/producto/${product.id}`}>
-                    <img src={product.image} alt={product.name}  />
+                    <img src={product.image} alt={product.name} className="h-48"  />
                     {product.porcentajeDescuento !== null && (
                         <span className="bg-red-500 text-white text-xs tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">{product.porcentajeDescuento}% off</span>
                     )}

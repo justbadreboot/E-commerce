@@ -7,6 +7,7 @@ import firestore from "../helpers/firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
 import {HiArrowUturnLeft} from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const FormContext = createContext();
 
@@ -19,7 +20,7 @@ const Checkout =()=>{
     const [subtotal, setSubtotal] = useState(0)
     const [envio, setEnvio] = useState(0)
 
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
     const collectionName =  'cart '+ user
 
     useEffect ( ()=>{
