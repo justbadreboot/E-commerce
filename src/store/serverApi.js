@@ -3,16 +3,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
   export const serverApi = createApi({
     reducerPath: 'serverApi',
     baseQuery: fetchBaseQuery({
-      credentials: "same-origin",
       baseUrl: 'https://',
-      prepareHeaders: (headers) => {
+      /*prepareHeaders: (headers) => {
         const token = JSON.parse(localStorage.getItem('token'))
         if (token) {
           headers.set("authorization", `Bearer ${token}`);
           headers.set("Content-Type", "application/json");
         }
         return headers;
-      },
+      },*/
     }),
     endpoints: (builder) => ({
       getLanding: builder.query({

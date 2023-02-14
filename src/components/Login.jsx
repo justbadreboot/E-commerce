@@ -9,11 +9,14 @@ import jwt from 'jwt-decode'
 import { useCreateMutation, useLoginMutation, 
     useAddNewClientMutation } from '../store/serverApi'
 import axios from 'axios';
+import { useDispatch} from "react-redux";
+import { setCurrentUser } from "../store/userSlice";
 
 const Login = () =>{
     
     const token = JSON.parse(localStorage.getItem('token'))
     const navigate = useNavigate()
+    const dispatch = useDispatch();
     const [isForm, setIsForm] = useState({
         login : true,
         register : false,
@@ -34,7 +37,7 @@ const Login = () =>{
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
-            localStorage.setItem('currentUser', JSON.stringify(response.data.id))
+            dispatch(setCurrentUser(response.data.id));
         })
         .catch(error => {
             console.log(error)
@@ -65,7 +68,7 @@ const Login = () =>{
                 Swal.fire({
                     title:'Error',
                     icon:'error',
-                    text:'Se produjo un problema. Intenta de nuevo'
+                    text:'Credenciales Incorrectas. Intenta de nuevo'
                 })
                 formik.resetForm()
             }
@@ -134,7 +137,7 @@ const Login = () =>{
                 </div>
                 <div className="z-10 col-span-7 sm:col-span-2 md:col-span-1 h-full flex sm:flex-col border-transparent items-center text-sm text-gray-500">
                     <button onClick={() => setIsForm({ login : true, register : false})} 
-                    className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col  justify-center items-center active:outline-none focus:outline-none  ${isForm.login ? "bg-white bg-opacity-80 text-gray-600 border-t-2 border-r-2 border-green-500" : "text-white"}`}>
+                    className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col  justify-center items-center active:outline-none focus:outline-none  ${isForm.login ? "bg-white bg-opacity-80 text-gray-600 border-t border-r border-green-500" : "text-white"}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-9 w-9" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -142,7 +145,7 @@ const Login = () =>{
                         <hr className={` hidden sm:block  ${!isForm.register ? "h-1 bg-green-500 w-20 mt-4" : "hidden" }`} />
                     </button>
                     <button onClick={() => setIsForm({ login : false, register : true})}
-                     className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.register ? "bg-white bg-opacity-80 text-gray-600 border-t-2 sm:border-t-0 sm:border-b-2 border-l-2 sm:border-r-2  sm:border-l-0 border-green-500" : "text-white "}`}>
+                     className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.register ? "bg-white bg-opacity-80 text-gray-600 border-t sm:border-t-0 sm:border-b border-l-2 sm:border-r  sm:border-l-0 border-green-500" : "text-white "}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                         </svg>

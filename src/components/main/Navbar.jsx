@@ -5,20 +5,18 @@ import { useEffect, useState } from "react";
 import firestore from '../../helpers/firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
 import  {FaUserAlt} from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentUser } from '../../store/userSlice';
 
 const Navbar = () =>{
+
+    const dispatch = useDispatch();
     const [show, setShow] = useState(false);
-    const [count, setCount] = useState(0)
-    const [user, setUser] = useState("")
+    const [count, setCount] = useState("")
+    const user = useSelector((state) => state.users.currentUser);
 
     const navigate = useNavigate()
     const collectionName =  'cart '+ user
-
-    useEffect(()=>{
-        const temp = JSON.parse(localStorage.getItem('currentUser'))
-        if (temp) 
-            setUser(temp)
-    },[])
 
     useEffect ( ()=>{
         const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
@@ -36,10 +34,9 @@ const Navbar = () =>{
     },[collectionName,user])
 
     const handleOnClick =()=>{
-        localStorage.removeItem("currentUser")
         localStorage.removeItem("token")
+        dispatch(setCurrentUser(null));
         navigate("/")
-        //window.location.reload()
     } 
     
     return(
@@ -89,10 +86,12 @@ const Navbar = () =>{
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 hover:text-secondary-100" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
-                                        <span className="flex absolute -mt-5 ml-4">
-                                            <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
-                                            <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
-                                        </span>
+                                        {user && (
+                                            <span className="flex absolute -mt-5 ml-4">
+                                                <span className="badge animate-ping absolute inline-flex badge-sm p-2 rounded-full bg-secondary-40 opacity-75"></span>
+                                                <span className="badge badge-sm relative inline-flex rounded-full p-2 indicator-item bg-secondary-100 border-secondary-100">{count}</span>
+                                            </span>
+                                        )}
                                     </button>
                                 </Link>
                                 {user ? ( 

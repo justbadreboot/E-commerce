@@ -127,7 +127,7 @@ const FilterServices =()=>{
                         {selectedOption !== "" && (
                             <div className="m-1 pt-4 flex items-center space-x-3">
                             <div>
-                                <input type="radio" name="categorias" value={1} 
+                                <input type="radio" name="especialidad" value={1} 
                                 onChange={handleOnChange} 
                                 className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
                             </div>
