@@ -5,10 +5,11 @@ import Swal from "sweetalert2";
 import { useGetAddressClientQuery, useUpdateAddressMutation } from "../../store/serverApi";
 import AddressForm from "../forms/AddressForm";
 import {MdClose} from "react-icons/md"
+import { useSelector } from "react-redux";
 
 const AddessCard = () =>{
 
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const [editAddress] = useUpdateAddressMutation()
     const {data: address, isSuccess} = useGetAddressClientQuery(id)
 

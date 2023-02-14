@@ -4,6 +4,7 @@ import { useGetProductByIdQuery } from '../../store/serverApi'
 import { deleteCartItem, updateCartQuantity } from "../../helpers/cartActions";
 import Swal from "sweetalert2";
 import Loader from "../main/Loader";
+import { useSelector } from "react-redux";
 
 const CartItem =({item}) =>{
     const {data: producto, isSuccess, isLoading} = useGetProductByIdQuery(item.id);
@@ -12,7 +13,7 @@ const CartItem =({item}) =>{
     const [price,setPrice] = useState(item.precio*item.cantidad)
     const [preUni, setPreUni] = useState(0)
     
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
 
     useEffect(()=>{
         setCount(item.cantidad)

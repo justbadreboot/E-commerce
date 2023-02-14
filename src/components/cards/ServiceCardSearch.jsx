@@ -1,8 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Appointment from "../../components/modals/Appointment"
 
 const ServiceCard = ({service}) =>{
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
 
     return(
         <>

@@ -4,12 +4,13 @@ import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useGetClientByIDQuery } from "../../store/serverApi";
+import { useSelector } from "react-redux";
 
 const Billing = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
     const [isChecked, setIsChecked] = useState(false)
 
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const {data: usuario, isSuccess} = useGetClientByIDQuery(id)
 
     const billingSchema = Yup.object().shape({

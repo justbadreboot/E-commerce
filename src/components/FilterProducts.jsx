@@ -16,6 +16,14 @@ const Filter =()=>{
   const [openFilter, setOpenFilter] = useState(true)
   const [selectedOption, setSelectedOption] = useState("")
 
+  const [Loading, setLoading] = useState(false)
+  const [productosPerPage, ] = useState(12)
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalProducts = products.length
+  
+  const lastIndex = currentPage * productosPerPage
+  const firstIndex = lastIndex - productosPerPage
+
   useEffect(() => {
     window.addEventListener('resize', () => {
       const viewport = window.innerWidth
@@ -26,6 +34,15 @@ const Filter =()=>{
   useEffect(()=>{
     getProducts()
   },[])
+
+  useEffect(() => {
+    if (products.length !== 0) {
+      setLoading(false)
+    }
+    else{
+      setLoading(true)
+    }
+  }, [products])
 
   const handleOnChange = (e) =>{
     let temp = parseInt(e.target.value)
@@ -139,16 +156,26 @@ const Filter =()=>{
         </div>
         <div className="col-span-full lg:col-span-3">
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-            <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-            {products !== "No existen coincidencias" ? (
-              products.map( product =>(
-                <ProductCard product={product} key={product.id}/>
-              ))
-              ):(
-                <p>Resultados no encontrados</p>
-              )}
-            </div>
-            <Pagination />
+            {Loading ? <Loader/> : (
+              <>  
+                <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
+                {products !== "No existen coincidencias" ? (
+                  products.map( product =>(
+                    <ProductCard product={product} key={product.id}/>
+                  )).slice(firstIndex,lastIndex)
+                  ):(
+                    <p>Resultados no encontrados</p>
+                  )}
+                </div>
+                <div className='mt-4'>
+                  <Pagination 
+                  productosPerPage={productosPerPage} 
+                  currentPage={currentPage} 
+                  setCurrentPage={setCurrentPage}
+                  totalProducts={totalProducts} />
+              </div>
+              </>
+            )}
           </div>
         </div>
       </div>

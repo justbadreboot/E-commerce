@@ -39,7 +39,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/filter/${doc}`
       }),
       getClientByID: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/${doc}`
+        query: (doc) => `client-production-d410.up.railway.app/api/private/client/${doc}`
       }),
       getServices: builder.query({
         query: () => "service-production-bb52.up.railway.app/api/public/service"
@@ -57,10 +57,10 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/${doc}/direction/custom`
       }),
       getOrdersByClient:builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/cliente/order/client/${doc}`
+        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/client/${doc}`
       }),
       getOrderByID:builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/cliente/order/${doc}`
+        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/${doc}`
       }),
       getAppointmentsByClient:builder.query({
         query: (doc) => `service-production-bb52.up.railway.app/api/cliente/appointment/client/${doc}`
@@ -95,7 +95,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       }),
       addNewOrder: builder.mutation({
         query: ({date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName, clientLastName,clientPhone})=>({
-          url: `client-production-d410.up.railway.app/api/cliente/order`,
+          url: `order-production-bfbc.up.railway.app/api/cliente/order`,
           method: 'POST',
           body:{date, deliveryState,idAddress, idClient, orderDetails, orderState, paymentState, subtotal, total,clientDocument,clientName,clientLastName,clientPhone},
         })

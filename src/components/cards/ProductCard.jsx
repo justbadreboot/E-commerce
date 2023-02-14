@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate, } from 'react-router-dom';
 import { addToCart } from '../../helpers/cartActions';
 
 const ProductCard = ({product}) =>{
 
     const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
     const [precio, setPrecio] = useState(0)
     
     useEffect(()=>{

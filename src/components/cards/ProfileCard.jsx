@@ -4,10 +4,11 @@ import { useEffect, useState } from "react"
 import { useUpdateClientMutation } from "../../store/serverApi";
 import axios from "axios";
 import {MdClose} from "react-icons/md"
+import { useSelector } from "react-redux";
 
 const ProfileCard = () =>{
 
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const [editClient] = useUpdateClientMutation()
     const [isEditar, setIsEditar] = useState(false)
     const [nombre,setNombre] = useState("")
@@ -21,7 +22,7 @@ const ProfileCard = () =>{
     })
 
     const getClient = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/client/${id}`)
+        await axios.get(`https://client-production-d410.up.railway.app/api/private/client/${id}`)
         .then(response => {
             setNombre(response.data.firstName)
             setApellido(response.data.lastName)

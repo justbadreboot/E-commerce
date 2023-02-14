@@ -6,8 +6,9 @@ import axios from 'axios';
 
 const Products = () =>{
 
+    const [isLoading, setIsLoading] = useState(false)
     const [productos,setProductos] = useState([])
-    const [productosPerPage, setProductosPerPage ] = useState(15)
+    const [productosPerPage, ] = useState(15)
     const [currentPage, setCurrentPage] = useState(1)
     const totalProducts = productos.length
     
@@ -17,6 +18,15 @@ const Products = () =>{
     useEffect(()=>{
         getProducts()
     },[])
+
+    useEffect(() => {
+        if (productos.length !== 0) {
+          setIsLoading(false)
+        }
+        else{
+          setIsLoading(true)
+        }
+      }, [productos])
 
     const getProducts = async ()=>{
         await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/all`)
@@ -36,21 +46,26 @@ const Products = () =>{
                 </h1>
                 <p className="mt-2 max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">Conoce todos los productos que tenemos disponibles para ti.</p>
             </div>
-                <div
-                data-aos="fade-up"
-                data-aos-duration="1200" 
-                className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                    {productos.map( product =>(
-                        <ProductCard product={product} key={product.id} />
-                    )).slice(firstIndex,lastIndex)}
-                </div>
-            <div className='mt-4'>
-                <Pagination 
-                productosPerPage={productosPerPage} 
-                currentPage={currentPage} 
-                setCurrentPage={setCurrentPage}
-                totalProducts={totalProducts} />
-            </div>
+            {isLoading ? <Loader/> : (
+                <>
+                    <div
+                    data-aos="fade-up"
+                    data-aos-duration="1200" 
+                    className="mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                        {productos.map( product =>(
+                            <ProductCard product={product} key={product.id} />
+                        )).slice(firstIndex,lastIndex)}
+                    </div>
+                    <div className='mt-4'>
+                        <Pagination 
+                        productosPerPage={productosPerPage} 
+                        currentPage={currentPage} 
+                        setCurrentPage={setCurrentPage}
+                        totalProducts={totalProducts} />
+                    </div>
+                </>
+            )}
+                
         </section>
     )
 }

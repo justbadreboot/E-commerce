@@ -1,9 +1,10 @@
+import { useSelector } from "react-redux";
 import { useGetAppointmentsByClientQuery } from "../../store/serverApi";
 import AppointmentElement from "./AppointmentElement";
 
 const AppointmentsTables = ()=>{
     
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const {data: appointments ,isSuccess} = useGetAppointmentsByClientQuery(id)
 
     return(

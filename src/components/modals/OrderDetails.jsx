@@ -1,11 +1,11 @@
 import axios from "axios";  
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import OrderDetailSummary from "../checkout/OrderDetailSummary";
 
 const OrderDetails = ({ordenID,nombre}) =>{
 
-    const user = JSON.parse(localStorage.getItem('currentUser'))
-    //const token = JSON.parse(localStorage.getItem('token'))
+    const user = useSelector((state) => state.users.currentUser);
     const [address,setAddress] = useState({})
     const [client, setClient] = useState({})
     const [orden, setOrden] = useState({})
@@ -32,7 +32,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
 
   
     const getClientnfo = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/client/${id}`)
+        await axios.get(`https://client-production-d410.up.railway.app/api/private/client/${id}`)
         .then(response => {
             setClient(response.data)
         })
@@ -42,7 +42,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
     }
 
     const getAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/direction/${id}`)
+        await axios.get(`https://client-production-d410.up.railway.app/api/private/direction/${id}`)
         .then(response => {
             setAddress(response.data)
         })

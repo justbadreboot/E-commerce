@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
@@ -7,7 +8,7 @@ import { useAddNewAppointmentMutation} from "../../store/serverApi";
 const Appointment = ({serviceID}) =>{
     
     const navigate = useNavigate()
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const [addNewApp] = useAddNewAppointmentMutation()
 
     const formik2 = useFormik({

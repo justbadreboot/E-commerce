@@ -1,11 +1,12 @@
 import { useFormik } from "formik";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { useAddNewAddressMutation } from "../../store/serverApi";
 
 const AddressForm =() => {
 
-    const id = JSON.parse(localStorage.getItem('currentUser'))
+    const id = useSelector((state) => state.users.currentUser);
     const [addNewAddress] = useAddNewAddressMutation()
 
     const shippingSchema = Yup.object().shape({

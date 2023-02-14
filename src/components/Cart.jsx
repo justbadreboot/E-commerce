@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import firestore from "../helpers/firebaseConfig";
 import { collection,onSnapshot } from "firebase/firestore";
 import carrito from "../assets/img/carrito.png"
+import { useSelector } from "react-redux";
 
 const Cart =()=>{
     const [cartItems, setCartItems] = useState([])
@@ -12,7 +13,7 @@ const Cart =()=>{
     const [subtotal, setSubtotal] = useState(0)
     const [count, setCount] = useState(0)
 
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
     const collectionName =  'cart '+ user
 
     useEffect ( ()=>{

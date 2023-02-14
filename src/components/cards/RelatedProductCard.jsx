@@ -1,11 +1,12 @@
 import { addToCart } from '../../helpers/cartActions';
 import { Link, useNavigate, } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const RelatedProductCard =({product})=>{
     
     const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem('currentUser'))
+    const user = useSelector((state) => state.users.currentUser);
     const [precio, setPrecio] = useState(0)
     
     useEffect(()=>{

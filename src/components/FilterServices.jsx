@@ -17,6 +17,14 @@ const FilterServices =()=>{
     const [servicios,setServicios] = useState([])
     const [selectedOption, setSelectedOption] = useState("")
 
+    const [Loading, setLoading] = useState(false)
+    const [serviciosPerPage, ] = useState(9)
+    const [currentPage, setCurrentPage] = useState(1)
+    const totalServicios = servicios.length
+
+    const lastIndex = currentPage * serviciosPerPage
+    const firstIndex = lastIndex - serviciosPerPage
+
     useEffect(() => {
         window.addEventListener('resize', () => {
           const viewport = window.innerWidth
@@ -27,6 +35,15 @@ const FilterServices =()=>{
     useEffect(()=>{
         getServices()
     },[])
+
+    useEffect(() => {
+        if (servicios.length !== 0) {
+          setLoading(false)
+        }
+        else{
+          setLoading(true)
+        }
+    }, [servicios])
 
     const handleOnChange = (e) =>{
         let temp = parseInt(e.target.value)
@@ -138,16 +155,26 @@ const FilterServices =()=>{
                 </div>
                 <div className="col-span-full lg:col-span-3">
                     <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-                        <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:grid-cols-3">
-                            {servicios.length !== 0 ? (
-                                servicios.map( service =>(
-                                    <ServiceCardSearch service={service} key={service.id} />
-                                ))
-                            ) : (
-                                <p className="">Resultados no encontrados</p>
-                            )}
-                        </div>
-                        <Pagination />
+                    {Loading ? <Loader/> : (
+                        <>
+                            <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:grid-cols-3">
+                                {servicios.length !== 0 ? (
+                                    servicios.map( service =>(
+                                        <ServiceCardSearch service={service} key={service.id} />
+                                    )).slice(firstIndex,lastIndex)
+                                ) : (
+                                    <p className="">Resultados no encontrados</p>
+                                )}
+                            </div>
+                            <div className='mt-4'>
+                                <Pagination 
+                                productosPerPage={serviciosPerPage} 
+                                currentPage={currentPage} 
+                                setCurrentPage={setCurrentPage}
+                                totalProducts={totalServicios} />
+                            </div>
+                        </>
+                    )}
                     </div>
                 </div>
             </div>
