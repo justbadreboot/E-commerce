@@ -216,7 +216,7 @@ const Navbar = () =>{
                                         </ul>
                                         <ul className='pt-6 ml-4'>
                                             <h2 className='font-semibold'>Servicios Médicos</h2>
-                                            <li className='pt-2 cursor-pointer'>
+                                            <li className='pt-3 cursor-pointer'>
                                                 <NavLink to="/servicios">
                                                     <div className="flex items-center justify-between">
                                                         <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Ver todos</p>
@@ -231,7 +231,7 @@ const Navbar = () =>{
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                        <li className='pt-5 cursor-pointer font-semibold'>
+                                        <li className='pt-6 cursor-pointer font-semibold'>
                                             <NavLink to="/doctores">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Doctores</p>

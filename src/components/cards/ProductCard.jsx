@@ -34,7 +34,7 @@ const ProductCard = ({product}) =>{
         <article className="rounded-lg bg-gray-100 p-4 shadow-lg hover:shadow-xl">
             <div className="relative flex items-end justify-center overflow-hidden rounded-xl">
                 <Link to={`/producto/${product.id}`}>
-                    <img src={product.image} alt={product.name} className="h-48"  />
+                    <img src={product.image} alt={product.name} className="h-36  sm:h-40 md:h-44 lg:h-48"  />
                     {product.porcentajeDescuento !== null && (
                         <span className="bg-red-500 text-white text-xs tracking-wider uppercase rounded-br-lg absolute left-0 top-0 px-3 py-1.5">{product.porcentajeDescuento}% off</span>
                     )}

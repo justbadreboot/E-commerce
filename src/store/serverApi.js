@@ -18,31 +18,22 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
         query: () => "landing-production-11fd.up.railway.app/api/landing"
       }),
       getCategories: builder.query({
-        query: () => "api-gateway-production-d841.up.railway.app/api/public/category/all"
-      }),
-      getProducts: builder.query({
-        query: () => "api-gateway-production-d841.up.railway.app/api/public/product/all"
+        query: () => "product-production-cf12.up.railway.app/api/public/category/all"
       }),
       getProductsMain: builder.query({
-        query: () => "api-gateway-production-d841.up.railway.app/api/public/product/main"
+        query: () => "product-production-cf12.up.railway.app/api/public/product/main"
       }),
       getRelatedProducts: builder.query({
-        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/same/category/${id}`
+        query: (id) => `product-production-cf12.up.railway.app/api/public/product/same/category/${id}`
       }),
       getProductById: builder.query({
-        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/${id}`
-      }),
-      getPromos: builder.query({
-        query: () => `api-gateway-production-d841.up.railway.app/api/public/promotion/all`
+        query: (id) => `product-production-cf12.up.railway.app/api/public/product/${id}`
       }),
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/filter/${doc}`
       }),
       getClientByID: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/private/client/${doc}`
-      }),
-      getServices: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/public/service"
       }),
       getServicesMain: builder.query({
         query: () => "service-production-bb52.up.railway.app/api/public/service/main"
@@ -129,7 +120,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetProductsQuery,
     useGetProductsMainQuery,
     useGetRelatedProductsQuery,
-    useGetPromosQuery,
     useGetLandingQuery,
     useGetAddressClientQuery,
     useGetProductByIdQuery,

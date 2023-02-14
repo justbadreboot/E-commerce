@@ -4,6 +4,7 @@ import Routes from "./router/Routes"
 import ScrollToTop from "./components/main/ScrollToTop"
 import AOS from "aos"
 import "aos/dist/aos.css"
+import Chatbox from './components/main/Chatbot';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
   
   return (
     <>
+      <Chatbox />
       <ScrollToTop />
       <Routes />
     </>
