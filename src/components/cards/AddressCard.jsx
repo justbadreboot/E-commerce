@@ -38,7 +38,7 @@ const AddessCard = () =>{
     })
 
     const getAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/direction/${id}`)
+        await axios.get(`https://client-production-d410.up.railway.app/api/private/direction/${id}`)
         .then(response => {
             setInfoDireccion(response.data)
             setCiudad(response.data.city)

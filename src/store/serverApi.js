@@ -32,8 +32,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getProductById: builder.query({
         query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/${id}`
       }),
-      getProductsByCategory: builder.query({
-        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/category/${id}`
+      getPromos: builder.query({
+        query: () => `api-gateway-production-d841.up.railway.app/api/public/promotion/all`
       }),
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/filter/${doc}`
@@ -129,6 +129,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetProductsQuery,
     useGetProductsMainQuery,
     useGetRelatedProductsQuery,
+    useGetPromosQuery,
     useGetLandingQuery,
     useGetAddressClientQuery,
     useGetProductByIdQuery,
