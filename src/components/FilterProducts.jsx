@@ -38,7 +38,7 @@ const Filter =()=>{
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 2000);
+    }, 2500);
   },[])
 
   const handleOnChange = (e) =>{

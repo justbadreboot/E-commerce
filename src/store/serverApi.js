@@ -55,7 +55,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
       updateClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId,id}) => ({
-          url: `api-gateway-production-d841.up.railway.app/api/cliente/client`,
+          url: `client-production-d410.up.railway.app/api/cliente/client`,
           method: 'PUT',
           body:{ document, lastName, firstName, phone, userId,id },
         })

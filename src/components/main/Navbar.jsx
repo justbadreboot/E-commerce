@@ -18,6 +18,13 @@ const Navbar = () =>{
     const navigate = useNavigate()
     const collectionName =  'cart '+ user
 
+    useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    },[])
+
     useEffect ( ()=>{
         const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
             let items = 0

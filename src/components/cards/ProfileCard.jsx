@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 import { FaEdit} from "react-icons/fa"
 import { useEffect, useState } from "react"
 import { useUpdateClientMutation } from "../../store/serverApi";
-import { MdClose } from "react-icons/md"
+import { MdClose} from "react-icons/md"
 import { useSelector } from "react-redux";
 import axios from "axios";
 import Loader from "../main/Loader";
@@ -21,7 +21,7 @@ const ProfileCard = () =>{
 
     useEffect(()=>{
         getClient(id)
-    })
+    },[id])
 
     useEffect(() => {
         setLoading(true)
@@ -56,9 +56,6 @@ const ProfileCard = () =>{
         }
     })
 
-    const handleOnChange = (e) =>{
-        console.log(e.target.value)
-    }
     const handleOnSubmit = async (e)=>{
         e.preventDefault()
         const res = await editClient({ 
@@ -100,8 +97,7 @@ const ProfileCard = () =>{
                                     <span className="label-text">Nombre</span>
                                 </label>
                                 {isEditar ? (
-                                    <input type="text" name="nombre" placeholder="Nombre" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} 
-                                     onChange={handleOnChange} />
+                                    <input type="text" name="nombre" placeholder="Nombre" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={nombre} onChange={(e) =>setNombre(e.target.value)} />
                                 ) : (
                                     <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{nombre}</p>
                                 )}
@@ -111,8 +107,7 @@ const ProfileCard = () =>{
                                     <span className="label-text">Apellido</span>
                                 </label>
                                 {isEditar ? (
-                                    <input type="text" name="apellido" placeholder="Apellido" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} 
-                                    value={apellido} onChange={(e) =>setApellido(e.target.value)} />
+                                    <input type="text" name="apellido" placeholder="Apellido" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={apellido} onChange={(e) =>setApellido(e.target.value)} />
                                 ) : (
                                     <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{apellido}</p>
                                 )}
@@ -124,8 +119,7 @@ const ProfileCard = () =>{
                                     <span className="label-text">Identificación</span>
                                 </label>
                                 {isEditar ? (
-                                    <input type="text" name="ident" placeholder="Identificación" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} 
-                                    value={ident} onChange={(e) =>setident(e.target.value)} />
+                                    <input type="text" name="ident" placeholder="Identificación" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={ident} onChange={(e) =>setident(e.target.value)} />
                                 ) : (
                                     <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{ident}</p>
                                 )}

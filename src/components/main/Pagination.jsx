@@ -1,6 +1,15 @@
+import { useEffect } from 'react';
 import {BsChevronLeft, BsChevronRight} from 'react-icons/bs'
 
 const Pagination =({totalProducts,setCurrentPage,currentPage,productosPerPage})=> {
+  
+  useEffect(()=>{
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  })
+
 
   const pageNumbers =[]
   

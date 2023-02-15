@@ -71,13 +71,13 @@ const Footer = () =>{
                                     <h6 className="text-lg font-bold text-primary-100 ">Servicos Médicos</h6>
                                     <ul className="mt-4 list-inside space-y-4">
                                         <li>
-                                            <NavLink to='/servicos' className="transition hover:text-cyan-500">Exámenes</NavLink>
+                                            <NavLink to='/servicios' className="transition hover:text-cyan-500">Exámenes</NavLink>
                                         </li>
                                         <li>
                                             <NavLink to='/servicios' className="transition hover:text-cyan-500">Especialidades</NavLink>
                                         </li>
                                         <li>
-                                            <NavLink to='/servicios' className="transition hover:text-cyan-500">Doctores</NavLink>
+                                            <NavLink to='/doctores' className="transition hover:text-cyan-500">Doctores</NavLink>
                                         </li>
                                     </ul>
                                 </div>
