@@ -29,7 +29,7 @@ const Services = () =>{
     }, [servicios])
 
     const getServices = async ()=>{
-        await axios.get(`https://service-production-bb52.up.railway.app/api/public/service`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/public/service`)
         .then(response => {
             setServicios(response.data)
         })

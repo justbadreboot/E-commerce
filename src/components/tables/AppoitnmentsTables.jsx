@@ -18,7 +18,7 @@ const AppointmentsTables = ()=>{
         setIsLoading(true)
         setTimeout(() => {
             setIsLoading(false)
-        }, 2000);
+        }, 2500);
     },[])
 
     const getApps = async (id)=>{

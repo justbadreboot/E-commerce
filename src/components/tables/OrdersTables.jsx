@@ -18,7 +18,7 @@ const OrdersTables =({setAction})=>{
         setIsLoading(true)
         setTimeout(() => {
             setIsLoading(false)
-        }, 2000);
+        }, 3000);
     },[])
 
     const getOrders = async (id)=>{

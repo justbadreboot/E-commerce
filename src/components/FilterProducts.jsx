@@ -43,7 +43,7 @@ const Filter =()=>{
 
   const handleOnChange = (e) =>{
     let temp = parseInt(e.target.value)
-    if(temp ===1){
+    if(temp ===0){
       setProductos(dataOriginal)
     }else{
       setSelectedOption(temp)
@@ -66,7 +66,7 @@ const Filter =()=>{
   }
 
   const getProducts = async ()=>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/all`)
+    await axios.get(`https://api-gateway-production-d841.up.railway.app/api/public/product/all`)
       .then(response => {
         setProductos(response.data)
         setDataOriginal(response.data)
@@ -136,7 +136,7 @@ const Filter =()=>{
               {selectedOption !== "" && (
                 <div className="m-1 pt-4 flex items-center space-x-3">
                   <div>
-                    <input type="radio" name="categorias" value={1} 
+                    <input type="radio" name="categorias" value={0} 
                       onChange={handleOnChange} 
                     className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
                   </div>

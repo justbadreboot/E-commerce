@@ -15,54 +15,47 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     }),
     endpoints: (builder) => ({
       getLanding: builder.query({
-        query: () => "landing-production-11fd.up.railway.app/api/landing"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/landing"
       }),
       getCategories: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/public/category/all"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/category/all"
       }),
       getProductsMain: builder.query({
-        query: () => "product-production-cf12.up.railway.app/api/public/product/main"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/product/main"
       }),
       getRelatedProducts: builder.query({
-        query: (id) => `product-production-cf12.up.railway.app/api/public/product/same/category/${id}`
+        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/same/category/${id}`
       }),
       getServicesMain: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/public/service/main"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/service/main"
       }),
       getDoctors: builder.query({
-        query: () => `service-production-bb52.up.railway.app/api/public/doctor`
+        query: () => `api-gateway-production-d841.up.railway.app/api/public/doctor`
       }),
       getProductById: builder.query({
-        query: (id) => `product-production-cf12.up.railway.app/api/public/product/${id}`
+        query: (id) => `api-gateway-production-d841.up.railway.app/api/public/product/${id}`
       }),
       getSpecialty: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/public/specialty"
+        query: () => "api-gateway-production-d841.up.railway.app/api/public/specialty"
       }),
 
 
-
-      getClientByDocument: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/filter/${doc}`
-      }),
       getClientByID: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/private/client/${doc}`
+        query: (doc) => `api-gateway-production-d841.up.railway.app/api/private/client/${doc}`
       }),
-      getAddressClient: builder.query({
-        query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/${doc}/direction/custom`
-      }),
-
 
 
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId}) => ({
-          url: `client-production-d410.up.railway.app/api/public/client`,
+          url: `api-gateway-production-d841.up.railway.app/api/public/client`,
           method: 'POST',
           body:{ document, lastName, firstName, phone, userId },
         })
       }),
+
       updateClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId,id}) => ({
-          url: `client-production-d410.up.railway.app/api/cliente/client`,
+          url: `api-gateway-production-d841.up.railway.app/api/cliente/client`,
           method: 'PUT',
           body:{ document, lastName, firstName, phone, userId,id },
         })
@@ -118,8 +111,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
     useGetRelatedProductsQuery,
     useGetLandingQuery,
     useGetProductByIdQuery,
-    useGetAddressClientQuery,
-    useGetClientByDocumentQuery,
     useGetClientByIDQuery,
     useGetServicesMainQuery,
     useGetSpecialtyQuery,

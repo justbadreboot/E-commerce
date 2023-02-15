@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FaEdit} from "react-icons/fa"
 import Swal from "sweetalert2";
-import {  useUpdateAddressMutation } from "../../store/serverApi";
+import { useUpdateAddressMutation } from "../../store/serverApi";
 import {MdClose} from "react-icons/md"
 import { useSelector } from "react-redux";
 import * as Yup from "yup";
