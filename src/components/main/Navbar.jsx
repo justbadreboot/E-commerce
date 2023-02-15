@@ -26,7 +26,6 @@ const Navbar = () =>{
         },(error) => {
             console.log(error)
         })
-        
         return () =>{
             if(user)
                 getItemsCount()
@@ -35,6 +34,7 @@ const Navbar = () =>{
 
     const handleOnClick =()=>{
         localStorage.removeItem("token")
+        localStorage.removeItem("currentUser")
         dispatch(setCurrentUser(null));
         navigate("/")
     } 

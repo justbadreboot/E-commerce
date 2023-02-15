@@ -38,6 +38,7 @@ const Login = () =>{
         })
         .then(response => {
             dispatch(setCurrentUser(response.data.id));
+            localStorage.setItem('currentUser', JSON.stringify(response.data.id))
         })
         .catch(error => {
             console.log(error)

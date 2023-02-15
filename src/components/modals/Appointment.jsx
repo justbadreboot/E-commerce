@@ -54,7 +54,7 @@ const Appointment = ({serviceID}) =>{
 
     return(
         <>
-            <input type="checkbox" id="cita" className="modal-toggle" />
+            <input type="checkbox" id={serviceID} className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box w-10/12 sm:w-7/12 lg:w-5/12 max-w-5xl">
                     <div className="text-center text-2xl font-semibold capitalize text-gray-600">
@@ -89,7 +89,7 @@ const Appointment = ({serviceID}) =>{
                         </form>
                     </div>
                     <div className="modal-action">
-                        <label htmlFor="cita" className="btn btn-sm bg-error-100 border-none">Cerrar</label>
+                        <label htmlFor={serviceID} className="btn btn-sm bg-error-100 border-none">Cerrar</label>
                     </div>
                 </div>
             </div>

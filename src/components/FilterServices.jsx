@@ -60,19 +60,13 @@ const FilterServices =()=>{
         let temp = e.target.value
         if(temp === '')
             setServicios(dataOriginal)
-        else
-            getServicesByName(temp)
-    }
-    
-    const getServicesByName = async (name)=>{
-        await axios.get(`https://service-production-bb52.up.railway.app/api/public/service/search/${name}`)
-        .then(response => {
-            setServicios(response.data)
-        })
-        .catch(error => {
-            setSelectedOption([])
-            console.log(error)
-        })
+        else{
+            let res = dataOriginal.filter(x => x.name.toLowerCase().includes(temp))
+            if(res.length ===0)
+                setServicios("Vacio")
+            else
+                setServicios(res)
+        }
     }
 
     const getServices = async ()=>{
@@ -107,7 +101,7 @@ const FilterServices =()=>{
                     </div>
                 </div>
                 <div className={`z-10 lg:hidden absolute inset-0 bg-gray-500 bg-opacity-75 ${openFilter ? "visible" : "invisible"}`} />
-                <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative w-full h-full max-h-full max-w-xs overflow-y-scroll lg:overflow-auto bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 hidden"}`}>
+                <div className={`z-10 col-span-1 absolute top-0 right-0 lg:inset-0 lg:relative w-full h-full max-h-full max-w-xs bg-gray-50 transition-all duration-300 ease-in-out transform ${openFilter ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 hidden"}`}>
                     <div className="lg:hidden py-5 px-5 flex items-center justify-between border-b border-gray-200">
                         <h3 className="text-xl text-gray-600 font-medium">Filtros de Búsqueda</h3>
                         <button className="text-gray-400 hover:text-gray-700" onClick={() => setOpenFilter(false)}>
@@ -157,22 +151,24 @@ const FilterServices =()=>{
                     <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
                     {Loading ? <Loader/> : (
                         <>
-                            <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:grid-cols-3">
-                                {servicios.length !== 0 ? (
+                            <div className={` ${servicios==='Vacio' && 'py-40 xl:grid-cols-1 text-center' }   z-0 mx-auto grid max-w-screen-xl grid-cols-1 sm:grid-cols-2 gap-6 p-6 md:grid-cols-3`}>
+                                {servicios !== "Vacio" ? (
                                     servicios.map( service =>(
                                         <ServiceCardSearch service={service} key={service.id} />
                                     )).slice(firstIndex,lastIndex)
                                 ) : (
-                                    <p className="">Resultados no encontrados</p>
+                                    <p>Resultados no encontrados</p>
                                 )}
                             </div>
-                            <div className='mt-4'>
+                            {servicios !== "Vacio" && ( 
+                                <div className='mt-4'>
                                 <Pagination 
                                 productosPerPage={serviciosPerPage} 
                                 currentPage={currentPage} 
                                 setCurrentPage={setCurrentPage}
                                 totalProducts={totalServicios} />
                             </div>
+                            )}
                         </>
                     )}
                     </div>

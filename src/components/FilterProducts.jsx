@@ -15,7 +15,6 @@ const Filter =()=>{
   const [products,setProductos] = useState([])
   const [openFilter, setOpenFilter] = useState(true)
   const [selectedOption, setSelectedOption] = useState("")
-
   const [Loading, setLoading] = useState(false)
   const [productosPerPage, ] = useState(12)
   const [currentPage, setCurrentPage] = useState(1)
@@ -36,13 +35,11 @@ const Filter =()=>{
   },[])
 
   useEffect(() => {
-    if (products.length !== 0) {
+    setLoading(true)
+    setTimeout(() => {
       setLoading(false)
-    }
-    else{
-      setLoading(true)
-    }
-  }, [products])
+    }, 2000);
+  },[])
 
   const handleOnChange = (e) =>{
     let temp = parseInt(e.target.value)
@@ -59,8 +56,13 @@ const Filter =()=>{
     let temp = e.target.value
     if(temp === '')
       setProductos(dataOriginal)
-    else
-      getProductsByName(temp)
+    else{
+      let res = dataOriginal.filter(product => product.name.toLowerCase().includes(temp))
+      if(res.length ===0)
+        setProductos("Vacio")
+      else
+        setProductos(res)
+    }
   }
 
   const getProducts = async ()=>{
@@ -74,16 +76,6 @@ const Filter =()=>{
       })
   }
 
-  const getProductsByName = async (name)=>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/filter/${name}`)
-    .then(response => {
-      setProductos(response.data)
-    })
-    .catch(error => {
-      setProductos([])
-      console.log(error)
-    })
-  }
 
   return(
     <div className="relative mx-auto py-4 sm:py-12 px-4 md:px-12 w-full max-w-8xl bg-gray-50 font-poppins">
@@ -156,24 +148,26 @@ const Filter =()=>{
         </div>
         <div className="col-span-full lg:col-span-3">
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-            {Loading ? <Loader/> : (
+            {Loading ?  <Loader/> : (
               <>  
-                <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-                {products !== "No existen coincidencias" ? (
+                <div className={`${products==='Vacio' && 'py-40 grid-cols-1 xl:grid-cols-1 text-center' } z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4`}>
+                {products !== "Vacio" ? (
                   products.map( product =>(
                     <ProductCard product={product} key={product.id}/>
                   )).slice(firstIndex,lastIndex)
                   ):(
                     <p>Resultados no encontrados</p>
-                  )}
+                )}
                 </div>
-                <div className='mt-4'>
-                  <Pagination 
-                  productosPerPage={productosPerPage} 
-                  currentPage={currentPage} 
-                  setCurrentPage={setCurrentPage}
-                  totalProducts={totalProducts} />
-              </div>
+                {products !== "Vacio" && (   
+                  <div className='mt-4'>
+                    <Pagination 
+                    productosPerPage={productosPerPage} 
+                    currentPage={currentPage} 
+                    setCurrentPage={setCurrentPage}
+                    totalProducts={totalProducts} />
+                </div>
+                )}
               </>
             )}
           </div>

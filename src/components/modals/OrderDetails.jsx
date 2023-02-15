@@ -8,7 +8,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
     const user = useSelector((state) => state.users.currentUser);
     const [address,setAddress] = useState({})
     const [client, setClient] = useState({})
-    const [orden, setOrden] = useState({})
+    const [orden, setOrden] = useState([])
     const [detalles,setDetalles] = useState([])
 
     useEffect(()=>{
@@ -23,13 +23,14 @@ const OrderDetails = ({ordenID,nombre}) =>{
                 console.log(error)
             })
         }
+        
         getOrder(ordenID)
     },[ordenID])
 
     useEffect( () =>{
         getClientnfo(user)
     },[user])
-
+   
   
     const getClientnfo = async(id) =>{
         await axios.get(`https://client-production-d410.up.railway.app/api/private/client/${id}`)
@@ -53,9 +54,9 @@ const OrderDetails = ({ordenID,nombre}) =>{
 
     return(
         <>
-            <input type="checkbox" id="orden" className="modal-toggle" />
+            <input type="checkbox" id={ordenID} className="modal-toggle" />
             <div className="modal">
-                <div className="modal-box w-10/12 lg:w-6/12 max-w-5xl">
+                <div className="modal-box w-10/12 lg:w-6/12 max-w-5xl overflow-y-auto">
                     <div className="text-center text-lg font-semibold capitalize text-gray-600">
                         {nombre === 'Orden' ? (
                             <h2>Detalles de la Orden #{orden.id}</h2>
@@ -104,7 +105,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
                         </div>
                     </div>
                     <div className="modal-action">
-                        <label htmlFor="orden" className="btn btn-sm bg-error-100 border-none">Cerrar</label>
+                        <label htmlFor={ordenID} className="btn btn-sm bg-error-100 border-none">Cerrar</label>
                     </div>
                 </div>
             </div>

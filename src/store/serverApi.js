@@ -26,36 +26,33 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
       getRelatedProducts: builder.query({
         query: (id) => `product-production-cf12.up.railway.app/api/public/product/same/category/${id}`
       }),
+      getServicesMain: builder.query({
+        query: () => "service-production-bb52.up.railway.app/api/public/service/main"
+      }),
+      getDoctors: builder.query({
+        query: () => `service-production-bb52.up.railway.app/api/public/doctor`
+      }),
       getProductById: builder.query({
         query: (id) => `product-production-cf12.up.railway.app/api/public/product/${id}`
       }),
+      getSpecialty: builder.query({
+        query: () => "service-production-bb52.up.railway.app/api/public/specialty"
+      }),
+
+
+
       getClientByDocument: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/filter/${doc}`
       }),
       getClientByID: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/private/client/${doc}`
       }),
-      getServicesMain: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/public/service/main"
-      }),
-      getSpecialty: builder.query({
-        query: () => "service-production-bb52.up.railway.app/api/public/specialty"
-      }),
-      getDoctors: builder.query({
-        query: () => `api-gateway-production-d841.up.railway.app/api/public/doctor`
-      }),
       getAddressClient: builder.query({
         query: (doc) => `client-production-d410.up.railway.app/api/cliente/client/${doc}/direction/custom`
       }),
-      getOrdersByClient:builder.query({
-        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/client/${doc}`
-      }),
-      getOrderByID:builder.query({
-        query: (doc) => `order-production-bfbc.up.railway.app/api/cliente/order/${doc}`
-      }),
-      getAppointmentsByClient:builder.query({
-        query: (doc) => `service-production-bb52.up.railway.app/api/cliente/appointment/client/${doc}`
-      }),
+
+
+
       addNewClient: builder.mutation({
         query: ({document,lastName, firstName, phone,userId}) => ({
           url: `client-production-d410.up.railway.app/api/public/client`,
@@ -117,20 +114,15 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
   export const { 
     useGetCategoriesQuery, 
-    useGetProductsQuery,
     useGetProductsMainQuery,
     useGetRelatedProductsQuery,
     useGetLandingQuery,
-    useGetAddressClientQuery,
     useGetProductByIdQuery,
+    useGetAddressClientQuery,
     useGetClientByDocumentQuery,
-    useGetOrderByIDQuery,
     useGetClientByIDQuery,
-    useGetServicesQuery,
-    useGetAppointmentsByClientQuery,
     useGetServicesMainQuery,
     useGetSpecialtyQuery,
-    useGetOrdersByClientQuery,
     useGetDoctorsQuery,
     useAddNewClientMutation,
     useUpdateClientMutation,
