@@ -14,7 +14,6 @@ import { setCurrentUser } from "../store/userSlice";
 
 const Login = () =>{
     
-    const token = JSON.parse(localStorage.getItem('token'))
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const [isForm, setIsForm] = useState({
@@ -33,11 +32,13 @@ const Login = () =>{
     }
  
     const getClient = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/cliente/client/user/${id}`, {
+        const token = JSON.parse(localStorage.getItem('token'))
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/user/${id}`,{
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
             dispatch(setCurrentUser(response.data.id));
+            localStorage.setItem('currentUser', JSON.stringify(response.data.id))
         })
         .catch(error => {
             console.log(error)
@@ -98,27 +99,19 @@ const Login = () =>{
                 password: data.password_sign,
             })
             if(res.data){
-                const res2 = await addNewClient({ 
+                await addNewClient({ 
                     userId: res.data.id,
                     document: data.ident,
                     firstName: data.nombre,
                     lastName: data.apellido,
                     phone: data.telf
                 })
-                if(res2.data){
-                    Swal.fire({
-                        title:'Excelente!',
-                        icon:'success',
-                        text:'Usuario registrado con éxito'
-                    })
-                    formik2.resetForm()
-                }else{
-                    Swal.fire({
-                        title:'Error',
-                        icon:'error',
-                        text:'Se produjo un problema. Intenta de nuevo'
-                    })
-                }
+                Swal.fire({
+                    title:'Excelente!',
+                    icon:'success',
+                    text:'Usuario registrado con éxito'
+                })
+                formik2.resetForm()
             }else{
                 Swal.fire({
                     title:'Error',

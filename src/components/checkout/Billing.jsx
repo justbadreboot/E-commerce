@@ -5,13 +5,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useGetClientByIDQuery } from "../../store/serverApi";
 import { useSelector } from "react-redux";
+import Loader from "../main/Loader";
 
 const Billing = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
     const [isChecked, setIsChecked] = useState(false)
 
     const id = useSelector((state) => state.users.currentUser);
-    const {data: usuario, isSuccess} = useGetClientByIDQuery(id)
+    const {data: usuario, isSuccess, isLoading} = useGetClientByIDQuery(id)
 
     const billingSchema = Yup.object().shape({
 		nombre: Yup.string().required("Este campo es requerido"),
@@ -52,7 +53,9 @@ const Billing = ({envio,total,subtotal})=>{
             <p className="text-xl font-medium">Datos para la Factura</p>
             <p className="text-gray-400 mt-2">Completa los datos para la generación de la factura</p>
             {!isChecked ? (
-                isSuccess && (
+                <>
+                {isLoading && <Loader />}
+                {isSuccess && (
                     <>
                         <div className="py-2">
                             <div className='grid grid-cols-1 md:grid-cols-2'>
@@ -93,7 +96,9 @@ const Billing = ({envio,total,subtotal})=>{
                             Continuar con el envío 
                         </button>  
                     </>  
-                )
+                )}
+                </>
+                
             ) : (
                 <form onSubmit={formik.handleSubmit} >   
                     <div className="py-2">

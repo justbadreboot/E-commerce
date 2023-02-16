@@ -29,7 +29,7 @@ const Products = () =>{
       }, [productos])
 
     const getProducts = async ()=>{
-        await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/all`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/public/product/all`)
           .then(response => {
             setProductos(response.data)
           })

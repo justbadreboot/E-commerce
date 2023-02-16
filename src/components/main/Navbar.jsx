@@ -18,6 +18,13 @@ const Navbar = () =>{
     const navigate = useNavigate()
     const collectionName =  'cart '+ user
 
+    useEffect(()=>{
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    },[])
+
     useEffect ( ()=>{
         const getItemsCount = onSnapshot(collection(firestore,collectionName), snapshot =>{
             let items = 0
@@ -26,7 +33,6 @@ const Navbar = () =>{
         },(error) => {
             console.log(error)
         })
-        
         return () =>{
             if(user)
                 getItemsCount()
@@ -35,12 +41,13 @@ const Navbar = () =>{
 
     const handleOnClick =()=>{
         localStorage.removeItem("token")
+        localStorage.removeItem("currentUser")
         dispatch(setCurrentUser(null));
         navigate("/")
     } 
     
     return(
-        <div className="bg-gray-200 h-full w-full font-poppins">
+        <div className=" bg-gray-200 h-full w-full font-poppins">
             <nav className="bg-primary-100 shadow xl:block hidden">
                 <div className="mx-auto container px-6 xl:py-2">
                     <div className="flex items-center justify-between">
@@ -118,7 +125,7 @@ const Navbar = () =>{
                     </div>
                 </div>
             </nav>
-            <nav>
+            <nav >
                 <div className="py-2 px-6 w-full flex xl:hidden justify-between items-center  bg-primary-100 z-40">
                     <div className="w-48">
                         <Link to="/">
@@ -176,7 +183,7 @@ const Navbar = () =>{
                 {/*Mobile responsive sidebar*/}
                 <div className={show ? "w-full xl:hidden h-full max-h-full absolute z-40 transform top-0 right-0 translate-x-0 " : " w-full xl:hidden h-full absolute z-40 transform max-h-full -translate-x-full"}>
                     <div className="bg-gray-700 opacity-50 w-full h-full " onClick={() => setShow(!show)} />
-                    <div className="w-72 fixed overflow-y-auto z-40 top-0 bg-gray-200 shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out" >
+                    <div className="w-72 fixed  z-40 top-0 bg-gray-200 shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out" >
                         <div className="px-6 h-full">
                             <div className="flex flex-col justify-between h-full w-full">
                                 <div>
@@ -187,7 +194,7 @@ const Navbar = () =>{
                                                     <img src={logo2} alt='Kruger' className='w-40' />
                                                 </div>
                                             </Link>
-                                            <div id="cross" className="text-gray-800" onClick={() => setShow(!show)}>
+                                            <div id="cross" className="text-gray-800 cursor-pointer" onClick={() => setShow(!show)}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width={24} height={24} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" />
                                                     <line x1={18} y1={6} x2={6} y2={18} />
@@ -216,7 +223,7 @@ const Navbar = () =>{
                                         </ul>
                                         <ul className='pt-6 ml-4'>
                                             <h2 className='font-semibold'>Servicios Médicos</h2>
-                                            <li className='pt-2 cursor-pointer'>
+                                            <li className='pt-3 cursor-pointer'>
                                                 <NavLink to="/servicios">
                                                     <div className="flex items-center justify-between">
                                                         <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Ver todos</p>
@@ -231,7 +238,7 @@ const Navbar = () =>{
                                                 </NavLink>
                                             </li>
                                         </ul>
-                                        <li className='pt-5 cursor-pointer font-semibold'>
+                                        <li className='pt-6 cursor-pointer font-semibold'>
                                             <NavLink to="/doctores">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-gray-800 text-base ml-3 hover:text-primary-100 hover:font-bold">Doctores</p>

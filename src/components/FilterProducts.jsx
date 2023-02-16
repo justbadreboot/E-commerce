@@ -15,7 +15,7 @@ const Filter =()=>{
   const [products,setProductos] = useState([])
   const [openFilter, setOpenFilter] = useState(true)
   const [selectedOption, setSelectedOption] = useState("")
-
+  const [nomCategoria,setNomCategoria] = useState('')
   const [Loading, setLoading] = useState(false)
   const [productosPerPage, ] = useState(12)
   const [currentPage, setCurrentPage] = useState(1)
@@ -36,35 +36,42 @@ const Filter =()=>{
   },[])
 
   useEffect(() => {
-    if (products.length !== 0) {
+    setLoading(true)
+    setTimeout(() => {
       setLoading(false)
-    }
-    else{
-      setLoading(true)
-    }
-  }, [products])
+    }, 2500);
+  },[])
 
   const handleOnChange = (e) =>{
     let temp = parseInt(e.target.value)
-    if(temp ===1){
+    if(temp ===0){
       setProductos(dataOriginal)
     }else{
       setSelectedOption(temp)
       let res = dataOriginal.filter(product => product.category.id === temp)
+      let cat = categorias.filter(cat => cat.id===temp)
       setProductos(res)
+      setNomCategoria(cat[0].name)
     }
+    const viewport = window.innerWidth
+    if(viewport <= 1024) return setOpenFilter(false)
   }
 
   const handleOnSearch = (e) =>{
     let temp = e.target.value
     if(temp === '')
       setProductos(dataOriginal)
-    else
-      getProductsByName(temp)
+    else{
+      let res = dataOriginal.filter(product => product.name.toLowerCase().includes(temp))
+      if(res.length ===0)
+        setProductos("Vacio")
+      else
+        setProductos(res)
+    }
   }
 
   const getProducts = async ()=>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/all`)
+    await axios.get(`https://api-gateway-production-d841.up.railway.app/api/public/product/all`)
       .then(response => {
         setProductos(response.data)
         setDataOriginal(response.data)
@@ -74,16 +81,6 @@ const Filter =()=>{
       })
   }
 
-  const getProductsByName = async (name)=>{
-    await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/filter/${name}`)
-    .then(response => {
-      setProductos(response.data)
-    })
-    .catch(error => {
-      setProductos([])
-      console.log(error)
-    })
-  }
 
   return(
     <div className="relative mx-auto py-4 sm:py-12 px-4 md:px-12 w-full max-w-8xl bg-gray-50 font-poppins">
@@ -100,6 +97,9 @@ const Filter =()=>{
               <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
                 <BiSearch className="w-4 h-4" />
               </span>
+            </div>
+            <div className="lg:hidden inline-block relative">
+              <p>{nomCategoria}</p>
             </div>
             <button className="lg:hidden text-gray-400 hover:text-blue-400" onClick={() => setOpenFilter(!openFilter)}>
               <FaFilter className="w-6 h-6" />
@@ -144,7 +144,7 @@ const Filter =()=>{
               {selectedOption !== "" && (
                 <div className="m-1 pt-4 flex items-center space-x-3">
                   <div>
-                    <input type="radio" name="categorias" value={1} 
+                    <input type="radio" name="categorias" value={0} 
                       onChange={handleOnChange} 
                     className="form-radio h-5 w-5 border-gray-300 rounded-full text-green-400 focus:text-green-400 " />
                   </div>
@@ -156,24 +156,26 @@ const Filter =()=>{
         </div>
         <div className="col-span-full lg:col-span-3">
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
-            {Loading ? <Loader/> : (
+            {Loading ?  <Loader/> : (
               <>  
-                <div className="z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4">
-                {products !== "No existen coincidencias" ? (
+                <div className={`${products==='Vacio' ? 'py-40 grid-cols-1 xl:grid-cols-1 text-center' : 'xl:grid-cols-4' } z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 `}>
+                {products !== "Vacio" ? (
                   products.map( product =>(
                     <ProductCard product={product} key={product.id}/>
                   )).slice(firstIndex,lastIndex)
                   ):(
                     <p>Resultados no encontrados</p>
-                  )}
+                )}
                 </div>
-                <div className='mt-4'>
-                  <Pagination 
-                  productosPerPage={productosPerPage} 
-                  currentPage={currentPage} 
-                  setCurrentPage={setCurrentPage}
-                  totalProducts={totalProducts} />
-              </div>
+                {products !== "Vacio" && (   
+                  <div className='mt-4'>
+                    <Pagination 
+                    productosPerPage={productosPerPage} 
+                    currentPage={currentPage} 
+                    setCurrentPage={setCurrentPage}
+                    totalProducts={totalProducts} />
+                </div>
+                )}
               </>
             )}
           </div>

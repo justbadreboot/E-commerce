@@ -2,27 +2,33 @@ import Swal from "sweetalert2";
 import { FaEdit} from "react-icons/fa"
 import { useEffect, useState } from "react"
 import { useUpdateClientMutation } from "../../store/serverApi";
-import axios from "axios";
-import {MdClose} from "react-icons/md"
+import { MdClose} from "react-icons/md"
 import { useSelector } from "react-redux";
+import axios from "axios";
+import Loader from "../main/Loader";
 
 const ProfileCard = () =>{
 
-    const id = useSelector((state) => state.users.currentUser);
+    const id = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config ={
+        headers: { Authorization: `Bearer ${token}` }
+    }
     const [editClient] = useUpdateClientMutation()
     const [isEditar, setIsEditar] = useState(false)
     const [nombre,setNombre] = useState("")
     const [apellido,setApellido] = useState("")
     const [ident,setident] = useState("")
     const [telf,setTelf] = useState("")
-    const [user,setUser] = useState(0)
+    const [user,setUser] = useState("")
+    const [loading,setLoading] = useState(false)
 
-    useEffect(()=>{
+    useEffect(()=>{    
         getClient(id)
-    })
+    },[id])
 
     const getClient = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/private/client/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/${id}`, config)
         .then(response => {
             setNombre(response.data.firstName)
             setApellido(response.data.lastName)
@@ -34,6 +40,14 @@ const ProfileCard = () =>{
             console.log(error)
         })
     }
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
+    },[])
+
 
     const Toast = Swal.mixin({
         toast: true,
@@ -80,19 +94,28 @@ const ProfileCard = () =>{
                     </div>
                 </div>
                 <div className="flex-auto px-6 mt-3 mb-3">
-                    <form onSubmit={handleOnSubmit}>
+                    {loading ? <Loader /> : (
+                        <form onSubmit={handleOnSubmit}>
                         <div className='grid grid-cols-1 md:grid-cols-2'>
                             <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
                                 <label className="label">
                                     <span className="label-text">Nombre</span>
                                 </label>
-                                <input type="text" name="nombre" placeholder="Nombre" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 ${!isEditar && "bg-gray-200"} focus:border-green-400 focus:ring-green-400`} value={nombre} onChange={(e) =>setNombre(e.target.value)} disabled={!isEditar} />
+                                {isEditar ? (
+                                    <input type="text" name="nombre" placeholder="Nombre" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={nombre} onChange={(e) =>setNombre(e.target.value)} />
+                                ) : (
+                                    <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{nombre}</p>
+                                )}
                             </div>
                             <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
                                 <label className="label">
                                     <span className="label-text">Apellido</span>
                                 </label>
-                                <input type="text" name="apellido" placeholder="Apellido" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 ${!isEditar && "bg-gray-200"} focus:border-green-400 focus:ring-green-400`} value={apellido} onChange={(e) =>setApellido(e.target.value)} disabled={!isEditar} />
+                                {isEditar ? (
+                                    <input type="text" name="apellido" placeholder="Apellido" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={apellido} onChange={(e) =>setApellido(e.target.value)} />
+                                ) : (
+                                    <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{apellido}</p>
+                                )}
                             </div>
                         </div>
                         <div className='grid grid-cols-1 md:grid-cols-2'>
@@ -100,13 +123,21 @@ const ProfileCard = () =>{
                                 <label className="label">
                                     <span className="label-text">Identificación</span>
                                 </label>
-                                <input type="text" name="ident" placeholder="Identificación" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 ${!isEditar && "bg-gray-200"} focus:border-green-400 focus:ring-green-400`} value={ident} onChange={(e) =>setident(e.target.value)} disabled={!isEditar} />
+                                {isEditar ? (
+                                    <input type="text" name="ident" placeholder="Identificación" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={ident} onChange={(e) =>setident(e.target.value)} />
+                                ) : (
+                                    <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{ident}</p>
+                                )}
                             </div>
                             <div className="form-control w-full md:w-10/12 max-w-sm mt-1">
                                 <label className="label">
                                     <span className="label-text">Teléfono</span>
                                 </label>
-                                <input type="text" name="telf" placeholder="Teléfono" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 ${!isEditar && "bg-gray-200"} focus:border-green-400 focus:ring-green-400`} value={telf} onChange={(e) =>setTelf(e.target.value)} disabled={!isEditar} />
+                                {isEditar ? (
+                                    <input type="text" name="telf" placeholder="Teléfono" className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none  focus:border-green-400 focus:ring-green-400`} value={telf} onChange={(e) =>setTelf(e.target.value)} />
+                                ) : (
+                                    <p className={`px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none bg-gray-200`}>{telf}</p>
+                                )}
                             </div>
                         </div>
                         {isEditar && (
@@ -117,6 +148,7 @@ const ProfileCard = () =>{
                             </div>
                         )}
                     </form> 
+                    )}
                 </div>
             </div>
         </div>

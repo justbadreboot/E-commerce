@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PriceSummary from './PriceSummary'
 import { FormContext } from "../../pages/CheckoutPage"
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useGetAddressClientQuery } from "../../store/serverApi";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Loader from "../main/Loader";
 
 const Shipping = ({envio,total,subtotal})=>{
     const { activeStep, setActiveStep, formData, setFormData } = useContext(FormContext);
@@ -21,12 +21,38 @@ const Shipping = ({envio,total,subtotal})=>{
     const [casa,setCasa] = useState("")
     const [addID,setAddID] = useState(0)
     const [ver,setVer] = useState(false)
+    const [address,setAddress] = useState([])
+    const [isLoading,setIsLoading] = useState(false)
 
     const id = useSelector((state) => state.users.currentUser);
-    const {data: address, isSuccess} = useGetAddressClientQuery(id)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
+    useEffect(()=>{
+        getListAddress(id)
+    },[id])
+
+    useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000);
+    },[])
+    
+    const getListAddress = async(id) =>{
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/${id}/direction/custom`,config)
+        .then(response => {
+            setAddress(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     const getAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/private/direction/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/direction/${id}`,config)
         .then(response => {
             setInfoDireccion(response.data)
             setCiudad(response.data.city)
@@ -101,7 +127,7 @@ const Shipping = ({envio,total,subtotal})=>{
             {!isChecked ? (
                 <>
                     <div className="py-2">
-                    {isSuccess && (
+                    {isLoading ? <Loader /> : (
                         address.length !== 0 ? (
                             <>
                                 <select name="direcciones" className='w-full sm:w-9/12 md:w-11/12  mt-3 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400 active:bg-green-100' onChange={handleOnChange} >

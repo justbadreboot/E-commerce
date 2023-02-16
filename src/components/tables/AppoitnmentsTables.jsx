@@ -1,11 +1,40 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useGetAppointmentsByClientQuery } from "../../store/serverApi";
+import Loader from "../main/Loader";
 import AppointmentElement from "./AppointmentElement";
 
 const AppointmentsTables = ()=>{
     
-    const id = useSelector((state) => state.users.currentUser);
-    const {data: appointments ,isSuccess} = useGetAppointmentsByClientQuery(id)
+    const id = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
+    const [appointments,setAppointments] = useState([])
+    const [isLoading,setIsLoading] = useState(false)
+
+    useEffect(()=>{
+        getApps(id)
+    },[id])
+
+    useEffect(() => {
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2500);
+    },[])
+
+    const getApps = async (id)=>{
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/appointment/client/${id}`,config)
+        .then(response => {
+            setAppointments(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
 
     return(
         <div className='bg-gray-50 font-poppins'>
@@ -15,7 +44,7 @@ const AppointmentsTables = ()=>{
                         <div className=" min-w-0 mb-6 break-words border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border ">
                             <div className="px-6 py-4 mb-0 bg-white border-b-0 border-b-solid rounded-2xl h-3gl">
                                 <div className="px-4 overflow-x-auto md:overflow-y-auto md:max-h-[22rem]">
-                                {isSuccess && (
+                                {isLoading ? <Loader /> : (
                                     appointments.length !== 0 ? (
                                         <table className="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                                             <thead className="align-bottom">
@@ -37,7 +66,6 @@ const AppointmentsTables = ()=>{
                                         <p className="mt-3 text-center">No existen citas médicas asociadas</p>
                                     )
                                 )}
-                                    
                                 </div>
                             </div>
                         </div>

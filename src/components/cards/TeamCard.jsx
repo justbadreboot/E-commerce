@@ -70,10 +70,10 @@ const TeamCard =()=>{
                                 </div>
                             </div>
                             <div className="text-center">
-                                <p className="text-xl text-gray-800 dark:text-white">
+                                <p className="text-xl text-gray-800">
                                     {member.nombre}
                                 </p>
-                                <p className="text-md mb-2 font-light text-gray-500 dark:text-gray-200">
+                                <p className="text-md mb-2 font-light text-gray-500">
                                     {member.titulo}
                                 </p>
                             </div>

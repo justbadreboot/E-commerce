@@ -51,7 +51,7 @@ const Cart =()=>{
                         <div className="md:grid md:grid-cols-3 gap-2 ">
                             <div className="col-span-2 p-5">
                                 <div className="flex justify-between">
-                                    <h1 className="text-xl font-medium ">Carrito de Compras</h1>
+                                    <h1 className="text-lg sm:text-xl font-medium ">Carrito de Compras</h1>
                                     <h2 className="mr-8 text-md">Total Items: <span>{count}</span></h2>
                                 </div>
                                 {cartItems.length!==0 ? (
