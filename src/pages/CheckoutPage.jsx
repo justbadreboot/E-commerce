@@ -66,10 +66,10 @@ const Checkout =()=>{
                 </div>
                 <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
                     <CheckoutSteps subtotal={subtotal} envio={envio} total={total} />
-                    <div className="px-4 pt-8 font-poppins">
+                    <div className="px-4 pt-8 font-poppins ">
                         <p className="text-xl font-medium">Resumen de Compra</p>
                         <p className="text-gray-400">Verifica tus articulos.</p>
-                        <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
+                        <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6 md:overflow-y-auto md:max-h-[28rem]">
                             {cartItems.map( item =>
                                 <Summary item={item} key={item.id} />
                             )}

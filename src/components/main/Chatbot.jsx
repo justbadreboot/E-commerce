@@ -8,6 +8,7 @@ const Chatbot = () => {
     const [cerrarG, setCerrarG]=useState('translate-x-80')
     const [cerrarB, setCerrarB]=useState('translate-x-full')
     const [cerrarC, setCerrarC]=useState('translate-x-full')
+    
     function handleClick() {
         setIsOpen(!isOpen)
         if(isOpen){
@@ -20,29 +21,33 @@ const Chatbot = () => {
             setCerrarB('')
             setCerrarC('') 
         }
-      }
+    }
+    
     const theme = {
         background: '#f5f8fb',
-        fontFamily: 'Helvetica Neue',
-        headerBgColor: '#2B97A4',
+        fontFamily: 'Poppins',
+        headerBgColor: '#22c55e',
         headerFontColor: '#fff',
-        headerFontSize: '18px',
-        botBubbleColor: '#2B97A4',
-
+        headerFontSize: '16px',
+        botBubbleColor: '#2b97a4',
         botFontColor: '#fff',
         userBubbleColor: '#fff',
         userFontColor: '#4a4a4a',
-    };
+    }
+
     return (
         <div className={`flex fixed ${cerrarG} transition-all duration-10000 bottom-5 right-4 z-50`}>
-            <div className={` flex mt-60 justify-center ${cerrarB} items-center rounded-l-lg bg-primary-100 text-white cursor-pointer text-[1.563rem] inset-y-1/2 right-0 w-14 h-12 transition-all duration-10000 ease-in-out font-medium`}
+            <div className={` flex mt-60 justify-center ${cerrarB} items-center rounded-l-lg bg-green-500 text-white cursor-pointer text-[1.563rem] inset-y-1/2 right-0 w-14 h-12 transition-all duration-10000 ease-in-out font-medium`}
             onClick={handleClick}
             >
                 <IoChatbubblesSharp />
             </div>
             <ThemeProvider theme={theme}>
-                <div className={`  transition-all ${cerrarC} duration-10000 ease-in-out `}>
-                    <ChatBot
+                <div className={`transition-all ${cerrarC} duration-10000 ease-in-out `}>
+                    <ChatBot 
+                        headerTitle='KrugerMed Informativo'
+                        placeholder='Escribe tu respuesta...'
+                        botAvatar='https://pps.whatsapp.net/v/t61.24694-24/289482132_7962176447156215_490363148019697903_n.jpg?ccb=11-4&oh=01_AdQ2OMltwhSuBJGIZa8yWVOOx5USv_1Z2ZxgBNeblHnpzw&oe=63FA86C6'
                         steps={[
                             {
                                 id: '1',
@@ -74,7 +79,7 @@ const Chatbot = () => {
                             },
                             {
                                 id: "4",
-                                message: "Dime, a qué has venido al KrugerMed informativo? (Selecciona una opción)",
+                                message: "Dime, ¿A qué has venido al KrugerMed informativo? (Selecciona una opción)",
                                 trigger: "5"
                             },
 
