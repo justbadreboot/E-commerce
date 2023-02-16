@@ -26,18 +26,18 @@ const Chatbot = () => {
     const theme = {
         background: '#f5f8fb',
         fontFamily: 'Poppins',
-        headerBgColor: '#22c55e',
+        headerBgColor: '#0284c7',
         headerFontColor: '#fff',
         headerFontSize: '16px',
-        botBubbleColor: '#2b97a4',
+        botBubbleColor: '#06b6d4',
         botFontColor: '#fff',
         userBubbleColor: '#fff',
         userFontColor: '#4a4a4a',
     }
 
     return (
-        <div className={`flex fixed ${cerrarG} transition-all duration-10000 bottom-5 right-4 z-50`}>
-            <div className={` flex mt-60 justify-center ${cerrarB} items-center rounded-l-lg bg-green-500 text-white cursor-pointer text-[1.563rem] inset-y-1/2 right-0 w-14 h-12 transition-all duration-10000 ease-in-out font-medium`}
+        <div className={`flex fixed ${cerrarG} transition-all duration-10000 bottom-14 right-4 z-50`}>
+            <div className={` flex mt-60 justify-center ${cerrarB} items-center rounded-l-lg bg-sky-600 text-white cursor-pointer text-[1.563rem] inset-y-1/2 right-0 w-14 h-12 transition-all duration-10000 ease-in-out font-medium`}
             onClick={handleClick}
             >
                 <IoChatbubblesSharp className="mr-2"/>

@@ -5,6 +5,7 @@ import Footer from "../components/main/Footer"
 import Pagination from "../components/main/Pagination"
 import Cart from "../components/Cart";
 import { Provider } from "react-redux";
+import Brands from "../components/home/Brands";
 
 describe("Test 1",()=>{
     it("El componente FOOTER se renderiza sin problemas",()=>{
@@ -34,5 +35,12 @@ describe("Test 4",()=>{
         <Provider>
             render(<Cart />); 
         </Provider>
+    });
+});
+
+describe("Test 5",()=>{
+    it("El componente para mostrar marcas asociadas contiene un titulo",()=>{
+        render(<Brands />);
+        const titulo = screen.getByText("Mejores")
     });
 });
