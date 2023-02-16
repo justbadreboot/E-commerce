@@ -16,6 +16,7 @@ const FilterServices =()=>{
     const [openFilter, setOpenFilter] = useState(true)
     const [servicios,setServicios] = useState([])
     const [selectedOption, setSelectedOption] = useState("")
+    const [nomSpec,setNomSpec] = useState('')
 
     const [Loading, setLoading] = useState(false)
     const [serviciosPerPage, ] = useState(9)
@@ -53,7 +54,11 @@ const FilterServices =()=>{
             setSelectedOption(temp)
             let res = dataOriginal.filter((x) => x.specialty.id === temp)
             setServicios(res)
+            let cat = specialties.filter(cat => cat.id===temp)
+            setNomSpec(cat[0].name)
         }
+        const viewport = window.innerWidth
+        if(viewport <= 1024) return setOpenFilter(false)
     }
     
     const handleOnSearch = (e) =>{
@@ -94,6 +99,9 @@ const FilterServices =()=>{
                             <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
                                 <BiSearch className="w-4 h-4" />
                             </span>
+                        </div>
+                        <div className="lg:hidden inline-block relative">
+                            <p>{nomSpec}</p>
                         </div>
                         <button className="lg:hidden text-gray-400 hover:text-blue-400" onClick={() => setOpenFilter(!openFilter)}>
                             <FaFilter className="w-6 h-6" />
@@ -157,7 +165,7 @@ const FilterServices =()=>{
                                         <ServiceCardSearch service={service} key={service.id} />
                                     )).slice(firstIndex,lastIndex)
                                 ) : (
-                                    <p>Resultados no encontrados</p>
+                                    <p className="text-center">Resultados no encontrados</p>
                                 )}
                             </div>
                             {servicios !== "Vacio" && ( 

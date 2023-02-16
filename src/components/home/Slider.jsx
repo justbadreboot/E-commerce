@@ -3,27 +3,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import slide1 from '../../assets/img/Slide1.png'
+import slide2 from '../../assets/img/Slide2.png'
+import slide3 from '../../assets/img/Slide3.png'
+import slide12 from '../../assets/img/Slide12.png'
+import slide22 from '../../assets/img/Slide22.png'
+import slide32 from '../../assets/img/Slide32.png'
 
 const MainSlider = () =>{
     
-    const imagenes =[
-        {
-            id:1,
-            img1:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw6b3155c0/images/homepage/hero-carousel/FY_HERO_CARROUSEL_desktop_dias_bebe_lunes_feb-min.jpg",
-            img2:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dwc6b8ef3b/images/homepage/hero-carousel/FY_HERO_CARROUSEL_mobile_dias_bebe_lunes_feb-min.jpg"
-
-        },
-        {
-            id:2,
-            img1:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dwcf765275/images/homepage/hero-carousel/FY_Hero_carrousel_desktop_proyecto_dermo_feb-min.jpg",
-            img2:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw897512c6/images/homepage/hero-carousel/FY_Hero_carrousel_mobile_proyecto_dermo_feb-min.jpg"
-        },
-        {
-            id:3,
-            img1:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dwc7c95138/images/homepage/hero-carousel/FY_Hero_carrousel_DESKTOP_bienestar_feb.png",
-            img2:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw8b2a96af/images/homepage/hero-carousel/FY_Hero_carrousel_mobile_bienestar_feb.png"
-        }
-    ]
     return(
         <div>
             <Swiper
@@ -42,17 +30,24 @@ const MainSlider = () =>{
                 modules={[Autoplay, Pagination, Navigation]}
                 className="mySwiper"
             >
-                {imagenes.map(imagen =>(
-                    <SwiperSlide key={imagen.id} className='w-full relative'>
-                        <div className='w-full'>
-                            <img className='object-cover w-full h-full hidden sm:block' src={imagen.img1} alt=''/>
-                            <img className='object-cover w-full h-full sm:hidden' src={imagen.img2} alt=''/>
-                        </div>
-                        {/*<div className='absolute'>
-                            <button className='text-black'>Compra ya</button>
-                        </div>*/}
-                    </SwiperSlide>
-                ))}
+                <SwiperSlide className='w-full relative'>
+                    <div className='w-full'>
+                        <img className='object-cover w-full h-full hidden sm:block' src={slide1} alt=''/>
+                        <img className='object-cover w-full h-full sm:hidden' src={slide12} alt=''/>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide  className='w-full relative'>
+                    <div className='w-full'>
+                        <img className='object-cover w-full h-full hidden sm:block' src={slide2} alt=''/>
+                        <img className='object-cover w-full h-full sm:hidden' src={slide22} alt=''/>
+                    </div>
+                </SwiperSlide>
+                    <SwiperSlide  className='w-full relative'>
+                    <div className='w-full'>
+                        <img className='object-cover w-full h-full hidden sm:block' src={slide3} alt=''/>
+                        <img className='object-cover w-full h-full sm:hidden' src={slide32} alt=''/>
+                    </div>
+                </SwiperSlide>
             </Swiper>
         </div>
     )

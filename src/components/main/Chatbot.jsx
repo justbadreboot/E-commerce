@@ -40,7 +40,7 @@ const Chatbot = () => {
             <div className={` flex mt-60 justify-center ${cerrarB} items-center rounded-l-lg bg-green-500 text-white cursor-pointer text-[1.563rem] inset-y-1/2 right-0 w-14 h-12 transition-all duration-10000 ease-in-out font-medium`}
             onClick={handleClick}
             >
-                <IoChatbubblesSharp />
+                <IoChatbubblesSharp className="mr-2"/>
             </div>
             <ThemeProvider theme={theme}>
                 <div className={`transition-all ${cerrarC} duration-10000 ease-in-out `}>

@@ -15,6 +15,7 @@ const Filter =()=>{
   const [products,setProductos] = useState([])
   const [openFilter, setOpenFilter] = useState(true)
   const [selectedOption, setSelectedOption] = useState("")
+  const [nomCategoria,setNomCategoria] = useState('')
   const [Loading, setLoading] = useState(false)
   const [productosPerPage, ] = useState(12)
   const [currentPage, setCurrentPage] = useState(1)
@@ -48,8 +49,12 @@ const Filter =()=>{
     }else{
       setSelectedOption(temp)
       let res = dataOriginal.filter(product => product.category.id === temp)
+      let cat = categorias.filter(cat => cat.id===temp)
       setProductos(res)
+      setNomCategoria(cat[0].name)
     }
+    const viewport = window.innerWidth
+    if(viewport <= 1024) return setOpenFilter(false)
   }
 
   const handleOnSearch = (e) =>{
@@ -92,6 +97,9 @@ const Filter =()=>{
               <span className="absolute top-1/2 left-3 text-gray-400 transform -translate-y-1/2">
                 <BiSearch className="w-4 h-4" />
               </span>
+            </div>
+            <div className="lg:hidden inline-block relative">
+              <p>{nomCategoria}</p>
             </div>
             <button className="lg:hidden text-gray-400 hover:text-blue-400" onClick={() => setOpenFilter(!openFilter)}>
               <FaFilter className="w-6 h-6" />
@@ -150,7 +158,7 @@ const Filter =()=>{
           <div className="border-2 border-gray-200 rounded-lg lg:h-full" >
             {Loading ?  <Loader/> : (
               <>  
-                <div className={`${products==='Vacio' && 'py-40 grid-cols-1 xl:grid-cols-1 text-center' } z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 xl:grid-cols-4`}>
+                <div className={`${products==='Vacio' ? 'py-40 grid-cols-1 xl:grid-cols-1 text-center' : 'xl:grid-cols-4' } z-0 mx-auto grid max-w-screen-xl grid-cols-2 gap-6 p-6 md:grid-cols-3 `}>
                 {products !== "Vacio" ? (
                   products.map( product =>(
                     <ProductCard product={product} key={product.id}/>
