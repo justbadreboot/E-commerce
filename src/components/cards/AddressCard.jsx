@@ -12,7 +12,12 @@ import Loader from "../main/Loader";
 
 const AddressCard = () =>{
 
-    const id = useSelector((state) => state.users.currentUser);
+    const id = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
     const [editAddress] = useUpdateAddressMutation()
     const [addNewAddress] = useAddNewAddressMutation()
 
@@ -42,7 +47,7 @@ const AddressCard = () =>{
     },[])
 
     const getListAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/cliente/client/${id}/direction/custom`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/${id}/direction/custom`,config)
         .then(response => {
             setAddress(response.data)
         })
@@ -106,7 +111,7 @@ const AddressCard = () =>{
     })
 
     const getAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/private/direction/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/direction/${id}`, config)
         .then(response => {
             setInfoDireccion(response.data)
             setCiudad(response.data.city)

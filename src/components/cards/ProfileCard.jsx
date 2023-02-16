@@ -9,7 +9,11 @@ import Loader from "../main/Loader";
 
 const ProfileCard = () =>{
 
-    const id = useSelector((state) => state.users.currentUser);
+    const id = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config ={
+        headers: { Authorization: `Bearer ${token}` }
+    }
     const [editClient] = useUpdateClientMutation()
     const [isEditar, setIsEditar] = useState(false)
     const [nombre,setNombre] = useState("")
@@ -19,19 +23,12 @@ const ProfileCard = () =>{
     const [user,setUser] = useState("")
     const [loading,setLoading] = useState(false)
 
-    useEffect(()=>{
+    useEffect(()=>{    
         getClient(id)
     },[id])
 
-    useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-          setLoading(false)
-        }, 2000);
-    },[])
-
     const getClient = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/private/client/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/${id}`, config)
         .then(response => {
             setNombre(response.data.firstName)
             setApellido(response.data.lastName)
@@ -43,6 +40,14 @@ const ProfileCard = () =>{
             console.log(error)
         })
     }
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000);
+    },[])
+
 
     const Toast = Swal.mixin({
         toast: true,

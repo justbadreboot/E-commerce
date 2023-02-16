@@ -6,7 +6,12 @@ import { useEffect, useState } from "react";
 
 const OrdersTables =({setAction})=>{
 
-    const id = useSelector((state) => state.users.currentUser);
+    const id = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
     const [ordenes,setOrdenes] = useState([])
     const [isLoading,setIsLoading] = useState(true)
 
@@ -22,7 +27,7 @@ const OrdersTables =({setAction})=>{
     },[])
 
     const getOrders = async (id)=>{
-        await axios.get(`https://order-production-bfbc.up.railway.app/api/cliente/order/client/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/order/client/${id}`,config)
           .then(response => {
             setOrdenes(response.data)
           })

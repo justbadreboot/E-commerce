@@ -6,7 +6,12 @@ import AppointmentElement from "./AppointmentElement";
 
 const AppointmentsTables = ()=>{
     
-    const id = useSelector((state) => state.users.currentUser);
+    const id = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
     const [appointments,setAppointments] = useState([])
     const [isLoading,setIsLoading] = useState(false)
 
@@ -22,7 +27,7 @@ const AppointmentsTables = ()=>{
     },[])
 
     const getApps = async (id)=>{
-        await axios.get(`https://service-production-bb52.up.railway.app/api/cliente/appointment/client/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/appointment/client/${id}`,config)
         .then(response => {
             setAppointments(response.data)
         })

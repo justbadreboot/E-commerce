@@ -18,6 +18,11 @@ const MainSlider = () =>{
             img1:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dwcf765275/images/homepage/hero-carousel/FY_Hero_carrousel_desktop_proyecto_dermo_feb-min.jpg",
             img2:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw897512c6/images/homepage/hero-carousel/FY_Hero_carrousel_mobile_proyecto_dermo_feb-min.jpg"
         },
+        {
+            id:3,
+            img1:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dwc7c95138/images/homepage/hero-carousel/FY_Hero_carrousel_DESKTOP_bienestar_feb.png",
+            img2:"https://www.fybeca.com/on/demandware.static/-/Sites-FybecaEcuador-Library/default/dw8b2a96af/images/homepage/hero-carousel/FY_Hero_carrousel_mobile_bienestar_feb.png"
+        }
     ]
     return(
         <div>

@@ -5,25 +5,18 @@ import OrderDetailSummary from "../checkout/OrderDetailSummary";
 
 const OrderDetails = ({ordenID,nombre}) =>{
 
-    const user = useSelector((state) => state.users.currentUser);
+    const user = useSelector((state) => state.users.currentUser)
+    const token = JSON.parse(localStorage.getItem("token"))
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    }
+
     const [address,setAddress] = useState({})
     const [client, setClient] = useState({})
     const [orden, setOrden] = useState([])
     const [detalles,setDetalles] = useState([])
 
     useEffect(()=>{
-        const getOrder = async (id) =>{
-            await axios.get(`https://order-production-bfbc.up.railway.app/api/cliente/order/${id}`)
-            .then(response => {
-                setOrden(response.data)
-                getAddress(response.data.idAddress)
-                setDetalles(response.data.orderDetails)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-        }
-        
         getOrder(ordenID)
     },[ordenID])
 
@@ -31,9 +24,20 @@ const OrderDetails = ({ordenID,nombre}) =>{
         getClientnfo(user)
     },[user])
    
+    const getOrder = async (id) =>{
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/order/${id}`,config)
+        .then(response => {
+            setOrden(response.data)
+            getAddress(response.data.idAddress)
+            setDetalles(response.data.orderDetails)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
   
     const getClientnfo = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/private/client/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/${id}`,config)
         .then(response => {
             setClient(response.data)
         })
@@ -43,7 +47,7 @@ const OrderDetails = ({ordenID,nombre}) =>{
     }
 
     const getAddress = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/private/direction/${id}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/direction/${id}`,config)
         .then(response => {
             setAddress(response.data)
         })

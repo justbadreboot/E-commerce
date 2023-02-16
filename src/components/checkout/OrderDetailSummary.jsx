@@ -11,7 +11,7 @@ const OrderDetailSummary = ({item})=>{
     },[item.name])
 
     const getProductInfo = async(name) =>{
-        await axios.get(`https://product-production-cf12.up.railway.app/api/public/product/filter/${name}`)
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/public/product/filter/${name}`)
         .then(response => {
             setImagen(response.data[0].image)
         })

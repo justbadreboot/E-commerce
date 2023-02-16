@@ -33,7 +33,7 @@ const Login = () =>{
     }
  
     const getClient = async(id) =>{
-        await axios.get(`https://client-production-d410.up.railway.app/api/cliente/client/user/${id}`, {
+        await axios.get(`https://api-gateway-production-d841.up.railway.app/api/cliente/client/user/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
         })
         .then(response => {
