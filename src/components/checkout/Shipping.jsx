@@ -62,7 +62,6 @@ const Shipping = ({envio,total,subtotal})=>{
             setProvincia(response.data.state)
             setSector(response.data.sector)
             setCasa(response.data.houseNumber)
-            setAddID(response.data.id)
         })
         .catch(error => {
             console.log(error)
@@ -74,6 +73,7 @@ const Shipping = ({envio,total,subtotal})=>{
         if(temp !==0){
             setVer(true)
             getAddress(temp)
+            setAddID(temp)
         }
         else
             setVer(false)
@@ -178,7 +178,8 @@ const Shipping = ({envio,total,subtotal})=>{
                     <PriceSummary subtotal={subtotal} envio={envio} total={total} />
                     <div className='grid sm:grid-cols-2 gap-4'>
                         <button className="order-2 sm:order-1 sm:mt-6 sm:mb-8 w-full rounded-md bg-primary-40 px-6 py-3 font-medium text-white" onClick={()=> (setActiveStep(activeStep -1))}>Regresar</button>
-                        <button onClick={()=> handleOnClick()} className={`order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white`} disabled={!ver}>Continuar con el pago</button>
+                        <button onClick={()=> handleOnClick()} className={`order-1 sm:order-2 mt-6 sm:mb-8 w-full rounded-md bg-primary-80 px-6 py-3 font-medium text-white`} 
+                        disabled={!ver} >Continuar con el pago</button>
                     </div>
                 </>
             ) : (

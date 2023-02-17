@@ -51,21 +51,29 @@ const Payment = ({envio,total,subtotal})=>{
                 confirmButtonText: 'Si, continuar',
                 cancelButtonText:"Cancelar",
                 reverseButtons:true
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    generarPago()
-                    Swal.fire(
-                    'Orden Generada!',
-                    'Su pago se ha realizado con éxito.',
-                    'success'
-                    )
-                    navigate("/")
+                    const res = await generarPago()
+                    if(res){
+                        Swal.fire(
+                            'Orden Generada!',
+                            'Su pedido se encuentra en camino',
+                            'success'
+                        )
+                        navigate("/")
+                    }else{
+                        Swal.fire(
+                            'Error',
+                            'Ocurrió un problema al generar la orden. Intente de nuevo',
+                            'error'
+                        )
+                    }
                 }
             })
 		},
 	});
 
-    const pagoEfectivo = ()=>{
+    const pagoEfectivo = async ()=>{
         Swal.fire({
             title: '¿Desea continuar?',
             text: "El pago deberá ser cancelado al momento de la entrega de su orden.",
@@ -76,16 +84,23 @@ const Payment = ({envio,total,subtotal})=>{
             confirmButtonText: 'Si, continuar',
             cancelButtonText:"Cancelar",
             reverseButtons:true
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                console.log(formData)
-                generarPago()
-                Swal.fire(
-                    'Orden Generada!',
-                    'Su pedido se encuentra en camino',
-                    'success'
-                )
-                navigate("/")
+                const res = await generarPago()
+                if(res){
+                    Swal.fire(
+                        'Orden Generada!',
+                        'Su pedido se encuentra en camino',
+                        'success'
+                    )
+                    navigate("/")
+                }else{
+                    Swal.fire(
+                        'Error',
+                        'Ocurrió un problema al generar la orden. Intente de nuevo',
+                        'error'
+                    )
+                }
             }
         })
     }
@@ -127,7 +142,7 @@ const Payment = ({envio,total,subtotal})=>{
             nom = ""
             telf = ""
         }
-        addNewOrder({
+        const res = await addNewOrder({
             date: fecha.toISOString(),
             deliveryState: {
                 id:1,
@@ -151,8 +166,13 @@ const Payment = ({envio,total,subtotal})=>{
             clientLastName: ape,
             clientPhone:telf
         })
-        vaciarCarrito(id)
-        setFormData({})
+        if(res.id){
+            vaciarCarrito(id)
+            setFormData({})
+            return true
+        }else if(res.originalStatus === 400){
+            return false
+        }
     }
 
     const crearDireccion = async (id)=>{

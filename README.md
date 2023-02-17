@@ -38,19 +38,19 @@
     <li>
       <a href="#🤸-getting-started">Getting Started</a>
       <ul>
-        <li><a href="#💾-Run Locally">Run Locally</a></li>
+        <li><a href="#💾-run-locally">Run Locally</a></li>
       </ul>
     </li>
     <li><a href="#⏩-usage">Usage</a></li>
     <li><a href="#📜-license">License</a></li>
-    <li><a href="#📫-contact">Contact</a></li>
+    <li><a href="#📫-contact-&-acknowledgments">Contact</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 
 <hr/>
-<br/>
+
 
 #  🌟 About This Project
 
@@ -58,9 +58,8 @@
 En esta aplicación podrás buscar recetas de distintos autores y con distintos ingredientes.
 Además, podrás almacenar tus propias recetas y armar una colección virtual con todas ellas.
 
-<img src="./src/assets/img/responsive.jpeg" height="350" /> 
+<img src="./src/assets/img/responsive.jpeg" alt="ScreenDevices" height="400" /> 
 
-<br/>
 
 ### What can you do?
 
@@ -68,7 +67,6 @@ Además, podrás almacenar tus propias recetas y armar una colección virtual co
 - Editar la información de la tienda en línea
 - Observar estadísticas de la tienda para poder tomar distintas desiciones
 
-<br/>
 
 #  🔨 Built with
 
@@ -86,7 +84,6 @@ Además, podrás almacenar tus propias recetas y armar una colección virtual co
 - [Daisy UI](https://daisyui.com/)
 - [React Simple Chatbot](https://lucasbassetti.com.br/react-simple-chatbot/)
 
-<br/>
 
 <!-- GETTING STARTED -->
 
@@ -123,7 +120,6 @@ Iniciar el servidor
 ```
 Por defecto la aplicación se ejecutará en tu navegador en https://localhost:3000
 
-<br/>
 
 ## 🧪 Running Tests
 
@@ -147,7 +143,6 @@ Para ejecutar las pruebas de la aplicación, utilizar el siguiente comando
 
   Puedes revisar el live demo de la aplicación [aquí](https://krugermed.vercel.app/)
 
-<br/>
 
 <!-- LICENSE -->
 
@@ -155,22 +150,25 @@ Para ejecutar las pruebas de la aplicación, utilizar el siguiente comando
 
 Kruger Med está distribuida bajo los terminos de Apache License Version 2.0. La version completa de la licencia esta disponible en el archivo [LICENSE](LICENSE) de este repositorio. Cualquier contribucion a este proyecto sera licenciada bajo la licencia Apache License Version 2.0.
 
-<br/>
 <!-- CONTACT -->
 
 # 📫 Contact & Acknowledgments
-<div style="display:flex">
-<div>
-<img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/52048016?v=4" width="100px;" alt="photo author"/>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+      <div>
+          <img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/52048016?v=4" width="100px;" alt="photo author"/>
 
 <sub><b>Daniela Cisneros</b></sub>
 <br />
 
 [![linkedin][linkedin.js]][linkedin-url] [![github][github.js]][github-url]
 </div>
-
-<hr/>
-<div>
+      </td>
+      <td>
+      <div>
 <img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/82623546?v=4" width="100px;" alt="photo author"/>
 
 <sub><b>Adrian Bastidas</b></sub>
@@ -178,10 +176,11 @@ Kruger Med está distribuida bajo los terminos de Apache License Version 2.0. La
 
 [![linkedin][linkedin.js]][linkedin2-url] [![github][github.js]][github2-url]
 </div>
-</div>
-<hr/>
-<div style="display:flex">
-<div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <div>
 <img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/66704761?v=4" width="100px;" alt="photo author"/>
 
 <sub><b>Bryan Quisaguano</b></sub>
@@ -189,9 +188,9 @@ Kruger Med está distribuida bajo los terminos de Apache License Version 2.0. La
 
 [![linkedin][linkedin.js]][linkedin3-url] [![github][github.js]][github3-url]
 </div>
-
-<hr/>
-<div>
+      </td>
+      <td>
+      <div>
 <img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/80604082?v=4" width="100px;" alt="photo author"/>
 
 <sub><b>Jonathan Sánchez</b></sub>
@@ -199,31 +198,32 @@ Kruger Med está distribuida bajo los terminos de Apache License Version 2.0. La
 
 [![linkedin][linkedin.js]][linkedin4-url] [![github][github.js]][github4-url]
 </div>
-</div>
-<hr/>
-<br/>
-<div style="display:flex">
-  <div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <div>
     <a href="https://github.com/Juanse7793">
       <img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/96317674?v=4" width="100px;" alt="Juan Sebastian Sotomayor"/>
       <br />
       <sub><b>Juan Sebastian Sotomayor</b></sub>
     </a>
     <br />
-    <a href="https://github.com/Juanse7793" title="Code">FrontEnd Kruger Mentor</a>
+    <p>FrontEnd Kruger Mentor</p>
   </div>
-  <br/>
-  <hr/>
-  <div>
-      <a href="https://github.com/Juanse7793">
+      </td>
+      <td><div>
+      <a href="https://github.com/jaimepsayago">
         <img style="border-radius: 50% !important;" src="https://avatars.githubusercontent.com/u/27781106?v=4" width="100px;" alt="Jaime Sayago Heredia"/>
         <br />
         <sub><b>Jaime Sayago Heredia</b></sub>
       </a>
       <br />
-      <a href="https://github.com/jaimepsayago" title="Code">BackEnd Kruger Mentor</a>
-  </div>
-<div>
+      <p>BackEnd Kruger Mentor</p>
+  </div></td>
+    </tr>
+  </tbody>
+</table>
 
 
 

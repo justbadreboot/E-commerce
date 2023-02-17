@@ -97,26 +97,34 @@ const Login = () =>{
             const res = await createM({
                 email: data.email_sign,
                 password: data.password_sign,
-            })
+            })      
             if(res.data){
-                await addNewClient({ 
+                const res2 = await addNewClient({ 
                     userId: res.data.id,
                     document: data.ident,
                     firstName: data.nombre,
                     lastName: data.apellido,
                     phone: data.telf
                 })
-                Swal.fire({
-                    title:'Excelente!',
-                    icon:'success',
-                    text:'Usuario registrado con éxito'
-                })
-                formik2.resetForm()
+                if(res2.data){
+                    Swal.fire({
+                        title:'Excelente!',
+                        icon:'success',
+                        text:'Usuario registrado con éxito'
+                    })
+                    formik2.resetForm()
+                }else{
+                    Swal.fire({
+                        title:'Error',
+                        icon:'error',
+                        text:'Se produjo un problema al registrar el cliente. Intenta de nuevo'
+                    })
+                }
             }else{
                 Swal.fire({
                     title:'Error',
                     icon:'error',
-                    text:'Se produjo un problema. Intenta de nuevo'
+                    text:'Se produjo un problema al crear un usuario. Intenta de nuevo'
                 })
             }
 		},
