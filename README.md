@@ -3,7 +3,7 @@
   <a href="https://github.com/justbadreboot/E-commerce-Administrator">
     <img src="./src/assets/img/logo2.png" alt="Logo" width="280" height="100">
   </a>
-    <br /><br/>
+  <br/>
   <h1 align="center">Kruger Med Ecommerce</h1>
 
 ![react Badge](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -13,13 +13,12 @@
 ![Tailwind Badge](https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white)
 ![Javascript Badge](https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black)
 
-
----
-
   <p align="center">
-    Manage your clinic e-commerce
-    <br />
-    <a href="https://e-commerce-administrator.vercel.app/">Demo</a>
+    Encuentra los mejores productos farmacéuticos del mercado en un solo lugar!
+  <br />
+
+[View Demo](https://krugermed.vercel.app/) | [Wireframe in Figma](https://www.figma.com/file/PlsxCTTq5REy80VKBUOrti/Wireframes-Ecommerce-Kruger?node-id=0%3A1&t=URyGfEfYnnoh0VJV-1)
+
   </p>
 
 </div>
@@ -39,7 +38,7 @@
     <li>
       <a href="#🤸-getting-started">Getting Started</a>
       <ul>
-        <li><a href="#💾-installation">Installation</a></li>
+        <li><a href="#💾-Run Locally">Run Locally</a></li>
       </ul>
     </li>
     <li><a href="#⏩-usage">Usage</a></li>
@@ -53,12 +52,15 @@
 <hr/>
 <br/>
 
-#  🌟 About The Project
+#  🌟 About This Project
 
 
-Esta es una aplicacion pensada para administrar el e-commerce de Kruger-med.
-<br>
+En esta aplicación podrás buscar recetas de distintos autores y con distintos ingredientes.
+Además, podrás almacenar tus propias recetas y armar una colección virtual con todas ellas.
 
+<img src="./src/assets/img/responsive.jpeg" height="350" /> 
+
+<br/>
 
 ### What can you do?
 
@@ -66,7 +68,9 @@ Esta es una aplicacion pensada para administrar el e-commerce de Kruger-med.
 - Editar la información de la tienda en línea
 - Observar estadísticas de la tienda para poder tomar distintas desiciones
 
-# 🔨 Built with
+<br/>
+
+#  🔨 Built with
 
 - ![react Badge](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 - ![redux Badge](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
@@ -74,31 +78,66 @@ Esta es una aplicacion pensada para administrar el e-commerce de Kruger-med.
 - ![DaisyUI Badge](https://img.shields.io/badge/DaisyUI-5A0EF8?style=for-the-badge&logo=DaisyUI&logoColor=white)
 - ![Tailwind Badge](https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white)
 - ![Javascript Badge](https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=black)
+- ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 - ![vercel Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white)
 - ![railway Badge](https://img.shields.io/badge/Railways-0B0D0E?style=for-the-badge&logo=Railway&logoColor=white)
+- Axios
+- [Sweet Alert 2](https://sweetalert2.github.io/)
+- [Daisy UI](https://daisyui.com/)
+- [React Simple Chatbot](https://lucasbassetti.com.br/react-simple-chatbot/)
+
+<br/>
 
 <!-- GETTING STARTED -->
 
 # 🤸 Getting Started
 
-It's necessary to have git 😺 and node in your computer!
+Es necesario tener Git y Node.js instalado en tu computadora antes de correr este proyecto 👀
+<br/>
 
+## 💾 Run It Locally
 
-### 💾 🗄️ Installation
+<br/>
+Clonar el repositorio
 
 ```bash
-# Clone Repository
-$ git clone https://github.com/justbadreboot/E-commerce-Administrator
-# Install Dependencies
-$ npm i
-# Run Aplication with create react app
-$ npm start
+  git clone https://github.com/justbadreboot/E-commerce.git
+```
+
+Ir al directorio del proyecto
+
+```bash
+  cd my-project
+```
+
+Instalar todas las dependencias
+
+```bash
+  npm install
+```
+
+Iniciar el servidor
+
+```bash
+  npm run start
+```
+Por defecto la aplicación se ejecutará en tu navegador en https://localhost:3000
+
+<br/>
+
+## 🧪 Running Tests
+
+Para ejecutar las pruebas de la aplicación, utilizar el siguiente comando
+
+```bash
+  npm run test
 ```
 
 <!-- USAGE EXAMPLES -->
 <br/>
 
 
+# ⏩ Usage
 
 
 <!-- ROADMAP -->
@@ -106,10 +145,7 @@ $ npm start
 
 # 💻 Live Demo
 
-
-###	🚧 Status: Building 🚀  🚧
-###  [Deploy](https://e-commerce-administrator.vercel.app/)
-
+  Puedes revisar el live demo de la aplicación [aquí](https://krugermed.vercel.app/)
 
 <br/>
 
