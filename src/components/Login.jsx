@@ -19,12 +19,13 @@ const Login = () =>{
     const [isForm, setIsForm] = useState({
         login : true,
         register : false,
+        forgot:false,
     })
 
     const [loginM] = useLoginMutation()
     const [createM] = useCreateMutation()
     const [addNewClient] = useAddNewClientMutation()
-    const [isLoading,setIsLoading] = useState(false)    
+    const [isLoading,setIsLoading] = useState(false)
 
     const getPosition = () => {
         return isForm.login ? "top-full"
@@ -95,27 +96,74 @@ const Login = () =>{
             telf: Yup.number().typeError('Solo dígitos').required("Este campo es requerido")
         }),
 		onSubmit: async (data) => {
+            let cliente, user
             setIsLoading(true)
-            const res = await createM({
-                email: data.email_sign,
-                password: data.password_sign,
-            })      
-            if(res.data){
-                const res2 = await addNewClient({ 
-                    userId: res.data.id,
-                    document: data.ident,
-                    firstName: data.nombre,
-                    lastName: data.apellido,
-                    phone: data.telf
+            await axios.get(`https://authserve-production.up.railway.app/auth/email/${data.email_sign}`)
+            .then(response => {
+                user = response.data
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            await axios.get(`https://api-gateway-production-d841.up.railway.app/api/public/client/filter/${data.ident}`)
+            .then(response => {
+               cliente=true
+            })
+            .catch(error => {
+                cliente=false
+            })
+            if(user.id && cliente){
+                Swal.fire({
+                    title:'Error',
+                    icon:'error',
+                    text:'El usuario ya se encuentra registrado. Inicia sesión'
                 })
-                if(res2.data){
-                    setIsLoading(false)
-                    Swal.fire({
-                        title:'Excelente!',
-                        icon:'success',
-                        text:'Usuario registrado con éxito. Inicia sesión ahora'
+                setIsLoading(false)
+            }
+            else if(user.id && !cliente){
+                Swal.fire({
+                    title:'Error',
+                    icon:'error',
+                    text:'Ya existe un usuario asociado con ese correo.'
+                })
+                setIsLoading(false)
+            }
+            else if(user === 'El correo NO se encuentra registrado' && cliente){
+                Swal.fire({
+                    title:'Error',
+                    icon:'error',
+                    text:'Ya existe un cliente asociado con esa identificación.'
+                })
+                setIsLoading(false)
+            }else{
+                setIsLoading(false)
+                const res = await createM({
+                    email: data.email_sign,
+                    password: data.password_sign,
+                })
+                if(res.data){
+                    const res2 = await addNewClient({ 
+                        userId: res.data.id,
+                        document: data.ident,
+                        firstName: data.nombre,
+                        lastName: data.apellido,
+                        phone: data.telf
                     })
-                    formik2.resetForm()
+                    if(res2.data){
+                        setIsLoading(false)
+                        Swal.fire({
+                            title:'Excelente!',
+                            icon:'success',
+                            text:'Usuario registrado con éxito. Inicia sesión ahora'
+                        })
+                        formik2.resetForm()
+                    }else{
+                        Swal.fire({
+                            title:'Error',
+                            icon:'error',
+                            text:'Se produjo un problema al registrar el cliente. Intenta de nuevo'
+                        })
+                    }
                 }else{
                     Swal.fire({
                         title:'Error',
@@ -123,12 +171,6 @@ const Login = () =>{
                         text:'Se produjo un problema al registrar el cliente. Intenta de nuevo'
                     })
                 }
-            }else{
-                Swal.fire({
-                    title:'Error',
-                    icon:'error',
-                    text:'Se produjo un problema al crear un usuario. Intenta de nuevo'
-                })
             }
 		},
 	});
@@ -156,6 +198,14 @@ const Login = () =>{
                         <span className="mt-2 text-base">Registrarse</span>
                         <hr className={` hidden sm:block ${isForm.register ? "h-1 bg-green-500 w-20 mt-4" : "hidden" }`} />
                     </button>
+                    {/*<button onClick={() => setIsForm({ login : false, register : false,forgot:true})}
+                     className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.forgot ? "bg-white bg-opacity-80 text-gray-600 border-t sm:border-t-0 sm:border-b border-l-2 sm:border-r  sm:border-l-0 border-green-500" : "text-white "}`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                        <span className="mt-2 text-base">Cambiar Contraseña</span>
+                        <hr className={` hidden sm:block ${isForm.forgot ? "h-1 bg-green-500 w-20 mt-4" : "hidden" }`} />
+                    </button>*/}
                 </div>
                 <div className={`col-span-7 sm:col-span-5 md:col-span-4 relative h-[48rem] md:h-[48rem] lg:h-[35rem] transition-all duration-500 ease-in-out transform -translate-y-full  ${getPosition()}`}>
                     {/* Login Form */}
@@ -270,9 +320,9 @@ const Login = () =>{
                             </div>
                             <div className="mt-6 md:mt-10 w-full">
                                 {isLoading ? (
-                                    <button class="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">
+                                    <button type="submit" className="btn btn-block bg-green-600 bg-opacity-70 hover:bg-green-800">
                                     <div className='pr-2'>
-                                     Registrando datos...
+                                     Validando datos...
                                      </div>
                                      <div role="status">
                                         <svg aria-hidden="true" className="inline w-4 h-4 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -288,6 +338,7 @@ const Login = () =>{
                             </div>
                         </form>
                     </div>
+                    {/* Forgot Form */}
                 </div>
             </div>
         </div>

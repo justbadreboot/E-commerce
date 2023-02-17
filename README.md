@@ -55,17 +55,21 @@
 #  🌟 About This Project
 
 
-En esta aplicación podrás buscar recetas de distintos autores y con distintos ingredientes.
-Además, podrás almacenar tus propias recetas y armar una colección virtual con todas ellas.
+Esta aplicación está enfocada a la venta de una variedad de productos farmacéuticos y al agendamiento de citas de servicios médicos
 
 <img src="./src/assets/img/responsive.jpeg" alt="ScreenDevices" height="400" /> 
 
 
 ### What can you do?
 
-- Administrar todos los productos, Categorias, servicios, doctores, promociones, ordenes y facturas del negocio.
-- Editar la información de la tienda en línea
-- Observar estadísticas de la tienda para poder tomar distintas desiciones
+- Visualizar un catálogo de productos y servicios 
+- Realizar búsquedas para filtrar productos y servicios 
+- Visualizar información general y datos de contacto de la tienda
+- Registrarse como cliente
+- Acceder a un carrito de compras
+- Generar mútliples ordenes de compra
+- Agendar citas médicas
+- Acceder al perfil del cliente para visualizar datos personales e historial de compras y citas agendadas
 
 
 #  🔨 Built with
@@ -135,6 +139,37 @@ Para ejecutar las pruebas de la aplicación, utilizar el siguiente comando
 
 # ⏩ Usage
 
+## 👀 Público General
+
+Cualquier persona que acceda a la tienda en línea podrá:
+
+- Navegar libremente para visualizar productos y servicios
+
+- Buscar productos por nombre o categoría
+
+- Buscar servicios por nombre o especialidad 
+ 
+- Visualizar información de la tienda
+
+- Acceder a un formulario para contactarse con la tienda
+
+- Registarse como nuevo cliente
+
+## 👨‍⚕️ Cliente Registrado
+
+Además de las funcionalidades a las que accede una persona general, un cliente que se encuentre registrado podrá:
+
+- Acceder a un carrito de compras
+
+- Agregar una variedad de productos al carrito
+
+- Generar una orden de compra al finalizar el proceso de checkout 
+
+- Agendar citas médicas de varios servicios
+
+- Visualizar y editar sus datos personales 
+
+- Visualizar un historial de las órdenes de compras y citas médicas
 
 <!-- ROADMAP -->
 <br/>

@@ -15,8 +15,8 @@ const About =()=>{
                     {isSuccess && (
                         info.map(card=>(
                             <div key={card.id}>
-                                <div className="focus:outline-none mt-10 flex flex-wrap justify-center gap-10">
-                                    <div className="focus:outline-none flex sm:w-full md:w-5/12 pb-10">
+                                <div className="focus:outline-none mt-10 flex flex-wrap justify-center gap-10 pb-4">
+                                    <div className="focus:outline-none flex sm:w-full md:w-5/12 ">
                                         <div className="w-20 h-20 relative mr-5">
                                             <div className="absolute top-0 right-0 bg-secondary-40 rounded w-16 h-16 mt-2 mr-1" />
                                             <div className="absolute text-white bottom-0 left-0 bg-secondary-80  rounded w-16 h-16 flex items-center justify-center mt-2 mr-3">
@@ -28,7 +28,7 @@ const About =()=>{
                                             <p className="focus:outline-none text-sm text-gray-600 leading-normal pt-2">{card.mission}</p>
                                         </div>
                                     </div>
-                                    <div className="focus:outline-none flex sm:w-full md:w-5/12 pb-10">
+                                    <div className="focus:outline-none flex sm:w-full md:w-5/12 ">
                                         <div className="w-20 h-20 relative mr-5">
                                             <div className="absolute top-0 right-0 bg-secondary-40 rounded w-16 h-16 mt-2 mr-1" />
                                             <div className="absolute text-white bottom-0 left-0 bg-secondary-80  rounded w-16 h-16 flex items-center justify-center mt-2 mr-3">
