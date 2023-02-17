@@ -166,11 +166,11 @@ const Payment = ({envio,total,subtotal})=>{
             clientLastName: ape,
             clientPhone:telf
         })
-        if(res.id){
+        if(res.data.id){
             vaciarCarrito(id)
             setFormData({})
             return true
-        }else if(res.originalStatus === 400){
+        }else if(res.error){
             return false
         }
     }

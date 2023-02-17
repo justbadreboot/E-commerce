@@ -31,21 +31,30 @@ const Appointment = ({serviceID}) =>{
                 confirmButtonText: 'Si, continuar',
                 cancelButtonText:"Cancelar",
                 reverseButtons:true
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    addNewApp({
+                    const res = await addNewApp({
                         id:serviceID,
                         clientId: id,
                         date:values.fecha,
                         duration:values.hora
                     })
-                    Swal.fire(
-                        'Cita generada!',
-                        'Su cita ha sido agendada con éxito',
-                        'success'
-                    )
-                    formik2.resetForm()
-                    navigate('/')
+                    if(res.data){
+                        Swal.fire(
+                            'Cita generada!',
+                            'Su cita ha sido agendada con éxito',
+                            'success'
+                        )
+                        formik2.resetForm()
+                        navigate('/')
+                    }else{
+                        Swal.fire(
+                            'Error',
+                            'Ocurrió un problema al generar la cita. Intente de nuevo',
+                            'error'
+                        )
+                    }
+                    
                 }
             })
             
