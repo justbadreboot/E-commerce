@@ -62,7 +62,7 @@ const FilterServices =()=>{
     }
     
     const handleOnSearch = (e) =>{
-        let temp = e.target.value
+        let temp = (e.target.value).toLowerCase()
         if(temp === '')
             setServicios(dataOriginal)
         else{
