@@ -60,7 +60,7 @@ Esta aplicación está enfocada a la venta de una variedad de productos farmacé
 <img src="./src/assets/img/responsive.jpeg" alt="ScreenDevices" height="400" /> 
 
 
-### What can you do?
+### What are the features of this project?
 
 - Visualizar un catálogo de productos y servicios 
 - Realizar búsquedas para filtrar productos y servicios 
@@ -84,9 +84,10 @@ Esta aplicación está enfocada a la venta de una variedad de productos farmacé
 - ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 - ![vercel Badge](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=Vercel&logoColor=white)
 - ![railway Badge](https://img.shields.io/badge/Railways-0B0D0E?style=for-the-badge&logo=Railway&logoColor=white)
-- Axios
+- ![axios Badge](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)
 - [Sweet Alert 2](https://sweetalert2.github.io/)
-- [Daisy UI](https://daisyui.com/)
+- [SwiperJS](https://swiperjs.com/)
+- [Formik](https://formik.org/)
 - [React Simple Chatbot](https://lucasbassetti.com.br/react-simple-chatbot/)
 
 
