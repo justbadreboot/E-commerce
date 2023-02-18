@@ -76,7 +76,7 @@ const Appointment = ({serviceID}) =>{
                                 <label className="label">
                                     <span className="label-text">Fecha</span>
                                 </label>
-                                <input type="date" name="fecha" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik2.handleChange} value={formik2.values.fecha}  />
+                                <input type="date" name="fecha" className="px-4 py-3 rounded-md border border-gray-200 text-sm shadow-sm outline-none focus:z-10 focus:border-green-400 focus:ring-green-400" onChange={formik2.handleChange} value={formik2.values.fecha} min={new Date().toISOString().split('T')[0]} />
                                 {formik2.touched.fecha && formik2.errors.fecha && (
                                     <span className="text-red-400 flex text-xs">
                                         {formik2.errors.fecha}

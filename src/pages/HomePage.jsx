@@ -9,17 +9,15 @@ import MainLayout from "../Layout/MainLayout";
 
 const HomePage = () => {
     return(
-        <>
-            <MainLayout>
-                <Slider />
-                <MainServices />
-                <Categories />
-                <MainProducts />
-                <Cta />
-                <MainMedServices />
-                <Brands />
-            </MainLayout>
-        </>
+        <MainLayout>
+            <Slider />
+            <MainServices />
+            <Categories />
+            <MainProducts />
+            <Cta />
+            <MainMedServices />
+            <Brands />
+        </MainLayout>
     )
 }
 

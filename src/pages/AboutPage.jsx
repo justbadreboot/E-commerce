@@ -4,12 +4,10 @@ import MainLayout from "../Layout/MainLayout";
 
 const AboutPage =()=>{
     return(
-        <>
-            <MainLayout>
-                <About />
-                <TeamCard />
-            </MainLayout>
-        </>
+        <MainLayout>
+            <About />
+            <TeamCard />
+        </MainLayout>
     )
 }
 export default AboutPage;

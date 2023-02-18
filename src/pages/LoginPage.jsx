@@ -3,11 +3,9 @@ import MainLayout from "../Layout/MainLayout";
 
 const AboutPage =()=>{
     return(
-        <>
-            <MainLayout>
-                <Login />
-            </MainLayout>
-        </>
+        <MainLayout>
+            <Login />
+        </MainLayout>
     )
 }
 export default AboutPage;

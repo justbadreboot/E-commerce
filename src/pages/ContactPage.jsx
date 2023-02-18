@@ -3,11 +3,9 @@ import MainLayout from "../Layout/MainLayout";
 
 const ContactPage = () => {
     return(
-        <>
-            <MainLayout>
-                <ContactForm />
-            </MainLayout>
-        </>
+        <MainLayout>
+            <ContactForm />
+        </MainLayout>
     )
 }
 export default ContactPage;

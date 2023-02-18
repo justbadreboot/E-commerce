@@ -70,6 +70,7 @@ Esta aplicación está enfocada a la venta de una variedad de productos farmacé
 - Generar mútliples ordenes de compra
 - Agendar citas médicas
 - Acceder al perfil del cliente para visualizar datos personales e historial de compras y citas agendadas
+- Conversar con un chatbot
 
 
 #  🔨 Built with
@@ -134,8 +135,6 @@ Para ejecutar las pruebas de la aplicación, utilizar el siguiente comando
 ```
 
 <!-- USAGE EXAMPLES -->
-<br/>
-
 
 # ⏩ Usage
 
@@ -155,6 +154,11 @@ Cualquier persona que acceda a la tienda en línea podrá:
 
 - Registarse como nuevo cliente
 
+- Conversar con un chatbot de KrugerMed
+
+![Main Usage Screen Shot][usage-screenshot]
+
+
 ## 👨‍⚕️ Cliente Registrado
 
 Además de las funcionalidades a las que accede una persona general, un cliente que se encuentre registrado podrá:
@@ -171,8 +175,9 @@ Además de las funcionalidades a las que accede una persona general, un cliente 
 
 - Visualizar un historial de las órdenes de compras y citas médicas
 
+![Client Usage Screen Shot][client-screenshot]
+
 <!-- ROADMAP -->
-<br/>
 
 # 💻 Live Demo
 
@@ -272,3 +277,6 @@ Kruger Med está distribuida bajo los terminos de Apache License Version 2.0. La
 [github2-url]: https://github.com/Adrian-Bastidas
 [github3-url]: https://github.com/orgs/justbadreboot/people/BryanArmando
 [github4-url]: https://github.com/orgs/justbadreboot/people/jonato96
+
+[usage-screenshot]: /src/assets/img/main.gif
+[client-screenshot]: /src/assets/img/carrito.gif

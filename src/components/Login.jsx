@@ -19,7 +19,6 @@ const Login = () =>{
     const [isForm, setIsForm] = useState({
         login : true,
         register : false,
-        forgot:false,
     })
 
     const [loginM] = useLoginMutation()
@@ -198,14 +197,6 @@ const Login = () =>{
                         <span className="mt-2 text-base">Registrarse</span>
                         <hr className={` hidden sm:block ${isForm.register ? "h-1 bg-green-500 w-20 mt-4" : "hidden" }`} />
                     </button>
-                    {/*<button onClick={() => setIsForm({ login : false, register : false,forgot:true})}
-                     className={`py-2 w-full h-full sm:h-1/2 inline-flex flex-col justify-center items-center active:outline-none focus:outline-none ${isForm.forgot ? "bg-white bg-opacity-80 text-gray-600 border-t sm:border-t-0 sm:border-b border-l-2 sm:border-r  sm:border-l-0 border-green-500" : "text-white "}`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0 h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
-                        </svg>
-                        <span className="mt-2 text-base">Cambiar Contraseña</span>
-                        <hr className={` hidden sm:block ${isForm.forgot ? "h-1 bg-green-500 w-20 mt-4" : "hidden" }`} />
-                    </button>*/}
                 </div>
                 <div className={`col-span-7 sm:col-span-5 md:col-span-4 relative h-[48rem] md:h-[48rem] lg:h-[35rem] transition-all duration-500 ease-in-out transform -translate-y-full  ${getPosition()}`}>
                     {/* Login Form */}
@@ -338,7 +329,6 @@ const Login = () =>{
                             </div>
                         </form>
                     </div>
-                    {/* Forgot Form */}
                 </div>
             </div>
         </div>
